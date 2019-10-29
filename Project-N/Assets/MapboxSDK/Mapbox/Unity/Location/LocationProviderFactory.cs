@@ -32,6 +32,9 @@ namespace Mapbox.Unity.Location
 		AbstractLocationProvider _transformLocationProvider;
 
 		[SerializeField]
+		AbstractLocationProvider _webGlLocationProvider;
+
+		[SerializeField]
 		bool _dontDestroyOnLoad;
 
 
@@ -116,6 +119,14 @@ namespace Mapbox.Unity.Location
 			}
 		}
 
+		public ILocationProvider WebGlLocationProvider
+		{
+			get
+			{
+				return _webGlLocationProvider;
+			}
+		}
+
 		/// <summary>
 		/// Create singleton instance and inject the DefaultLocationProvider upon initialization of this component. 
 		/// </summary>
@@ -155,6 +166,7 @@ namespace Mapbox.Unity.Location
 		[System.Diagnostics.Conditional("NOT_UNITY_EDITOR")]
 		void InjectDeviceLocationProvider()
 		{
+
 			int AndroidApiVersion = 0;
 			var regex = new Regex(@"(?<=API-)-?\d+");
 			Match match = regex.Match(SystemInfo.operatingSystem); // eg 'Android OS 8.1.0 / API-27 (OPM2.171019.029/4657601)'
@@ -175,6 +187,11 @@ namespace Mapbox.Unity.Location
 			{
 				Debug.LogFormat("LocationProviderFactory: Injected native Android DEVICE Location Provider - {0}", _deviceLocationProviderAndroid.GetType());
 				DefaultLocationProvider = _deviceLocationProviderAndroid;
+			}
+			else if (Application.platform == RuntimePlatform.WebGLPlayer)
+			{
+				Debug.LogFormat("LocationProviderFactory: Injected native WEBGL Location Provider - {0}", _webGlLocationProvider.GetType());
+				DefaultLocationProvider = _webGlLocationProvider;
 			}
 			else
 			{
