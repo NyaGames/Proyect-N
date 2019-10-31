@@ -25,8 +25,8 @@
 			}
 		}
 
-		/*[DllImport("__Internal")]
-		private static extern void Hello();*/
+		[DllImport("__Internal")]
+		private static extern float[] WebGlGeolocation();
 
 		private void Awake()
 		{
@@ -42,17 +42,23 @@
 
 		private IEnumerator locationRoutine()
 		{
-			_currentLocation.UserHeading = 0;
-			_currentLocation.LatitudeLongitude = LatitudeLongitude;
-			_currentLocation.Accuracy = 5;
-			_currentLocation.Timestamp = UnixTimestampUtils.To(DateTime.UtcNow);
-			_currentLocation.IsLocationUpdated = true;
-			_currentLocation.IsUserHeadingUpdated = true;
-			_currentLocation.IsLocationServiceEnabled = true;
+			while (true)
+			{
+				_currentLocation.UserHeading = 0;
+				float[] location = WebGlGeolocation();
+				Debug.Log(location);
+				Vector2d latLon = new Vector2d(location[0], location[1]);
+				Debug.Log(latLon);
+				_currentLocation.LatitudeLongitude = latLon; ;				
+				_currentLocation.Accuracy = 5;
+				_currentLocation.Timestamp = UnixTimestampUtils.To(DateTime.UtcNow);
+				_currentLocation.IsLocationUpdated = true;
+				_currentLocation.IsUserHeadingUpdated = true;			
 
-			SendLocation(_currentLocation);
+				SendLocation(_currentLocation);
 
-			yield return _wait1sec;
+				yield return _wait1sec;
+			}
 		}
 	}
 }

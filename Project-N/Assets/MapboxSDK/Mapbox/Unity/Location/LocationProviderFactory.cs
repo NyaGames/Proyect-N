@@ -157,6 +157,7 @@ namespace Mapbox.Unity.Location
 		{
 			Debug.LogFormat("LocationProviderFactory: Injected EDITOR Location Provider - {0}", _editorLocationProvider.GetType());
 			DefaultLocationProvider = _editorLocationProvider;
+			//DefaultLocationProvider = _webGlLocationProvider;
 		}
 
 		/// <summary>

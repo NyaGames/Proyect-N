@@ -7,6 +7,7 @@ namespace Mapbox.Unity.Location
 	using Mapbox.Utils;
 	using Mapbox.CheapRulerCs;
 	using System;
+	using System.Runtime.InteropServices;
 	using System.Linq;
 
 
@@ -95,6 +96,12 @@ namespace Mapbox.Unity.Location
 		private void OnDenyAndNeverAskAgain() { _gotPermissionRequestResponse = true; }
 #endif
 
+#if UNITY_WEBGL
+
+		[DllImport("__Internal")]
+		private static extern bool AskForLocationPermission();
+#endif
+
 
 		protected virtual void Awake()
 		{
@@ -167,7 +174,18 @@ namespace Mapbox.Unity.Location
 				while (!_gotPermissionRequestResponse) { yield return _wait1sec; }
 			}
 #endif
-
+			Debug.Log("Antes de compreobar si es WebGL");
+#if UNITY_WEBGL
+			Debug.Log("Antes del if");
+			if (!_locationService.isEnabledByUser)
+			{
+				Debug.Log("Dentro del if");
+				//_currentLocation.IsLocationServiceEnabled = AskForLocationPermission();
+				//wait for user to allow or deny
+				Debug.Log(_currentLocation.IsLocationServiceEnabled);
+				while (!_currentLocation.IsLocationServiceEnabled) { yield return _wait1sec; }			
+			}
+#endif
 
 			if (!_locationService.isEnabledByUser)
 			{
