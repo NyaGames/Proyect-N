@@ -17,16 +17,16 @@
 
 		private Coroutine _pollLocation;
 
+		[DllImport("__Internal")]
+		private static extern void StartTrackingLocalization();		
+
 		Vector2d LatitudeLongitude
 		{
 			get
 			{
 				return new Vector2d(40.470198f, -3.63259f);
 			}
-		}
-
-		[DllImport("__Internal")]
-		private static extern void StartTrackingLocalization();
+		}		
 
 		private void Awake()
 		{
@@ -47,7 +47,7 @@
 			while (true)
 			{
 				_currentLocation.UserHeading = 0;
-				float[] location = WebGlGeolocation();
+				float[] location = RetrieveLocation();
 				Debug.Log(location);
 				Vector2d latLon = new Vector2d(location[0], location[1]);
 				Debug.Log(latLon);
@@ -59,13 +59,27 @@
 
 				SendLocation(_currentLocation);
 
+
+
 				yield return _wait1sec;
 			}
 		}*/
 
-        public void LocationReceived(float[] location)
-        {
-            Debug.Log("Location Received: " + location);
-        }
+		public void LocationReceived(string location)
+		{
+			Debug.Log(location);
+			Vector2d latLon = Conversions.StringToLatLon(location);
+			Debug.Log(latLon);
+
+			_currentLocation.UserHeading = 0;
+			_currentLocation.LatitudeLongitude = latLon; ;
+			_currentLocation.Accuracy = 5;
+			_currentLocation.Timestamp = UnixTimestampUtils.To(DateTime.UtcNow);
+			_currentLocation.IsLocationUpdated = true;
+			_currentLocation.IsUserHeadingUpdated = true;
+
+			SendLocation(_currentLocation);
+		}
+       
 	}
 }
