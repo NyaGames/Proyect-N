@@ -48,6 +48,34 @@ mergeInto(LibraryManager.library, {
 
     report: function (state) {
         alert('Permission ' + state);
+    },
+
+    StartTrackingLocalization: function () {
+        var geo_options = {
+            enableHighAccuracy = true,
+            maximumAge: 30000,
+            timeout = 27000
+        }
+
+        var wpid = navigator.geolocation.watchPosition(SendLocationInfo, error, geo_options);
+    },
+
+    SendLocationInfo: function (position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
+        var latLon = [latitude, longitude];
+
+        unityInstace.SendMessage('WebGlLocationProvider', LocationReceived, latLon);
+        
+    }, 
+
+    error: function(error){
+        console.error('ERROR(' + error.code + '): ' + error.message);
     }
+
+
+
+
 
 })

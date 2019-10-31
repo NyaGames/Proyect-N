@@ -26,7 +26,7 @@
 		}
 
 		[DllImport("__Internal")]
-		private static extern float[] WebGlGeolocation();
+		private static extern void StartTrackingLocalization();
 
 		private void Awake()
 		{
@@ -34,13 +34,15 @@
 			_wait5sec = new WaitForSeconds(5);
 			_wait60sec = new WaitForSeconds(60);
 
-			if (_pollLocation == null)
+            /*if (_pollLocation == null)
 			{
 				_pollLocation = StartCoroutine(locationRoutine());
-			}
-		}	
+			}*/
 
-		private IEnumerator locationRoutine()
+            StartTrackingLocalization();
+		}
+
+        /*private IEnumerator locationRoutine()
 		{
 			while (true)
 			{
@@ -59,6 +61,11 @@
 
 				yield return _wait1sec;
 			}
-		}
+		}*/
+
+        public void LocationReceived(float[] location)
+        {
+            Debug.Log("Location Received: " + location);
+        }
 	}
 }
