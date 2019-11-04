@@ -8,23 +8,28 @@ public class Player : MonoBehaviour
 {
     public bool isGameMaster;
     public int id { get; set; }
-    private PhotonView photonView;
+    public PhotonView photonViewTransform;
+    public PhotonView photonViewInfo;
 
     public Button createZoneButton;
     public Slider zoneRadiusSlider;
     public Dropdown zonePosDropdown;
 
+    private bool newZoneCreated;
+
     void Start()
     {
+        newZoneCreated = false;
+
         createZoneButton = GameObject.Find("CreateZoneButton").GetComponent<Button>();
         zoneRadiusSlider = GameObject.Find("RadiusSelector").GetComponent<Slider>();
         zonePosDropdown = GameObject.Find("PosSelector").GetComponent<Dropdown>();
 
-        photonView = GetComponent<PhotonView>();
+        //photonViewTransform = GetComponent<PhotonView>();
         //Variables
-        if (!photonView.IsMine) //Si no soy yo, cojo los datos del servidor
+        if (!photonViewTransform.IsMine) //Si no soy yo, cojo los datos del servidor
         {
-            Photon.Realtime.Player playerReference = getPlayerReference(photonView.OwnerActorNr); 
+            Photon.Realtime.Player playerReference = getPlayerReference(photonViewTransform.OwnerActorNr); 
             id = (int)playerReference.CustomProperties["id"];
             isGameMaster = (bool)playerReference.CustomProperties["isGameMaster"];
 

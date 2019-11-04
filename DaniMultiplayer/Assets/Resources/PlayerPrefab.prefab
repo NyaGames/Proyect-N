@@ -104,9 +104,10 @@ GameObject:
   - component: {fileID: 6662247923965597331}
   - component: {fileID: 6393972026251810432}
   - component: {fileID: 3586165811260207714}
+  - component: {fileID: 2363137550480410851}
   - component: {fileID: 7569475190593564509}
   - component: {fileID: 3104748707656188120}
-  - component: {fileID: 4752997815423554249}
+  - component: {fileID: 8950339811545957941}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -200,9 +201,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameMaster: 0
+  photonViewTransform: {fileID: 3104748707656188120}
+  photonViewInfo: {fileID: 8950339811545957941}
   createZoneButton: {fileID: 0}
   zoneRadiusSlider: {fileID: 0}
   zonePosDropdown: {fileID: 0}
+--- !u!114 &2363137550480410851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8844448876360683055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58402c8116f311147aa785aadaa7a1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  photonViewInfo: {fileID: 8950339811545957941}
 --- !u!114 &7569475190593564509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +231,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf1ccb8d63a0f142ac1e04ffdce07ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerControlScripts: []
+  playerControlScripts:
+  - {fileID: 3586165811260207714}
+  photonViewTransform: {fileID: 3104748707656188120}
+  photonViewInfo: {fileID: 8950339811545957941}
 --- !u!114 &3104748707656188120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,11 +253,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 4752997815423554249}
+  - {fileID: 7569475190593564509}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4752997815423554249
+--- !u!114 &8950339811545957941
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,9 +266,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8844448876360683055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 1
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 2363137550480410851}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

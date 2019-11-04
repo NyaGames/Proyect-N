@@ -8,23 +8,25 @@ using UnityEngine;
 namespace Photon.Pun
 {
 
-    public class PlayerNetwork : MonoBehaviour //,Photon.Pun.IPunObservable
+    public class PlayerNetwork : MonoBehaviour ,Photon.Pun.IPunObservable
     {
 
         [SerializeField] private MonoBehaviour[] playerControlScripts;
 
-        private PhotonView photonView;
-
+        public PhotonView photonViewTransform;
+        public PhotonView photonViewInfo;
+        
         private Vector3 actualPos;
         private void Start()
         {
-            photonView = GetComponent<PhotonView>();
-            actualPos = transform.position;
+            photonViewTransform = GetComponent<PhotonView>();
             Initialize();
         }
         private void Initialize()
         {
-            if (photonView.IsMine) //Si somos nosotros
+            
+
+            if (photonViewTransform.IsMine) //Si somos nosotros
             {
                 InitializedOnline();
             }
@@ -37,6 +39,15 @@ namespace Photon.Pun
             }            
         }
 
+        private void Update()
+        {
+            if (!actualPos.Equals(transform.position)) 
+            {
+                actualPos = transform.position;
+            }
+            
+        }
+
         void InitializedOnline()
         {
             Hashtable table = new Hashtable();
@@ -46,21 +57,26 @@ namespace Photon.Pun
         }
         
 
-        public void OnPhotonSerializeView(PhotonStream stream,PhotonMessageInfo info)
+        public void OnPhotonSerializeView(PhotonStream stream,PhotonMessageInfo info) //Stream = Mensaje que escribes/recibes |||| Info = info del que envia o manda el mensaje
         {
-            if (stream.IsWriting) //Si mandamos info
-            {
-                if (photonView.IsMine) //Si soy yo, mando mi posición
+            if (stream.IsWriting)
+            {   
+                if (photonViewTransform.IsMine) //Solo mando información si soy yo
                 {
-                    stream.SendNext(actualPos);
+                    stream.SendNext(actualPos.x);
+                    stream.SendNext(actualPos.y);
+                    stream.SendNext(actualPos.z);
                 }
+            }
+            else
+            {
+                if (!photonViewTransform.IsMine){ //Solo recibo información de otros jugadores
+                    actualPos.x = (float)stream.ReceiveNext();
+                    actualPos.y = (float)stream.ReceiveNext();
+                    actualPos.z = (float)stream.ReceiveNext();
 
-            }else if (stream.IsReading) //SI recibimos info
-            {
-                if (!photonView.IsMine) //Leo la posición de los demás
-                {
-                    transform.position = (Vector3)stream.ReceiveNext();
-                }
+                    transform.position = new Vector3(actualPos.x, actualPos.y, actualPos.z);
+                }  
             }
         }  
 

@@ -86,18 +86,6 @@ public class AutoLobby : MonoBehaviourPunCallbacks
         playersList.Add(PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity)); 
     }
 
-
-    public void CreateNewZone()
-    {
-
-        //Crear nueva zona
-        Vector3 zonePos = stringToVector3(zonePosDropdown.options[zonePosDropdown.value].text);
-        float zoneRadius = zoneRadiusSlider.value;
-        Debug.Log("New zone in: " + zonePos + " with radius = " + zoneRadius);
-        actualZone = PhotonNetwork.Instantiate(zonePrefab.name, zonePos, Quaternion.identity);
-        actualZone.transform.localScale = new Vector3(zoneRadius,0.0f,zoneRadius);
-    }
-
     public Vector3 stringToVector3(string s)
     {
         // Remove the parentheses
