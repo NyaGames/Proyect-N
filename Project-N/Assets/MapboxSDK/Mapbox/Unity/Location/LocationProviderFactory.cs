@@ -191,6 +191,7 @@ namespace Mapbox.Unity.Location
 			}
 			else if (Application.platform == RuntimePlatform.WebGLPlayer)
 			{
+				_webGlLocationProvider.gameObject.SetActive(true);
 				Debug.LogFormat("LocationProviderFactory: Injected native WEBGL Location Provider - {0}", _webGlLocationProvider.GetType());
 				DefaultLocationProvider = _webGlLocationProvider;
 			}
