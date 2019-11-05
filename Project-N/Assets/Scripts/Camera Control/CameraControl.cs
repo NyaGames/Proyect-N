@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class CameraControl : MonoBehaviour
 {
+    [SerializeField]
+    private bool isLockedOnPlayer;
+
     [Header("Panning")]
     [SerializeField]
     private float panSpeed;
@@ -14,20 +16,26 @@ public class CameraControl : MonoBehaviour
     private float zoomSpeed;
     [SerializeField]
     private Vector2 zoomClamping;
+    [SerializeField]
+    private Vector2 swivelZoomClamping;
 
     [Header("Rotation")]
     [SerializeField]
     private float rotationSpeed;
 
-    private Rigidbody rb;
+    private Rigidbody stickRb;
     private MovementType movementType = MovementType.Still;
 
-    private float zoomAmount = 1;
+    private float zoom = 0f;
+    private Transform swivel, stick;    
 
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        swivel = transform.GetChild(0);
+        stick = swivel.GetChild(0);
+
+        stickRb = stick.GetComponent<Rigidbody>();
     }
 
     private void HandleTouch()
@@ -42,10 +50,10 @@ public class CameraControl : MonoBehaviour
                 }
                 break;
             case 2:
-                Touch touchZero = Input.GetTouch(0);
-                Touch touchOne = Input.GetTouch(1);
+                Touch firstTouch = Input.GetTouch(0);
+                Touch secondTouch = Input.GetTouch(1);
 
-                ZoomCamera(touchZero, touchOne);
+                ZoomCamera(firstTouch, secondTouch);
                 break;
 
 
@@ -56,21 +64,26 @@ public class CameraControl : MonoBehaviour
     private void PanCamera(Touch touch)
     {    
         Vector2 touchDeltaPosition = touch.deltaPosition;
-        rb.AddForce(-touchDeltaPosition.x * panSpeed, 0f, -touchDeltaPosition.y * panSpeed);
+        stickRb.AddForce(-touchDeltaPosition.x * panSpeed, 0f, -touchDeltaPosition.y * panSpeed);
     }
 
-    private void ZoomCamera(Touch touchZero, Touch touchOne)
+    private void ZoomCamera(Touch firstTouch, Touch secondTouch)
     {
-        Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
-        Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+        Vector2 firstTouchPrevPos = firstTouch.position - firstTouch.deltaPosition;
+        Vector2 secondTouchPrevPos = secondTouch.position - secondTouch.deltaPosition;
 
-        float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-        float touchDeltaMag = (touchOne.position - touchOne.position).magnitude;
+        float prevMagnitude = (firstTouchPrevPos - secondTouchPrevPos).magnitude;
+        float currentMagnitude = (firstTouch.position - secondTouch.position).magnitude;
 
-        float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
-        Debug.Log(deltaMagnitudeDiff);
+        float delta = currentMagnitude - prevMagnitude;
 
-        rb.AddRelativeForce(0f, 0f, deltaMagnitudeDiff * zoomSpeed);
+        zoom = Mathf.Clamp01(zoom + delta * zoomSpeed);
+
+        float distance = Mathf.Lerp(zoomClamping.x, zoomClamping.y, zoom);
+        stick.localPosition = new Vector3(stick.localPosition.x, stick.localPosition.y, distance);
+        
+        float angle = Mathf.Lerp(swivelZoomClamping.x, swivelZoomClamping.y, zoom);  
+        swivel.localRotation = Quaternion.Euler(angle, 0f, 0f);
     }
 
     private void LateUpdate()

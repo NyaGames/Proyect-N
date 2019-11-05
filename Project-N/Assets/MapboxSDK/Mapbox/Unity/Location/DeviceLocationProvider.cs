@@ -174,7 +174,7 @@ namespace Mapbox.Unity.Location
 				while (!_gotPermissionRequestResponse) { yield return _wait1sec; }
 			}
 #endif
-			Debug.Log("Antes de compreobar si es WebGL");
+            
 #if UNITY_WEBGL
 			Debug.Log("Antes del if");
 			if (!_locationService.isEnabledByUser)

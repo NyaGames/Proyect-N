@@ -17,8 +17,6 @@ public class WebGlLocationDebug : MonoBehaviour
 		{
 			_locationProvider = LocationProviderFactory.Instance.DefaultLocationProvider as AbstractLocationProvider;
 		}
-
-		Debug.Log("Current location provider: " + _locationProvider.name);
 	}
 
 	private void Update()
