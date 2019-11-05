@@ -26,7 +26,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     public List<GameObject> playersList = new List<GameObject>();
     public byte maxPlayersPerRoom = 4;
 
-    public GameObject actualZone;
+    private GameObject actualZone;
     public GameObject zonePrefab;
 
     public void Connect()
@@ -123,4 +123,40 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
     }
 
+    public void CreateZone()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector3 startPosition = new Vector3(0,0,0);
+            switch (touch.phase)
+            {
+                // Record initial touch position.
+                case TouchPhase.Began:
+                    Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
+                    startPosition = worldPosition;
+                    actualZone = PhotonNetwork.Instantiate(playerPrefab.name, worldPosition, Quaternion.identity);
+                    break;
+
+                // Determine direction by comparing the current touch position with the initial one.
+                case TouchPhase.Moved:
+                    float resta = Mathf.Abs(startPosition.x - touch.position.x);
+                    if (touch.position.x < startPosition.x)
+                    {
+                        actualZone.transform.localScale -= new Vector3(resta * 0.5f, resta * 0.5f, resta*0.5f);
+                    }else if (touch.position.x > startPosition.x)
+                    {
+                        actualZone.transform.localScale -= new Vector3(resta * 0.5f, resta * 0.5f, resta * 0.5f);
+                    }
+                        
+                    break;
+
+                // Report that a direction has been chosen when the finger is lifted.
+                case TouchPhase.Ended:
+                    //directionChosen = true;
+                    break;
+            }
+        }
+        
+    }
 }
