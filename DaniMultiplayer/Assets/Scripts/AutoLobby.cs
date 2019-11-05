@@ -11,6 +11,8 @@ namespace tutoriales.multiplayer{ }
 
 public class AutoLobby : MonoBehaviourPunCallbacks
 {
+
+    public static AutoLobby Instance { get; private set; }
     public Button connectButton;
     public Button joinRandomButton;
     public Toggle gameMasterToggle;
@@ -28,7 +30,20 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
     private GameObject actualZone;
     public GameObject zonePrefab;
+    private List<GameObject> dropList;
+    public GameObject dropPrefab;
 
+    private void Awake()
+    {
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(Instance);
+        }
+    }
     public void Connect()
     {
         if (!PhotonNetwork.IsConnected)
@@ -135,7 +150,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
                 case TouchPhase.Began:
                     Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
                     startPosition = worldPosition;
-                    actualZone = PhotonNetwork.Instantiate(playerPrefab.name, worldPosition, Quaternion.identity);
+                    actualZone = PhotonNetwork.Instantiate(zonePrefab.name, worldPosition, Quaternion.identity);
                     break;
 
                 // Determine direction by comparing the current touch position with the initial one.
@@ -159,4 +174,23 @@ public class AutoLobby : MonoBehaviourPunCallbacks
         }
         
     }
+
+    public void CreateDrop()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector3 startPosition = new Vector3(0, 0, 0);
+            switch (touch.phase)
+            {
+                // Record initial touch position.
+                case TouchPhase.Began:
+                    Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
+                    startPosition = worldPosition;
+                    dropList.Add(PhotonNetwork.Instantiate(dropPrefab.name, worldPosition, Quaternion.identity));
+                    break;
+            }
+        }
+    }
+
 }

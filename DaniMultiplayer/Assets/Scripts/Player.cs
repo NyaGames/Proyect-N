@@ -15,11 +15,15 @@ public class Player : MonoBehaviour
     public Slider zoneRadiusSlider;
     public Dropdown zonePosDropdown;
 
+    private BoxCollider playerCollider;
+
     private bool newZoneCreated;
 
     void Start()
     {
         newZoneCreated = false;
+
+        playerCollider = GetComponent<BoxCollider>();
 
         createZoneButton = GameObject.Find("CreateZoneButton").GetComponent<Button>();
         zoneRadiusSlider = GameObject.Find("RadiusSelector").GetComponent<Slider>();
@@ -67,6 +71,11 @@ public class Player : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void PickDrop()
+    {
+
     }
 
     void Update()
