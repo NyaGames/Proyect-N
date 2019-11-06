@@ -4,11 +4,12 @@ using Photon.Realtime;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Photon.Pun
 {
 
-    public class PlayerNetwork : MonoBehaviour ,Photon.Pun.IPunObservable
+    public class PlayerNetwork : MonoBehaviour //,Photon.Pun.IPunObservable
     {
 
         [SerializeField] private MonoBehaviour[] playerControlScripts;
@@ -17,15 +18,19 @@ namespace Photon.Pun
         public PhotonView photonViewInfo;
         
         private Vector3 actualPos;
+
+        public bool isGameMaster;
+        public int id { get; set; }
+
         private void Start()
         {
             photonViewTransform = GetComponent<PhotonView>();
             Initialize();
+
+            this.GetComponentInChildren<TextMesh>().text = id.ToString() + "/" + isGameMaster.ToString();
         }
         private void Initialize()
         {
-            
-
             if (photonViewTransform.IsMine) //Si somos nosotros
             {
                 InitializedOnline();
@@ -44,8 +49,31 @@ namespace Photon.Pun
             if (!actualPos.Equals(transform.position)) 
             {
                 actualPos = transform.position;
+                PhotonView photonView = PhotonView.Get(this);
+                photonView.RPC("updatePlayerPos", RpcTarget.Others, actualPos);
+                
             }
             
+        }
+
+        [PunRPC]
+        public void updatePlayerPos(Vector3 newPos, PhotonMessageInfo info)
+        {
+            if (GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn) //Si este cliente es gameMaster, updatea al jugador que le manda su nueva posición
+            {
+                for(int i = 0;i < AutoLobby.Instance.playersList.Count; i++)
+                {
+                    if (AutoLobby.Instance.playersList[i].GetComponent<PlayerNetwork>().id == info.Sender.ActorNumber) //Busco al jugador que me ha mandado su posición en mi lista de jugadores 
+                    {
+                        AutoLobby.Instance.playersList[i].transform.position = newPos;
+                    }
+                }
+                
+            }
+            else // Si este cliente es jugador normal, no updatea a nadie
+            {
+
+            }
         }
 
         void InitializedOnline()
@@ -57,7 +85,7 @@ namespace Photon.Pun
         }
         
 
-        public void OnPhotonSerializeView(PhotonStream stream,PhotonMessageInfo info) //Stream = Mensaje que escribes/recibes |||| Info = info del que envia o manda el mensaje
+        /*public void OnPhotonSerializeView(PhotonStream stream,PhotonMessageInfo info) //Stream = Mensaje que escribes/recibes |||| Info = info del que envia o manda el mensaje
         {
             if (stream.IsWriting)
             {   
@@ -78,7 +106,7 @@ namespace Photon.Pun
                     transform.position = new Vector3(actualPos.x, actualPos.y, actualPos.z);
                 }  
             }
-        }  
+        }*/  
 
     }
 

@@ -33,6 +33,14 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     private List<GameObject> dropList;
     public GameObject dropPrefab;
 
+    public Button dropButton;
+
+    Vector3 lasPositionTapped = new Vector3(0, 0, 0);
+    Vector3 zoneCenter = new Vector3(0, 0, 0);
+
+    public bool creatingDrop = false;
+    public GameObject dropPos;
+
     private void Awake()
     {
         if (!Instance)
@@ -98,7 +106,32 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     {
         Log.text += "\nJoined";
         joinRandomButton.interactable = false;
-        playersList.Add(PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity)); 
+        //playersList.Add(PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity));
+
+        PhotonView photonView = PhotonView.Get(this);
+        bool isGameMaster = GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn;
+        photonView.RPC("NewPlayerJoined", RpcTarget.All, isGameMaster); //Le dices a los otros clientes que has entrado en la sala
+    }
+
+    [PunRPC]
+    public void NewPlayerJoined(bool isNewPlayerAGameMaster, PhotonMessageInfo info)
+    {
+        if (GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn) //Si este cliente es gameMaster, instancia al jugador que ha entrado
+        {
+            GameObject newPlayer = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            if (!info.Sender.IsLocal) //Si se instancia a otro jugador, se desactivan sus controles
+            {
+                newPlayer.GetComponent<Player>().enabled = false;
+            }
+            newPlayer.GetComponent<PlayerNetwork>().isGameMaster = isNewPlayerAGameMaster;
+            newPlayer.GetComponent<PlayerNetwork>().id = info.Sender.ActorNumber;
+            playersList.Add(newPlayer);
+            
+        }
+        else // Si este cliente es jugador normal, no instancia a nadie
+        {
+
+        }
     }
 
     public Vector3 stringToVector3(string s)
@@ -123,6 +156,14 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
+        CreateZone();
+
+        if (creatingDrop)
+        { 
+            CreateDrop();
+        }
+        
+
         playerCount.text = GameObject.Find("JoinSpecificTextInput").GetComponent<TMP_InputField>().text;
         if (PhotonNetwork.CurrentRoom != null) //Si estamos en una sala
         {
@@ -138,32 +179,37 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
     }
 
+    public float getDistanceFromCameraToGround()
+    {
+        return (GameObject.Find("Plane").transform.position - GameObject.Find("Main Camera").transform.position).magnitude;
+    }
+
     public void CreateZone()
     {
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            Vector3 startPosition = new Vector3(0,0,0);
+            float cameraDistanceToGround = getDistanceFromCameraToGround();
+            Vector3 touchInWorldCoord = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
             switch (touch.phase)
             {
                 // Record initial touch position.
                 case TouchPhase.Began:
-                    Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
-                    startPosition = worldPosition;
-                    actualZone = PhotonNetwork.Instantiate(zonePrefab.name, worldPosition, Quaternion.identity);
+                    lasPositionTapped = touch.position;
+                    zoneCenter = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
+                    actualZone = PhotonNetwork.Instantiate(zonePrefab.name, zoneCenter, Quaternion.identity);
                     break;
 
                 // Determine direction by comparing the current touch position with the initial one.
                 case TouchPhase.Moved:
-                    float resta = Mathf.Abs(startPosition.x - touch.position.x);
-                    if (touch.position.x < startPosition.x)
+                    if(actualZone != null)
                     {
-                        actualZone.transform.localScale -= new Vector3(resta * 0.5f, resta * 0.5f, resta*0.5f);
-                    }else if (touch.position.x > startPosition.x)
-                    {
-                        actualZone.transform.localScale -= new Vector3(resta * 0.5f, resta * 0.5f, resta * 0.5f);
+                        float distanceFromCenterToTap = (zoneCenter - touchInWorldCoord).magnitude;
+                        actualZone.transform.localScale = new Vector3(distanceFromCenterToTap * 2, distanceFromCenterToTap * 2, distanceFromCenterToTap * 2);
                     }
-                        
+
+                    lasPositionTapped = touch.position;
+
                     break;
 
                 // Report that a direction has been chosen when the finger is lifted.
@@ -180,17 +226,28 @@ public class AutoLobby : MonoBehaviourPunCallbacks
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            Vector3 startPosition = new Vector3(0, 0, 0);
             switch (touch.phase)
             {
-                // Record initial touch position.
-                case TouchPhase.Began:
-                    Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
-                    startPosition = worldPosition;
-                    dropList.Add(PhotonNetwork.Instantiate(dropPrefab.name, worldPosition, Quaternion.identity));
+                case TouchPhase.Moved:
+
+                    dropPos.transform.position = touch.position;
+
+                    break;
+
+                case TouchPhase.Ended:
+                    float cameraDistanceToGround = getDistanceFromCameraToGround();
+                    Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
+                    GameObject newDrop = PhotonNetwork.Instantiate(dropPrefab.name, worldPosition, Quaternion.identity);
+                    Destroy(dropPos);
+                    creatingDrop = false;
+
+                    dropList.Add(newDrop);
+
+                    
                     break;
             }
         }
     }
+
 
 }

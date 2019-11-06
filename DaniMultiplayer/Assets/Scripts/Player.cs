@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        newZoneCreated = false;
+        /*newZoneCreated = false;
 
         playerCollider = GetComponent<BoxCollider>();
 
@@ -54,12 +54,12 @@ public class Player : MonoBehaviour
                 zoneRadiusSlider.interactable = false;
                 zonePosDropdown.interactable = false;
             }
-        }
+        }*/
 
         //Visual
         Color randomColor = new Color(Random.Range(0f,1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         this.GetComponent<Renderer>().material.color = randomColor;
-        this.GetComponentInChildren<TextMesh>().text = id.ToString() + "/" + isGameMaster.ToString();
+        
     }
 
     public Photon.Realtime.Player getPlayerReference(int actorNumber){
@@ -109,8 +109,8 @@ public class Player : MonoBehaviour
     }
 
     public void EnterGameMasterMode(){
-        isGameMaster = GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn;
-        Debug.Log("Gamemaster = " + isGameMaster);
+        //isGameMaster = GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn;
+        //Debug.Log("Gamemaster = " + isGameMaster);
     }
 
 }
