@@ -20,10 +20,6 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     public Text playerCount;
     public int playersCount;
 
-
-    public Slider zoneRadiusSlider;
-    public Dropdown zonePosDropdown;
-
     public GameObject playerPrefab;
     public List<GameObject> playersList = new List<GameObject>();
     public byte maxPlayersPerRoom = 4;
@@ -40,6 +36,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
     public bool creatingDrop = false;
     public GameObject dropPos;
+    public int numDrops = 3;
 
     private void Awake()
     {
@@ -226,24 +223,22 @@ public class AutoLobby : MonoBehaviourPunCallbacks
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
+            float cameraDistanceToGround = getDistanceFromCameraToGround();
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
+            worldPosition.y = 0;
             switch (touch.phase)
             {
                 case TouchPhase.Moved:
 
-                    dropPos.transform.position = touch.position;
+                    dropPos.transform.position = worldPosition;
 
                     break;
 
                 case TouchPhase.Ended:
-                    float cameraDistanceToGround = getDistanceFromCameraToGround();
-                    Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
-                    GameObject newDrop = PhotonNetwork.Instantiate(dropPrefab.name, worldPosition, Quaternion.identity);
                     Destroy(dropPos);
+                    numDrops--;
                     creatingDrop = false;
-
-                    dropList.Add(newDrop);
-
-                    
+                    PhotonNetwork.Instantiate(dropPrefab.name, worldPosition,Quaternion.identity);
                     break;
             }
         }
