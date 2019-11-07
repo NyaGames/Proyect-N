@@ -176,10 +176,8 @@ namespace Mapbox.Unity.Location
 #endif
             
 #if UNITY_WEBGL
-			Debug.Log("Antes del if");
 			if (!_locationService.isEnabledByUser)
 			{
-				Debug.Log("Dentro del if");
 				//_currentLocation.IsLocationServiceEnabled = AskForLocationPermission();
 				//wait for user to allow or deny
 				Debug.Log(_currentLocation.IsLocationServiceEnabled);

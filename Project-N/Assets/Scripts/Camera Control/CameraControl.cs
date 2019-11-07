@@ -2,100 +2,139 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControl : MonoBehaviour
+public abstract class CameraControl : MonoBehaviour
 {
-    [SerializeField]
-    private bool isLockedOnPlayer;
+	[SerializeField] protected CameraMovementType cameraMovement = CameraMovementType.Still;
 
-    [Header("Panning")]
-    [SerializeField]
-    private float panSpeed;
+	[Header("Panning")]
+	[SerializeField]
+	protected Vector2 panSpeed;
 
-    [Header("Zooming")]
-    [SerializeField]
-    private float zoomSpeed;
-    [SerializeField]
-    private Vector2 zoomClamping;
-    [SerializeField]
-    private Vector2 swivelZoomClamping;
+	[Header("Zooming")]
+	[SerializeField]
+	protected float zoomSpeed;
+	[SerializeField]
+	protected Vector2 zoomClamping;
+	[SerializeField]
+	protected Vector2 swivelZoomClamping;
 
-    [Header("Rotation")]
-    [SerializeField]
-    private float rotationSpeed;
+	[Header("Rotation")]
+	[SerializeField]
+	protected float rotationSpeed;
+	[Range(0, 5)]
+	[SerializeField] private float zoomingRotationSensibility = 0.1f;
 
-    private Rigidbody stickRb;
-    private MovementType movementType = MovementType.Still;
+	[Header("Centering Camera")]
+	[SerializeField]
+	protected float smoothTime = 0.3f;
 
-    private float zoom = 0f;
-    private Transform swivel, stick;    
+	[Header("References")]
+	[SerializeField]
+	protected Transform user;
+		
+	protected Transform swivel, stick;
+	protected new Camera camera;
+	protected Rigidbody stickRb;
 
-
-    private void Awake()
-    {
-        swivel = transform.GetChild(0);
-        stick = swivel.GetChild(0);
-
-        stickRb = stick.GetComponent<Rigidbody>();
-    }
-
-    private void HandleTouch()
-    {
-        switch (Input.touchCount)
-        {
-            case 1:
-                Touch touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Moved)
-                {
-                    PanCamera(touch);
-                }
-                break;
-            case 2:
-                Touch firstTouch = Input.GetTouch(0);
-                Touch secondTouch = Input.GetTouch(1);
-
-                ZoomCamera(firstTouch, secondTouch);
-                break;
+	protected float zoom = 0f;
 
 
+	protected virtual void Awake()
+	{
+		swivel = transform.GetChild(0);
+		stick = swivel.GetChild(0);
+		camera = stick.GetChild(0).GetComponent<Camera>();
 
-        }
-    }
+		stickRb = stick.GetComponent<Rigidbody>();
+	}
 
-    private void PanCamera(Touch touch)
-    {    
-        Vector2 touchDeltaPosition = touch.deltaPosition;
-        stickRb.AddForce(-touchDeltaPosition.x * panSpeed, 0f, -touchDeltaPosition.y * panSpeed);
-    }
-
-    private void ZoomCamera(Touch firstTouch, Touch secondTouch)
-    {
-        Vector2 firstTouchPrevPos = firstTouch.position - firstTouch.deltaPosition;
-        Vector2 secondTouchPrevPos = secondTouch.position - secondTouch.deltaPosition;
-
-        float prevMagnitude = (firstTouchPrevPos - secondTouchPrevPos).magnitude;
-        float currentMagnitude = (firstTouch.position - secondTouch.position).magnitude;
-
-        float delta = currentMagnitude - prevMagnitude;
-
-        zoom = Mathf.Clamp01(zoom + delta * zoomSpeed);
-
-        float distance = Mathf.Lerp(zoomClamping.x, zoomClamping.y, zoom);
-        stick.localPosition = new Vector3(stick.localPosition.x, stick.localPosition.y, distance);
-        
-        float angle = Mathf.Lerp(swivelZoomClamping.x, swivelZoomClamping.y, zoom);  
-        swivel.localRotation = Quaternion.Euler(angle, 0f, 0f);
-    }
-
-    private void LateUpdate()
+	protected virtual void LateUpdate()
     {
         if(Input.touchCount > 0)
-        {
-            HandleTouch();
-        }
-    }
+		{
+			if (cameraMovement == CameraMovementType.Still)
+			{
+				HandleTouch();
+			}
+		}
+		else
+		{
+			if (cameraMovement != CameraMovementType.Centering)
+			{
+				cameraMovement = CameraMovementType.Still;
+			}
+		}
 
-    private enum MovementType
-    {
-        Still, Panning, Zooming, Rotating
-    }
+		if (Input.touchCount <= 0) return;
+		switch (cameraMovement)
+		{
+			case CameraMovementType.Still:
+				break;
+			case CameraMovementType.Panning:
+				PanCamera();
+				break;
+			case CameraMovementType.Centering:
+				CenterCamera();
+				break;
+			case CameraMovementType.Rotating:
+				RotateCamera();
+				break;
+			case CameraMovementType.Zooming:
+				ZoomCamera();
+				break;
+		}
+	}
+
+	private void HandleTouch()
+	{
+		switch (Input.touchCount)
+		{
+			case 1:			
+				if (Input.GetTouch(0).phase == TouchPhase.Moved)
+				{
+					cameraMovement = CameraMovementType.Panning;					
+				}
+				break;
+			case 2:
+				Touch firstTouch = Input.GetTouch(0);
+				Touch secondTouch = Input.GetTouch(1);
+
+				if (firstTouch.phase == TouchPhase.Moved && secondTouch.phase == TouchPhase.Moved)
+				{
+					Vector2 firstTouchPrevPos = firstTouch.position - firstTouch.deltaPosition;
+					Vector2 secondTouchPrevPos = secondTouch.position - secondTouch.deltaPosition;
+
+
+					float prevMagnitude = (firstTouchPrevPos - secondTouchPrevPos).magnitude;
+					float currentMagnitude = (firstTouch.position - secondTouch.position).magnitude;
+
+					Debug.Log(Mathf.Abs(currentMagnitude - prevMagnitude));
+
+					if (Mathf.Abs(currentMagnitude - prevMagnitude) <= zoomingRotationSensibility)
+					{
+						cameraMovement = CameraMovementType.Rotating;
+					}
+					else
+					{
+						cameraMovement = CameraMovementType.Zooming;
+					}
+				}	
+
+				break;
+			default:
+				cameraMovement = CameraMovementType.Still;
+				break;
+		}
+	}
+
+	protected abstract void PanCamera();
+	protected abstract void ZoomCamera();
+	protected abstract void RotateCamera();
+
+	private void CenterCamera() {
+		cameraMovement = CameraMovementType.Centering;
+	}
+
+
+	protected enum CameraMovementType { Still, Panning, Zooming, Centering, Rotating }
 }
