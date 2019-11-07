@@ -784,7 +784,7 @@ GameObject:
   - component: {fileID: 191305447}
   - component: {fileID: 191305446}
   m_Layer: 5
-  m_Name: CreateZoneButton
+  m_Name: ModifyZoneRadiusButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -807,8 +807,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -71.1, y: -41.7}
-  m_SizeDelta: {x: 87.28, y: 30}
+  m_AnchoredPosition: {x: -56.9, y: -41.7}
+  m_SizeDelta: {x: 137.36, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &191305446
 MonoBehaviour:
@@ -850,8 +850,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 160053475}
-        m_MethodName: sendMessage
+      - m_Target: {fileID: 549009862}
+        m_MethodName: enableCreateNewRadious
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1242,6 +1242,7 @@ MonoBehaviour:
   creatingDrop: 0
   dropPos: {fileID: 0}
   numDrops: 3
+  zoneCreated: 0
 --- !u!114 &549009863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2206,7 +2207,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Create zone
+  m_Text: 'Modify zone radius
+
 
 '
 --- !u!222 &1687995258
@@ -2811,10 +2813,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1829157089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d90a9856da352e41bb187bd780e6259, type: 3}
+  m_Script: {fileID: 11500000, guid: c363bec3d8562a84e89993c1de2bf18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropPrefab: {fileID: 899230403699993387, guid: 025e1b2a1aae75341acad12f2c355ca9,
+  imageDrop: {fileID: 899230403699993387, guid: 025e1b2a1aae75341acad12f2c355ca9,
     type: 3}
 --- !u!1 &1836693945
 GameObject:

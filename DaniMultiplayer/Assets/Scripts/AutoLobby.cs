@@ -37,12 +37,14 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     public bool creatingDrop = false;
     public GameObject dropPos;
     public int numDrops = 3;
+    public bool zoneCreated;
 
     private void Awake()
     {
         if (!Instance)
         {
             Instance = this;
+            zoneCreated = false;
         }
         else
         {
@@ -153,9 +155,13 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
-        CreateZone();
+        if (!zoneCreated) //Si no se ha creado la zona todavía y no estoy creando un drop, se puede crear
+        {
+            CreateZone();
+        }
+        
 
-        if (creatingDrop)
+        if (creatingDrop) //Si el botón de los drops está holdeado, se puede crear un drop
         { 
             CreateDrop();
         }
@@ -211,13 +217,29 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
                 // Report that a direction has been chosen when the finger is lifted.
                 case TouchPhase.Ended:
+                    zoneCreated = true;
+                    actualZone.GetComponent<Zone>().creatingObject = false;
                     //directionChosen = true;
                     break;
             }
         }
         
     }
+    public void enableCreateNewRadious()
+    {
+        if (actualZone != null)
+        {
+            if (actualZone.GetComponent<Zone>().creatingNewRadious)
+            {
+                actualZone.GetComponent<Zone>().creatingNewRadious = false;
+            }
+            else
+            {
+                actualZone.GetComponent<Zone>().creatingNewRadious = true;
+            }
+        }
 
+    }
     public void CreateDrop()
     {
         if (Input.touchCount > 0)
@@ -238,8 +260,17 @@ public class AutoLobby : MonoBehaviourPunCallbacks
                     Destroy(dropPos);
                     numDrops--;
                     creatingDrop = false;
-                    PhotonNetwork.Instantiate(dropPrefab.name, worldPosition,Quaternion.identity);
+                    GameObject newDrop = PhotonNetwork.Instantiate(dropPrefab.name, worldPosition,Quaternion.identity);
+                    newDrop.GetComponent<Drop>().creatingObject = false;
                     break;
+            }
+        }
+        else
+        {
+            //Si no se detecta bien el input del dedo, se borra la imagen del drop, ese intento de crear el drop no cuenta
+            if(dropPos != null)
+            {
+                Destroy(dropPos);
             }
         }
     }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5747253405241593375}
   - component: {fileID: 132087843165481197}
   - component: {fileID: 6223358378183132954}
+  - component: {fileID: 5600917539811119582}
   m_Layer: 0
   m_Name: DropPrefab
   m_TagString: Untagged
@@ -115,3 +116,17 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &5600917539811119582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291670006575766536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d90a9856da352e41bb187bd780e6259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  creatingObject: 0

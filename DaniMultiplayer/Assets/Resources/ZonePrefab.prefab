@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8690322182831458843}
   - component: {fileID: 1247726124389003086}
   - component: {fileID: 6533406070624933883}
+  - component: {fileID: 114795006087351020}
   m_Layer: 0
   m_Name: ZonePrefab
   m_TagString: Untagged
@@ -114,3 +115,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &114795006087351020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411654372939709560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fbb35a0bdbb2134db99bf72dcb949dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creatingNewRadious: 1
+  movingObject: 0
+  creatingObject: 0
+  editRadius: 0
