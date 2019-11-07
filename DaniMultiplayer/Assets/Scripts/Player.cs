@@ -9,11 +9,6 @@ public class Player : MonoBehaviour
     public bool isGameMaster;
     public int id { get; set; }
     public PhotonView photonViewTransform;
-    public PhotonView photonViewInfo;
-
-    public Button createZoneButton;
-    public Slider zoneRadiusSlider;
-    public Dropdown zonePosDropdown;
 
     private BoxCollider playerCollider;
 
@@ -21,14 +16,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        /*newZoneCreated = false;
 
         playerCollider = GetComponent<BoxCollider>();
-
-        createZoneButton = GameObject.Find("CreateZoneButton").GetComponent<Button>();
-        zoneRadiusSlider = GameObject.Find("RadiusSelector").GetComponent<Slider>();
-        zonePosDropdown = GameObject.Find("PosSelector").GetComponent<Dropdown>();
-
         //photonViewTransform = GetComponent<PhotonView>();
         //Variables
         if (!photonViewTransform.IsMine) //Si no soy yo, cojo los datos del servidor
@@ -50,11 +39,9 @@ public class Player : MonoBehaviour
             id = PhotonNetwork.LocalPlayer.ActorNumber;
             if (!isGameMaster) //Si no soy gameMaster,desactivo los controles para crear la zona
             {
-                createZoneButton.interactable = false;
-                zoneRadiusSlider.interactable = false;
-                zonePosDropdown.interactable = false;
+       
             }
-        }*/
+        }
 
         //Visual
         Color randomColor = new Color(Random.Range(0f,1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
@@ -109,8 +96,8 @@ public class Player : MonoBehaviour
     }
 
     public void EnterGameMasterMode(){
-        //isGameMaster = GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn;
-        //Debug.Log("Gamemaster = " + isGameMaster);
+        isGameMaster = GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn;
+        Debug.Log("Gamemaster = " + isGameMaster);
     }
 
 }

@@ -105,19 +105,21 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     {
         Log.text += "\nJoined";
         joinRandomButton.interactable = false;
-        //playersList.Add(PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity));
+        /*playersList.Add(*/PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
 
-        PhotonView photonView = PhotonView.Get(this);
+        /*PhotonView photonView = PhotonView.Get(this);
         bool isGameMaster = GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn;
-        photonView.RPC("NewPlayerJoined", RpcTarget.All, isGameMaster); //Le dices a los otros clientes que has entrado en la sala
+        photonView.RPC("NewPlayerJoined", RpcTarget.AllBuffered, isGameMaster);*/ //Le dices a los otros clientes (AllBuffered = incluso a los que entren mas tarde) que has entrado en la sala
+        
+        
     }
-
-    [PunRPC]
+    /*[PunRPC]
     public void NewPlayerJoined(bool isNewPlayerAGameMaster, PhotonMessageInfo info)
     {
         if (GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn) //Si este cliente es gameMaster, instancia al jugador que ha entrado
         {
             GameObject newPlayer = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            updateViewIDHashtable();
             if (!info.Sender.IsLocal) //Si se instancia a otro jugador, se desactivan sus controles
             {
                 newPlayer.GetComponent<Player>().enabled = false;
@@ -127,11 +129,14 @@ public class AutoLobby : MonoBehaviourPunCallbacks
             playersList.Add(newPlayer);
             
         }
-        else // Si este cliente es jugador normal, no instancia a nadie
+        else // Si este cliente es jugador normal, solo se instancia a si mismo
         {
-
+            if (info.Sender.IsLocal)
+            {
+                GameObject newPlayer = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            }
         }
-    }
+    }*/
 
     public Vector3 stringToVector3(string s)
     {
@@ -186,6 +191,24 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     {
         return (GameObject.Find("Plane").transform.position - GameObject.Find("Main Camera").transform.position).magnitude;
     }
+    public void SendZoneToOtherPlayers()
+    {
+        PhotonView photonView = PhotonView.Get(this);
+        photonView.RPC("NewZoneReceived", RpcTarget.Others, actualZone.transform.position,actualZone.transform.localScale);
+     
+    }
+
+    [PunRPC]
+    public void NewZoneReceived(Vector3 newPos, Vector3 newScale)
+    {
+        if(actualZone != null)
+        {
+            Destroy(actualZone);
+        }
+        actualZone = Instantiate(zonePrefab, newPos, Quaternion.identity);
+        actualZone.transform.localScale = newScale;
+        
+    }
 
     public void CreateZone()
     {
@@ -200,7 +223,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
                 case TouchPhase.Began:
                     lasPositionTapped = touch.position;
                     zoneCenter = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
-                    actualZone = PhotonNetwork.Instantiate(zonePrefab.name, zoneCenter, Quaternion.identity);
+                    actualZone = Instantiate(zonePrefab, zoneCenter, Quaternion.identity);
                     break;
 
                 // Determine direction by comparing the current touch position with the initial one.

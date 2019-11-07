@@ -37,5 +37,6 @@ MonoBehaviour:
   - NewZoneCreated
   - NewPlayerJoined
   - updatePlayerPos
+  - NewZoneReceived
   DisableAutoOpenWizard: 1
   ShowSettings: 1

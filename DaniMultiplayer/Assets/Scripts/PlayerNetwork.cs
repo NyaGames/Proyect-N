@@ -27,7 +27,7 @@ namespace Photon.Pun
             photonViewTransform = GetComponent<PhotonView>();
             Initialize();
 
-            this.GetComponentInChildren<TextMesh>().text = id.ToString() + "/" + isGameMaster.ToString();
+            this.GetComponentInChildren<TextMesh>().text = GetComponent<Player>().id.ToString() + "/" + GetComponent<Player>().isGameMaster.ToString();
         }
         private void Initialize()
         {
@@ -46,17 +46,19 @@ namespace Photon.Pun
 
         private void Update()
         {
-            if (!actualPos.Equals(transform.position)) 
+            /*if (!isGameMaster)
             {
-                actualPos = transform.position;
-                PhotonView photonView = PhotonView.Get(this);
-                photonView.RPC("updatePlayerPos", RpcTarget.Others, actualPos);
-                
-            }
-            
+                if (!actualPos.Equals(transform.position))
+                {
+                    actualPos = transform.position;
+                    PhotonView photonView = PhotonView.Get(this);
+                    photonView.RPC("updatePlayerPos", RpcTarget.Others, actualPos);
+
+                }
+            }*/
         }
 
-        [PunRPC]
+        /*[PunRPC]
         public void updatePlayerPos(Vector3 newPos, PhotonMessageInfo info)
         {
             if (GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn) //Si este cliente es gameMaster, updatea al jugador que le manda su nueva posición
@@ -74,7 +76,7 @@ namespace Photon.Pun
             {
 
             }
-        }
+        }*/
 
         void InitializedOnline()
         {
