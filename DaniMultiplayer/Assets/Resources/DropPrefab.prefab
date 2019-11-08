@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 132087843165481197}
   - component: {fileID: 6223358378183132954}
   - component: {fileID: 5600917539811119582}
+  - component: {fileID: 4323739013939648350}
   m_Layer: 0
   m_Name: DropPrefab
   m_TagString: Untagged
@@ -109,10 +110,10 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 4323739013939648350}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -130,3 +131,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingObject: 0
   creatingObject: 0
+--- !u!114 &4323739013939648350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291670006575766536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1

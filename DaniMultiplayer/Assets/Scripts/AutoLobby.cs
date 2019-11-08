@@ -9,6 +9,11 @@ using UnityEngine.UI;
 
 namespace tutoriales.multiplayer{ }
 
+public enum ObjectsToSpawn
+{
+    Zone,Drop
+}
+
 public class AutoLobby : MonoBehaviourPunCallbacks
 {
 
@@ -26,7 +31,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
     private GameObject actualZone;
     public GameObject zonePrefab;
-    private List<GameObject> dropList;
+    private List<GameObject> dropList = new List<GameObject>();
     public GameObject dropPrefab;
 
     public Button dropButton;
@@ -105,59 +110,9 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     {
         Log.text += "\nJoined";
         joinRandomButton.interactable = false;
-        /*playersList.Add(*/PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
-
-        /*PhotonView photonView = PhotonView.Get(this);
-        bool isGameMaster = GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn;
-        photonView.RPC("NewPlayerJoined", RpcTarget.AllBuffered, isGameMaster);*/ //Le dices a los otros clientes (AllBuffered = incluso a los que entren mas tarde) que has entrado en la sala
-        
+       PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
         
     }
-    /*[PunRPC]
-    public void NewPlayerJoined(bool isNewPlayerAGameMaster, PhotonMessageInfo info)
-    {
-        if (GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn) //Si este cliente es gameMaster, instancia al jugador que ha entrado
-        {
-            GameObject newPlayer = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            updateViewIDHashtable();
-            if (!info.Sender.IsLocal) //Si se instancia a otro jugador, se desactivan sus controles
-            {
-                newPlayer.GetComponent<Player>().enabled = false;
-            }
-            newPlayer.GetComponent<PlayerNetwork>().isGameMaster = isNewPlayerAGameMaster;
-            newPlayer.GetComponent<PlayerNetwork>().id = info.Sender.ActorNumber;
-            playersList.Add(newPlayer);
-            
-        }
-        else // Si este cliente es jugador normal, solo se instancia a si mismo
-        {
-            if (info.Sender.IsLocal)
-            {
-                GameObject newPlayer = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            }
-        }
-    }*/
-
-    public Vector3 stringToVector3(string s)
-    {
-        // Remove the parentheses
-        if (s.StartsWith("(") && s.EndsWith(")"))
-        {
-            s = s.Substring(1, s.Length - 2);
-        }
-
-        // split the items
-        string[] sArray = s.Split(',');
-
-        // store as a Vector3
-        Vector3 result = new Vector3(
-            float.Parse(sArray[0]),
-            float.Parse(sArray[1]),
-            float.Parse(sArray[2]));
-
-        return result;
-    }
-
     private void FixedUpdate()
     {
         if (!zoneCreated) //Si no se ha creado la zona todavía y no estoy creando un drop, se puede crear
@@ -187,29 +142,41 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
     }
 
-    public float getDistanceFromCameraToGround()
-    {
-        return (GameObject.Find("Plane").transform.position - GameObject.Find("Main Camera").transform.position).magnitude;
-    }
-    public void SendZoneToOtherPlayers()
-    {
-        PhotonView photonView = PhotonView.Get(this);
-        photonView.RPC("NewZoneReceived", RpcTarget.Others, actualZone.transform.position,actualZone.transform.localScale);
-     
-    }
 
-    [PunRPC]
-    public void NewZoneReceived(Vector3 newPos, Vector3 newScale)
+
+    /*[PunRPC]
+    public void NewObjectReceived(Vector3[] objectArray, Vector3 scale, ObjectsToSpawn objectToSpawn)
     {
-        if(actualZone != null)
+        switch (objectToSpawn)
         {
-            Destroy(actualZone);
-        }
-        actualZone = Instantiate(zonePrefab, newPos, Quaternion.identity);
-        actualZone.transform.localScale = newScale;
-        
-    }
+            case ObjectsToSpawn.Zone: //Ha llegado una zona nueva
+                if (actualZone != null)
+                {
+                    Destroy(actualZone);
+                }
+                actualZone = Instantiate(zonePrefab, objectArray[0], Quaternion.identity);
+                actualZone.transform.localScale = scale;
+                break;
 
+            case ObjectsToSpawn.Drop: //Han llegado nuevos drops
+                if (dropList != null)
+                {
+                    foreach (GameObject i in dropList)
+                    {
+                        Destroy(i);
+                    }
+                }
+                foreach(Vector3 v in objectArray)
+                {
+                    GameObject newDrop = Instantiate(dropPrefab, v, Quaternion.identity);
+                    newDrop.transform.localScale = scale;
+                    dropList.Add(newDrop);
+                }
+               
+                break;
+        }
+
+    }*/
     public void CreateZone()
     {
         if (Input.touchCount > 0)
@@ -240,27 +207,27 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
                 // Report that a direction has been chosen when the finger is lifted.
                 case TouchPhase.Ended:
-                    zoneCreated = true;
-                    actualZone.GetComponent<Zone>().creatingObject = false;
-                    //directionChosen = true;
+                    if (actualZone != null)
+                    {
+                        zoneCreated = true;
+                        actualZone.GetComponent<Zone>().creatingObject = false;
+                    }
                     break;
             }
         }
+        else //Si no se detecta bien el input del dedo
+        {
+            
+        }
         
     }
-    public void enableCreateNewRadious()
+    public void SendZoneToOtherPlayers()
     {
-        if (actualZone != null)
-        {
-            if (actualZone.GetComponent<Zone>().creatingNewRadious)
-            {
-                actualZone.GetComponent<Zone>().creatingNewRadious = false;
-            }
-            else
-            {
-                actualZone.GetComponent<Zone>().creatingNewRadious = true;
-            }
-        }
+        /*Vector3[] zoneArray = new Vector3[] { actualZone.transform.position};
+        PhotonView photonView = PhotonView.Get(this);
+        photonView.RPC("NewObjectReceived", RpcTarget.Others, zoneArray, actualZone.transform.localScale, ObjectsToSpawn.Zone);*/
+        GameObject newZone = PhotonNetwork.Instantiate(dropPrefab.name, actualZone.transform.position, Quaternion.identity);
+        newZone.transform.localScale = actualZone.transform.localScale;
 
     }
     public void CreateDrop()
@@ -283,8 +250,9 @@ public class AutoLobby : MonoBehaviourPunCallbacks
                     Destroy(dropPos);
                     numDrops--;
                     creatingDrop = false;
-                    GameObject newDrop = PhotonNetwork.Instantiate(dropPrefab.name, worldPosition,Quaternion.identity);
+                    GameObject newDrop = Instantiate(dropPrefab, worldPosition,Quaternion.identity);
                     newDrop.GetComponent<Drop>().creatingObject = false;
+                    dropList.Add(newDrop);
                     break;
             }
         }
@@ -297,6 +265,33 @@ public class AutoLobby : MonoBehaviourPunCallbacks
             }
         }
     }
+    public void SendDropsToOtherPlayers()
+    {
+        foreach (GameObject g in dropList)
+        {
+            GameObject n = PhotonNetwork.Instantiate(dropPrefab.name,g.transform.position,Quaternion.identity);
+            n.transform.localScale = g.transform.localScale;
+        }
 
+    }
+    public void enableCreateNewRadious()
+    {
+        if (actualZone != null)
+        {
+            if (actualZone.GetComponent<Zone>().creatingNewRadious)
+            {
+                actualZone.GetComponent<Zone>().creatingNewRadious = false;
+            }
+            else
+            {
+                actualZone.GetComponent<Zone>().creatingNewRadious = true;
+            }
+        }
+
+    }
+    public float getDistanceFromCameraToGround()
+    {
+        return (GameObject.Find("Plane").transform.position - GameObject.Find("Main Camera").transform.position).magnitude;
+    }
 
 }
