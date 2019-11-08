@@ -60,37 +60,61 @@ public class Player : MonoBehaviour
         return null;
     }
 
-    public void PickDrop()
+    public void OnTriggerEnter(Collider collision)
     {
+        if (collision.gameObject.CompareTag("Drop") && !isGameMaster) //Si un jugador normla choca con un drop
+        {
+            PickDrop(collision.gameObject);
+            
+        }
+    }
 
+    public void PickDrop(GameObject drop)
+    {
+        Destroy(drop);
+        Debug.Log("Cogiste un drop!");
     }
 
     void Update()
     {
+        if (!isGameMaster)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                Vector3 position = this.transform.position;
+                position.x--;
+                this.transform.position = position;
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                Vector3 position = this.transform.position;
+                position.x++;
+                this.transform.position = position;
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                Vector3 position = this.transform.position;
+                position.z++;
+                this.transform.position = position;
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                Vector3 position = this.transform.position;
+                position.z--;
+                this.transform.position = position;
+            }
+        }
+        else
+        {
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            Vector3 position = this.transform.position;
-            position.x--;
-            this.transform.position = position;
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            Vector3 position = this.transform.position;
-            position.x++;
-            this.transform.position = position;
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            Vector3 position = this.transform.position;
-            position.z++;
-            this.transform.position = position;
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            Vector3 position = this.transform.position;
-            position.z--;
-            this.transform.position = position;
+            Vector3 mouse = Input.mousePosition;
+            Ray castPoint = Camera.main.ScreenPointToRay(mouse);
+            RaycastHit hit;
+            if (Physics.Raycast(castPoint, out hit, Mathf.Infinity))
+            {
+                this.transform.position = new Vector3( hit.point.x,0,hit.point.z);
+        
+            }
         }
 
     }
