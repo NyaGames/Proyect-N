@@ -12,7 +12,7 @@ public class GmCameraControl : CameraControl
 		base.Awake();
 
 		float size = Mathf.Lerp(zoomClamping.x, zoomClamping.y, zoom);
-		camera.orthographicSize = size;
+		m_camera.orthographicSize = size;
 	}
 
 	protected override void PanCamera()
@@ -42,7 +42,7 @@ public class GmCameraControl : CameraControl
 		zoom = Mathf.Clamp01(zoom + delta * zoomSpeed * Time.deltaTime);
 
 		float size = Mathf.Lerp(zoomClamping.x, zoomClamping.y, zoom);
-		camera.orthographicSize = size;
+		m_camera.orthographicSize = size;
 
 		stick.transform.position = new Vector3(stick.transform.position.x, size, stick.transform.position.z);
 	}
@@ -79,11 +79,11 @@ public class GmCameraControl : CameraControl
 		Vector2 middlePoint = new Vector2((firstTouch.position.x + secondTouch.position.x) * 0.5f,
 										  (firstTouch.position.y + secondTouch.position.y) * 0.5f);
 
-		Vector3 worldRotationPivot = camera.ScreenToWorldPoint(new Vector3(middlePoint.x, middlePoint.y, 0));
+		Vector3 worldRotationPivot = m_camera.ScreenToWorldPoint(new Vector3(middlePoint.x, middlePoint.y, 0));
 	
 		Vector3 stickPosition = stick.position;	
 
-		swivel.localPosition = worldRotationPivot;
+		pivot.localPosition = worldRotationPivot;
 
 		stick.position = stickPosition;
 

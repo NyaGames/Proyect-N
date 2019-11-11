@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class CameraControl : MonoBehaviour
 {
-	[SerializeField] protected CameraMovementType cameraMovement = CameraMovementType.Still;
+	public CameraMovementType cameraMovement;
 
 	[Header("Panning")]
 	[SerializeField]
@@ -32,8 +32,8 @@ public abstract class CameraControl : MonoBehaviour
 	[SerializeField]
 	protected Transform user;
 		
-	protected Transform swivel, stick;
-	protected new Camera camera;
+	protected Transform pivot, stick, swivel;
+	protected Camera m_camera;
 	protected Rigidbody stickRb;
 
 	protected float zoom = 0f;
@@ -41,11 +41,14 @@ public abstract class CameraControl : MonoBehaviour
 
 	protected virtual void Awake()
 	{
-		swivel = transform.GetChild(0);
-		stick = swivel.GetChild(0);
-		camera = stick.GetChild(0).GetComponent<Camera>();
+		pivot = transform.GetChild(0);
+		stick = pivot.GetChild(0);
+		swivel = stick.GetChild(0);
+		m_camera = swivel.GetChild(0).GetComponent<Camera>();
 
 		stickRb = stick.GetComponent<Rigidbody>();
+
+		cameraMovement = CameraMovementType.Still;
 	}
 
 	protected virtual void LateUpdate()
@@ -108,8 +111,6 @@ public abstract class CameraControl : MonoBehaviour
 					float prevMagnitude = (firstTouchPrevPos - secondTouchPrevPos).magnitude;
 					float currentMagnitude = (firstTouch.position - secondTouch.position).magnitude;
 
-					Debug.Log(Mathf.Abs(currentMagnitude - prevMagnitude));
-
 					if (Mathf.Abs(currentMagnitude - prevMagnitude) <= zoomingRotationSensibility)
 					{
 						cameraMovement = CameraMovementType.Rotating;
@@ -136,5 +137,5 @@ public abstract class CameraControl : MonoBehaviour
 	}
 
 
-	protected enum CameraMovementType { Still, Panning, Zooming, Centering, Rotating }
+	public enum CameraMovementType { Still, Panning, Zooming, Centering, Rotating }
 }

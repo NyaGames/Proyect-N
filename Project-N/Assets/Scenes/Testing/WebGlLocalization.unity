@@ -810,7 +810,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 43
   m_Depth: 0
   m_CullingMask:
@@ -1206,10 +1206,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6fe43b35d9f9814bbcfe73bb2cc32d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panSpeed: 120
+  cameraMovement: 0
+  panSpeed: {x: 0, y: 0}
   zoomSpeed: 0.005
   zoomClamping: {x: 0, y: 90}
   swivelZoomClamping: {x: 90, y: 60}
+  rotationSpeed: 0
+  zoomingRotationSensibility: 0.1
+  smoothTime: 0.3
+  user: {fileID: 0}
+  smoothFactor: 0.5
+  zCameraOffset: 30
+  stickMinZoom: 0
+  stickMaxZoom: 0
+  swivelMinZoom: 0
+  swivelMaxZoom: 0
 --- !u!54 &1538276391
 Rigidbody:
   m_ObjectHideFlags: 0
