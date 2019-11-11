@@ -1,0 +1,126 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Zone : MonoBehaviour
+{
+
+    public bool creatingNewRadious;
+
+    public bool movingObject;
+    public bool creatingObject;
+    public bool editRadius;
+
+    private void Start()
+    {
+        movingObject = false;
+        creatingObject = true;
+        editRadius = false;
+        creatingNewRadious = false;
+    }
+    private void Update()
+{
+        if (!creatingNewRadious)
+        {
+            this.GetComponent<Renderer>().material.color = new Color(0, 0, 255);
+            if (!movingObject && !creatingObject) //Si no se mueve y no se esta creando, lo detectamos
+            {
+                bool tapped = detectObjectTapped();
+                if (tapped)
+                {
+                    movingObject = true;
+                }
+            }
+            else if (movingObject)  //Si puede moverse y no se esta crando, lo movemos
+            {
+                moveObject();
+            }
+        }
+        else //Si se pulsa el botón de modificar el radio, vemos si estamos pulsando sobra la zona
+        {
+            if (!editRadius)
+            {
+                bool tapped = detectObjectTapped();
+                this.GetComponent<Renderer>().material.color = new Color(255, 0, 0);
+                Debug.Log("Creando nuevo radio");
+                if (tapped)
+                {
+                    editRadius = true;
+                }
+            }
+            else
+            {
+                setNewRadius();
+            }
+        }
+       
+    }
+
+    public void setNewRadius()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            float cameraDistanceToGround = AutoLobby.Instance.getDistanceFromCameraToGround();
+            Vector3 touchInWorldCoord = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
+            switch (touch.phase)
+            {
+                case TouchPhase.Moved:
+                    float distanceFromCenterToTap = (gameObject.transform.position - touchInWorldCoord).magnitude;
+                    gameObject.transform.localScale = new Vector3(distanceFromCenterToTap * 2, distanceFromCenterToTap * 2, distanceFromCenterToTap * 2);
+
+                    break;
+
+                // Report that a direction has been chosen when the finger is lifted.
+                case TouchPhase.Ended:
+                    editRadius = false;
+                    break;
+            }
+        }
+
+    }
+    public bool detectObjectTapped()
+    {
+        bool tapped = false;
+        if ((Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began))
+        {
+            Ray raycast = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            RaycastHit raycastHit;
+            if (Physics.Raycast(raycast, out raycastHit))
+            {
+                Debug.Log("Something Hit");
+                if (raycastHit.collider.gameObject == this.gameObject)
+                {
+                    //Destroy(this.gameObject);
+                    tapped = true;
+                    Debug.Log("Drop tapped");
+                }
+
+            }
+        }
+        return tapped;
+    }
+    public void moveObject()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            float cameraDistanceToGround = AutoLobby.Instance.getDistanceFromCameraToGround();
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
+            worldPosition.y = 0;
+            switch (touch.phase)
+            {
+                case TouchPhase.Moved:
+                    this.gameObject.transform.position = worldPosition;
+                    break;
+
+                case TouchPhase.Ended:
+                    movingObject = false;
+                    break;
+            }
+        }
+    }
+
+   
+
+}
