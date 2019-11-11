@@ -29,7 +29,9 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     public List<GameObject> playersList = new List<GameObject>();
     public byte maxPlayersPerRoom = 4;
 
+    private GameObject editableZone;
     private GameObject actualZone;
+    private GameObject nextZone;
     public GameObject zonePrefab;
     private List<GameObject> dropList = new List<GameObject>();
     public GameObject dropPrefab;
@@ -142,41 +144,39 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
     }
 
-
-
-    /*[PunRPC]
-    public void NewObjectReceived(Vector3[] objectArray, Vector3 scale, ObjectsToSpawn objectToSpawn)
+    public void StartClosingZone()
     {
-        switch (objectToSpawn)
+        StartCoroutine(CloseActualZone());
+    }
+
+    public IEnumerator CloseActualZone()
+    {
+        float timeToClose = 1.0f;
+        float t = 0;
+        Vector3 InitialScale = actualZone.transform.localScale;
+        Vector3 FinalScale = nextZone.transform.localScale;
+        Vector3 Initialpos = actualZone.transform.position;
+        Vector3 Finalpos = nextZone.transform.position;
+
+        while (t <= 1)
         {
-            case ObjectsToSpawn.Zone: //Ha llegado una zona nueva
-                if (actualZone != null)
-                {
-                    Destroy(actualZone);
-                }
-                actualZone = Instantiate(zonePrefab, objectArray[0], Quaternion.identity);
-                actualZone.transform.localScale = scale;
-                break;
-
-            case ObjectsToSpawn.Drop: //Han llegado nuevos drops
-                if (dropList != null)
-                {
-                    foreach (GameObject i in dropList)
-                    {
-                        Destroy(i);
-                    }
-                }
-                foreach(Vector3 v in objectArray)
-                {
-                    GameObject newDrop = Instantiate(dropPrefab, v, Quaternion.identity);
-                    newDrop.transform.localScale = scale;
-                    dropList.Add(newDrop);
-                }
-               
-                break;
+            actualZone.transform.localScale = Vector3.Lerp(InitialScale, FinalScale, t);
+            actualZone.transform.position = Vector3.Lerp(Initialpos, Finalpos, t);
+            t += Time.deltaTime / timeToClose;
+            yield return null;
         }
+        actualZone.transform.localScale = FinalScale;
+        actualZone.transform.position = Finalpos;
+        PhotonNetwork.Destroy(actualZone);
+        actualZone = PhotonNetwork.Instantiate(zonePrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
+        actualZone.transform.localScale = FinalScale;
+        PhotonNetwork.Destroy(nextZone);
 
-    }*/
+    }
+    public void CanCreateNewZone(){
+        zoneCreated = false; //Podemos crear una nueva zona
+        Debug.Log("Puedes crear una nueva zona");
+    }
     public void CreateZone()
     {
         if (Input.touchCount > 0)
@@ -188,17 +188,20 @@ public class AutoLobby : MonoBehaviourPunCallbacks
             {
                 // Record initial touch position.
                 case TouchPhase.Began:
-                    lasPositionTapped = touch.position;
-                    zoneCenter = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
-                    actualZone = Instantiate(zonePrefab, zoneCenter, Quaternion.identity);
+                    if (editableZone == null)
+                    {
+                        lasPositionTapped = touch.position;
+                        zoneCenter = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
+                        editableZone = Instantiate(zonePrefab, zoneCenter, Quaternion.identity);
+                    }
                     break;
 
                 // Determine direction by comparing the current touch position with the initial one.
                 case TouchPhase.Moved:
-                    if(actualZone != null)
+                    if(editableZone != null)
                     {
                         float distanceFromCenterToTap = (zoneCenter - touchInWorldCoord).magnitude;
-                        actualZone.transform.localScale = new Vector3(distanceFromCenterToTap * 2, distanceFromCenterToTap * 2, distanceFromCenterToTap * 2);
+                        editableZone.transform.localScale = new Vector3(distanceFromCenterToTap * 2, distanceFromCenterToTap * 2, distanceFromCenterToTap * 2);
                     }
 
                     lasPositionTapped = touch.position;
@@ -207,10 +210,10 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
                 // Report that a direction has been chosen when the finger is lifted.
                 case TouchPhase.Ended:
-                    if (actualZone != null)
+                    if (editableZone != null)
                     {
                         zoneCreated = true;
-                        actualZone.GetComponent<Zone>().creatingObject = false;
+                        editableZone.GetComponent<Zone>().creatingObject = false;
                     }
                     break;
             }
@@ -223,12 +226,23 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     }
     public void SendZoneToOtherPlayers()
     {
-        /*Vector3[] zoneArray = new Vector3[] { actualZone.transform.position};
-        PhotonView photonView = PhotonView.Get(this);
-        photonView.RPC("NewObjectReceived", RpcTarget.Others, zoneArray, actualZone.transform.localScale, ObjectsToSpawn.Zone);*/
-        GameObject newZone = PhotonNetwork.Instantiate(dropPrefab.name, actualZone.transform.position, Quaternion.identity);
-        newZone.transform.localScale = actualZone.transform.localScale;
+        if(editableZone != null) //Solo se envía una zona si se ha creado previamente en local. Si no se ha editado nada, no se puede mandar nada
+        {
+            if (actualZone == null) //Si no hay ninguna zona todavia, se guarda la zona editada en actualZone
+            {
+                actualZone = PhotonNetwork.Instantiate(zonePrefab.name, editableZone.transform.position, Quaternion.identity);
+                actualZone.transform.localScale = editableZone.transform.localScale;
+            }
+            else //Si ya habia una zona en el mapa, se guarda la zona editada en nextZone
+            {
+                nextZone = PhotonNetwork.Instantiate(zonePrefab.name, editableZone.transform.position, Quaternion.identity);
+                nextZone.transform.localScale = editableZone.transform.localScale;
+            }
+            Destroy(editableZone);
+        }
+        
 
+        
     }
     public void CreateDrop()
     {
@@ -276,15 +290,15 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     }
     public void enableCreateNewRadious()
     {
-        if (actualZone != null)
+        if (editableZone != null)
         {
-            if (actualZone.GetComponent<Zone>().creatingNewRadious)
+            if (editableZone.GetComponent<Zone>().creatingNewRadious)
             {
-                actualZone.GetComponent<Zone>().creatingNewRadious = false;
+                editableZone.GetComponent<Zone>().creatingNewRadious = false;
             }
             else
             {
-                actualZone.GetComponent<Zone>().creatingNewRadious = true;
+                editableZone.GetComponent<Zone>().creatingNewRadious = true;
             }
         }
 

@@ -19,9 +19,10 @@ public class Zone : MonoBehaviour
         creatingNewRadious = false;
     }
     private void Update()
-    {
+{
         if (!creatingNewRadious)
         {
+            this.GetComponent<Renderer>().material.color = new Color(0, 0, 255);
             if (!movingObject && !creatingObject) //Si no se mueve y no se esta creando, lo detectamos
             {
                 bool tapped = detectObjectTapped();
@@ -34,7 +35,6 @@ public class Zone : MonoBehaviour
             {
                 moveObject();
             }
-            this.GetComponent<Renderer>().material.color = new Color(0, 255, 0);
         }
         else //Si se pulsa el botón de modificar el radio, vemos si estamos pulsando sobra la zona
         {
@@ -52,7 +52,6 @@ public class Zone : MonoBehaviour
             {
                 setNewRadius();
             }
-            
         }
        
     }
