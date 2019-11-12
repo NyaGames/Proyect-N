@@ -195,7 +195,12 @@ namespace Mapbox.Unity.Location
 				Debug.LogFormat("LocationProviderFactory: Injected native WEBGL Location Provider - {0}", _webGlLocationProvider.GetType());
 				DefaultLocationProvider = _webGlLocationProvider;
 			}
-			else
+			else if (Application.platform == RuntimePlatform.WindowsPlayer)
+            {
+                Debug.LogFormat("LocationProviderFactory: Injected EDITOR Location Provider - {0}", _editorLocationProvider.GetType());
+                DefaultLocationProvider = _editorLocationProvider;
+            }
+            else
 			{
 				Debug.LogFormat("LocationProviderFactory: Injected DEVICE Location Provider - {0}", _deviceLocationProviderUnity.GetType());
 				DefaultLocationProvider = _deviceLocationProviderUnity;
