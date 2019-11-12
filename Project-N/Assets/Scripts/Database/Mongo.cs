@@ -1,8 +1,6 @@
-﻿using System.Collections;
+﻿using MongoDB.Driver;
 using System.Collections.Generic;
 using UnityEngine;
-using MongoDB.Driver;
-
 public class Mongo
 {
     private const string MONGO_URI = "mongodb+srv://Chetok:123ddd456@lobbydb-tqpcq.mongodb.net/test?retryWrites=true&w=majority";
@@ -11,8 +9,6 @@ public class Mongo
     private MongoClient client;
     private IMongoDatabase db;
     private IMongoCollection<Model_Account> accounts;
-
-
 
     public void Init()
     {
@@ -28,109 +24,55 @@ public class Mongo
         db = null;
     }
 
-   
-
     #region Insert
-    public bool InsertAccount(string username,string password,string email)
+    public Model_Account InsertAccount(string username,string password)
     {
-        //Checkea si el email es valido
-        if (!Utility.isEmail(email))
-        {
-            Debug.Log(email + "is not an email");
-            return false;
-        }
+        Model_Account newAccount = null;
         //Checkea si el username es valido
         if (!Utility.IsUsername(username))
         {
             Debug.Log(username + "is not an username");
-            return false;
+            return newAccount;
         }
+
         //Checkea si la cuenta existe
-        if (FindAccountByEmail(email) != null)
+        newAccount = FindAccountByUsername(username);
+        if (newAccount.Discriminator == "failed")
         {
-            Debug.Log(email + "is already in use");
-            return false;
+            Debug.Log(username + "has no discriminator avaiable, please change your username");
+            return newAccount;
         }
-
-        Model_Account newAccount = new Model_Account();
-        newAccount.Username = username;
-        newAccount.ShaPassword = password;
-        newAccount.Email = email;
-        newAccount.Discriminator = "0000";
-
-        //Generar Discriminator aleatorio
-        int rollCount = 0;
-        while(FindAccountByUsernameAndDiscriminator(newAccount.Username,newAccount.Discriminator) != null) //Mientras haya alguien con ese Discriminator, creamos uno nuevo y volvemos a buscar
-
-        {
-            newAccount.Discriminator = Random.Range(0, 9999).ToString("0000");
-
-            rollCount++;
-            if(rollCount > 1000)
-            {
-                Debug.Log("We rolled to many time, suggest username change!");
-                return false;
-            }
-        }
-
+        newAccount.ShaPassword = Utility.Sha256FromString(password);
+        newAccount.isGameMaster = false;
+        newAccount.LastLogin = System.DateTime.Now;
+        //newAccount.Email = email;
         accounts.InsertOne(newAccount);
-        Debug.Log("Nueva cuenta creada");
         //accounts.Insert(newAccount);
 
-        return true;
+        return newAccount;
     }
 
     public Model_Account LoginAccount(string usernameOrEmail, string password, int cnnId, string token)
     {
         Model_Account myAccount = null;
-        bool emailUsed = false;
         string[] data = usernameOrEmail.Split('#');
 
         //Find my account
-        if (Utility.isEmail(usernameOrEmail)) //Si me he loggeado usando el email 
+        if (!Utility.isEmail(usernameOrEmail)) //Si me he loggeado usando el username#Discriminator
         {
-            myAccount = accounts.Find(u => u.Email.Equals(usernameOrEmail) && u.ShaPassword.Equals(password)).SingleOrDefault();
-            emailUsed = true;
-        }
-        else //Si me he loggeado usando el username#Discriminator
-        {
-            if (data.Length > 1) //Si existe el Discriminator,continuamos 
+            if (data[1] != null) //Si existe el Discriminator,continuamos 
             {
                 myAccount = accounts.Find(u => u.Username.Equals(data[0]) && u.Discriminator.Equals(data[1]) && u.ShaPassword.Equals(password)).SingleOrDefault();
-            }
-            else
-            {
-                return null;
             }
         }
 
         if(myAccount != null) //Si hemos encontrado la cuenta
         {
-           /* myAccount.ActiveConnection = cnnId;
-            myAccount.Token = token;
-            myAccount.Status = 1; //Status indica si eta online(1) o no(0)
-            myAccount.LastLogin = System.DateTime.Now;*/
-
-            if (emailUsed) //Si me he logeado con el email
-            {
-                accounts.UpdateOne(u => u.Email.Equals(usernameOrEmail) && u.ShaPassword.Equals(password),Builders<Model_Account>.Update.Set(u => u.ActiveConnection, cnnId));
-                accounts.UpdateOne(u => u.Email.Equals(usernameOrEmail) && u.ShaPassword.Equals(password), Builders<Model_Account>.Update.Set(u => u.Token, token));
-                accounts.UpdateOne(u => u.Email.Equals(usernameOrEmail) && u.ShaPassword.Equals(password), Builders<Model_Account>.Update.Set(u => u.Status, 1));
-                accounts.UpdateOne(u => u.Email.Equals(usernameOrEmail) && u.ShaPassword.Equals(password), Builders<Model_Account>.Update.Set(u => u.LastLogin, System.DateTime.Now));
-            }
-            else //Si me he logeado con Username#Discriminator
-            {
-                accounts.UpdateOne(u => u.Username.Equals(data[0]) && u.Discriminator.Equals(data[1]) && u.ShaPassword.Equals(password), Builders<Model_Account>.Update.Set(u => u.ActiveConnection, cnnId));
-                accounts.UpdateOne(u => u.Username.Equals(data[0]) && u.Discriminator.Equals(data[1]) && u.ShaPassword.Equals(password), Builders<Model_Account>.Update.Set(u => u.Token, token));
-                accounts.UpdateOne(u => u.Username.Equals(data[0]) && u.Discriminator.Equals(data[1]) && u.ShaPassword.Equals(password), Builders<Model_Account>.Update.Set(u => u.Status, 1));
                 accounts.UpdateOne(u => u.Username.Equals(data[0]) && u.Discriminator.Equals(data[1]) && u.ShaPassword.Equals(password), Builders<Model_Account>.Update.Set(u => u.LastLogin, System.DateTime.Now));
-            }
-            
         }
         else
         {
             //No hemos encontrado la cuenta
-            Debug.Log("No se ha encontrado la cuenta");
         }
 
         return myAccount;
@@ -139,10 +81,27 @@ public class Mongo
     #endregion
 
     #region Fetch
-    public Model_Account FindAccountByEmail(string email)
+    public Model_Account FindAccountByUsername(string username)
     {
-        Model_Account modelUser = accounts.Find(user => user.Email.Equals(email)).SingleOrDefault(); //Cojo un documento que cumpla la condición(el email es igual al string que le paso)
-        return modelUser;
+        List<Model_Account> usersList = accounts.Find(user => user.Username.Equals(username)).ToList();
+        //Generar Discriminator aleatorio
+        Model_Account newAccount = new Model_Account();
+        newAccount.Username = username;
+        newAccount.Discriminator = "0000";
+        int rollCount = 0;
+        while (FindAccountByUsernameAndDiscriminator(newAccount.Username, newAccount.Discriminator) != null) //Mientras haya alguien con ese Discriminator, creamos uno nuevo y volvemos a buscar
+        {
+            newAccount.Discriminator = Random.Range(0, 9999).ToString("0000");
+            rollCount++;
+            if (rollCount > 1000)
+            {
+                Debug.Log("We rolled to many time, suggest username change!");
+                newAccount.Discriminator = "failed";
+                return newAccount;
+            }
+        }
+
+        return newAccount;
     }
     public Model_Account FindAccountByUsernameAndDiscriminator(string username,string discriminator)
     {
