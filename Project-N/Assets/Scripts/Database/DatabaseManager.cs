@@ -9,6 +9,9 @@ public class DatabaseManager : MonoBehaviour
     public TMPro.TMP_InputField SignInPasswordInputText;
     public TMPro.TMP_InputField SignInRepeatPasswordInputText;
 
+    public TMPro.TMP_InputField LogInUsernameInputText;
+    public TMPro.TMP_InputField LogInPasswordInputText;
+
     private Mongo db;
 
     void Start()
@@ -31,13 +34,33 @@ public class DatabaseManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Cannot create the account ");
+                Debug.LogError("MongoDB: Cannot create the account");
             }
         }
-        else{
-            Debug.Log("Passwords mismatched, write it again!");
+        else
+        {
+            Debug.LogError("MongoDB: Password mismatched. Write it again!");
         }
         
     }
 
+    public void LogIn() {
+        string username = LogInUsernameInputText.text;
+        string password = LogInPasswordInputText.text;
+        Model_Account userAccount = db.FindAccountByUsername(username);
+        if (userAccount != null)
+        {
+            if (userAccount.ShaPassword.Equals(password))
+            {
+                Debug.Log("Letsgoooooooooooooo");
+            }
+            else
+            {
+                Debug.LogError("MongoDB: Password not valid!");
+            }
+        }
+        else {
+            Debug.LogError("MongoDB: Username not valid!");
+        }
+    }
 }
