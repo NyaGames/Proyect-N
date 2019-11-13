@@ -49,7 +49,7 @@ public class Drop : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            float cameraDistanceToGround = AutoLobby.Instance.getDistanceFromCameraToGround();
+            float cameraDistanceToGround = GamemasterManager.Instance.getDistanceFromCameraToGround();
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
             worldPosition.y = 0;
             switch (touch.phase)
