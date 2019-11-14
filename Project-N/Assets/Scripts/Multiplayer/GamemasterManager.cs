@@ -104,7 +104,7 @@ public class GamemasterManager : MonoBehaviour
                     {
                         lasPositionTapped = touch.position;
                         zoneCenter = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
-                        editableZone = Instantiate(zonePrefab, zoneCenter, Quaternion.identity);
+                        editableZone = Instantiate(zonePrefab, zoneCenter,Quaternion.identity);
                     }
                     break;
 

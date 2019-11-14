@@ -22,7 +22,6 @@ public class Zone : MonoBehaviour
 {
         if (!creatingNewRadious)
         {
-            this.GetComponent<Renderer>().material.color = new Color(0, 0, 255);
             if (!movingObject && !creatingObject) //Si no se mueve y no se esta creando, lo detectamos
             {
                 bool tapped = detectObjectTapped();
@@ -41,7 +40,6 @@ public class Zone : MonoBehaviour
             if (!editRadius)
             {
                 bool tapped = detectObjectTapped();
-                this.GetComponent<Renderer>().material.color = new Color(255, 0, 0);
                 Debug.Log("Creando nuevo radio");
                 if (tapped)
                 {
@@ -89,7 +87,7 @@ public class Zone : MonoBehaviour
             if (Physics.Raycast(raycast, out raycastHit))
             {
                 Debug.Log("Something Hit");
-                if (raycastHit.collider.gameObject == this.gameObject)
+                if (raycastHit.collider.gameObject == this.gameObject.transform.GetChild(0).gameObject)
                 {
                     //Destroy(this.gameObject);
                     tapped = true;
