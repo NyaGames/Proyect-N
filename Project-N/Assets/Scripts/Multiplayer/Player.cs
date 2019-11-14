@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        /*if (!isGameMaster)
+        if (!isGameMaster)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
                 this.transform.position = new Vector3( hit.point.x,0,hit.point.z);
         
             }
-        }*/
+        }
 
     }
 

@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 100559624}
   - component: {fileID: 100559623}
   m_Layer: 5
-  m_Name: JoinSpecificRoomButton
+  m_Name: JoinRoomButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,13 +466,13 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 100559624}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 549009862}
-        m_MethodName: JoinExistingRoom
+        m_MethodName: JoinRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -878,7 +878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &269263911
 RectTransform:
   m_ObjectHideFlags: 0
@@ -893,8 +893,8 @@ RectTransform:
   m_Father: {fileID: 1190055813}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.040161617}
-  m_AnchorMax: {x: 1, y: 0.3875475}
+  m_AnchorMin: {x: 0.7388402, y: 0.46}
+  m_AnchorMax: {x: 1, y: 0.5803232}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1252,7 +1252,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectButton: {fileID: 474864493}
-  joinRandomButton: {fileID: 1760641300}
+  createRoomButton: {fileID: 1760641300}
+  joinRoomButton: {fileID: 100559623}
   gameMasterToggle: {fileID: 2101532704}
   Log: {fileID: 1910849395}
   playerCount: {fileID: 269263912}
@@ -1261,6 +1262,9 @@ MonoBehaviour:
     type: 3}
   playersList: []
   maxPlayersPerRoom: 4
+  roomnameInputText: {fileID: 766715815}
+  roompasswordInputText: {fileID: 2061596178}
+  roomsAvaiableText: {fileID: 2056992340}
 --- !u!114 &549009863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1551,7 +1555,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.14600001}
   m_AnchorMax: {x: 1, y: 0.3875475}
-  m_AnchoredPosition: {x: 0, y: 0.0000038146973}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0.0000038146973}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &766715815
@@ -2303,13 +2307,14 @@ RectTransform:
   - {fileID: 269263911}
   - {fileID: 2101532703}
   - {fileID: 512504137}
+  - {fileID: 2056992339}
   m_Father: {fileID: 1719586375}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.347, y: 0.739}
+  m_AnchorMin: {x: 0.35121053, y: 0.5715475}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -1, y: 0}
+  m_SizeDelta: {x: 2, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1190055814
 MonoBehaviour:
@@ -2414,7 +2419,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Join random
+  m_Text: 'Create room with name and password
+
+
+'
 --- !u!222 &1223630955
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3095,7 +3103,7 @@ MonoBehaviour:
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -3498,7 +3506,7 @@ GameObject:
   - component: {fileID: 1760641301}
   - component: {fileID: 1760641300}
   m_Layer: 5
-  m_Name: 'JoinRandomRoomButton '
+  m_Name: 'CreateRoomButton '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3559,13 +3567,13 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1760641301}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 549009862}
-        m_MethodName: JoinRandom
+        m_MethodName: CreateRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3678,7 +3686,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Join with name
+  m_Text: 'Join with name and password
+
+'
 --- !u!222 &1815920437
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4108,6 +4118,83 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910849393}
+  m_CullTransparentMesh: 0
+--- !u!1 &2056992338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2056992339}
+  - component: {fileID: 2056992341}
+  - component: {fileID: 2056992340}
+  m_Layer: 5
+  m_Name: roomlist
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2056992339
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056992338}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1190055813}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.40625575, y: 0.3875475}
+  m_AnchorMax: {x: 1, y: 0.5803232}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2056992340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056992338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &2056992341
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056992338}
   m_CullTransparentMesh: 0
 --- !u!1 &2061596176
 GameObject:
