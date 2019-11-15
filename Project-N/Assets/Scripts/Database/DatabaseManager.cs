@@ -9,14 +9,18 @@ public class DatabaseManager : MonoBehaviour
     public TMPro.TMP_InputField SignInPasswordInputText;
     public TMPro.TMP_InputField SignInRepeatPasswordInputText;
 
+    public TMPro.TMP_InputField LogInInUsernameInputText;
+    public TMPro.TMP_InputField LogInPasswordInputText;
+
     private Mongo db;
+    private Model_Account userAccount;
 
     void Start()
     {
         db = new Mongo();
         db.Init();
     }
-
+    //Inserta una nueva cuenta en la base de datos
     public void InsertNewAccount()
     {
         string username = SignInUsernameInputText.text;
@@ -24,7 +28,7 @@ public class DatabaseManager : MonoBehaviour
         string passwordRepeated = SignInRepeatPasswordInputText.text;
         if (password.Equals(passwordRepeated)) //Si ambas contraseñas están bien escritas, se intenta insertar
         {
-            Model_Account userAccount = db.InsertAccount(username, password);
+            userAccount = db.InsertAccount(username, password);
             if (userAccount != null)
             {
                 Debug.Log("New account created, your username is: " + userAccount.Username +"#"+ userAccount.Discriminator + ". Use it to login!");
@@ -38,6 +42,23 @@ public class DatabaseManager : MonoBehaviour
             Debug.Log("Passwords mismatched, write it again!");
         }
         
+    }
+
+    public void LogIn()
+    {
+        string username = LogInInUsernameInputText.text;
+        string password = Utility.Sha256FromString(LogInPasswordInputText.text);
+
+        userAccount = db.LoginAccount(username,password);
+        if(userAccount != null) //SI hemos encontrado la cuenta
+        {
+            Debug.Log("Login as: " + userAccount.Username + "#" + userAccount.Discriminator + ". Welcome back!");
+        }
+        else
+        {
+            Debug.Log("Wrong username or password, please try to log in with other credentials");
+        }
+
     }
 
 }

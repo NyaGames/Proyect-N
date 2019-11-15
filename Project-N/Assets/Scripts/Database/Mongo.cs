@@ -52,7 +52,7 @@ public class Mongo
         return newAccount;
     }
 
-    public Model_Account LoginAccount(string usernameOrEmail, string password, int cnnId, string token)
+    public Model_Account LoginAccount(string usernameOrEmail, string password)
     {
         Model_Account myAccount = null;
         string[] data = usernameOrEmail.Split('#');
@@ -60,7 +60,7 @@ public class Mongo
         //Find my account
         if (!Utility.isEmail(usernameOrEmail)) //Si me he loggeado usando el username#Discriminator
         {
-            if (data[1] != null) //Si existe el Discriminator,continuamos 
+            if (data.Length > 1) //Si existe el Discriminator,continuamos 
             {
                 myAccount = accounts.Find(u => u.Username.Equals(data[0]) && u.Discriminator.Equals(data[1]) && u.ShaPassword.Equals(password)).SingleOrDefault();
             }
