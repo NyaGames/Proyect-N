@@ -24,6 +24,7 @@ public class GamemasterManager : MonoBehaviour
     public GameObject dropPos;
     public int numDrops = 3;
     public bool zoneCreated;
+    public GameObject lastDropTapped;
 
     private void Awake()
     {
@@ -55,35 +56,13 @@ public class GamemasterManager : MonoBehaviour
 
     }
 
-    public void StartClosingZone()
+    
+    public float getDistanceFromCameraToGround()
     {
-        StartCoroutine(CloseActualZone());
+        return (GameObject.Find("LocationBasedGame").transform.position - GameObject.Find("Main Camera").transform.position).magnitude;
     }
 
-    public IEnumerator CloseActualZone()
-    {
-        float timeToClose = 1.0f;
-        float t = 0;
-        Vector3 InitialScale = actualZone.transform.localScale;
-        Vector3 FinalScale = nextZone.transform.localScale;
-        Vector3 Initialpos = actualZone.transform.position;
-        Vector3 Finalpos = nextZone.transform.position;
-
-        while (t <= 1)
-        {
-            actualZone.transform.localScale = Vector3.Lerp(InitialScale, FinalScale, t);
-            actualZone.transform.position = Vector3.Lerp(Initialpos, Finalpos, t);
-            t += Time.deltaTime / timeToClose;
-            yield return null;
-        }
-        actualZone.transform.localScale = FinalScale;
-        actualZone.transform.position = Finalpos;
-        PhotonNetwork.Destroy(actualZone);
-        actualZone = PhotonNetwork.Instantiate(zonePrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
-        actualZone.transform.localScale = FinalScale;
-        PhotonNetwork.Destroy(nextZone);
-
-    }
+    //Zone methods
     public void CanCreateNewZone()
     {
         zoneCreated = false; //Podemos crear una nueva zona
@@ -156,6 +135,58 @@ public class GamemasterManager : MonoBehaviour
 
 
     }
+    public void enableCreateNewRadious()
+    {
+        if (editableZone != null)
+        {
+            if (editableZone.GetComponent<Zone>().creatingNewRadious)
+            {
+                editableZone.GetComponent<Zone>().creatingNewRadious = false;
+            }
+            else
+            {
+                editableZone.GetComponent<Zone>().creatingNewRadious = true;
+            }
+        }
+
+    }
+    public void StartClosingZone()
+    {
+        StartCoroutine(CloseActualZone());
+    }
+    public IEnumerator CloseActualZone()
+    {
+        float timeToClose = 1.0f;
+        float t = 0;
+        Vector3 InitialScale = actualZone.transform.localScale;
+        Vector3 FinalScale = nextZone.transform.localScale;
+        Vector3 Initialpos = actualZone.transform.position;
+        Vector3 Finalpos = nextZone.transform.position;
+
+        while (t <= 1)
+        {
+            actualZone.transform.localScale = Vector3.Lerp(InitialScale, FinalScale, t);
+            actualZone.transform.position = Vector3.Lerp(Initialpos, Finalpos, t);
+            t += Time.deltaTime / timeToClose;
+            yield return null;
+        }
+        actualZone.transform.localScale = FinalScale;
+        actualZone.transform.position = Finalpos;
+        PhotonNetwork.Destroy(actualZone);
+        actualZone = PhotonNetwork.Instantiate(zonePrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
+        actualZone.transform.localScale = FinalScale;
+        PhotonNetwork.Destroy(nextZone);
+
+    }
+    public void DeleteZone()
+    {
+        if(editableZone != null)
+        {
+            Destroy(editableZone);
+            zoneCreated = false;
+        }
+    }
+    //Drop methods
     public void CreateDrop()
     {
         if (Input.touchCount > 0)
@@ -179,6 +210,7 @@ public class GamemasterManager : MonoBehaviour
                     GameObject newDrop = Instantiate(dropPrefab, worldPosition, Quaternion.identity);
                     newDrop.GetComponent<Drop>().creatingObject = false;
                     dropList.Add(newDrop);
+                    newDrop.GetComponent<Drop>().lastTouchedDrop();
                     break;
             }
         }
@@ -200,24 +232,13 @@ public class GamemasterManager : MonoBehaviour
         }
 
     }
-    public void enableCreateNewRadious()
+    public void DeleteDrop()
     {
-        if (editableZone != null)
-        {
-            if (editableZone.GetComponent<Zone>().creatingNewRadious)
-            {
-                editableZone.GetComponent<Zone>().creatingNewRadious = false;
-            }
-            else
-            {
-                editableZone.GetComponent<Zone>().creatingNewRadious = true;
-            }
-        }
+        dropList.Remove(lastDropTapped);
+        Destroy(lastDropTapped);
+        numDrops++;
+    }
 
-    }
-    public float getDistanceFromCameraToGround()
-    {
-        return (GameObject.Find("LocationBasedGame").transform.position - GameObject.Find("Main Camera").transform.position).magnitude;
-    }
+
 
 }
