@@ -12,8 +12,11 @@ public class DatabaseManager : MonoBehaviour
     public TMPro.TMP_InputField LogInInUsernameInputText;
     public TMPro.TMP_InputField LogInPasswordInputText;
 
+    public ConnectToPhoton lobby;
+
     private Mongo db;
     private Model_Account userAccount;
+
 
     void Start()
     {
@@ -53,6 +56,7 @@ public class DatabaseManager : MonoBehaviour
         if(userAccount != null) //SI hemos encontrado la cuenta
         {
             Debug.Log("Login as: " + userAccount.Username + "#" + userAccount.Discriminator + ". Welcome back!");
+            lobby.Connect();
         }
         else
         {
