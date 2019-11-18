@@ -19,7 +19,8 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
     public static AutoLobby Instance { get; private set; }
     public Button connectButton;
-    public Button joinRandomButton;
+    public Button createRoomButton;
+    public Button joinRoomButton;
     public Toggle gameMasterToggle;
     public Text Log;
     public Text playerCount;
@@ -29,29 +30,20 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     public List<GameObject> playersList = new List<GameObject>();
     public byte maxPlayersPerRoom = 4;
 
-    private GameObject editableZone;
-    private GameObject actualZone;
-    private GameObject nextZone;
-    public GameObject zonePrefab;
-    private List<GameObject> dropList = new List<GameObject>();
-    public GameObject dropPrefab;
+    public TMP_InputField roomnameInputText;
+    public TMP_InputField roompasswordInputText;
 
-    public Button dropButton;
-
-    Vector3 lasPositionTapped = new Vector3(0, 0, 0);
-    Vector3 zoneCenter = new Vector3(0, 0, 0);
-
-    public bool creatingDrop = false;
-    public GameObject dropPos;
-    public int numDrops = 3;
-    public bool zoneCreated;
+    private string roomPassword;
+    private GameObject myPlayer;
+    private List<RoomInfo> roomsAvaiable = new List<RoomInfo>();
+    public Text roomsAvaiableText;
 
     private void Awake()
     {
         if (!Instance)
         {
             Instance = this;
-            zoneCreated = false;
+           
         }
         else
         {
@@ -74,12 +66,44 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     }
     public override void OnConnectedToMaster()
     {
+        PhotonNetwork.JoinLobby(null);
         Log.text += "\nConnected to server";
         connectButton.interactable = false;
-        joinRandomButton.interactable = true;
+        createRoomButton.interactable = true;
+        joinRoomButton.interactable = true;
+        
     }
 
-    public void JoinRandom()
+    //Se llama cada vez que alguien crea o borra una sala del servidor
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        Debug.Log("Has entrado en el lobby, estas son las salas que hay disponibles");
+        UpdateCachedRoomList(roomList);
+    }
+    void UpdateCachedRoomList(List<RoomInfo> roomList)
+    {
+        roomsAvaiableText.text = "";
+
+        foreach (RoomInfo r in roomList)
+        {
+            if (!roomsAvaiable.Contains(r)) //Si no teniamos esa sala guardada,la guardamos
+            {
+                ExitGames.Client.Photon.Hashtable table = r.CustomProperties;
+                roomsAvaiable.Add(r);
+            }
+            else //Si la sala etaba guardada, la borramos
+            {
+                roomsAvaiable.Remove(r);
+            }
+        }
+        foreach(RoomInfo r in roomsAvaiable)
+        {
+            roomsAvaiableText.text += r.Name + "/";
+        }
+        
+    }
+
+    /*public void JoinRandom()
     {
         if (!PhotonNetwork.JoinRandomRoom())
         {
@@ -96,38 +120,85 @@ public class AutoLobby : MonoBehaviourPunCallbacks
             Log.text += "\nFail creating room";
         }
 
-    }
-    public void JoinExistingRoom()
+    }*/
+    public void CreateRoom()
     {
-        string roomName = GameObject.Find("JoinSpecificTextInput").GetComponent<TMP_InputField>().text;
+        string roomName = roomnameInputText.text;
+        roomPassword = roompasswordInputText.text;
 
-        if (roomName != "")
+        bool usernameAlreadyUsed = false;
+        foreach(RoomInfo r in roomsAvaiable)
+        {
+            if(r.Name == roomName)
+            {
+                usernameAlreadyUsed = true;
+                break;
+            }
+        }
+
+        if (roomName != "" && roomPassword != "" && !usernameAlreadyUsed)
         {
             RoomOptions roomOptions = new RoomOptions();
-            roomOptions.IsVisible = false; //Hace la sala privada
-            PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, null);
+            roomOptions.MaxPlayers = maxPlayersPerRoom;
+            roomOptions.IsVisible = true; //FALSE = Hace la sala privada
+            ExitGames.Client.Photon.Hashtable table = new ExitGames.Client.Photon.Hashtable();
+            table.Add("password", roomPassword);
+            roomOptions.CustomRoomProperties = table;
+            PhotonNetwork.CreateRoom(roomName, roomOptions,null);
+            Debug.Log("Sala creada: " + roomName  + " / " + roomPassword);
         }
+        else
+        {
+            Debug.Log("Nombre de sala no disponible o contraseña no introducida");
+        }
+    }
+    public void JoinRoom()
+    {
+        string roomName = roomnameInputText.text;
+        roomPassword = roompasswordInputText.text;
+
+        bool passwordCorrect = false;
+        //Miramos en las salas creadas la sala a la que queremos unirnos, y comprobamos si la contraseña es correcta
+        foreach (RoomInfo r in roomsAvaiable)
+        {
+            if(r.Name == roomName)
+            {
+                ExitGames.Client.Photon.Hashtable table = r.CustomProperties;
+                if (table.ContainsValue(roomPassword))
+                {
+                    passwordCorrect = true;
+                    break;
+                }
+            }  
+        }
+        if (roomName != "" && roomPassword != "" && passwordCorrect)
+        {
+            PhotonNetwork.JoinRoom(roomName);
+        }
+        else
+        {
+            Debug.Log("Nombre de sala o contraseña incorrectas");
+        }
+
     }
     public override void OnJoinedRoom()
     {
+        roomsAvaiableText.text = "Sala actual: " + PhotonNetwork.CurrentRoom.Name;
+
+        roomnameInputText.interactable = false;
+        roompasswordInputText.interactable = false;
+        createRoomButton.interactable = false;
         Log.text += "\nJoined";
-        joinRandomButton.interactable = false;
-       PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
-        
+        myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
+
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("La sala no existe o la contraseña es incorrecta");
     }
     private void FixedUpdate()
     {
-        if (!zoneCreated) //Si no se ha creado la zona todavía y no estoy creando un drop, se puede crear
-        {
-            CreateZone();
-        }
-        
-
-        if (creatingDrop) //Si el botón de los drops está holdeado, se puede crear un drop
-        { 
-            CreateDrop();
-        }
-        
 
         playerCount.text = GameObject.Find("JoinSpecificTextInput").GetComponent<TMP_InputField>().text;
         if (PhotonNetwork.CurrentRoom != null) //Si estamos en una sala
@@ -144,168 +215,6 @@ public class AutoLobby : MonoBehaviourPunCallbacks
 
     }
 
-    public void StartClosingZone()
-    {
-        StartCoroutine(CloseActualZone());
-    }
-
-    public IEnumerator CloseActualZone()
-    {
-        float timeToClose = 1.0f;
-        float t = 0;
-        Vector3 InitialScale = actualZone.transform.localScale;
-        Vector3 FinalScale = nextZone.transform.localScale;
-        Vector3 Initialpos = actualZone.transform.position;
-        Vector3 Finalpos = nextZone.transform.position;
-
-        while (t <= 1)
-        {
-            actualZone.transform.localScale = Vector3.Lerp(InitialScale, FinalScale, t);
-            actualZone.transform.position = Vector3.Lerp(Initialpos, Finalpos, t);
-            t += Time.deltaTime / timeToClose;
-            yield return null;
-        }
-        actualZone.transform.localScale = FinalScale;
-        actualZone.transform.position = Finalpos;
-        PhotonNetwork.Destroy(actualZone);
-        actualZone = PhotonNetwork.Instantiate(zonePrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
-        actualZone.transform.localScale = FinalScale;
-        PhotonNetwork.Destroy(nextZone);
-
-    }
-    public void CanCreateNewZone(){
-        zoneCreated = false; //Podemos crear una nueva zona
-        Debug.Log("Puedes crear una nueva zona");
-    }
-    public void CreateZone()
-    {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            float cameraDistanceToGround = getDistanceFromCameraToGround();
-            Vector3 touchInWorldCoord = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
-            switch (touch.phase)
-            {
-                // Record initial touch position.
-                case TouchPhase.Began:
-                    if (editableZone == null)
-                    {
-                        lasPositionTapped = touch.position;
-                        zoneCenter = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
-                        editableZone = Instantiate(zonePrefab, zoneCenter, Quaternion.identity);
-                    }
-                    break;
-
-                // Determine direction by comparing the current touch position with the initial one.
-                case TouchPhase.Moved:
-                    if(editableZone != null)
-                    {
-                        float distanceFromCenterToTap = (zoneCenter - touchInWorldCoord).magnitude;
-                        editableZone.transform.localScale = new Vector3(distanceFromCenterToTap * 2, distanceFromCenterToTap * 2, distanceFromCenterToTap * 2);
-                    }
-
-                    lasPositionTapped = touch.position;
-
-                    break;
-
-                // Report that a direction has been chosen when the finger is lifted.
-                case TouchPhase.Ended:
-                    if (editableZone != null)
-                    {
-                        zoneCreated = true;
-                        editableZone.GetComponent<Zone>().creatingObject = false;
-                    }
-                    break;
-            }
-        }
-        else //Si no se detecta bien el input del dedo
-        {
-            
-        }
-        
-    }
-    public void SendZoneToOtherPlayers()
-    {
-        if(editableZone != null) //Solo se envía una zona si se ha creado previamente en local. Si no se ha editado nada, no se puede mandar nada
-        {
-            if (actualZone == null) //Si no hay ninguna zona todavia, se guarda la zona editada en actualZone
-            {
-                actualZone = PhotonNetwork.Instantiate(zonePrefab.name, editableZone.transform.position, Quaternion.identity);
-                actualZone.transform.localScale = editableZone.transform.localScale;
-            }
-            else //Si ya habia una zona en el mapa, se guarda la zona editada en nextZone
-            {
-                nextZone = PhotonNetwork.Instantiate(zonePrefab.name, editableZone.transform.position, Quaternion.identity);
-                nextZone.transform.localScale = editableZone.transform.localScale;
-            }
-            Destroy(editableZone);
-        }
-        
-
-        
-    }
-    public void CreateDrop()
-    {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            float cameraDistanceToGround = getDistanceFromCameraToGround();
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
-            worldPosition.y = 0;
-            switch (touch.phase)
-            {
-                case TouchPhase.Moved:
-
-                    dropPos.transform.position = worldPosition;
-
-                    break;
-
-                case TouchPhase.Ended:
-                    Destroy(dropPos);
-                    numDrops--;
-                    creatingDrop = false;
-                    GameObject newDrop = Instantiate(dropPrefab, worldPosition,Quaternion.identity);
-                    newDrop.GetComponent<Drop>().creatingObject = false;
-                    dropList.Add(newDrop);
-                    break;
-            }
-        }
-        else
-        {
-            //Si no se detecta bien el input del dedo, se borra la imagen del drop, ese intento de crear el drop no cuenta
-            if(dropPos != null)
-            {
-                Destroy(dropPos);
-            }
-        }
-    }
-    public void SendDropsToOtherPlayers()
-    {
-        foreach (GameObject g in dropList)
-        {
-            GameObject n = PhotonNetwork.Instantiate(dropPrefab.name,g.transform.position,Quaternion.identity);
-            n.transform.localScale = g.transform.localScale;
-        }
-
-    }
-    public void enableCreateNewRadious()
-    {
-        if (editableZone != null)
-        {
-            if (editableZone.GetComponent<Zone>().creatingNewRadious)
-            {
-                editableZone.GetComponent<Zone>().creatingNewRadious = false;
-            }
-            else
-            {
-                editableZone.GetComponent<Zone>().creatingNewRadious = true;
-            }
-        }
-
-    }
-    public float getDistanceFromCameraToGround()
-    {
-        return (GameObject.Find("Plane").transform.position - GameObject.Find("Main Camera").transform.position).magnitude;
-    }
+  
 
 }
