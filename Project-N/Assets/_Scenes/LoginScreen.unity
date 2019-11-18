@@ -607,6 +607,9 @@ MonoBehaviour:
   SignInRepeatPasswordInputText: {fileID: 1915311299}
   LogInUsernameInputText: {fileID: 32751724}
   LogInPasswordInputText: {fileID: 1052174486}
+  LoginError: {fileID: 1706909866}
+  SignInPasswordError: {fileID: 1753161660}
+  SignInUsernameError: {fileID: 1229968676}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -5848,7 +5851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1949874398
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6138,7 +6141,7 @@ PrefabInstance:
     - target: {fileID: 5662541441945094576, guid: 9531450e24c2f224882d2792b4c2b398,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5662541441945094576, guid: 9531450e24c2f224882d2792b4c2b398,
         type: 3}

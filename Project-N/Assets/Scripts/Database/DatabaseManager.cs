@@ -12,6 +12,10 @@ public class DatabaseManager : MonoBehaviour
     public TMPro.TMP_InputField LogInUsernameInputText;
     public TMPro.TMP_InputField LogInPasswordInputText;
 
+    public GameObject LoginError;
+    public GameObject SignInPasswordError;
+    public GameObject SignInUsernameError;
+
     private Mongo db;
 
     void Start()
@@ -35,11 +39,13 @@ public class DatabaseManager : MonoBehaviour
             else
             {
                 Debug.LogError("MongoDB: Cannot create the account");
+                SignInUsernameError.SetActive(true);
             }
         }
         else
         {
             Debug.LogError("MongoDB: Password mismatched. Write it again!");
+            SignInPasswordError.SetActive(true);
         }
         
     }
@@ -57,10 +63,12 @@ public class DatabaseManager : MonoBehaviour
             else
             {
                 Debug.LogError("MongoDB: Password not valid!");
+                LoginError.SetActive(false);
             }
         }
         else {
             Debug.LogError("MongoDB: Username not valid!");
+            LoginError.SetActive(false);
         }
     }
 }
