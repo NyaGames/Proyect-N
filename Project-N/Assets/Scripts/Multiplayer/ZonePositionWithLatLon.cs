@@ -28,10 +28,15 @@ public class ZonePositionWithLatLon : MonoBehaviour, IPunObservable
     {
         if (photonView.IsMine)//SI soy el gm, calculo la posición de la zona
         {
-            latLonCurrent = CalculateZoneLatLon(map.CenterLatitudeLongitude);
+            latLonCurrent = CalculateZoneLatLon(map.CenterLatitudeLongitude) + map.CenterLatitudeLongitude;
             latlonSend.x = (float)latLonCurrent.x;
             latlonSend.y = (float)latLonCurrent.y;
-            Debug.Log("Map:" + map.CenterLatitudeLongitude + "/ Zone:" + latLonCurrent);
+            Debug.Log("Centro mapa: " + map.CenterLatitudeLongitude + "/Zona: " + latLonCurrent);
+        }
+        else
+        {
+            Vector2d v = new Vector2d(latlonReceived.x, latlonReceived.y);
+            transform.localPosition = map.GeoToWorldPosition(v);
         }
 
     }
@@ -40,18 +45,12 @@ public class ZonePositionWithLatLon : MonoBehaviour, IPunObservable
         Vector2d latlon = transform.GetGeoPosition(center, 1);
         return latlon;
     }
-    private void LateUpdate()
-    {
-        if (latLonCurrent != null)
-        {
-            if (!photonView.IsMine) //Si no he creado la zona(Si soy un jugador normal),la uptadeo con lo que me llega
-            {
-                Vector2d v = new Vector2d(latlonReceived.x, latlonReceived.y);
-                transform.localPosition = map.GeoToWorldPosition(v);
-            }
-        }
-    }
 
+    public Vector3 GetGeoPosition()
+    {
+        Vector2d v = new Vector2d(latlonReceived.x, latlonReceived.y);
+        return  map.GeoToWorldPosition(v);
+    }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)

@@ -75,7 +75,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     }
 
     //Se llama cada vez que alguien crea o borra una sala del servidor
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    /*public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         Debug.Log("Has entrado en el lobby, estas son las salas que hay disponibles");
         if(roomList.Count <= 0)
@@ -109,7 +109,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
             roomsAvaiableText.text += r.Name + "/";
         }
         
-    }
+    }*/
 
     /*public void JoinRandom()
     {
@@ -153,7 +153,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     }
     public void JoinRoom()
     {
-        roomPassword = roompasswordInputText.text;
+        roomPassword = "22";//roompasswordInputText.text;
 
         if (roomPassword != "")
         {
@@ -173,10 +173,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
         createRoomButton.interactable = false;
         Log.text += "\nJoined";
         GameObject g = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
-        if (g.GetComponent<Player>().isGameMaster)
-        {
-            myPlayer = g;
-        }
+        myPlayer = g;
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
@@ -185,11 +182,11 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     }
     private void FixedUpdate()
     {
-
+        
         if (PhotonNetwork.CurrentRoom != null) //Si estamos en una sala
         {
             playersCount = PhotonNetwork.CurrentRoom.PlayerCount;
-            playerCount.text = playersCount + "/" + maxPlayersPerRoom;
+            playerCount.text = "IsMasterClient: " + PhotonNetwork.IsMasterClient.ToString() + "- Player Count: " + playersCount + "/" + maxPlayersPerRoom;
             gameMasterToggle.interactable = false;
         }
         else
