@@ -1,9 +1,10 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
 Shader "Custom/Zone1"
 {Properties{
 		_MainTex("Main texture", 2D) = "white" {}
 		_NoiseTex("Noise texture", 2D) = "grey" {}
+		
 
 		_Mitigation("Distortion mitigation", Range(1, 30)) = 1
 		_SpeedX("Speed along X", Range(0, 5)) = 1
@@ -11,7 +12,7 @@ Shader "Custom/Zone1"
 }
 
 SubShader{
-	Tags { "RenderType" = "opaque" }
+	Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
 
 	Pass {
 		CGPROGRAM

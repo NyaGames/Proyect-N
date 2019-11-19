@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_Shader_zone
-  m_Shader: {fileID: 4800000, guid: dab7496f91ff8af44a4243d62e156517, type: 3}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
+  m_Name: MAT_Shader2
+  m_Shader: {fileID: 4800000, guid: 9d238a97803f5e3489ddfb9d6e08fc15, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -47,10 +47,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NoiseTex:
-        m_Texture: {fileID: 2800000, guid: 57d7190d83efada4c9f988c16695a57b, type: 3}
-        m_Scale: {x: 4.12, y: 3.76}
-        m_Offset: {x: 0, y: 3.78}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -60,32 +56,24 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amount: 0
-    - _Amplitude: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _CutoutThresh: 0
     - _DetailNormalMapScale: 1
-    - _Distance: 1
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
-    - _Mitigation: 6.9
-    - _Mode: 3
+    - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 1
-    - _SpeedX: 0.05
-    - _SpeedY: 0.07
     - _SrcBlend: 1
-    - _Transparency: 0
     - _UVSec: 0
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Offset: {r: 5.64, g: 3.11, b: 2.87, a: 4.17}
+    - _Scale: {r: 8.77, g: 3.54, b: 3.02, a: 3.84}
