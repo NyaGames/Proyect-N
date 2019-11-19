@@ -4,7 +4,9 @@ Shader "Custom/Zone1"
 {Properties{
 		_MainTex("Main texture", 2D) = "white" {}
 		_NoiseTex("Noise texture", 2D) = "grey" {}
-		
+		_Color ("Color", Color) = (1,1,1,1)
+        _TransparentColor ("Transparent Color", Color) = (1,1,1,1)
+        _Threshold ("Threshhold", Float) = 0.1
 
 		_Mitigation("Distortion mitigation", Range(1, 30)) = 1
 		_SpeedX("Speed along X", Range(0, 5)) = 1
@@ -12,16 +14,21 @@ Shader "Custom/Zone1"
 }
 
 SubShader{
-	Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
+	Tags {"Queue" = "Transparent" "RenderType" = "Transparent" "ForceNoShadowCasting" = "True"}
+             Blend SrcAlpha OneMinusSrcAlpha
+             ColorMask RGBA
+			 LOD 200
 
 	Pass {
 		CGPROGRAM
 		#pragma vertex vert
 		#pragma fragment frag
+
 		#include "UnityCG.cginc"
 
 		sampler2D _MainTex;
 		sampler2D _NoiseTex;
+
 		float _SpeedX;
 		float _SpeedY;
 		float _Mitigation;
@@ -45,6 +52,7 @@ SubShader{
 			half noiseVal = tex2D(_NoiseTex, uv).r;
 			uv.x = uv.x + noiseVal * sin(_Time.y * _SpeedX) / _Mitigation;
 			uv.y = uv.y + noiseVal * sin(_Time.y * _SpeedY) / _Mitigation;
+
 			return tex2D(_MainTex, uv);
 		}
 
