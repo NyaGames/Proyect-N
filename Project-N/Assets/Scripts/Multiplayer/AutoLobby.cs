@@ -30,7 +30,6 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     public List<GameObject> playersList = new List<GameObject>();
     public byte maxPlayersPerRoom = 4;
 
-    public TMP_InputField roomnameInputText;
     public TMP_InputField roompasswordInputText;
 
     private string roomPassword;
@@ -38,7 +37,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     private List<RoomInfo> roomsAvaiable = new List<RoomInfo>();
     public Text roomsAvaiableText;
 
-    /*private void Awake()
+    private void Awake()
     {
         if (!Instance)
         {
@@ -72,10 +71,10 @@ public class AutoLobby : MonoBehaviourPunCallbacks
         connectButton.interactable = false;
         createRoomButton.interactable = true;
         joinRoomButton.interactable = true;      
-    }*/
+    }
 
     //Se llama cada vez que alguien crea o borra una sala del servidor
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+   /* public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         Debug.Log("Has entrado en el lobby, estas son las salas que hay disponibles");
         UpdateCachedRoomList(roomList);
@@ -101,7 +100,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
             roomsAvaiableText.text += r.Name + "/";
         }
         
-    }
+    }*/
 
     /*public void JoinRandom()
     {
@@ -123,61 +122,37 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     }*/
     public void CreateRoom()
     {
-        string roomName = roomnameInputText.text;
-        roomPassword = roompasswordInputText.text;
+        string roomName = GenerateUniqueRoomID();
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = maxPlayersPerRoom;
+        roomOptions.IsVisible = false; //FALSE = Hace la sala privada
+        PhotonNetwork.CreateRoom(roomName, roomOptions,null);
+        Debug.Log("Sala creada: " + roomName);
+    }
+    public string GenerateUniqueRoomID()
+    {
+        string s = "";
+        string time = System.DateTime.Now.ToString();
 
-        bool usernameAlreadyUsed = false;
-        foreach(RoomInfo r in roomsAvaiable)
+        string[] timeSplit = time.Split(char.Parse("/"), char.Parse(" "),char.Parse(":"));
+        
+        for(int i = 0;i < 3; i++)
         {
-            if(r.Name == roomName)
-            {
-                usernameAlreadyUsed = true;
-                break;
-            }
+            s += timeSplit[i] + timeSplit[i+3];
         }
-
-        if (roomName != "" && roomPassword != "" && !usernameAlreadyUsed)
-        {
-            RoomOptions roomOptions = new RoomOptions();
-            roomOptions.MaxPlayers = maxPlayersPerRoom;
-            roomOptions.IsVisible = true; //FALSE = Hace la sala privada
-            ExitGames.Client.Photon.Hashtable table = new ExitGames.Client.Photon.Hashtable();
-            table.Add("password", roomPassword);
-            roomOptions.CustomRoomProperties = table;
-            PhotonNetwork.CreateRoom(roomName, roomOptions,null);
-            Debug.Log("Sala creada: " + roomName  + " / " + roomPassword);
-        }
-        else
-        {
-            Debug.Log("Nombre de sala no disponible o contraseña no introducida");
-        }
+        return s;
     }
     public void JoinRoom()
     {
-        string roomName = roomnameInputText.text;
         roomPassword = roompasswordInputText.text;
 
-        bool passwordCorrect = false;
-        //Miramos en las salas creadas la sala a la que queremos unirnos, y comprobamos si la contraseña es correcta
-        foreach (RoomInfo r in roomsAvaiable)
+        if (roomPassword != "")
         {
-            if(r.Name == roomName)
-            {
-                ExitGames.Client.Photon.Hashtable table = r.CustomProperties;
-                if (table.ContainsValue(roomPassword))
-                {
-                    passwordCorrect = true;
-                    break;
-                }
-            }  
-        }
-        if (roomName != "" && roomPassword != "" && passwordCorrect)
-        {
-            PhotonNetwork.JoinRoom(roomName);
+            PhotonNetwork.JoinRoom(roomPassword);
         }
         else
         {
-            Debug.Log("Nombre de sala o contraseña incorrectas");
+            Debug.Log("Introduce el código de la sala a la que quieres unirte");
         }
 
     }
@@ -185,7 +160,6 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     {
         roomsAvaiableText.text = "Sala actual: " + PhotonNetwork.CurrentRoom.Name;
 
-        roomnameInputText.interactable = false;
         roompasswordInputText.interactable = false;
         createRoomButton.interactable = false;
         Log.text += "\nJoined";
@@ -200,7 +174,6 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     private void FixedUpdate()
     {
 
-        playerCount.text = GameObject.Find("JoinSpecificTextInput").GetComponent<TMP_InputField>().text;
         if (PhotonNetwork.CurrentRoom != null) //Si estamos en una sala
         {
             playersCount = PhotonNetwork.CurrentRoom.PlayerCount;
