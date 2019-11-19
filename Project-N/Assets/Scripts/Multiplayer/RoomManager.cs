@@ -44,7 +44,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         string roomName = GenerateUniqueRoomID();
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = (byte)roomMaxPlayers.value;
+        roomOptions.MaxPlayers = (byte)Mathf.RoundToInt(roomMaxPlayers.value);
         roomOptions.IsVisible = false; //FALSE = Hace la sala privada
         PhotonNetwork.CreateRoom(roomName, roomOptions, null);
         Debug.Log("Sala creada: " + roomName);
