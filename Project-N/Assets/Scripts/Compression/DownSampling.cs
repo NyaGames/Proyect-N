@@ -6,6 +6,9 @@ public static class DownSampling
 {
 	public static DownSampledImage CompressImage(Color[] uncompressedData)
 	{
+		//int referenceSide = 10000;
+		//byte compressionRate = (byte) ((uncompressedData.Length <= referenceSide) ? 1 : uncompressedData.Length / referenceSide);
+
 		byte compressionRate = 2;
 		int imageRowSize = (int)Mathf.Sqrt(uncompressedData.Length);	
 
@@ -41,7 +44,9 @@ public static class DownSampling
 		for (int i = 0, index = 0; i < decompressedData.Length; i+=4, index++)
 		{
 			int row = index / imageRowSize;
-			int pixelIndex = (index % compressionRate) + (compressionRate * row);
+			int col = (index - imageRowSize * row);
+
+			int pixelIndex = (row / compressionRate) * imageRowSize / compressionRate + (col / compressionRate);
 
 			decompressedData[i + 0] = data[pixelIndex];
 			decompressedData[i + 1] = data[pixelIndex];

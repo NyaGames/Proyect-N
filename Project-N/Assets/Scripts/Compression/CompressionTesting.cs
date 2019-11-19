@@ -17,10 +17,11 @@ public class CompressionTesting : MonoBehaviour
 		DownSampledImage downSampledImage = DownSampling.CompressImage(data);
 
 		byte[] uncompressedData = DownSampling.DecompressImage(downSampledImage);
-		Texture2D tex = new Texture2D(sourceImage.texture.width, sourceImage.texture.height);
+		Texture2D tex = new Texture2D(sourceImage.texture.width, sourceImage.texture.height, TextureFormat.RGBA32, false);
 		tex.LoadRawTextureData(uncompressedData);
 		tex.Apply();
 
 		targetImage.texture = tex;
 	}
 }
+
