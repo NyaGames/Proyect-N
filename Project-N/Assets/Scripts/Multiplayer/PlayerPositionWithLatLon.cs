@@ -8,10 +8,10 @@ using Photon.Pun;
 
 public class PlayerPositionWithLatLon : MonoBehaviour, IPunObservable 
 {
-    private Vector2d latLon;
-    private Vector2 latlonSend;
-    private Vector2 latlonReceived;
-    private PhotonView photonView;
+    public Vector2d latLon;
+    public Vector2 latlonSend;
+    public Vector2 latlonReceived;
+    public PhotonView photonView;
 
     public void Start()
     {

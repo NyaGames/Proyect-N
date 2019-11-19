@@ -14,11 +14,10 @@ public class Player : MonoBehaviour
 
     private bool newZoneCreated;
 
-    void Start()
+    void Awake()
     {
 
         playerCollider = GetComponent<BoxCollider>();
-        //photonViewTransform = GetComponent<PhotonView>();
         //Variables
         if (!photonViewTransform.IsMine) //Si no soy yo, cojo los datos del servidor
         {
@@ -39,7 +38,7 @@ public class Player : MonoBehaviour
             id = PhotonNetwork.LocalPlayer.ActorNumber;
             if (!isGameMaster) //Si no soy gameMaster,desactivo los controles para crear la zona
             {
-       
+                
             }
         }
 

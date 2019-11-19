@@ -33,7 +33,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     public TMP_InputField roompasswordInputText;
 
     private string roomPassword;
-    private GameObject myPlayer;
+    public GameObject myPlayer;
     private List<RoomInfo> roomsAvaiable = new List<RoomInfo>();
     public Text roomsAvaiableText;
 
@@ -163,8 +163,11 @@ public class AutoLobby : MonoBehaviourPunCallbacks
         roompasswordInputText.interactable = false;
         createRoomButton.interactable = false;
         Log.text += "\nJoined";
-        myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
-
+        GameObject g = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
+        if (g.GetComponent<Player>().isGameMaster)
+        {
+            myPlayer = g;
+        }
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)

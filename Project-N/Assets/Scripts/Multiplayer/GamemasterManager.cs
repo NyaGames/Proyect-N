@@ -43,7 +43,7 @@ public class GamemasterManager : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (!zoneCreated) //Si no se ha creado la zona todavía y no estoy creando un drop, se puede crear
+        if (!zoneCreated && PhotonNetwork.CurrentRoom != null) //Si no se ha creado la zona todavía y estoy dentro de una sala,puedo crearla
         {
             CreateZone();
         }

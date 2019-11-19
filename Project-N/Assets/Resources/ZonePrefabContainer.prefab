@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4371380296670193681}
   - component: {fileID: 962378040651143813}
   - component: {fileID: 7276285315872104023}
-  - component: {fileID: 4845235054267013792}
+  - component: {fileID: 6299076172973803376}
   m_Layer: 0
   m_Name: ZonePrefabContainer
   m_TagString: Untagged
@@ -159,11 +159,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 4845235054267013792}
+  - {fileID: 6299076172973803376}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4845235054267013792
+--- !u!114 &6299076172973803376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,9 +172,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4882047626752070807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: 18635bd36c1f40f4ca564147d97e1111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
