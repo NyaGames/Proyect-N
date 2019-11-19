@@ -15,7 +15,7 @@ public class ZonePositionWithLatLon : MonoBehaviour, IPunObservable
     private PhotonView photonView;
 
     private AbstractMap map;
-
+    private Zone zoneData;
     void Start()
     {
         photonView = GetComponent<PhotonView>();

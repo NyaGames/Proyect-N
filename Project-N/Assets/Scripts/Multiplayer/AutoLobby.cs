@@ -53,13 +53,14 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsConnected)
         {
+            PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = "eu";
             if (PhotonNetwork.ConnectUsingSettings())
             {
-                
+                Log.text = "\nConectado a " + PhotonNetwork.CloudRegion;
             }
             else
             {
-                Log.text += "\nFailing connected to server";
+                Log.text = "\nFailing connected to server";
             }
         }
     }
@@ -67,17 +68,25 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(null);
-        Log.text += "\nConnected to server";
+        Log.text = "\nConnected to server";
         connectButton.interactable = false;
         createRoomButton.interactable = true;
         joinRoomButton.interactable = true;      
     }
 
     //Se llama cada vez que alguien crea o borra una sala del servidor
-   /* public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         Debug.Log("Has entrado en el lobby, estas son las salas que hay disponibles");
-        UpdateCachedRoomList(roomList);
+        if(roomList.Count <= 0)
+        {
+            roomsAvaiableText.text = "No hay ninguna sala creada";
+        }
+        else
+        {
+            UpdateCachedRoomList(roomList);
+        }
+       
     }
     void UpdateCachedRoomList(List<RoomInfo> roomList)
     {
@@ -100,7 +109,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
             roomsAvaiableText.text += r.Name + "/";
         }
         
-    }*/
+    }
 
     /*public void JoinRandom()
     {
@@ -122,7 +131,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     }*/
     public void CreateRoom()
     {
-        string roomName = GenerateUniqueRoomID();
+        string roomName = "22";//GenerateUniqueRoomID();
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = maxPlayersPerRoom;
         roomOptions.IsVisible = false; //FALSE = Hace la sala privada

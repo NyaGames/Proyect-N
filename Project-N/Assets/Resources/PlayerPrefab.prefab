@@ -286,3 +286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32639d2c8657de4dba56de6b5a90c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  latLon:
+    x: 0
+    y: 0
+  latlonSend: {x: 0, y: 0}
+  latlonReceived: {x: 0, y: 0}
+  photonView: {fileID: 0}

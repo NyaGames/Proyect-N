@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     private bool newZoneCreated;
 
-    void Awake()
+    void Start()
     {
 
         playerCollider = GetComponent<BoxCollider>();
