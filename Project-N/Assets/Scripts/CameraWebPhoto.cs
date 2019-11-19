@@ -127,8 +127,37 @@ public class CameraWebPhoto : MonoBehaviour
         Texture2D photo = new Texture2D(frontCam.width, frontCam.height);
         photo.SetPixels(frontCam.GetPixels());
         photo.Apply();
-        
         var data = photo.GetRawTextureData<Color32>();
+
+        Color32[,] colorMatrix = new Color32[426, 319];
+        for (int i = 0; i < 426; i++)
+        {
+            for (int j = 0; j < 319; j++)
+            {
+                colorMatrix[i, j] = data[j * frontCam.width + i];
+                if ((j * frontCam.width + i)==(frontCam.width*frontCam.height-1))
+                {
+                    Debug.Log("");
+                }
+            }
+
+        }
+        for (int i = 0; i < frontCam.width; i++)
+        {
+            for (int j = 0; j < frontCam.height; j++)
+            {
+                colorMatrix[i, j] = data[j * frontCam.width + i];
+                if ((j * frontCam.width + i) == (frontCam.width * frontCam.height - 1))
+                {
+                    Debug.Log("");
+                }
+            }
+
+        }
+        Debug.Log(colorMatrix[0, 0]+ "Real: " + data[0] + "-______" + colorMatrix[frontCam.width-1, frontCam.height-1] + " : " + data[data.Length-1]);
+
+
+
         string[] hexData= new string[data.Length];
         Debug.Log("Enviado" + data.Length);
         NativeArray<Color32> rgbData = new NativeArray<Color32>(data.Length, Allocator.Temp);
