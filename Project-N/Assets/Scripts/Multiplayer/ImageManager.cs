@@ -18,8 +18,8 @@ public class ImageManager : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
 
-        sourceImage = GameObject.FindGameObjectWithTag("SourceImage").GetComponent<RawImage>();
-        targetImage = GameObject.FindGameObjectWithTag("TargetImage").GetComponent<RawImage>();
+        //sourceImage = GameObject.FindGameObjectWithTag("SourceImage").GetComponent<RawImage>();
+        //targetImage = GameObject.FindGameObjectWithTag("TargetImage").GetComponent<RawImage>();
     }
     //FOTOS
     public void SendImageToMaster()

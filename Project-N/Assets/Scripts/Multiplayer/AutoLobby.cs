@@ -131,7 +131,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     }*/
     public void CreateRoom()
     {
-        string roomName = "22";//GenerateUniqueRoomID();
+        string roomName = "23";//GenerateUniqueRoomID();
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = maxPlayersPerRoom;
         roomOptions.IsVisible = false; //FALSE = Hace la sala privada
@@ -153,7 +153,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
     }
     public void JoinRoom()
     {
-        roomPassword = "22";//roompasswordInputText.text;
+        roomPassword = "23";//roompasswordInputText.text;
 
         if (roomPassword != "")
         {
