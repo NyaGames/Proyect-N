@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6223358378183132954}
   - component: {fileID: 5600917539811119582}
   - component: {fileID: 4323739013939648350}
-  - component: {fileID: 114609778876945338}
+  - component: {fileID: 338027146693487716}
   m_Layer: 0
   m_Name: DropPrefab
   m_TagString: Drop
@@ -132,7 +132,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 4323739013939648350}
-  - {fileID: 114609778876945338}
+  - {fileID: 338027146693487716}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
---- !u!114 &114609778876945338
+--- !u!114 &338027146693487716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

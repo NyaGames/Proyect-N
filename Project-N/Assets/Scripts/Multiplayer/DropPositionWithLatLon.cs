@@ -10,19 +10,19 @@ using UnityEngine;
 public class DropPositionWithLatLon : MonoBehaviour, IPunObservable
 {
     private Vector2d latLonCurrent;
-    private double[] latlonSend;
-    private double[] latlonReceived;
+    private Vector2 latlonSend;
+    private Vector2 latlonReceived;
     private PhotonView photonView;
 
-    private AbstractMap map;
+    //private AbstractMap map;
     private Drop dropData; 
 
     void Start()
     {
         photonView = GetComponent<PhotonView>();
-        latlonSend = new double[2];
-        latlonReceived = new double[2];
-        map = LocationProviderFactory.Instance.mapManager;
+        latlonSend = new Vector2();
+        latlonReceived = new Vector2();
+        //map = LocationProviderFactory.Instance.mapManager;
     }
 
     // Update is called once per frame
@@ -30,15 +30,34 @@ public class DropPositionWithLatLon : MonoBehaviour, IPunObservable
     {
         if (photonView.IsMine)//SI soy el gm, calculo la posición del drop
         {
+            var map = LocationProviderFactory.Instance.mapManager;
             latLonCurrent = CalculateDropLatLon(map.CenterLatitudeLongitude) + map.CenterLatitudeLongitude;
-            latlonSend[0] = latLonCurrent.x;
-            latlonSend[1] = latLonCurrent.y;
             Debug.Log("Centro mapa: " + map.CenterLatitudeLongitude + "/Drop: " + latLonCurrent);
+        }
+    }
+
+    public void UpdatePosition()
+    {
+        latlonSend.x = (float)latLonCurrent.x;
+        latlonSend.y = (float)latLonCurrent.y;
+        if (photonView.IsMine)//SI soy el gm, calculo la posición del drop
+        {
+            //var map = LocationProviderFactory.Instance.mapManager;
+            //Debug.Log("Centro mapa: " + map.CenterLatitudeLongitude + "/Drop: " + latLonCurrent);
         }
         else
         {
-            Vector2d v = new Vector2d(latlonSend[0], latlonSend[1]);
+            var map = LocationProviderFactory.Instance.mapManager;
+            Vector2d v = new Vector2d(latlonReceived.x, latlonReceived.y);
             transform.localPosition = map.GeoToWorldPosition(v);
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (latLonCurrent != null)
+        {
+            UpdatePosition();
         }
     }
 
@@ -65,7 +84,7 @@ public class DropPositionWithLatLon : MonoBehaviour, IPunObservable
         {
             if (photonView != null && !photonView.IsMine)//SI me llega info de la zona, la updateo
             {
-                latlonReceived = (double[])stream.ReceiveNext();
+                latlonReceived = (Vector2)stream.ReceiveNext();
             }
         }
     }
