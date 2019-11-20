@@ -9,7 +9,7 @@ public class CompressionTesting : MonoBehaviour
 	[SerializeField] private RawImage sourceImage;
 	[SerializeField] private RawImage targetImage;
 
-	private void Update()
+	private void OnValidate()
 	{
 		Texture2D sourceTexture = (Texture2D) sourceImage.texture;		
 
