@@ -49,7 +49,7 @@ public class DropPositionWithLatLon : MonoBehaviour, IPunObservable
         {
             var map = LocationProviderFactory.Instance.mapManager;
             Vector2d v = new Vector2d(latlonReceived.x, latlonReceived.y);
-            transform.localPosition = map.GeoToWorldPosition(v);
+            transform.localPosition = Conversions.GeoToWorldPosition(v, map.CenterMercator, map.WorldRelativeScale).ToVector3xz();
         }
     }
 
@@ -63,7 +63,7 @@ public class DropPositionWithLatLon : MonoBehaviour, IPunObservable
 
     public Vector2d CalculateDropLatLon(Vector2d center)
     {
-        Vector2d latlon = transform.GetGeoPosition(center, 1);
+        Vector2d latlon = transform.GetGeoPosition(center);
         return latlon;
     }
 
