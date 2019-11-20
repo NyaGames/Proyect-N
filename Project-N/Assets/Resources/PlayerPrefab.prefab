@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 3104748707656188120}
   - component: {fileID: 7218982979458829416}
   - component: {fileID: 877655161397267938}
-  - component: {fileID: 7649650338926308731}
+  - component: {fileID: 114042656775179338}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -324,7 +324,7 @@ MonoBehaviour:
   latlonSend: {x: 0, y: 0}
   latlonReceived: {x: 0, y: 0}
   photonView: {fileID: 0}
---- !u!114 &7649650338926308731
+--- !u!114 &114042656775179338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
