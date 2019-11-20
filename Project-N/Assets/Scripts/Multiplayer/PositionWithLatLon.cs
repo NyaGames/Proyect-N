@@ -50,7 +50,7 @@ public class PositionWithLatLon : MonoBehaviour, IPunObservable
         {
             var map = LocationProviderFactory.Instance.mapManager;
             Vector2d v = new Vector2d(latlonReceived.x, latlonReceived.y);
-            Vector3 pos = Conversions.GeoToWorldPosition(v, map.CenterMercator, map.WorldRelativeScale).ToVector3xz();
+            Vector3 pos = Conversions.GeoToWorldPosition(v.x,v.y, map.CenterMercator, map.WorldRelativeScale).ToVector3xz();
 
             if (!float.IsNaN(pos.x) && !float.IsNaN(pos.y) && !float.IsNaN(pos.z)) transform.localPosition = pos;
 
