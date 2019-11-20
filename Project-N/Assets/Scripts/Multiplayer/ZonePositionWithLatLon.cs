@@ -62,8 +62,7 @@ public class ZonePositionWithLatLon : MonoBehaviour, IPunObservable
         {
             if (photonView != null && !photonView.IsMine)//SI me llega info de la zona, la updateo
             {
-                object o = stream.ReceiveNext();
-                latlonReceived = (double[])o;
+                latlonReceived = (double[])stream.ReceiveNext();
             }
         }
     }
