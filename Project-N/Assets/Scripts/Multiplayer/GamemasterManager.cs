@@ -126,8 +126,8 @@ public class GamemasterManager : MonoBehaviour
             }
             else //Si ya habia una zona en el mapa, se guarda la zona editada en nextZone
             {
-                Vector3 geoPosition = editableZone.GetComponent<ZonePositionWithLatLon>().GetGeoPosition();
-                nextZone = PhotonNetwork.Instantiate(zonePrefab.name, geoPosition, Quaternion.identity);
+                //Vector3 geoPosition = editableZone.GetComponent<ZonePositionWithLatLon>().GetGeoPosition();
+                nextZone = PhotonNetwork.Instantiate(zonePrefab.name, editableZone.transform.position, Quaternion.identity);
                 nextZone.transform.localScale = editableZone.transform.localScale;
             }
             Destroy(editableZone);
@@ -228,7 +228,9 @@ public class GamemasterManager : MonoBehaviour
         {
             GameObject n = PhotonNetwork.Instantiate(dropPrefab.name, g.transform.position, Quaternion.identity);
             n.transform.localScale = g.transform.localScale;
+            Destroy(g);
         }
+
 
     }
     public void DeleteDrop()
