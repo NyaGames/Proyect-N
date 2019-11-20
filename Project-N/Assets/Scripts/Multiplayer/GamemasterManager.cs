@@ -230,7 +230,7 @@ public class GamemasterManager : MonoBehaviour
             n.transform.localScale = g.transform.localScale;
             Destroy(g);
         }
-
+        dropList.Clear();
 
     }
     public void DeleteDrop()

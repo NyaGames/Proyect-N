@@ -5,9 +5,10 @@ using Mapbox.Utils;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class DropPositionWithLatLon : MonoBehaviour, IPunObservable
+public class PositionWithLatLon : MonoBehaviour, IPunObservable
 {
     private Vector2d latLonCurrent;
     private Vector2 latlonSend;
@@ -49,7 +50,10 @@ public class DropPositionWithLatLon : MonoBehaviour, IPunObservable
         {
             var map = LocationProviderFactory.Instance.mapManager;
             Vector2d v = new Vector2d(latlonReceived.x, latlonReceived.y);
-            transform.localPosition = Conversions.GeoToWorldPosition(v, map.CenterMercator, map.WorldRelativeScale).ToVector3xz();
+            Vector3 pos = Conversions.GeoToWorldPosition(v, map.CenterMercator, map.WorldRelativeScale).ToVector3xz();
+
+            if (!float.IsNaN(pos.x) && !float.IsNaN(pos.y) && !float.IsNaN(pos.z)) transform.localPosition = pos;
+
         }
     }
 
@@ -63,7 +67,8 @@ public class DropPositionWithLatLon : MonoBehaviour, IPunObservable
 
     public Vector2d CalculateDropLatLon(Vector2d center)
     {
-        Vector2d latlon = transform.GetGeoPosition(center);
+        var map = LocationProviderFactory.Instance.mapManager;
+        Vector2d latlon = transform.GetGeoPosition(map.CenterMercator, map.WorldRelativeScale);
         return latlon;
     }
 
