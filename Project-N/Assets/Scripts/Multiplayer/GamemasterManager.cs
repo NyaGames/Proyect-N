@@ -15,16 +15,15 @@ public class GamemasterManager : MonoBehaviour
     private List<GameObject> dropList = new List<GameObject>();
     public GameObject dropPrefab;
 
-    public Button dropButton;
 
     Vector3 lasPositionTapped = new Vector3(0, 0, 0);
     Vector3 zoneCenter = new Vector3(0, 0, 0);
 
     public bool creatingDrop = false;
-    public GameObject dropPos;
+    [HideInInspector]public GameObject dropPos;
     public int numDrops = 3;
     public bool zoneCreated;
-    public GameObject lastDropTapped;
+    [HideInInspector] public GameObject lastDropTapped;
 
     private void Awake()
     {

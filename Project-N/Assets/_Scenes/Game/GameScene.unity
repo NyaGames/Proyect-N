@@ -1299,7 +1299,7 @@ GameObject:
   - component: {fileID: 546428591}
   - component: {fileID: 546428593}
   m_Layer: 5
-  m_Name: ScreenLeftGUI
+  m_Name: ScreenRightGUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1547,7 +1547,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 799328363}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250016669}
+        m_MethodName: CanCreateNewZone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &799328363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2004,7 +2015,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1056258017}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250016669}
+        m_MethodName: DeleteZone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1056258017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2054,7 +2076,7 @@ GameObject:
   - component: {fileID: 1081047283}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2213,7 +2235,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1232580002}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250016669}
+        m_MethodName: SendZoneToOtherPlayers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1232580002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2259,6 +2292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1250016668}
   - component: {fileID: 1250016667}
+  - component: {fileID: 1250016669}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2294,6 +2328,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1250016669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250016666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c52d901a4a84b7544b1106809b78efc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zonePrefab: {fileID: 4882047626752070807, guid: b882004d80974e34ab64c4cd801dfa08,
+    type: 3}
+  dropPrefab: {fileID: 7291670006575766536, guid: 131d60eb84b431440ac933a227a29ca5,
+    type: 3}
+  creatingDrop: 0
+  dropPos: {fileID: 0}
+  numDrops: 3
+  zoneCreated: 0
+  lastDropTapped: {fileID: 0}
 --- !u!1 &1272490028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2451,7 +2506,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1312882122}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250016669}
+        m_MethodName: DeleteDrop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1312882122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2565,7 +2631,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1413315898}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250016669}
+        m_MethodName: StartClosingZone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1413315898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3050,7 +3127,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1636107273}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250016669}
+        m_MethodName: SendDropsToOtherPlayers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1636107273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3247,6 +3335,7 @@ GameObject:
   - component: {fileID: 1761783754}
   - component: {fileID: 1761783753}
   - component: {fileID: 1761783752}
+  - component: {fileID: 1761783755}
   m_Layer: 5
   m_Name: Create Drop
   m_TagString: Untagged
@@ -3349,6 +3438,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761783750}
   m_CullTransparentMesh: 0
+--- !u!114 &1761783755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761783750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e09bad29344b1d4e8aab9e304b96a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageDrop: {fileID: 899230403699993387, guid: bd1dae8baac246e4ab291ac122bc4c38,
+    type: 3}
 --- !u!1 &1854929676
 GameObject:
   m_ObjectHideFlags: 0
@@ -3427,7 +3530,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1854929679}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250016669}
+        m_MethodName: enableCreateNewRadious
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1854929679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3674,7 +3788,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047152458}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f4214fc682b9d547815f3569e5e1d97, type: 3}
   m_Name: 
