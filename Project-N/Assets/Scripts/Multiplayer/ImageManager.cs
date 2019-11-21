@@ -7,21 +7,28 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(PhotonView))]
 public class ImageManager : MonoBehaviour
 {
     PhotonView photonView;    
 
     private Photon.Realtime.Player lastPlayerReference;
 
-	[SerializeField] private RawImage imageReceived;
+	private RawImage imageReceived;
 
     public void Awake()
     {
         photonView = GetComponent<PhotonView>();
 
     }
-    //FOTOS
-    public void SendImageToMaster(RawImage image)
+
+	private void Start()
+	{
+		imageReceived = GameObject.FindGameObjectWithTag("TargetImage").GetComponent<RawImage>();
+	}
+
+	//FOTOS
+	public void SendImageToMaster(RawImage image)
     {
         Texture2D sourceTexture = (Texture2D)image.texture;
         Color[] data = sourceTexture.GetPixels();

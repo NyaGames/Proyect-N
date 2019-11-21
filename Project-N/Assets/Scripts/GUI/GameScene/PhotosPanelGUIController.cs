@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(ImageManager))]
 public class PhotosPanelGUIController : MonoBehaviour
 {
 	[SerializeField] private GameObject photoConfirmationPanel;
 	[SerializeField] private RawImage sourceImage;
 
-	private ImageManager imageManager;
+	private GameObject player;
+	
 
 	private void Awake()
 	{
-		imageManager = GetComponent<ImageManager>();
+		player = AutoLobby.Instance.myPlayer;
 	}
 
 	public void TakePhoto()
@@ -25,7 +25,7 @@ public class PhotosPanelGUIController : MonoBehaviour
 	public void ConfirmPhotoToSend()
 	{
 		Debug.Log("Photo Confirmed!");
-		imageManager.SendImageToMaster(sourceImage);
+		player.GetComponent<ImageManager>().SendImageToMaster(sourceImage);
 		photoConfirmationPanel.SetActive(false);
 	}
 
