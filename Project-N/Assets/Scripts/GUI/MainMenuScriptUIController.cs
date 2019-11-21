@@ -20,7 +20,8 @@ public class MainMenuScriptUIController : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("RoomScreen");                
+        ConnectToPhoton.Instance.Connect();
+        //SceneManager.LoadScene("RoomScreen");                
     }
 
     public void ChangeGMText()

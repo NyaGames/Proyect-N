@@ -42,6 +42,7 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.JoinLobby(null);
-        SceneManager.LoadScene("MainMenuScreen");
+        // SceneManager.LoadScene("MainMenuScreen");
+        SceneManager.LoadScene("RoomScreen");
     }
 }

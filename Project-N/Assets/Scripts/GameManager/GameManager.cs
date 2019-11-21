@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private GameObject myPlayer;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
     }

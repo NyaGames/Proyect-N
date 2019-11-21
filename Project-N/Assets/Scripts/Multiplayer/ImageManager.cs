@@ -14,12 +14,12 @@ public class ImageManager : MonoBehaviour
     private RawImage sourceImage;
     private RawImage targetImage;
 
+    private Photon.Realtime.Player lastPlayerReference;
+
     public void Awake()
     {
         photonView = GetComponent<PhotonView>();
 
-        //sourceImage = GameObject.FindGameObjectWithTag("SourceImage").GetComponent<RawImage>();
-        //targetImage = GameObject.FindGameObjectWithTag("TargetImage").GetComponent<RawImage>();
     }
     //FOTOS
     public void SendImageToMaster()
@@ -40,15 +40,19 @@ public class ImageManager : MonoBehaviour
             }
 
             byteArray[i] = downSampledImage.data[i];           
-        }      
+        }
 
-        photonView.RPC("ReceiveImageFromPlayer", RpcTarget.MasterClient, byteArray as object);
+        int playerToKill = 5; //ELEGIR A QUIEN QUIERES MATAR -> actorNumber
+
+        photonView.RPC("ReceiveImageFromPlayer", RpcTarget.MasterClient, byteArray as object, playerToKill);
 
     }
 
     [PunRPC]
-    void ReceiveImageFromPlayer(byte[] byteArray)
+    void ReceiveImageFromPlayer(byte[] byteArray ,int playerToKill,PhotonMessageInfo info)
     {
+        lastPlayerReference = info.Sender;
+
         byte compressionRate = byteArray[byteArray.Length - 1];
         byteArray = byteArray.Take(byteArray.Count() - 1).ToArray();
 
@@ -63,6 +67,18 @@ public class ImageManager : MonoBehaviour
 
         targetImage.texture = tex;
         
+    }
+
+    public void DestroyPlayer(int id)
+    {
+        foreach(GameObject p in GamemasterManager.Instance.playersViewsList)
+        {
+            if(p.GetComponent<Player>().id == id)
+            {
+                PhotonNetwork.Destroy(p);
+            }
+        }
+
     }
 
 }

@@ -15,7 +15,6 @@ public class GamemasterManager : MonoBehaviour
     private List<GameObject> dropList = new List<GameObject>();
     public GameObject dropPrefab;
 
-
     Vector3 lasPositionTapped = new Vector3(0, 0, 0);
     Vector3 zoneCenter = new Vector3(0, 0, 0);
 
@@ -25,17 +24,25 @@ public class GamemasterManager : MonoBehaviour
     public bool zoneCreated;
     [HideInInspector] public GameObject lastDropTapped;
 
+     public GameObject[] playersViewsList;
+
     private void Awake()
     {
         if (!Instance)
         {
             Instance = this;
             zoneCreated = false;
+           
         }
         else
         {
             Destroy(Instance);
         }
+    }
+
+    public void Start()
+    {
+        playersViewsList = GameObject.FindGameObjectsWithTag("Player");
     }
 
     // Update is called once per frame
@@ -61,6 +68,26 @@ public class GamemasterManager : MonoBehaviour
         return (GameObject.Find("LocationBasedGame").transform.position - GameObject.Find("Main Camera").transform.position).magnitude;
     }
 
+    //Player interaction methods
+    public void tapOnPlayer()
+    {
+        if ((Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began))
+        {
+            Ray raycast = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            RaycastHit raycastHit;
+            if (Physics.Raycast(raycast, out raycastHit))
+            {
+                Debug.Log("Something Hit");
+                if (raycastHit.collider.gameObject.CompareTag("Player")) //Si es un jugador
+                {
+                    /*lastTouchedDrop();
+                    movingObject = true;
+                    Debug.Log("Drop tapped");*/
+                }
+
+            }
+        }
+    }
     //Zone methods
     public void CanCreateNewZone()
     {
