@@ -13,7 +13,7 @@ public class LobbySceneGUIController : MonoBehaviour
     public void Start()
     {
         roomName.text = "Room: " + PhotonNetwork.CurrentRoom.Name;
-        ´//if(!PersistentData.account.isGameMaster)
+        //if(!PersistentData.account.isGameMaster)
     }
 
     public void Update()
@@ -26,7 +26,6 @@ public class LobbySceneGUIController : MonoBehaviour
 
     public void StartNewGame()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.LoadLevel("GameScene");
     }
 
