@@ -71,7 +71,9 @@ public class ImageManager : MonoBehaviour
         tex.LoadRawTextureData(uncompressedData);
         tex.Apply();
 
-		imageReceived.texture = tex;        
+		PhotosNotificationsManager.Instance.OnImageRecived(tex);
+
+		//imageReceived.texture = tex;   		
     }
 
     public void DestroyPlayer(int id)
