@@ -24,7 +24,7 @@ public class ImageManager : MonoBehaviour
 
 	private void Start()
 	{
-		imageReceived = GameObject.FindGameObjectWithTag("TargetImage").GetComponent<RawImage>();
+		imageReceived = GameObject.FindGameObjectWithTag("TargetImage").GetComponent<GameSceneGUIController>().targetImage;
 	}
 
 	//FOTOS

@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 38420528}
   m_Layer: 5
   m_Name: ImageReceived
-  m_TagString: Untagged
+  m_TagString: TargetImage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 78903004}
   m_Layer: 5
   m_Name: GUI
-  m_TagString: Untagged
+  m_TagString: TargetImage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,6 +219,7 @@ MonoBehaviour:
   GMPanel: {fileID: 1413504830}
   playerPanel: {fileID: 373642725}
   webCameraPanel: {fileID: 1196780681}
+  targetImage: {fileID: 0}
 --- !u!114 &78903000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3258,9 +3259,7 @@ GameObject:
   - component: {fileID: 1196780684}
   - component: {fileID: 1196780683}
   - component: {fileID: 1196780685}
-  - component: {fileID: 1196780687}
   - component: {fileID: 1196780686}
-  - component: {fileID: 1196780688}
   m_Layer: 5
   m_Name: PhotoPanel
   m_TagString: Untagged
@@ -3354,41 +3353,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 252856344}
   photoPlane: {fileID: 252856344}
---- !u!114 &1196780687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196780681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce3de3e0f2984f4799aa75b3eca751a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageReceived: {fileID: 0}
---- !u!114 &1196780688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196780681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 2
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 1
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &1232579999
 GameObject:
   m_ObjectHideFlags: 0
@@ -5705,7 +5669,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce3de3e0f2984f4799aa75b3eca751a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageReceived: {fileID: 38420528}
 --- !u!114 &1857199404
 MonoBehaviour:
   m_ObjectHideFlags: 0

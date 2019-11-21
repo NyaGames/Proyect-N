@@ -8,14 +8,6 @@ public class PhotosPanelGUIController : MonoBehaviour
 	[SerializeField] private GameObject photoConfirmationPanel;
 	[SerializeField] private RawImage sourceImage;
 
-	private GameObject player;
-	
-
-	private void Awake()
-	{
-		player = AutoLobby.Instance.myPlayer;
-	}
-
 	public void TakePhoto()
 	{
 		Debug.Log("Photo Taken!");
@@ -25,7 +17,7 @@ public class PhotosPanelGUIController : MonoBehaviour
 	public void ConfirmPhotoToSend()
 	{
 		Debug.Log("Photo Confirmed!");
-		player.GetComponent<ImageManager>().SendImageToMaster(sourceImage);
+		GameManager.Instance.myPlayer.GetComponent<ImageManager>().SendImageToMaster(sourceImage);
 		photoConfirmationPanel.SetActive(false);
 	}
 

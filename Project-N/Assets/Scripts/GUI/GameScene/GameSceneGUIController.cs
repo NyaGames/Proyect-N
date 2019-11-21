@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameSceneGUIController : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GameSceneGUIController : MonoBehaviour
     [SerializeField] private GameObject GMPanel;
     [SerializeField] private GameObject playerPanel;
 	[SerializeField] private GameObject webCameraPanel;
+
+	public RawImage targetImage;
 
     private bool GM;
 
