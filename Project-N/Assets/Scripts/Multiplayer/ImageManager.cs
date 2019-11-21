@@ -9,12 +9,11 @@ using UnityEngine.UI;
 
 public class ImageManager : MonoBehaviour
 {
-    PhotonView photonView;
-
-    private RawImage sourceImage;
-    private RawImage targetImage;
+    PhotonView photonView;    
 
     private Photon.Realtime.Player lastPlayerReference;
+
+	[SerializeField] private RawImage imageReceived;
 
     public void Awake()
     {
@@ -22,9 +21,9 @@ public class ImageManager : MonoBehaviour
 
     }
     //FOTOS
-    public void SendImageToMaster()
+    public void SendImageToMaster(RawImage image)
     {
-        Texture2D sourceTexture = (Texture2D)sourceImage.texture;
+        Texture2D sourceTexture = (Texture2D)image.texture;
         Color[] data = sourceTexture.GetPixels();
         DownSampledImage downSampledImage = DownSampling.CompressImage(data);
 
@@ -65,8 +64,7 @@ public class ImageManager : MonoBehaviour
         tex.LoadRawTextureData(uncompressedData);
         tex.Apply();
 
-        targetImage.texture = tex;
-        
+		imageReceived.texture = tex;        
     }
 
     public void DestroyPlayer(int id)

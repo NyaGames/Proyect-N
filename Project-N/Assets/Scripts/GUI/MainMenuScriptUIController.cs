@@ -28,7 +28,7 @@ public class MainMenuScriptUIController : MonoBehaviour
     {
         if (PersistentData.isGM)
         {
-            gmButton.GetComponentInChildren<TextMeshProUGUI>().text = "Deactivate GM";
+            gmButton.GetComponentInChildren<TextMeshProUGUI>().text = "Deactivate \n GM";
         }
         else
         {
