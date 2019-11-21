@@ -6,8 +6,6 @@ public class DeviceOrientation : MonoBehaviour
 {
     public static DeviceOrientation Instance { get; private set; }
 
-	public bool portrait = true;
-
 	private void Awake()
 	{
         if (!Instance)
@@ -20,11 +18,9 @@ public class DeviceOrientation : MonoBehaviour
         }
 	}
 
-	public void ChangeOrientation()
+	public void ChangeOrientation(bool changeToLandscape)
 	{
-		portrait = !portrait;
-
-		if (portrait)
+		if (!changeToLandscape)
 		{
 			Screen.orientation = ScreenOrientation.AutoRotation;
 			Screen.autorotateToPortrait = true;
