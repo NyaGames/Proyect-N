@@ -9,20 +9,14 @@ using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
-    public Button joinRoomButton;
-    public Button createRoomButton;
-
-    public TMP_InputField roomnameInputText;
-    public Slider roomMaxPlayers;
-
+    public ScreenSceneGUIController screenSceneGUIController;
     private List<RoomInfo> roomsAvaiable = new List<RoomInfo>();
 
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    /*public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         Debug.Log("Has entrado en el lobby, estas son las salas que hay disponibles");
         UpdateCachedRoomList(roomList);
     }
-
     void UpdateCachedRoomList(List<RoomInfo> roomList)
     {
         foreach (RoomInfo r in roomList)
@@ -38,17 +32,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
             }
         }
 
-    }
+    }*/
 
-    public void CreateRoom()
-    {
-        string roomName = GenerateUniqueRoomID();
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = (byte)Mathf.RoundToInt(roomMaxPlayers.value);
-        roomOptions.IsVisible = false; //FALSE = Hace la sala privada
-        PhotonNetwork.CreateRoom(roomName, roomOptions, null);
-        Debug.Log("Sala creada: " + roomName);
-    }
     public string GenerateUniqueRoomID()
     {
         string s = "";
@@ -62,10 +47,24 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         return s;
     }
+    public void CreateRoom()
+    {
+        string roomName = "23";//GenerateUniqueRoomID();
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = (byte)screenSceneGUIController.maxPlayers.GetComponentInChildren<Slider>().value;
+        roomOptions.IsVisible = false; //FALSE = Hace la sala privada
+        PhotonNetwork.CreateRoom(roomName, roomOptions, null);
+        Debug.Log("Sala creada: " + roomName);
+    }
+
+    public override void OnCreatedRoom()
+    {
+        SceneManager.LoadScene("LobbyScene");
+    }
 
     public void JoinRoom()
     {
-        string roomPassword = roomnameInputText.text;
+        string roomPassword = "23";//roompasswordInputText.text;
 
         if (roomPassword != "")
         {
@@ -79,9 +78,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        roomnameInputText.interactable = false;
-        createRoomButton.interactable = false;
         Debug.Log("Te has unido a la sala " + PhotonNetwork.CurrentRoom.Name);
+        SceneManager.LoadScene("LobbyScene");
         //myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
 
     }
@@ -90,21 +88,5 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("La sala no existe o la contraseña es incorrecta");
     }
-    private void FixedUpdate()
-    {
-
-        /*playerCount.text = GameObject.Find("JoinSpecificTextInput").GetComponent<TMP_InputField>().text;
-        if (PhotonNetwork.CurrentRoom != null) //Si estamos en una sala
-        {
-            playersCount = PhotonNetwork.CurrentRoom.PlayerCount;
-            playerCount.text = playersCount + "/" + maxPlayersPerRoom;
-            gameMasterToggle.interactable = false;
-        }
-        else
-        {
-            gameMasterToggle.interactable = true;
-            playerCount.text = "You are not in a room";
-        }*/
-
-    }
+   
 }

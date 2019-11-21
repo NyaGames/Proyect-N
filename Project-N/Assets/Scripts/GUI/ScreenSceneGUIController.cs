@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class ScreenSceneGUIController : MonoBehaviour
 {
-    [SerializeField] private Button loginRoomButton;
-    [SerializeField] private Button createRoomButton;
-    [SerializeField] private GameObject maxPlayers;
+    public TMPro.TMP_InputField roomName;
+    public Button loginRoomButton;
+    public Button createRoomButton;
+    public GameObject maxPlayers;
 
     private void Awake()
     {

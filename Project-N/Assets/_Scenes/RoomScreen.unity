@@ -1471,10 +1471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee210d50bb2eaa347a9b2686b6e0b154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joinRoomButton: {fileID: 1823950718}
-  createRoomButton: {fileID: 1117839812}
-  roomnameInputText: {fileID: 243604891}
-  roomMaxPlayers: {fileID: 1820333982}
+  screenSceneGUIController: {fileID: 1900224544}
 --- !u!4 &1055940543
 Transform:
   m_ObjectHideFlags: 0
@@ -2642,6 +2639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c765b4cab34a9e4e83da1d48f811e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomName: {fileID: 243604891}
   loginRoomButton: {fileID: 1823950718}
   createRoomButton: {fileID: 1117839812}
   maxPlayers: {fileID: 1322197004}
