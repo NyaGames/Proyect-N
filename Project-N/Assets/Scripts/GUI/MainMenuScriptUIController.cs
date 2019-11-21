@@ -20,4 +20,10 @@ public class MainMenuScriptUIController : MonoBehaviour
     {
         SceneManager.LoadScene("RoomScreen");                
     }
+
+    public void ChangeGMStatus()
+    {
+        PersistentData.isGM = !PersistentData.isGM;
+    }
+
 }
