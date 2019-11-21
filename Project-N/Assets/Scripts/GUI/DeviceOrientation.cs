@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class DeviceOrientation : MonoBehaviour
 {
-	[SerializeField] private ScreenOrientation orientation;
+    public static DeviceOrientation Instance { get; private set; }
 
 	public bool portrait = true;
 
 	private void Awake()
 	{
-		Screen.orientation = orientation;
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
 	}
 
 	public void ChangeOrientation()

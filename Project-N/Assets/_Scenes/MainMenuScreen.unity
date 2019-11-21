@@ -401,7 +401,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 112788405}
-  - component: {fileID: 112788406}
   m_Layer: 0
   m_Name: DatabaseManager
   m_TagString: Untagged
@@ -423,19 +422,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &112788406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112788404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 990708eaaeea7654e93e8cdc862aafa4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playButton: {fileID: 1823950718}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,7 +1095,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Login
+  m_text: PLAY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -1178,7 +1164,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 312586361}
-    characterCount: 5
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -2674,7 +2660,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: sign In
+  m_text: GM
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -2743,10 +2729,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 843264852}
-    characterCount: 7
+    characterCount: 2
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -3111,7 +3097,7 @@ GameObject:
   - component: {fileID: 1117839813}
   - component: {fileID: 1117839812}
   m_Layer: 5
-  m_Name: SignInButton
+  m_Name: ChangeToGMButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3176,7 +3162,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1117839813}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1900224544}
+        m_MethodName: ChangeOrientation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1117839813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4434,7 +4431,7 @@ GameObject:
   - component: {fileID: 1823950719}
   - component: {fileID: 1823950718}
   m_Layer: 5
-  m_Name: LoginButton
+  m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4500,8 +4497,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 112788406}
-        m_MethodName: startGame
+      - m_Target: {fileID: 1900224542}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4866,6 +4863,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1900224543}
   - component: {fileID: 1900224544}
+  - component: {fileID: 1900224545}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -4897,9 +4895,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1900224542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca9dfc3f4e2f69345b489bc63340fc35, type: 3}
+  m_Script: {fileID: 11500000, guid: c6cb728a03eedfb4099b672bca9b22eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portrait: 1
+--- !u!114 &1900224545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900224542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaeb5524b2a68c4c908da5df52b66ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gmButton: {fileID: 1117839812}
 --- !u!1 &1903430334
 GameObject:
   m_ObjectHideFlags: 0

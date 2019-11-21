@@ -72,6 +72,7 @@ public class AutoLobby : MonoBehaviourPunCallbacks
         connectButton.interactable = false;
         createRoomButton.interactable = true;
         joinRoomButton.interactable = true;      
+       
     }
 
     //Se llama cada vez que alguien crea o borra una sala del servidor

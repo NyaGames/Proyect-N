@@ -53,8 +53,11 @@ public class DatabaseManager : MonoBehaviour
         string password = Utility.Sha256FromString(LogInPasswordInputText.text);
 
         userAccount = db.LoginAccount(username,password);
+      
         if(userAccount != null) //SI hemos encontrado la cuenta
         {
+            PersistentData.account = userAccount;
+
             Debug.Log("Login as: " + userAccount.Username + "#" + userAccount.Discriminator + ". Welcome back!");
             lobby.Connect();
         }

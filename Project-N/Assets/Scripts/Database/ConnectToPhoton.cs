@@ -41,6 +41,6 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(null);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("MainMenuScreen");
     }
 }
