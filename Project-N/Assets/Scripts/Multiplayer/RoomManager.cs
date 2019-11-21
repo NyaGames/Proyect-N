@@ -88,5 +88,5 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("La sala no existe o la contraseña es incorrecta");
     }
-   
+
 }

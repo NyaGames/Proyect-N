@@ -41,10 +41,14 @@ public abstract class CameraControl : MonoBehaviour
 
 	protected virtual void Awake()
 	{
-		pivot = transform.GetChild(0);
+        /*pivot = transform.GetChild(0);
 		stick = pivot.GetChild(0);
 		swivel = stick.GetChild(0);
-		m_camera = swivel.GetChild(0).GetComponent<Camera>();
+		m_camera = swivel.GetChild(0).GetComponent<Camera>();*/
+
+        swivel = transform.GetChild(0);
+        stick = swivel.GetChild(0);
+        m_camera = stick.GetChild(0).GetComponent<Camera>();
 
 		stickRb = stick.GetComponent<Rigidbody>();
 
