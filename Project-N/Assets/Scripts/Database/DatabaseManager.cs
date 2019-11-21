@@ -57,7 +57,7 @@ public class DatabaseManager : MonoBehaviour
         if(userAccount != null) //SI hemos encontrado la cuenta
         {
             PersistentData.account = userAccount;
-
+            PersistentData.isGM = userAccount.isGameMaster;
             Debug.Log("Login as: " + userAccount.Username + "#" + userAccount.Discriminator + ". Welcome back!");
             lobby.Connect();
         }

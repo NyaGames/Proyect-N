@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         }
         else //Si soy yo,cojo los datos de mi escena
         {
-            isGameMaster = GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn;
+            isGameMaster = PersistentData.isGM;
             id = PhotonNetwork.LocalPlayer.ActorNumber;
             if (!isGameMaster) //Si no soy gameMaster,desactivo los controles para crear la zona
             {
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (!isGameMaster)
+       /* if (!isGameMaster)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
                 this.transform.position = new Vector3( hit.point.x,0,hit.point.z);
         
             }
-        }
+        }*/
 
     }
 
