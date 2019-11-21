@@ -46,16 +46,7 @@ namespace Photon.Pun
 
         private void Update()
         {
-            /*if (!isGameMaster)
-            {
-                if (!actualPos.Equals(transform.position))
-                {
-                    actualPos = transform.position;
-                    PhotonView photonView = PhotonView.Get(this);
-                    photonView.RPC("updatePlayerPos", RpcTarget.Others, actualPos);
-
-                }
-            }*/
+          
         }
 
         /*[PunRPC]
