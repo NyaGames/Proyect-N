@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScreenSceneGUIController : MonoBehaviour
+public class RoomSceneGUIController : MonoBehaviour
 {
     public TMPro.TMP_InputField roomName;
     public Button loginRoomButton;

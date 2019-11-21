@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
-    public ScreenSceneGUIController screenSceneGUIController;
+    public RoomSceneGUIController screenSceneGUIController;
     private List<RoomInfo> roomsAvaiable = new List<RoomInfo>();
 
     /*public override void OnRoomListUpdate(List<RoomInfo> roomList)
