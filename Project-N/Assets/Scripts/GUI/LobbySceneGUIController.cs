@@ -13,7 +13,10 @@ public class LobbySceneGUIController : MonoBehaviour
     public void Start()
     {
         roomName.text = "Room: " + PhotonNetwork.CurrentRoom.Name;
-        ´//if(!PersistentData.account.isGameMaster)
+        if (!PersistentData.isGM)
+        {
+            startGameButton.interactable = false;
+        }
     }
 
     public void Update()

@@ -10,7 +10,7 @@ public class MainMenuScriptUIController : MonoBehaviour
 
     private void Awake()
     {
-        if (!PersistentData.account.isGameMaster)
+        if (!PersistentData.isGM)
         {
             gmButton.interactable = false;
         }

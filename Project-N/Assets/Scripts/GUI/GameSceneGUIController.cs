@@ -12,7 +12,7 @@ public class GameSceneGUIController : MonoBehaviour
 
     private void Start()
     {
-        GM = PersistentData.account.isGameMaster;
+        GM = PersistentData.isGM;
 
         AdjustCamera();
         AdjustOrientation();

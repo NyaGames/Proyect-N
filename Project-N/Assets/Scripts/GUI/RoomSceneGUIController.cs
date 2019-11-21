@@ -12,7 +12,7 @@ public class RoomSceneGUIController : MonoBehaviour
 
     private void Awake()
     {
-        if (PersistentData.account.isGameMaster)
+        if (PersistentData.isGM)
         {
             loginRoomButton.interactable = false;
             createRoomButton.interactable = true;
