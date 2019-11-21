@@ -18,4 +18,18 @@ public class Model_Account
     //public string Token { set; get; }
     public DateTime LastLogin;  //última vez que se conectó
 
+    public Model_Account()
+    {
+
+    }
+
+    public Model_Account( string username, string discriminator, string shaPassword, bool isGameMaster, DateTime lastLogin)
+    {
+       // _id = id;
+        Username = username;
+        Discriminator = discriminator;
+        ShaPassword = shaPassword;
+        this.isGameMaster = isGameMaster;
+        LastLogin = lastLogin;
+    }
 }

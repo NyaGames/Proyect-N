@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Mongo
 {
-    private const string MONGO_URI = "mongodb+srv://Chetok:123ddd456@lobbydb-tqpcq.mongodb.net/test?retryWrites=true&w=majority";
-    private const string DATABASE_NAME = "lobbydb";
+    
+    private string MONGO_URI = "mongodb+srv://Chetok:123ddd456@lobbydb-tqpcq.mongodb.net/test?retryWrites=true&w=majority";
+    private string DATABASE_NAME = "lobbydb";
 
     private MongoClient client;
     private IMongoDatabase db;
