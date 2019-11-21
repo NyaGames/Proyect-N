@@ -29,7 +29,6 @@ public class LobbySceneGUIController : MonoBehaviour
 
     public void StartNewGame()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.LoadLevel("GameScene");
     }
 
