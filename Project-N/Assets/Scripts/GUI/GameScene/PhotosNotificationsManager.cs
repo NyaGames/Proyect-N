@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class PhotosNotificationsManager : MonoBehaviour
 {
-    public static PhotosNotificationsManager Instance { get; private set; }
+    public static PhotosNotificationsManager Instance { get; private set; }	
 
 	public List<Texture2D> imagesReceived { get; private set; }
 
-	[SerializeField] private GameObject notificationPrefab;
+	[SerializeField] private GameObject photoReceivedPanel;
+ 	[SerializeField] private GameObject notificationPrefab;
 
 	private void Awake()
 	{
@@ -21,6 +22,8 @@ public class PhotosNotificationsManager : MonoBehaviour
 		{
 			Destroy(this);
 		}
+
+		imagesReceived = new List<Texture2D>();
 	}
 
 	public void OnImageRecived(Texture2D newImage)
@@ -28,13 +31,31 @@ public class PhotosNotificationsManager : MonoBehaviour
 		imagesReceived.Add(newImage);
 
 		GameObject notification = Instantiate(notificationPrefab);
-		notificationPrefab.transform.SetParent(transform, false);
+		notification.transform.SetParent(transform, false);
 
 		notification.GetComponent<RawImage>().texture = newImage;
 	}
 
-	public void ImageOpened(Texture2D image)
+
+	public void OpenNotification(GameObject notification)
 	{
-		imagesReceived.Remove(image);
+		Texture2D tex = (Texture2D)notification.GetComponent<RawImage>().texture;
+		photoReceivedPanel.SetActive(true);
+		photoReceivedPanel.GetComponentInChildren<RawImage>().texture = tex;
+
+		imagesReceived.Remove(tex);
+		Destroy(notification);
+	}
+
+	public void ConfirmDeath()
+	{
+		photoReceivedPanel.SetActive(false);
+		Debug.Log("Player Killed!");
+	}
+
+	public void CancelDeath()
+	{
+		photoReceivedPanel.SetActive(false);
+		Debug.Log("Player not killed!");
 	}
 }
