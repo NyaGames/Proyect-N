@@ -10,13 +10,28 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PhotonView))]
 public class ImageManager : MonoBehaviour
 {
-    PhotonView photonView;   
+    public static ImageManager Instance { get; private set; }
+
+
+    public PhotonView photonView;    
+
+    private Photon.Realtime.Player lastPlayerReference;
 
 	private RawImage imageReceived;
 
+    public Text killedText;
+
     public void Awake()
     {
-        photonView = GetComponent<PhotonView>();
+        if (!Instance)
+        {
+            Instance = this;
+            photonView = GetComponent<PhotonView>();
+        }
+        else
+        {
+            Destroy(Instance);
+        }
     }
 
 	private void Start()
@@ -43,8 +58,9 @@ public class ImageManager : MonoBehaviour
             }
 
             byteArray[i] = downSampledImage.data[i];           
-        }
-   
+        }        
+
+        photonView.Group = (byte)PhotonNetwork.LocalPlayer.ActorNumber;
         photonView.RPC("ReceiveImageFromPlayer", RpcTarget.MasterClient, byteArray as object, playerInPhotoID);
     }
 
@@ -68,9 +84,15 @@ public class ImageManager : MonoBehaviour
 		PhotosNotificationsManager.Instance.OnImageRecived(tex, sender, playerToKill);	
     }
 
+    [PunRPC]
+    void ReceiveConfirmationFromGM(bool killConfirmed)
+    {
+        killedText.text = "Killed = " + killConfirmed;
+    }
+
     public void DestroyPlayer(int id)
     {
-        foreach(GameObject p in GamemasterManager.Instance.playersViewsList)
+        foreach(GameObject p in GameManager.Instance.playersViewsList)
         {
             if(p.GetComponent<Player>().id == id)
             {
