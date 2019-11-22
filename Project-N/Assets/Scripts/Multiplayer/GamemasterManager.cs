@@ -8,31 +8,34 @@ public class GamemasterManager : MonoBehaviour
 {
     public static GamemasterManager Instance { get; private set; }
 
-    private GameObject editableZone;
-    private GameObject actualZone;
-    private GameObject nextZone;
-    public GameObject zonePrefab;
-    private List<GameObject> dropList = new List<GameObject>();
-    public GameObject dropPrefab;
+	public GameObject zonePrefab;
+	public GameObject dropPrefab;
 
-    Vector3 lasPositionTapped = new Vector3(0, 0, 0);
+	public bool creatingDrop = false;
+	public int numDrops = 3;
+
+    private GameObject staticZone;
+    private GameObject provZone;
+
+	[SerializeField] private Material provZoneMat;
+	[SerializeField] private Material staticZoneMat;
+
+	private List<GameObject> dropList = new List<GameObject>();
+
+	[HideInInspector] public GameObject dropPos;
+	[HideInInspector] public GameObject lastDropTapped;
+
+
+	Vector3 lasPositionTapped = new Vector3(0, 0, 0);
     Vector3 zoneCenter = new Vector3(0, 0, 0);
 
-    public bool creatingDrop = false;
-    [HideInInspector]public GameObject dropPos;
-    public int numDrops = 3;
-    public bool zoneCreated;
-    [HideInInspector] public GameObject lastDropTapped;
-
-     public GameObject[] playersViewsList;
+    public GameObject[] playersViewsList;
 
     private void Awake()
     {
         if (!Instance)
         {
-            Instance = this;
-            zoneCreated = false;
-           
+            Instance = this;          
         }
         else
         {
@@ -48,8 +51,7 @@ public class GamemasterManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        if (!zoneCreated && PhotonNetwork.CurrentRoom != null) //Si no se ha creado la zona todavía y estoy dentro de una sala,puedo crearla
+        if (ZoneManager.Instance.isEditingZone && PhotonNetwork.CurrentRoom != null) //Si no se ha creado la zona todavía y estoy dentro de una sala,puedo crearla
         {
             CreateZone();
         }
@@ -60,65 +62,38 @@ public class GamemasterManager : MonoBehaviour
             CreateDrop();
         }
 
-    }
+    } 
 
-    
-    public float getDistanceFromCameraToGround()
-    {
-        return (GameObject.Find("LocationBasedGame").transform.position - GameObject.Find("Main Camera").transform.position).magnitude;
-    }
-
-    //Player interaction methods
-    public void tapOnPlayer()
-    {
-        if ((Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began))
-        {
-            Ray raycast = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            RaycastHit raycastHit;
-            if (Physics.Raycast(raycast, out raycastHit))
-            {
-                Debug.Log("Something Hit");
-                if (raycastHit.collider.gameObject.CompareTag("Player")) //Si es un jugador
-                {
-                    /*lastTouchedDrop();
-                    movingObject = true;
-                    Debug.Log("Drop tapped");*/
-                }
-
-            }
-        }
-    }
-    //Zone methods
-    public void CanCreateNewZone()
-    {
-        zoneCreated = false; //Podemos crear una nueva zona
-        Debug.Log("Puedes crear una nueva zona");
-    }
+	#region Zone
     public void CreateZone()
     {
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
+			Touch touch = Input.GetTouch(0);
+
+			Vector2 posNormalized = touch.position / Screen.width;
+			if (posNormalized.x > 0.66f) return;
+            
             float cameraDistanceToGround = getDistanceFromCameraToGround();
             Vector3 touchInWorldCoord = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
             switch (touch.phase)
             {
                 // Record initial touch position.
                 case TouchPhase.Began:
-                    if (editableZone == null)
+                    if (provZone == null)
                     {
-                        lasPositionTapped = touch.position;
-                        zoneCenter = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
-                        editableZone = Instantiate(zonePrefab, zoneCenter,Quaternion.identity);
+                        lasPositionTapped = touch.position;          
+						provZone = Instantiate(zonePrefab, touchInWorldCoord, Quaternion.identity);
+						provZone.GetComponentInChildren<MeshRenderer>().material = provZoneMat;
                     }
                     break;
 
                 // Determine direction by comparing the current touch position with the initial one.
                 case TouchPhase.Moved:
-                    if (editableZone != null)
+                    if (provZone != null)
                     {
                         float distanceFromCenterToTap = (zoneCenter - touchInWorldCoord).magnitude;
-                        editableZone.transform.localScale = new Vector3(distanceFromCenterToTap * 2, distanceFromCenterToTap * 2, distanceFromCenterToTap * 2);
+						provZone.transform.localScale = new Vector3(distanceFromCenterToTap * 2, 5f, distanceFromCenterToTap * 2);
                     }
 
                     lasPositionTapped = touch.position;
@@ -127,10 +102,9 @@ public class GamemasterManager : MonoBehaviour
 
                 // Report that a direction has been chosen when the finger is lifted.
                 case TouchPhase.Ended:
-                    if (editableZone != null)
+                    if (provZone != null)
                     {
-                        zoneCreated = true;
-                        editableZone.GetComponent<Zone>().creatingObject = false;
+						provZone.GetComponent<Zone>().creatingObject = false;
                     }
                     break;
             }
@@ -141,78 +115,84 @@ public class GamemasterManager : MonoBehaviour
         }
 
     }
+
     public void SendZoneToOtherPlayers()
     {
-        if (editableZone != null) //Solo se envía una zona si se ha creado previamente en local. Si no se ha editado nada, no se puede mandar nada
+        if (provZone != null) //Solo se envía una zona si se ha creado previamente en local. Si no se ha editado nada, no se puede mandar nada
         {
-            if (actualZone == null) //Si no hay ninguna zona todavia, se guarda la zona editada en actualZone
+            if (staticZone == null) //Si no hay ninguna zona todavia, se guarda la zona editada en actualZone
             {
-                actualZone = PhotonNetwork.Instantiate(zonePrefab.name, editableZone.transform.position, Quaternion.identity);
-                actualZone.transform.localScale = editableZone.transform.localScale;
+                staticZone = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
+                staticZone.transform.localScale = provZone.transform.localScale;
             }
             else //Si ya habia una zona en el mapa, se guarda la zona editada en nextZone
             {
                 //Vector3 geoPosition = editableZone.GetComponent<ZonePositionWithLatLon>().GetGeoPosition();
-                nextZone = PhotonNetwork.Instantiate(zonePrefab.name, editableZone.transform.position, Quaternion.identity);
-                nextZone.transform.localScale = editableZone.transform.localScale;
+                provZone = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
+                provZone.transform.localScale = provZone.transform.localScale;
             }
-            Destroy(editableZone);
+            Destroy(provZone);
         }
 
     }
+
     public void enableCreateNewRadious()
     {
-        if (editableZone != null)
+        if (provZone != null)
         {
-            if (editableZone.GetComponent<Zone>().creatingNewRadious)
+            if (provZone.GetComponent<Zone>().creatingNewRadious)
             {
-                editableZone.GetComponent<Zone>().creatingNewRadious = false;
+                provZone.GetComponent<Zone>().creatingNewRadious = false;
             }
             else
             {
-                editableZone.GetComponent<Zone>().creatingNewRadious = true;
+                provZone.GetComponent<Zone>().creatingNewRadious = true;
             }
         }
 
     }
+
     public void StartClosingZone()
     {
         StartCoroutine(CloseActualZone());
     }
+
     public IEnumerator CloseActualZone()
     {
         float timeToClose = 1.0f;
         float t = 0;
-        Vector3 InitialScale = actualZone.transform.localScale;
-        Vector3 FinalScale = nextZone.transform.localScale;
-        Vector3 Initialpos = actualZone.transform.position;
-        Vector3 Finalpos = nextZone.transform.position;
+        Vector3 InitialScale = staticZone.transform.localScale;
+        Vector3 FinalScale = provZone.transform.localScale;
+        Vector3 Initialpos = staticZone.transform.position;
+        Vector3 Finalpos = provZone.transform.position;
 
         while (t <= 1)
         {
-            actualZone.transform.localScale = Vector3.Lerp(InitialScale, FinalScale, t);
-            actualZone.transform.position = Vector3.Lerp(Initialpos, Finalpos, t);
+            staticZone.transform.localScale = Vector3.Lerp(InitialScale, FinalScale, t);
+            staticZone.transform.position = Vector3.Lerp(Initialpos, Finalpos, t);
             t += Time.deltaTime / timeToClose;
             yield return null;
         }
-        actualZone.transform.localScale = FinalScale;
-        actualZone.transform.position = Finalpos;
-        PhotonNetwork.Destroy(actualZone);
-        actualZone = PhotonNetwork.Instantiate(zonePrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
-        actualZone.transform.localScale = FinalScale;
-        PhotonNetwork.Destroy(nextZone);
+        staticZone.transform.localScale = FinalScale;
+        staticZone.transform.position = Finalpos;
+        PhotonNetwork.Destroy(staticZone);
+        staticZone = PhotonNetwork.Instantiate(zonePrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
+        staticZone.transform.localScale = FinalScale;
+        PhotonNetwork.Destroy(provZone);
 
     }
+
     public void DeleteZone()
     {
-        if(editableZone != null)
+        if(provZone != null)
         {
-            Destroy(editableZone);
-            zoneCreated = false;
+            Destroy(provZone);           
         }
     }
-    //Drop methods
-    public void CreateDrop()
+	#endregion
+
+	#region Drops
+	public void CreateDrop()
     {
         if (Input.touchCount > 0)
         {
@@ -265,6 +245,33 @@ public class GamemasterManager : MonoBehaviour
         Destroy(lastDropTapped);
         numDrops++;
     }
+	#endregion
+
+	public float getDistanceFromCameraToGround()
+	{
+		return (GameObject.Find("LocationBasedGame").transform.position - GameObject.Find("Main Camera").transform.position).magnitude;
+	}
+
+	//Player interaction methods
+	public void tapOnPlayer()
+	{
+		if ((Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began))
+		{
+			Ray raycast = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+			RaycastHit raycastHit;
+			if (Physics.Raycast(raycast, out raycastHit))
+			{
+				Debug.Log("Something Hit");
+				if (raycastHit.collider.gameObject.CompareTag("Player")) //Si es un jugador
+				{
+					/*lastTouchedDrop();
+                    movingObject = true;
+                    Debug.Log("Drop tapped");*/
+				}
+
+			}
+		}
+	}
 
 
 

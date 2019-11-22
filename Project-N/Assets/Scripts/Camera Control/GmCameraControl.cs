@@ -49,6 +49,8 @@ public class GmCameraControl : CameraControl
 
 	protected override void LateUpdate()
 	{
+		if (ZoneManager.Instance != null && ZoneManager.Instance.isEditingZone) return;
+
 		base.LateUpdate();
 
 		if (cameraMovement == CameraMovementType.Centering)
