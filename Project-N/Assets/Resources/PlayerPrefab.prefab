@@ -336,5 +336,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce3de3e0f2984f4799aa75b3eca751a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  killedText: {fileID: 0}

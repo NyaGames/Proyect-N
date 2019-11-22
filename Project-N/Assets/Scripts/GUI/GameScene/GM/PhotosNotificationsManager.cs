@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun;
 
 public class PhotosNotificationsManager : MonoBehaviour
 {
@@ -64,13 +63,11 @@ public class PhotosNotificationsManager : MonoBehaviour
 	{
 		photoReceivedPanel.SetActive(false);
 		Debug.Log("Player Killed!");
-        ImageManager.Instance.photonView.RPC("ReceiveConfirmationFromGM", RpcTarget.Others,true);
 	}
 
 	public void CancelDeath()
 	{
 		photoReceivedPanel.SetActive(false);
-        Debug.Log("Player not killed!");
-        ImageManager.Instance.photonView.RPC("ReceiveConfirmationFromGM", RpcTarget.Others, false);
-    }
+		Debug.Log("Player not killed!");
+	}
 }

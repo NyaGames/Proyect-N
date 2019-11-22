@@ -40,6 +40,5 @@ MonoBehaviour:
   - NewZoneReceived
   - NewObjectReceived
   - ReceiveImageFromPlayer
-  - ReceiveConfirmationFromGM
   DisableAutoOpenWizard: 1
   ShowSettings: 1

@@ -3352,7 +3352,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8844448876360683055, guid: 52724d1bd5c379c4c83848061dfd5521,
     type: 3}
-  playersViewsList: []
 --- !u!4 &1250016668
 Transform:
   m_ObjectHideFlags: 0
@@ -3388,6 +3387,7 @@ MonoBehaviour:
   numDrops: 3
   zoneCreated: 0
   lastDropTapped: {fileID: 0}
+  playersViewsList: []
 --- !u!1 &1272490028
 GameObject:
   m_ObjectHideFlags: 0

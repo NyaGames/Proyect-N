@@ -24,6 +24,8 @@ public class GamemasterManager : MonoBehaviour
     public bool zoneCreated;
     [HideInInspector] public GameObject lastDropTapped;
 
+     public GameObject[] playersViewsList;
+
     private void Awake()
     {
         if (!Instance)
@@ -40,8 +42,7 @@ public class GamemasterManager : MonoBehaviour
 
     public void Start()
     {
-     
-       
+        playersViewsList = GameObject.FindGameObjectsWithTag("Player");
     }
 
     // Update is called once per frame
