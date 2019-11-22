@@ -10,16 +10,28 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PhotonView))]
 public class ImageManager : MonoBehaviour
 {
-    PhotonView photonView;    
+    public static ImageManager Instance { get; private set; }
+
+
+    public PhotonView photonView;    
 
     private Photon.Realtime.Player lastPlayerReference;
 
 	private RawImage imageReceived;
 
+    public Text killedText;
+
     public void Awake()
     {
-        photonView = GetComponent<PhotonView>();
-
+        if (!Instance)
+        {
+            Instance = this;
+            photonView = GetComponent<PhotonView>();
+        }
+        else
+        {
+            Destroy(Instance);
+        }
     }
 
 	private void Start()
@@ -50,8 +62,8 @@ public class ImageManager : MonoBehaviour
 
         int playerToKill = 5; //ELEGIR A QUIEN QUIERES MATAR -> actorNumber
 
+        photonView.Group = (byte)PhotonNetwork.LocalPlayer.ActorNumber;
         photonView.RPC("ReceiveImageFromPlayer", RpcTarget.MasterClient, byteArray as object, playerToKill);
-
     }
 
     [PunRPC]
@@ -76,9 +88,15 @@ public class ImageManager : MonoBehaviour
 		//imageReceived.texture = tex;   		
     }
 
+    [PunRPC]
+    void ReceiveConfirmationFromGM(bool killConfirmed)
+    {
+        killedText.text = "Killed = " + killConfirmed;
+    }
+
     public void DestroyPlayer(int id)
     {
-        foreach(GameObject p in GamemasterManager.Instance.playersViewsList)
+        foreach(GameObject p in GameManager.Instance.playersViewsList)
         {
             if(p.GetComponent<Player>().id == id)
             {
