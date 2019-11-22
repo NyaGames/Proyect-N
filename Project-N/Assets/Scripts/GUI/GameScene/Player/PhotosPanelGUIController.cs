@@ -5,8 +5,21 @@ using UnityEngine.UI;
 
 public class PhotosPanelGUIController : MonoBehaviour
 {
-	[SerializeField] private GameObject photoConfirmationPanel;
-	[SerializeField] private RawImage sourceImage;
+	public static PhotosPanelGUIController Instance { get; private set; }
+	[SerializeField] private GameObject photoConfirmationPanel;	
+	[SerializeField] private GameObject usersPanel;
+
+	private void Awake()
+	{
+		if (!Instance)
+		{
+			Instance = this;
+		}
+		else
+		{
+			Destroy(this);
+		}
+	}
 
 	public void TakePhoto()
 	{
@@ -16,10 +29,9 @@ public class PhotosPanelGUIController : MonoBehaviour
 
 	public void ConfirmPhotoToSend()
 	{
-		Debug.Log("Photo Confirmed!");
-		GameManager.Instance.myPlayer.GetComponent<ImageManager>().SendImageToMaster(sourceImage);
-		photoConfirmationPanel.SetActive(false);
-	}
+		Debug.Log("Photo Confirmed!");	
+		usersPanel.SetActive(true);		
+	}	
 
 	public void CancelPhotoToSend()
 	{

@@ -5,16 +5,30 @@ using UnityEngine.UI;
 
 public class GameSceneGUIController : MonoBehaviour
 {
+	public static GameSceneGUIController Instance { get; private set; }
     [SerializeField] private new Camera camera;
     [SerializeField] private GameObject GMPanel;
     [SerializeField] private GameObject playerPanel;
 	[SerializeField] private GameObject webCameraPanel;
 
 	public RawImage targetImage;
+	public RawImage sourceImage;
 
     private bool GM;
 
-    private void Start()
+	private void Awake()
+	{
+		if (!Instance)
+		{
+			Instance = this;
+		}
+		else
+		{
+			Destroy(this);
+		}
+	}
+
+	private void Start()
     {
         GM = PersistentData.isGM;
 

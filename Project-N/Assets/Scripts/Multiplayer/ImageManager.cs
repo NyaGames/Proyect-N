@@ -10,16 +10,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PhotonView))]
 public class ImageManager : MonoBehaviour
 {
-    PhotonView photonView;    
-
-    private Photon.Realtime.Player lastPlayerReference;
+    PhotonView photonView;   
 
 	private RawImage imageReceived;
 
     public void Awake()
     {
         photonView = GetComponent<PhotonView>();
-
     }
 
 	private void Start()
@@ -28,7 +25,7 @@ public class ImageManager : MonoBehaviour
 	}
 
 	//FOTOS
-	public void SendImageToMaster(RawImage image)
+	public void SendImageToMaster(RawImage image, int playerInPhotoID)
     {
         Texture2D sourceTexture = (Texture2D)image.texture;
         Color[] data = sourceTexture.GetPixels();
@@ -47,17 +44,14 @@ public class ImageManager : MonoBehaviour
 
             byteArray[i] = downSampledImage.data[i];           
         }
-
-        int playerToKill = 5; //ELEGIR A QUIEN QUIERES MATAR -> actorNumber
-
-        photonView.RPC("ReceiveImageFromPlayer", RpcTarget.MasterClient, byteArray as object, playerToKill);
-
+   
+        photonView.RPC("ReceiveImageFromPlayer", RpcTarget.MasterClient, byteArray as object, playerInPhotoID);
     }
 
     [PunRPC]
     void ReceiveImageFromPlayer(byte[] byteArray ,int playerToKill,PhotonMessageInfo info)
     {
-        lastPlayerReference = info.Sender;
+        int sender = info.Sender.ActorNumber;
 
         byte compressionRate = byteArray[byteArray.Length - 1];
         byteArray = byteArray.Take(byteArray.Count() - 1).ToArray();
@@ -71,9 +65,7 @@ public class ImageManager : MonoBehaviour
         tex.LoadRawTextureData(uncompressedData);
         tex.Apply();
 
-		PhotosNotificationsManager.Instance.OnImageRecived(tex);
-
-		//imageReceived.texture = tex;   		
+		PhotosNotificationsManager.Instance.OnImageRecived(tex, sender, playerToKill);	
     }
 
     public void DestroyPlayer(int id)

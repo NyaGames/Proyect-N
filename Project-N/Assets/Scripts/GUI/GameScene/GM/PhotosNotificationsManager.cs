@@ -11,6 +11,8 @@ public class PhotosNotificationsManager : MonoBehaviour
 
 	[SerializeField] private GameObject photoReceivedPanel;
  	[SerializeField] private GameObject notificationPrefab;
+	[SerializeField] private Text senderText;
+	[SerializeField] private Text playerToKillText;
 
 	private void Awake()
 	{
@@ -26,13 +28,15 @@ public class PhotosNotificationsManager : MonoBehaviour
 		imagesReceived = new List<Texture2D>();
 	}
 
-	public void OnImageRecived(Texture2D newImage)
+	public void OnImageRecived(Texture2D newImage, int sender, int playerToKill)
 	{
 		imagesReceived.Add(newImage);
 
 		GameObject notification = Instantiate(notificationPrefab);
 		notification.transform.SetParent(transform, false);
 
+		senderText.text = "Sent by: " + sender.ToString();
+		playerToKillText.text = "Do you want to kill " + playerToKill.ToString() + "?";
 		notification.GetComponent<RawImage>().texture = newImage;
 	}
 
