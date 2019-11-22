@@ -69,6 +69,8 @@ public class UsersPanelGUIController : MonoBehaviour
 
 	private void RemoveExistingButtons()
 	{
+		scrollRect.height = 0;
+
 		for (int i = 0; i < users.Count; i++)
 		{
 			users[i].Destroy();

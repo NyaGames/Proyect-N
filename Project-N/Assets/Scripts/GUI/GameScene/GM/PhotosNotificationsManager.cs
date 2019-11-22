@@ -15,6 +15,8 @@ public class PhotosNotificationsManager : MonoBehaviour
 	[SerializeField] private Text senderText;
 	[SerializeField] private Text playerToKillText;
 
+	private Rect notificationsRect;
+
 	private void Awake()
 	{
 		if (!Instance)
@@ -27,10 +29,14 @@ public class PhotosNotificationsManager : MonoBehaviour
 		}
 
 		imagesReceived = new List<Texture2D>();
+		notificationsRect = GetComponent<RectTransform>().rect;
 	}
 
 	public void OnImageRecived(Texture2D newImage, int sender, int playerToKill)
 	{
+
+		notificationsRect.height += notificationPrefab.GetComponent<RectTransform>().rect.height + 10; 
+
 		imagesReceived.Add(newImage);
 
 		GameObject notification = Instantiate(notificationPrefab);
@@ -44,6 +50,8 @@ public class PhotosNotificationsManager : MonoBehaviour
 
 	public void OpenNotification(GameObject notification)
 	{
+		notificationsRect.height += notificationPrefab.GetComponent<RectTransform>().rect.height - 10;
+
 		Texture2D tex = (Texture2D)notification.GetComponent<RawImage>().texture;
 		photoReceivedPanel.SetActive(true);
 		photoReceivedPanel.GetComponentInChildren<RawImage>().texture = tex;
