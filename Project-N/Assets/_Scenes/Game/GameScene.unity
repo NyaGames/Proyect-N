@@ -3162,7 +3162,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 344, y: 0}
+  m_SizeDelta: {x: 344, y: 620.64}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1207583121
 MonoBehaviour:
@@ -4951,7 +4951,7 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.10042269, y: 0}
+  m_AnchorMax: {x: 0.063589744, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
@@ -4976,7 +4976,7 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
+  m_ChildControlWidth: 0
   m_ChildControlHeight: 0
 --- !u!222 &1643417480
 CanvasRenderer:
@@ -5003,6 +5003,7 @@ MonoBehaviour:
     type: 3}
   senderText: {fileID: 1503776453}
   playerToKillText: {fileID: 725369038}
+  rectTransform: {fileID: 1643417478}
 --- !u!1 &1656750056
 GameObject:
   m_ObjectHideFlags: 0
