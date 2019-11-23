@@ -14,8 +14,8 @@ public class GamemasterManager : MonoBehaviour
 	public bool creatingDrop = false;
 	public int numDrops = 3;
 
-    private GameObject staticZone;
-    private GameObject provZone;
+    [HideInInspector]public GameObject staticZone;
+    [HideInInspector]public GameObject provZone;
 
 	[SerializeField] private Material provZoneMat;
 	[SerializeField] private Material staticZoneMat;
@@ -124,6 +124,8 @@ public class GamemasterManager : MonoBehaviour
             {
                 staticZone = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
                 staticZone.transform.localScale = provZone.transform.localScale;
+				staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
+				Destroy(provZone);
             }
             else //Si ya habia una zona en el mapa, se guarda la zona editada en nextZone
             {
@@ -189,6 +191,11 @@ public class GamemasterManager : MonoBehaviour
             Destroy(provZone);           
         }
     }
+
+	public void DestroyProvZone()
+	{
+		provZone.Destroy();
+	}
 	#endregion
 
 	#region Drops

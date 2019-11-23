@@ -22,16 +22,18 @@ public class ZoneManager : MonoBehaviour
 		}
 	}
 
-	public void EnterZoneMode()
+	public void TriggerZoneMode()
 	{
-		isEditingZone = true;
-		zoneMod.SetActive(true);
-	}
-
-	public void ExitZoneMode()
-	{
-		isEditingZone = false;
-		zoneMod.SetActive(false);
-
+		if (isEditingZone)
+		{
+			isEditingZone = false;
+			zoneMod.SetActive(false);
+			GamemasterManager.Instance.DestroyProvZone();
+		}
+		else
+		{
+			isEditingZone = true;
+			zoneMod.SetActive(true);
+		}		
 	}
 }

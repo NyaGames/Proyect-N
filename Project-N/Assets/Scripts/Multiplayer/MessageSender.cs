@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(PhotonView))]
-public class ImageManager : MonoBehaviour
+public class MessageSender : MonoBehaviour
 {
     PhotonView photonView;    
 
@@ -27,7 +27,7 @@ public class ImageManager : MonoBehaviour
 		imageReceived = GameObject.FindGameObjectWithTag("TargetImage").GetComponent<GameSceneGUIController>().targetImage;
 	}
 
-	//FOTOS
+	#region photos
 	public void SendImageToMaster(RawImage image, int playerInPhotoID)
     {
         Texture2D sourceTexture = (Texture2D)image.texture;
@@ -71,8 +71,24 @@ public class ImageManager : MonoBehaviour
 
 		PhotosNotificationsManager.Instance.OnImageRecived(tex, sender, playerToKill);	
     }
+	#endregion
 
-    public void DestroyPlayer(int id)
+	#region countDown
+	public void SendCountdown(int countDown)
+	{
+		photonView.RPC("ReceiveCountdown", RpcTarget.Others, countDown);
+	}
+
+	[PunRPC]
+	public void ReceiveCountDown(int countDown)
+	{
+		GameManager.Instance.OnCountDownReceived(countDown);
+	}
+	#endregion
+
+
+
+	public void DestroyPlayer(int id)
     {
         foreach(GameObject p in GamemasterManager.Instance.playersViewsList)
         {

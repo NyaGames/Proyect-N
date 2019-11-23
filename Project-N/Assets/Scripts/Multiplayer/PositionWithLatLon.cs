@@ -33,7 +33,6 @@ public class PositionWithLatLon : MonoBehaviour, IPunObservable
         {
             var map = LocationProviderFactory.Instance.mapManager;
             latLonCurrent = CalculateDropLatLon(map.CenterLatitudeLongitude) + map.CenterLatitudeLongitude;
-            Debug.Log("Centro mapa: " + map.CenterLatitudeLongitude + "/Drop: " + latLonCurrent);
         }
     }
 

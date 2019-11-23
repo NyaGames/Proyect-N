@@ -63,7 +63,7 @@ public class UsersPanelGUIController : MonoBehaviour
 	{
 		PhotosPanelGUIController.Instance.CancelPhotoToSend();
 		gameObject.SetActive(false);		
-		GameManager.Instance.myPlayer.GetComponent<ImageManager>().SendImageToMaster(GameSceneGUIController.Instance.sourceImage, actorSelected);
+		GameManager.Instance.myPlayer.GetComponent<MessageSender>().SendImageToMaster(GameSceneGUIController.Instance.sourceImage, actorSelected);
 		
 	}
 
