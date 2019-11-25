@@ -94,20 +94,31 @@ public class MessageSender : MonoBehaviour
 	#endregion
 
 	#region countDown
-	public void SendCountdown(int countDown)
+	public void SendCountdown(int countDown, string callbackMethod)
 	{
-		photonView.RPC("ReceiveCountdown", RpcTarget.Others, countDown);
+		photonView.RPC(callbackMethod, RpcTarget.Others, countDown);
 	}
 
 	[PunRPC]
-	public void ReceiveCountDown(int countDown)
+	public void ReceiveGameStartCountdown(int countDown)
 	{
 		GameManager.Instance.OnCountDownReceived(countDown);
 	}
     #endregion
 
     #region MasterResponse
-    public void ConfirmKill(int sender,int playerToKill,bool killed)
+    public void ConfirmKill(int sender,int playerToKill,bool killed){}
+
+    [PunRPC]
+    public void ReceiveZoneClosingCountdown(int countDown)
+    {
+       
+    }
+    #endregion
+
+
+
+    public void DestroyPlayer(int id)
     {
         byte lastGroup = photonView.Group;
         
