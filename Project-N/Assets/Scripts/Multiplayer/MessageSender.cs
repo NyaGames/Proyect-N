@@ -107,30 +107,16 @@ public class MessageSender : MonoBehaviour
     #endregion
 
     #region MasterResponse
-    public void ConfirmKill(int sender,int playerToKill,bool killed){}
-
-    [PunRPC]
-    public void ReceiveZoneClosingCountdown(int countDown)
-    {
-       
-    }
-    #endregion
-
-
-
-    public void DestroyPlayer(int id)
-    {
+    public void ConfirmKill(int sender,int playerToKill,bool killed){
         byte lastGroup = photonView.Group;
-        
+
         if (PhotonNetwork.IsMasterClient)
         {
             for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
             {
                 if (GamemasterManager.Instance.playersViewsList[i].GetPhotonView().CreatorActorNr == playerToKill)
                 {
-                    //photonView.Group = (byte)playerToKill;
-                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All,new byte[2]);
-                    //photonView.Group = (byte)lastGroup;
+                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All,ImageManager.Instance.imagesList[0]);
                 }
             }
         }
@@ -143,11 +129,23 @@ public class MessageSender : MonoBehaviour
         photonView.RPC("KillReceived", RpcTarget.All, playerToKill, killed);
         photonView.Group = lastGroup;
     }
+    public void DestroyPlayer(int id)
+    {
+
+    }
+
+    [PunRPC]
+    public void ReceiveZoneClosingCountdown(int countDown)
+    {
+       
+    }
+    #endregion
+
 
     [PunRPC]
     public void KillYourself(byte [] image)
     {
-
+        //GameManager.Instance.actorNumberText.text = "Me llego la kill"; 
         Debug.Log("Matao");
         if (photonView.IsMine && !myPlayer.isGameMaster)
         {
@@ -167,7 +165,7 @@ public class MessageSender : MonoBehaviour
         Debug.Log("MATASTE A " + playerToKill);
     }
     
-    #endregion
+
 
 
     private void OnDestroy()

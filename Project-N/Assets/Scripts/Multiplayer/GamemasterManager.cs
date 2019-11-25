@@ -32,7 +32,6 @@ public class GamemasterManager : MonoBehaviour
     Vector3 zoneCenter = new Vector3(0, 0, 0);
 
     [HideInInspector] public GameObject[] playersViewsList;
-    public GameObject[] playersViewsList;
 
     private bool provZoneCreated = false;
 
