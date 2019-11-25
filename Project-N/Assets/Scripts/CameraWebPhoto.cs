@@ -49,6 +49,7 @@ public class CameraWebPhoto : MonoBehaviour
         }
 
         webCamTexture.Play();
+        
         background.texture = webCamTexture;
 
         camAvailable = true;
@@ -83,91 +84,48 @@ public class CameraWebPhoto : MonoBehaviour
        
     }
     
-    /*public void TakePhoto()
+    public void TakePhoto()
     {
        
-        Debug.Log("Photo!!");
-        Debug.Log(frontCam.width + " " + frontCam.height);
+        
        
         var data2 = frontCam.GetPixels32();
     
 
         int aux = 0;
-        int aux2 = 0;
+ 
         Color32[] newData2 = new Color32[(128 * 128)];
 
-        byte[] sentColors3 = new byte[newData2.Length * 3];
-
-        byte[] receivedColors2 = new byte[newData2.Length * 4];
+      
 
         Color32[] newData = new Color32[newData2.Length];
-        Color32 color;
+
 
         for (int j = 0; j < frontCam.height; j++)    
         {
-            if (j > 56 && j < 184)
-                aux2++;
+          
             for (int i = 0; i < frontCam.width; i++)
             {
                 if ((i > 96) && (i < 224) && (j > 56) && (j < 184))
                 {
-                    if (i < 96 + aux2)
-                    {
-                        newData2[aux] = data2[(j * frontCam.width) + (i+127)];       
-                    }
-                    else
-                    {
+                   
                         newData2[aux] = data2[(j * frontCam.width) + i];     
-                    }
+                   
                     aux++;   
                 }
             }
         }
-        
-   
-        Debug.Log(aux);
-        Debug.Log(aux2);
-        newData2[16380] = new Color32(0, 0, 255, 255);
-        newData2[8180] = new Color32(255, 0, 0, 255);
-        Debug.Log(newData2[8191]);
-
-
-        ////////////ENVIAR DATOS//////////////
-        for (int i = 0, j = 0; j < newData2.Length; i += 3, j++)
-        {
-            sentColors3[i] = newData2[j].r;
-            sentColors3[i + 1] = newData2[j].g;
-            sentColors3[i + 2] = newData2[j].b;
-        }
-        
-        ///////////RECIBIR DATOS/////////////   
-        for (int i = 0, j = 0; j < sentColors3.Length; i += 4, j += 3)
-        {
-            receivedColors2[i] = sentColors3[j];
-            receivedColors2[i + 1] = sentColors3[j + 1];
-            receivedColors2[i + 2] = sentColors3[j + 2];
-            receivedColors2[i + 3] = 255;
-
-        }
-
-        
-        
-        ///////PASARLOS A COLOR32 AGAIN////////////////////
-        for (int i = 0, j = 0; i < receivedColors2.Length; i += 4, j++)
-        {
-            color = new Color32(receivedColors2[i], receivedColors2[i + 1], receivedColors2[i + 2], receivedColors2[i + 3]);
-            newData[j] = color;
-        }
-
-        Debug.Log(newData[8191]);
+      
         Texture2D tex = new Texture2D(128, 128);
-        tex.SetPixels32(newData);
+
+        tex.SetPixels32(newData2);
         tex.Apply();
-        photoPlane.texture = tex;
+        snapTakenImage.texture = tex;
         
 
-    }*/
-    public void TakePhotoGuarra()
+    }
+
+    /*public void TakePhotoGuarra()
     {
         float h = snapTakenImage.texture.height;
         float w = snapTakenImage.texture.width;
@@ -178,8 +136,17 @@ public class CameraWebPhoto : MonoBehaviour
         float newW = 128 / w;
         float newH = 128 / h;
 
-        snapTakenImage.texture = background.texture;
-        snapTakenImage.uvRect = new Rect(x, y, newW, newH);
-     }
+        //Texture2D tex = (Texture2D) background.texture;
+        
+        Texture2D tex = new Texture2D(frontCam.width, frontCam.height, TextureFormat.RGBA32, false);
+        tex.SetPixels32(frontCam.GetPixels32());
+        //tex = (Texture2D) background.texture;
+       
+        photoPlane.texture = tex;
+
+        //tex.GetPixels()
+        photoPlane.texture = tex;
+        photoPlane.uvRect = new Rect(x, y, newW, newH);
+     }*/
 
 }
