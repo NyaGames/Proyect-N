@@ -76,18 +76,8 @@ public class MessageSender : MonoBehaviour
     {
         int sender = info.Sender.ActorNumber;
 
-        byte compressionRate = byteArray[byteArray.Length - 1];
-        byteArray = byteArray.Take(byteArray.Count() - 1).ToArray();
         ImageManager.Instance.imagesList.Add(byteArray);
-
-        DownSampledImage image = new DownSampledImage(byteArray, compressionRate);
-
-        byte[] uncompressedData = DownSampling.DecompressImage(image);
-        
-        int rowSize = (int) Mathf.Sqrt(byteArray.Length) * compressionRate;
-        Texture2D tex = new Texture2D(rowSize, rowSize, TextureFormat.RGBA32, false);
-        tex.LoadRawTextureData(uncompressedData);
-        tex.Apply();
+        Texture2D tex = getUncompressedTextureFromBytes(byteArray);
 
 		PhotosNotificationsManager.Instance.OnImageRecived(tex, sender, playerToKill);	
     }
@@ -118,19 +108,16 @@ public class MessageSender : MonoBehaviour
                 {
                     GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All,ImageManager.Instance.imagesList[0]);
                 }
+                if(GamemasterManager.Instance.playersViewsList[i].GetPhotonView().CreatorActorNr == sender)
+                {
+                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillReceived", RpcTarget.All, playerToKill, killed);
+                }
             }
         }
         else
         {
             Debug.Log("NO ERES MASTER CLIENT");
         }
-
-        photonView.Group = (byte)sender;
-        photonView.RPC("KillReceived", RpcTarget.All, playerToKill, killed);
-        photonView.Group = lastGroup;
-    }
-    public void DestroyPlayer(int id)
-    {
 
     }
 
@@ -150,7 +137,7 @@ public class MessageSender : MonoBehaviour
         if (photonView.IsMine && !myPlayer.isGameMaster)
         {
             PhotonNetwork.Destroy(gameObject);
-            Debug.Log(image);
+            PhotosPanelGUIController.Instance.PlayerKilled(getUncompressedTextureFromBytes(image));
         }
         else
         {
@@ -162,11 +149,26 @@ public class MessageSender : MonoBehaviour
     [PunRPC]
     public void KillReceived(int playerToKill,bool killed)
     {
-        Debug.Log("MATASTE A " + playerToKill);
+        if(!PhotonNetwork.IsMasterClient)
+        PhotosPanelGUIController.Instance.KillConfirmed();
     }
-    
 
+    private Texture2D getUncompressedTextureFromBytes(byte[] byteArray)
+    {
+        byte compressionRate = byteArray[byteArray.Length - 1];
+        byteArray = byteArray.Take(byteArray.Count() - 1).ToArray();        
 
+        DownSampledImage image = new DownSampledImage(byteArray, compressionRate);
+
+        byte[] uncompressedData = DownSampling.DecompressImage(image);
+
+        int rowSize = (int)Mathf.Sqrt(byteArray.Length) * compressionRate;
+        Texture2D tex = new Texture2D(rowSize, rowSize, TextureFormat.RGBA32, false);
+        tex.LoadRawTextureData(uncompressedData);
+        tex.Apply();
+
+        return tex;
+    } 
 
     private void OnDestroy()
     {

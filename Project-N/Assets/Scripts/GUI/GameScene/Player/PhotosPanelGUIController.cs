@@ -49,10 +49,10 @@ public class PhotosPanelGUIController : MonoBehaviour
 
 	}
 
-    public void PlayerKilled(byte[] image)
+    public void PlayerKilled(Texture2D killCam)
     {
         killedPanel.SetActive(true);
-        killedPanel.GetComponent<SetPhotoReceivedInImage>().SetImage(image);
+        killedPanel.GetComponent<SetPhotoReceivedInImage>().SetImage(killCam);
     }
 
     public void KillConfirmed()
