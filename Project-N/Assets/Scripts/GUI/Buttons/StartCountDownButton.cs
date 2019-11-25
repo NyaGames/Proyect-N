@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,9 @@ public class StartCountDownButton : MonoBehaviour
 
 	int secs, mins;
 
-	private void Awake()
+    public GameObject countDownPrefab;
+
+    private void Awake()
 	{
 		button = GetComponent<Button>();
 	}
@@ -27,14 +30,14 @@ public class StartCountDownButton : MonoBehaviour
 		int.TryParse(secsText.text, out secs);
 		int.TryParse(minsText.text, out mins);
 
-		if (GamemasterManager.Instance.provZone != null && GamemasterManager.Instance.provZone.activeSelf && secs <= 60 && mins <= 60 && !(mins == 0 && secs == 0))
+		/*if (GamemasterManager.Instance.provZone != null && GamemasterManager.Instance.provZone.activeSelf && secs <= 60 && mins <= 60 && !(mins == 0 && secs == 0))
 		{			
 			button.interactable = true;					
 		}
 		else
 		{
 			button.interactable = false;
-		}	
+		}	*/
 
 		if(GamemasterManager.Instance.provZone == null || !GamemasterManager.Instance.provZone.activeSelf)
 		{
@@ -57,7 +60,10 @@ public class StartCountDownButton : MonoBehaviour
 
 	public void StartGameCountdown()
 	{
-        GamemasterManager.Instance.SendZoneToOtherPlayers();
-		GameManager.Instance.SetCountDown(mins * 60 + secs, "Game starts in", GameManager.Instance.StartGame);
-	}
+        /*GamemasterManager.Instance.SendZoneToOtherPlayers();
+		GameManager.Instance.SetCountDown(mins * 60 + secs, "Game starts in", GameManager.Instance.StartGame);*/
+        GameObject countDown = PhotonNetwork.Instantiate(countDownPrefab.name, Vector3.zero, Quaternion.identity);
+        countDown.GetComponent<CountDown>().Create(mins * 60 + secs, "Game starts in", GameManager.Instance.CloseZone);
+        countDown.GetComponent<CountDown>().StartCoundDown();
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using Photon.Pun;
 
 public class CloseZoneButton : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class CloseZoneButton : MonoBehaviour
 
     int secs, mins;
 
+    public GameObject countDownPrefab;
+
     private void Awake()
     {
         button = GetComponent<Button>();
@@ -22,8 +25,10 @@ public class CloseZoneButton : MonoBehaviour
     {
         if (GameManager.Instance.gameStarted)
         {
-            GameManager.Instance.SetCountDown(mins * 60 + secs, "Zone close in", GameManager.Instance.CloseZone);
-            GamemasterManager.Instance.CreateNewPosZone();
+            /* GameManager.Instance.SetCountDown(mins * 60 + secs, "Zone close in", GameManager.Instance.CloseZone);
+             GamemasterManager.Instance.CreateNewPosZone();*/
+            GameObject countDown = PhotonNetwork.Instantiate(countDownPrefab.name,Vector3.zero,Quaternion.identity);
+            countDown.GetComponent<CountDown>().Create(mins * 60 + secs, "Zone close in", GameManager.Instance.CloseZone);
         }
     }
 

@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         gameStarted = false;
     }
 
-	public void SetCountDown(int secs, string countDownText, UnityAction onCountDownFinished)
+	/*public void SetCountDown(int secs, string countDownText, UnityAction onCountDownFinished)
 	{
         if (!countdownActive)
         {
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
             InvokeRepeating("Countdown", 1f, 1f);
         }
     
-	}
+	}*/
 
 	public void StartGame()
 	{
@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	private void Countdown()
+	/*private void Countdown()
 	{
 		secsToGameStart--;
 		myPlayer.GetComponent<MessageSender>().SendCountdown(secsToGameStart, "ReceiveGameStartCountdown");
@@ -116,12 +116,7 @@ public class GameManager : MonoBehaviour
             onCountDownFinished();
             countdownActive = false;
 		}
-	}
-
-	public void OnCountDownReceived(int countDown)
-	{
-		secsToGameStart = countDown;
-	}
+	}*/
 
     public void CloseZone()
     {

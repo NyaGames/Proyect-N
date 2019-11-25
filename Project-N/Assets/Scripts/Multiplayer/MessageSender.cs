@@ -102,7 +102,7 @@ public class MessageSender : MonoBehaviour
 	[PunRPC]
 	public void ReceiveGameStartCountdown(int countDown)
 	{
-		GameManager.Instance.OnCountDownReceived(countDown);
+		//GameManager.Instance.OnCountDownReceived(countDown);
 	}
     #endregion
 

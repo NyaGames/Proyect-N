@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - SourceImage
   - TargetImage
+  - CountDownText
   layers:
   - Default
   - TransparentFX
