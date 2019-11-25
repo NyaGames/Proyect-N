@@ -74,21 +74,27 @@ public class MessageSender : MonoBehaviour
 	#endregion
 
 	#region countDown
-	public void SendCountdown(int countDown)
+	public void SendCountdown(int countDown, string callbackMethod)
 	{
-		photonView.RPC("ReceiveCountdown", RpcTarget.Others, countDown);
+		photonView.RPC(callbackMethod, RpcTarget.Others, countDown);
 	}
 
 	[PunRPC]
-	public void ReceiveCountDown(int countDown)
+	public void ReceiveGameStartCountdown(int countDown)
 	{
 		GameManager.Instance.OnCountDownReceived(countDown);
 	}
-	#endregion
+
+    [PunRPC]
+    public void ReceiveZoneClosingCountdown(int countDown)
+    {
+       
+    }
+    #endregion
 
 
 
-	public void DestroyPlayer(int id)
+    public void DestroyPlayer(int id)
     {
         foreach(GameObject p in GamemasterManager.Instance.playersViewsList)
         {

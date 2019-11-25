@@ -41,5 +41,7 @@ MonoBehaviour:
   - NewObjectReceived
   - ReceiveImageFromPlayer
   - ReceiveCountDown
+  - ReceiveGameStartCountdown
+  - ReceiveZoneClosingCountdown
   DisableAutoOpenWizard: 1
   ShowSettings: 1
