@@ -9,6 +9,9 @@ public class PhotosPanelGUIController : MonoBehaviour
 	[SerializeField] private GameObject photoConfirmationPanel;	
 	[SerializeField] private GameObject usersPanel;
 
+    [SerializeField] private GameObject killedPanel;
+    [SerializeField] private GameObject killConfirmedPanel;
+
 	private void Awake()
 	{
 		if (!Instance)
@@ -45,4 +48,15 @@ public class PhotosPanelGUIController : MonoBehaviour
 		
 
 	}
+
+    public void PlayerKilled(byte[] image)
+    {
+        killedPanel.SetActive(true);
+        killedPanel.GetComponent<SetPhotoReceivedInImage>().SetImage(image);
+    }
+
+    public void KillConfirmed()
+    {
+        killConfirmedPanel.SetActive(true);
+    }
 }
