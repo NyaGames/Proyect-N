@@ -55,6 +55,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         roomOptions.IsVisible = false; //FALSE = Hace la sala privada
         PhotonNetwork.CreateRoom(roomName, roomOptions, null);
         Debug.Log("Sala creada: " + roomName);
+        PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
     }
 
     public override void OnCreatedRoom()

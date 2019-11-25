@@ -15,8 +15,6 @@ namespace Photon.Pun
         [SerializeField] private MonoBehaviour[] playerControlScripts;
 
         public PhotonView photonViewTransform;
-        public PhotonView photonViewInfo;
-        
         private Vector3 actualPos;
 
         public bool isGameMaster;

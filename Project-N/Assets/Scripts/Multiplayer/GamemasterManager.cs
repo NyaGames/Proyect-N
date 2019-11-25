@@ -29,7 +29,7 @@ public class GamemasterManager : MonoBehaviour
 	Vector3 lasPositionTapped = new Vector3(0, 0, 0);
     Vector3 zoneCenter = new Vector3(0, 0, 0);
 
-    public GameObject[] playersViewsList;
+    [HideInInspector] public GameObject[] playersViewsList;
 
     private void Awake()
     {
@@ -45,7 +45,20 @@ public class GamemasterManager : MonoBehaviour
 
     public void Start()
     {
-        playersViewsList = GameObject.FindGameObjectsWithTag("Player");
+       
+    }
+
+    public void Update()
+    {
+        if(playersViewsList.Length != PhotonNetwork.CurrentRoom.PlayerCount)
+        {
+            playersViewsList = GameObject.FindGameObjectsWithTag("Player");
+        }
+        else
+        {
+
+        }
+
     }
 
     // Update is called once per frame

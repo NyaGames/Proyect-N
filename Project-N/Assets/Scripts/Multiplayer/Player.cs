@@ -27,8 +27,15 @@ public class Player : MonoBehaviour
 
             if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["isGameMaster"]) //Si el cliente NO es game master, desactiva a los demás
             {
-                //gameObject.SetActive(false);
-                Destroy(gameObject);
+               // if (isGameMaster)
+                //{
+                 //   gameObject.SetActive(false);
+               // }
+               // else
+               // {
+                    Destroy(gameObject);
+               // }
+                
             }
 
         }
