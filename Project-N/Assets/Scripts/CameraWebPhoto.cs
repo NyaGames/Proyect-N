@@ -54,6 +54,7 @@ public class CameraWebPhoto : MonoBehaviour
         }
 
         webCamTexture.Play();
+        
         background.texture = webCamTexture;
 
         camAvailable = true;
@@ -88,7 +89,7 @@ public class CameraWebPhoto : MonoBehaviour
        
     }
     
-    /*public void TakePhoto()
+    public void TakePhoto()
     {
        
         Debug.Log("Photo!!");
@@ -116,14 +117,14 @@ public class CameraWebPhoto : MonoBehaviour
             {
                 if ((i > 96) && (i < 224) && (j > 56) && (j < 184))
                 {
-                    if (i < 96 + aux2)
+                    /*if (i < 96 + aux2)
                     {
                         newData2[aux] = data2[(j * frontCam.width) + (i+127)];       
                     }
                     else
-                    {
+                    {*/
                         newData2[aux] = data2[(j * frontCam.width) + i];     
-                    }
+                    //}
                     aux++;   
                 }
             }
@@ -166,12 +167,13 @@ public class CameraWebPhoto : MonoBehaviour
 
         Debug.Log(newData[8191]);
         Texture2D tex = new Texture2D(128, 128);
+
         tex.SetPixels32(newData);
         tex.Apply();
         photoPlane.texture = tex;
         
 
-    }*/
+    }
     public void TakePhotoGuarra()
     {
 
@@ -185,7 +187,16 @@ public class CameraWebPhoto : MonoBehaviour
         float newW = 128 / w;
         float newH = 128 / h;
 
-        photoPlane.texture = background.texture;
+        //Texture2D tex = (Texture2D) background.texture;
+        
+        Texture2D tex = new Texture2D(frontCam.width, frontCam.height, TextureFormat.RGBA32, false);
+        tex.SetPixels32(frontCam.GetPixels32());
+        //tex = (Texture2D) background.texture;
+       
+        photoPlane.texture = tex;
+
+        //tex.GetPixels()
+        photoPlane.texture = tex;
         photoPlane.uvRect = new Rect(x, y, newW, newH);
      }
 
