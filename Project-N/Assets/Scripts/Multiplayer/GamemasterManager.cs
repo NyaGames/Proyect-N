@@ -15,10 +15,12 @@ public class GamemasterManager : MonoBehaviour
 	public int numDrops = 3;
 
     [HideInInspector]public GameObject staticZone;
+    [HideInInspector]public GameObject newZonePosition;
     [HideInInspector]public GameObject provZone;
 
 	[SerializeField] private Material provZoneMat;
 	[SerializeField] private Material staticZoneMat;
+	[SerializeField] private Material newZonePositionMat;
 
 	private List<GameObject> dropList = new List<GameObject>();
 
@@ -29,7 +31,9 @@ public class GamemasterManager : MonoBehaviour
 	Vector3 lasPositionTapped = new Vector3(0, 0, 0);
     Vector3 zoneCenter = new Vector3(0, 0, 0);
 
-    public GameObject[] playersViewsList;
+    [HideInInspector] public GameObject[] playersViewsList;
+
+    private bool provZoneCreated = false;
 
     private void Awake()
     {
@@ -45,7 +49,20 @@ public class GamemasterManager : MonoBehaviour
 
     public void Start()
     {
-        playersViewsList = GameObject.FindGameObjectsWithTag("Player");
+       
+    }
+
+    public void Update()
+    {
+        if(playersViewsList.Length != PhotonNetwork.CurrentRoom.PlayerCount)
+        {
+            playersViewsList = GameObject.FindGameObjectsWithTag("Player");
+        }
+        else
+        {
+
+        }
+
     }
 
     // Update is called once per frame
@@ -53,7 +70,7 @@ public class GamemasterManager : MonoBehaviour
     {
         if (ZoneManager.Instance.isEditingZone && PhotonNetwork.CurrentRoom != null) //Si no se ha creado la zona todavía y estoy dentro de una sala,puedo crearla
         {
-            CreateZone();
+            HandleZoneInput();
         }
 
 
@@ -65,52 +82,112 @@ public class GamemasterManager : MonoBehaviour
     } 
 
 	#region Zone
-    public void CreateZone()
+    public void HandleZoneInput()
     {
         if (Input.touchCount > 0)
         {
 			Touch touch = Input.GetTouch(0);
 
 			Vector2 posNormalized = touch.position / Screen.width;
-			if (posNormalized.x > 0.66f) return;
-            
-            float cameraDistanceToGround = getDistanceFromCameraToGround();
-            Vector3 touchInWorldCoord = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
-            switch (touch.phase)
+			if (posNormalized.x > 0.66f) return;         
+           
+            switch (Input.touchCount)
             {
-                // Record initial touch position.
-                case TouchPhase.Began:
-                    if (provZone == null)
+                case 1:
+                    if (!provZoneCreated)
                     {
-                        lasPositionTapped = touch.position;          
-						provZone = Instantiate(zonePrefab, touchInWorldCoord, Quaternion.identity);
-						provZone.GetComponentInChildren<MeshRenderer>().material = provZoneMat;
+                        CreateProvZone(touch);
+                    }
+                    else
+                    {
+                        MoveProvZone(touch);
                     }
                     break;
-
-                // Determine direction by comparing the current touch position with the initial one.
-                case TouchPhase.Moved:
-                    if (provZone != null)
-                    {
-                        float distanceFromCenterToTap = (zoneCenter - touchInWorldCoord).magnitude;
-						provZone.transform.localScale = new Vector3(distanceFromCenterToTap * 2, 5f, distanceFromCenterToTap * 2);
-                    }
-
-                    lasPositionTapped = touch.position;
-
+                case 2:
+                    ChangeProvZoneScale(Input.GetTouch(0), Input.GetTouch(1));
                     break;
-
-                // Report that a direction has been chosen when the finger is lifted.
-                case TouchPhase.Ended:
-                    if (provZone != null)
-                    {
-						provZone.GetComponent<Zone>().creatingObject = false;
-                    }
+                default:
                     break;
             }
-        }
-        else //Si no se detecta bien el input del dedo
+        
+        }    
+
+    }
+
+    private void CreateProvZone(Touch touch)
+    {
+        float cameraDistanceToGround = getDistanceFromCameraToGround();
+        Vector3 touchInWorldCoord = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
+
+
+        switch (touch.phase)
         {
+            // Record initial touch position.
+            case TouchPhase.Began:
+                if (provZone == null || provZone.activeSelf == false)
+                {
+                    if (provZone == null)
+                    {                      
+                        provZone = Instantiate(zonePrefab, touchInWorldCoord, Quaternion.identity);
+                        provZone.GetComponentInChildren<MeshRenderer>().material = provZoneMat;
+                    }
+                    else
+                    {
+                        provZone.SetActive(true);
+                        provZone.transform.localScale = Vector3.one * 5;
+                        provZone.transform.position = touchInWorldCoord;
+                    }
+                }
+                break;
+
+            // Determine direction by comparing the current touch position with the initial one.
+            case TouchPhase.Moved:
+                if (provZone.activeSelf == true)
+                {
+                    float distanceFromCenterToTap = (Vector3.zero - touchInWorldCoord).magnitude;
+                    provZone.transform.localScale = new Vector3(distanceFromCenterToTap * 2, 5f, distanceFromCenterToTap * 2);
+                }           
+
+                break;
+
+            // Report that a direction has been chosen when the finger is lifted.
+            case TouchPhase.Ended:
+                if (provZone.activeSelf == true)
+                {
+                    provZone.GetComponent<Zone>().creatingObject = false;
+                }
+             
+                provZoneCreated = true;
+                break;
+        }
+    }
+
+    private void MoveProvZone(Touch touch)
+    {
+        if (touch.phase == TouchPhase.Moved)
+        {
+            float cameraDistanceToGround = getDistanceFromCameraToGround();
+            Vector3 touchInWorldCoord = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
+
+            provZone.transform.position = new Vector3(touchInWorldCoord.x, provZone.transform.position.y, touchInWorldCoord.z);
+        }
+    }
+
+    private void ChangeProvZoneScale(Touch firstTouch, Touch secondTouch)
+    {
+        Vector2 firstTouchPrevPos = firstTouch.position - firstTouch.deltaPosition;
+        Vector2 secondTouchPrevPos = secondTouch.position - secondTouch.deltaPosition;
+
+        float zoomSpeed = 1f;
+
+        if (firstTouch.position.x / Screen.width < 0.66 && secondTouch.position.x / Screen.width < 0.66)
+        {
+            float prevMagnitude = (firstTouchPrevPos - secondTouchPrevPos).magnitude;
+            float currentMagnitude = (firstTouch.position - secondTouch.position).magnitude;
+
+            float scaleDelta = (currentMagnitude - prevMagnitude) * zoomSpeed;
+
+            provZone.transform.localScale = new Vector3(provZone.transform.localScale.x + scaleDelta, provZone.transform.localScale.y, provZone.transform.localScale.z + scaleDelta);
 
         }
 
@@ -118,55 +195,53 @@ public class GamemasterManager : MonoBehaviour
 
     public void SendZoneToOtherPlayers()
     {
-        if (provZone != null) //Solo se envía una zona si se ha creado previamente en local. Si no se ha editado nada, no se puede mandar nada
+        if (provZone != null || provZone.activeSelf == true) //Solo se envía una zona si se ha creado previamente en local. Si no se ha editado nada, no se puede mandar nada
         {
             if (staticZone == null) //Si no hay ninguna zona todavia, se guarda la zona editada en actualZone
             {
                 staticZone = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
                 staticZone.transform.localScale = provZone.transform.localScale;
 				staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
-				Destroy(provZone);
+                HideProvZone();
             }
             else //Si ya habia una zona en el mapa, se guarda la zona editada en nextZone
             {
                 //Vector3 geoPosition = editableZone.GetComponent<ZonePositionWithLatLon>().GetGeoPosition();
                 provZone = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
                 provZone.transform.localScale = provZone.transform.localScale;
-            }
-            Destroy(provZone);
+                provZone.GetComponentInChildren<MeshRenderer>().material = provZoneMat;
+            }      
         }
 
     }
 
-    public void enableCreateNewRadious()
+    public void CreateNewPosZone()
     {
-        if (provZone != null)
+        if (newZonePosition == null)
         {
-            if (provZone.GetComponent<Zone>().creatingNewRadious)
-            {
-                provZone.GetComponent<Zone>().creatingNewRadious = false;
-            }
-            else
-            {
-                provZone.GetComponent<Zone>().creatingNewRadious = true;
-            }
+            newZonePosition = Instantiate(zonePrefab);
+            newZonePosition.GetComponentInChildren<MeshRenderer>().material = newZonePositionMat;
         }
 
+        newZonePosition.transform.position = provZone.transform.position;
+        newZonePosition.transform.localScale = provZone.transform.localScale;
+
+        HideProvZone();
     }
 
     public void StartClosingZone()
-    {
+    {   
         StartCoroutine(CloseActualZone());
     }
 
     public IEnumerator CloseActualZone()
     {
-        float timeToClose = 1.0f;
+        float timeToClose = 10.0f;
         float t = 0;
         Vector3 InitialScale = staticZone.transform.localScale;
-        Vector3 FinalScale = provZone.transform.localScale;
+        Vector3 FinalScale = newZonePosition.transform.localScale;
         Vector3 Initialpos = staticZone.transform.position;
-        Vector3 Finalpos = provZone.transform.position;
+        Vector3 Finalpos = newZonePosition.transform.position;
 
         while (t <= 1)
         {
@@ -180,6 +255,8 @@ public class GamemasterManager : MonoBehaviour
         PhotonNetwork.Destroy(staticZone);
         staticZone = PhotonNetwork.Instantiate(zonePrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
         staticZone.transform.localScale = FinalScale;
+        staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
+        newZonePosition.SetActive(false);
         PhotonNetwork.Destroy(provZone);
 
     }
@@ -188,14 +265,15 @@ public class GamemasterManager : MonoBehaviour
     {
         if(provZone != null)
         {
-            Destroy(provZone);           
+            HideProvZone();       
         }
     }
 
-	public void DestroyProvZone()
+	public void HideProvZone()
 	{
-		provZone.Destroy();
-	}
+        provZone.SetActive(false);
+        provZoneCreated = false;
+    }
 	#endregion
 
 	#region Drops
@@ -278,8 +356,6 @@ public class GamemasterManager : MonoBehaviour
 
 			}
 		}
-	}
-
-
+	}    
 
 }

@@ -266,7 +266,6 @@ MonoBehaviour:
   playerControlScripts:
   - {fileID: 3586165811260207714}
   photonViewTransform: {fileID: 3104748707656188120}
-  photonViewInfo: {fileID: 0}
   isGameMaster: 0
 --- !u!114 &3104748707656188120
 MonoBehaviour:

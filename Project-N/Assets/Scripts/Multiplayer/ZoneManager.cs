@@ -28,7 +28,7 @@ public class ZoneManager : MonoBehaviour
 		{
 			isEditingZone = false;
 			zoneMod.SetActive(false);
-			GamemasterManager.Instance.DestroyProvZone();
+			GamemasterManager.Instance.HideProvZone();
 		}
 		else
 		{

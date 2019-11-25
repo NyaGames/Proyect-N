@@ -49,12 +49,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     public void CreateRoom()
     {
-        string roomName = "23";//GenerateUniqueRoomID();
+        string roomName = "24";//GenerateUniqueRoomID();
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = (byte)screenSceneGUIController.maxPlayers.GetComponentInChildren<Slider>().value;
         roomOptions.IsVisible = false; //FALSE = Hace la sala privada
         PhotonNetwork.CreateRoom(roomName, roomOptions, null);
         Debug.Log("Sala creada: " + roomName);
+        PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
     }
 
     public override void OnCreatedRoom()
@@ -64,7 +65,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
-        string roomPassword = "23";//roompasswordInputText.text;
+        string roomPassword = "24";//roompasswordInputText.text;
 
         if (roomPassword != "")
         {

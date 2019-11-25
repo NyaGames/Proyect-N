@@ -14,12 +14,7 @@ public class CameraWebPhoto : MonoBehaviour
 
    
     public RawImage background;
-    public RawImage photoPlane;
-    //public AspectRatioFitter fit;
-
-    //public GameObject plano2;
-    //public Camera camera;
-    //private float distance = 0.0f;
+    public RawImage snapTakenImage;
 
 
     void Start()
@@ -176,10 +171,8 @@ public class CameraWebPhoto : MonoBehaviour
     }
     public void TakePhotoGuarra()
     {
-
-        Canvas canvas = FindObjectOfType<Canvas>();
-        float h = canvas.GetComponent<RectTransform>().rect.height;
-        float w = canvas.GetComponent<RectTransform>().rect.width;
+        float h = snapTakenImage.texture.height;
+        float w = snapTakenImage.texture.width;
         
         float x = ((w-128)/2)/w;
         float y = ((h - 128) / 2) / h;
