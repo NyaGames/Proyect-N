@@ -110,4 +110,6 @@ public class GmCameraControl : CameraControl
 
 		swivel.Rotate(0, 0, -angularDiff * rotationSpeed * Time.deltaTime);
 	}
+
+    
 }
