@@ -49,7 +49,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     public void CreateRoom()
     {
-        string roomName = "25";//GenerateUniqueRoomID();
+        string roomName = "27";//GenerateUniqueRoomID();
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = (byte)screenSceneGUIController.maxPlayers.GetComponentInChildren<Slider>().value;
         roomOptions.IsVisible = false; //FALSE = Hace la sala privada
@@ -65,7 +65,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
-        string roomPassword = "25";//roompasswordInputText.text;
+        string roomPassword = "27";//roompasswordInputText.text;
 
         if (roomPassword != "")
         {
