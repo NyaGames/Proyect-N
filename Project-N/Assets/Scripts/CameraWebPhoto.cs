@@ -150,8 +150,9 @@ public class CameraWebPhoto : MonoBehaviour
                 tamaño = tamaño / 2;
             }
         }
-            
-  
+        Debug.Log("Tamaño mayor que imagen:" + tamaño);
+
+
         float x = ((w-tamaño)/2)/w;
         float y = ((h - tamaño) / 2) / h;
 
