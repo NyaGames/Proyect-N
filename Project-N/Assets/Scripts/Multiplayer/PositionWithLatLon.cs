@@ -32,7 +32,10 @@ public class PositionWithLatLon : MonoBehaviour, IPunObservable
         if (photonView.IsMine)//SI soy el gm, calculo la posición del drop
         {
             var map = LocationProviderFactory.Instance.mapManager;
-            latLonCurrent = CalculateDropLatLon(map.CenterLatitudeLongitude) + map.CenterLatitudeLongitude;
+            latLonCurrent = CalculateDropLatLon();
+            Debug.Log("+Center latituleLongitude" + latLonCurrent.ToString());
+            Debug.Log("Player latlon" + GameManager.Instance.myPlayer.GetComponent<PlayerPositionWithLatLon>().latLon.ToString());
+
         }
     }
 
@@ -64,10 +67,11 @@ public class PositionWithLatLon : MonoBehaviour, IPunObservable
         }
     }
 
-    public Vector2d CalculateDropLatLon(Vector2d center)
+    public Vector2d CalculateDropLatLon()
     {
         var map = LocationProviderFactory.Instance.mapManager;
         Vector2d latlon = transform.GetGeoPosition(map.CenterMercator, map.WorldRelativeScale);
+
         return latlon;
     }
 
