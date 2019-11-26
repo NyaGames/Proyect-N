@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1445,6 +1445,21 @@ PrefabInstance:
       propertyPath: _options.extentOptions.defaultExtents.cameraBoundsOptions.camera
       value: 
       objectReference: {fileID: 1081047285}
+    - target: {fileID: 114105500206378512, guid: 35ce2bb4caba9434db5e656796b632b1,
+        type: 3}
+      propertyPath: _previewOptions.isPreviewEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114105500206378512, guid: 35ce2bb4caba9434db5e656796b632b1,
+        type: 3}
+      propertyPath: _tileProvider
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114105500206378512, guid: 35ce2bb4caba9434db5e656796b632b1,
+        type: 3}
+      propertyPath: _imagery._layerProperty.sourceOptions.layerSource.Id
+      value: mapbox://styles/nyagames/ck3g951wj09ae1cml1wx0x8q4
+      objectReference: {fileID: 0}
     - target: {fileID: 1065618987163410, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5186,7 +5201,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 43
+  orthographic size: 45
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -10104,11 +10119,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047152458}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 633e777a9b23a8845a9d70e17fae8974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingStick: {x: 0, y: 0, z: -20}
+  startingSwivel: {x: 90, y: 0, z: 0}
   moveSpeed: {x: 20, y: 120}
   zoomSpeed: 0.5
   zoomClamping: {x: 10, y: 100}
@@ -10135,11 +10152,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047152458}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b0a8cea8fab0b942afca34ce7299315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingStick: {x: 0, y: 0, z: -20}
+  startingSwivel: {x: 90, y: 0, z: 0}
+  smoothFactor: 0.5
+  rotationSpeed: 10
+  zoomSpeed: 10
+  swivelZoom: {x: 0, y: 0}
+  stickZoom: {x: 0, y: 0}
+  lockObjective: {fileID: 0}
 --- !u!1 &2141045649
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FreeCameraMovement : CameraMovement
 {
+	[Header("Parameters")]
     [SerializeField] private Vector2 moveSpeed;
     [SerializeField] private float zoomSpeed = 0.5f;
     [SerializeField] private Vector2 zoomClamping;
@@ -11,10 +12,9 @@ public class FreeCameraMovement : CameraMovement
 
     private bool isFollowingPlayer = false;
 
-    private void Start()
+    private void OnEnable()
     {
-        zoom = Mathf.InverseLerp(zoomClamping.y, zoomClamping.x, m_camera.orthographicSize);
-        stick.transform.position = new Vector3(stick.transform.position.x, m_camera.orthographicSize, stick.transform.position.z);
+		Initialize();        
     }
 
     protected override void HandleInput()
@@ -118,4 +118,16 @@ public class FreeCameraMovement : CameraMovement
     {
 
     }
+
+	protected override void Initialize()
+	{
+		m_camera.orthographic = true;
+		m_camera.orthographicSize = 45f;
+
+		swivel.localRotation = Quaternion.Euler(startingSwivel);
+		stick.localPosition = startingStick;
+
+		zoom = Mathf.InverseLerp(zoomClamping.y, zoomClamping.x, m_camera.orthographicSize);
+		stick.transform.position = new Vector3(stick.transform.position.x, m_camera.orthographicSize, stick.transform.position.z);
+	}
 }
