@@ -16,6 +16,8 @@ public class CameraWebPhoto : MonoBehaviour
     public RawImage background;
     public RawImage snapTakenImage;
 
+    public int tamaño = 512;
+
 
     void Start()
     {
@@ -84,7 +86,7 @@ public class CameraWebPhoto : MonoBehaviour
        
     }
     
-    public void TakePhoto()
+    /*public void TakePhoto()
     {
        
         
@@ -123,30 +125,48 @@ public class CameraWebPhoto : MonoBehaviour
         snapTakenImage.texture = tex;
         
 
-    }
+    }*/
 
-    /*public void TakePhotoGuarra()
+    public void TakePhotoGuarra()
     {
-        float h = snapTakenImage.texture.height;
-        float w = snapTakenImage.texture.width;
+        Canvas canvas = null;
+        foreach (var can in FindObjectsOfType<Canvas>())
+        {
+            if(can.name == "GUI")
+            {
+                canvas = can;
+            }
+        }
         
-        float x = ((w-128)/2)/w;
-        float y = ((h - 128) / 2) / h;
+        float h = canvas.GetComponent<RectTransform>().rect.height;
+        float w = canvas.GetComponent<RectTransform>().rect.width;
 
-        float newW = 128 / w;
-        float newH = 128 / h;
+        if (tamaño > w || tamaño > h)
+        {
+            Debug.LogError("Tamaño mayor que imagen");
+            Debug.Log("Tamaño mayor que imagen");
+            while (tamaño > w || tamaño > h)
+            {
+                tamaño = tamaño / 2;
+            }
+        }
+        Debug.Log("Tamaño mayor que imagen:" + tamaño);
 
-        //Texture2D tex = (Texture2D) background.texture;
+
+        float x = ((w-tamaño)/2)/w;
+        float y = ((h - tamaño) / 2) / h;
+
+        float newW = tamaño / w;
+        float newH = tamaño / h;
+
         
         Texture2D tex = new Texture2D(frontCam.width, frontCam.height, TextureFormat.RGBA32, false);
         tex.SetPixels32(frontCam.GetPixels32());
-        //tex = (Texture2D) background.texture;
-       
-        photoPlane.texture = tex;
+        tex.Apply();
 
-        //tex.GetPixels()
-        photoPlane.texture = tex;
-        photoPlane.uvRect = new Rect(x, y, newW, newH);
-     }*/
+        snapTakenImage.texture = tex;
+        
+        snapTakenImage.uvRect = new Rect(x, y, newW, newH);
+     }
 
 }

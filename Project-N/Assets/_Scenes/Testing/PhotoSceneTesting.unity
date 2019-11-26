@@ -413,7 +413,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 1495171486}
-  photoPlane: {fileID: 1202804301}
+  snapTakenImage: {fileID: 1202804301}
+  "tama\xF1o": 128
 --- !u!1 &1202804298
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +579,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 534669907}
-        m_MethodName: TakePhoto
+        m_MethodName: TakePhotoGuarra
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
