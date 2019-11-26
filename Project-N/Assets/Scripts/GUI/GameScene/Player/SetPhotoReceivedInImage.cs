@@ -7,8 +7,13 @@ public class SetPhotoReceivedInImage : MonoBehaviour
 {
     [SerializeField] private RawImage imageToBeShown;
 
-    public void SetImage(Texture2D killCam)
+    public void Start()
     {
-        imageToBeShown.texture = killCam;
+        SetImage();
+    }
+
+    public void SetImage()
+    {
+        imageToBeShown.texture = KillCamImageInfo.killcamImage;
     }
 }

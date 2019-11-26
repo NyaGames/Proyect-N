@@ -5,10 +5,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(PhotonView))]
-public class MessageSender : MonoBehaviour
+public class MessageSender : MonoBehaviourPunCallbacks
 {
     PhotonView photonView;
     Player myPlayer;
@@ -106,7 +107,7 @@ public class MessageSender : MonoBehaviour
             {
                 if (GamemasterManager.Instance.playersViewsList[i].GetPhotonView().CreatorActorNr == playerToKill)
                 {
-                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All,ImageManager.Instance.imagesList[0]);
+                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All, ImageManager.Instance.imagesList[0]);
                 }
                 if(GamemasterManager.Instance.playersViewsList[i].GetPhotonView().CreatorActorNr == sender)
                 {
@@ -132,20 +133,28 @@ public class MessageSender : MonoBehaviour
     [PunRPC]
     public void KillYourself(byte [] image)
     {
-        //GameManager.Instance.actorNumberText.text = "Me llego la kill"; 
         Debug.Log("Matao");
         if (photonView.IsMine && !myPlayer.isGameMaster)
         {
             PhotonNetwork.Destroy(gameObject);
-            PhotosPanelGUIController.Instance.PlayerKilled(getUncompressedTextureFromBytes(image));
+            PhotonNetwork.LeaveRoom();
+            SceneManager.LoadScene("DeathScene");
+
+            //PhotosPanelGUIController.Instance.PlayerKilled(getUncompressedTextureFromBytes(image));
+            KillCamImageInfo.killcamImage = getUncompressedTextureFromBytes(image);
         }
         else
         {
             Debug.Log("No es mio,creado por: " + photonView.CreatorActorNr + " y lo controla:" + photonView.ControllerActorNr);
         }
         
+    }
+
+    public override void OnLeftRoom()
+    {
         
     }
+
     [PunRPC]
     public void KillReceived(int playerToKill,bool killed)
     {

@@ -54,7 +54,7 @@ public class GamemasterManager : MonoBehaviour
 
     public void Update()
     {
-        if(playersViewsList.Length != PhotonNetwork.CurrentRoom.PlayerCount)
+        if(PhotonNetwork.CurrentRoom != null && playersViewsList.Length != PhotonNetwork.CurrentRoom.PlayerCount )
         {
             playersViewsList = GameObject.FindGameObjectsWithTag("Player");
         }

@@ -73,10 +73,6 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-        if(myPlayer != null)
-        {
-            actorNumberText.text = "Actor number: " + PhotonNetwork.LocalPlayer.ActorNumber + "/ id:" + myPlayer.GetComponent<Player>().id;
-        }
 
         if (secsToGameStart != 0)
 		{
