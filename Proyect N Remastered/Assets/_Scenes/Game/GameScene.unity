@@ -146,7 +146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.5000019}
+  m_AnchoredPosition: {x: 0, y: -0.5000038}
   m_SizeDelta: {x: -20, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1717465
@@ -2017,7 +2017,7 @@ Rigidbody:
   m_GameObject: {fileID: 468789723}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 5
+  m_Drag: 6
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -9259,7 +9259,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.5000019}
+  m_AnchoredPosition: {x: 0, y: -0.5000038}
   m_SizeDelta: {x: -20, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1757448380
@@ -9465,7 +9465,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.5000019}
+  m_AnchoredPosition: {x: 0, y: -0.5000038}
   m_SizeDelta: {x: -20, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1792283048
@@ -10478,9 +10478,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingStick: {x: 0, y: 0, z: -20}
   startingSwivel: {x: 90, y: 0, z: 0}
-  moveSpeed: {x: 20, y: 120}
+  moveSpeed: {x: 30, y: 100}
   zoomSpeed: 0.5
-  zoomClamping: {x: 10, y: 100}
+  zoomClamping: {x: 20, y: 100}
   rotationSpeed: 60
 --- !u!4 &2047152460
 Transform:
@@ -10504,7 +10504,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047152458}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b0a8cea8fab0b942afca34ce7299315, type: 3}
   m_Name: 

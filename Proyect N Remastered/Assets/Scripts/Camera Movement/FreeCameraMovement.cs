@@ -131,7 +131,7 @@ public class FreeCameraMovement : CameraMovement
 		swivel.localRotation = Quaternion.Euler(startingSwivel);
 		stick.localPosition = startingStick;
 
-		zoom = Mathf.InverseLerp(zoomClamping.y, zoomClamping.x, m_camera.orthographicSize);
+		zoom = Mathf.InverseLerp(zoomClamping.x, zoomClamping.y, m_camera.orthographicSize);
 		stick.transform.position = new Vector3(stick.transform.position.x, m_camera.orthographicSize, stick.transform.position.z);
 	}
 
