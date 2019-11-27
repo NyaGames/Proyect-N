@@ -68,7 +68,7 @@ public class GamemasterManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (ZoneManager.Instance.isEditingZone && PhotonNetwork.CurrentRoom != null) //Si no se ha creado la zona todavía y estoy dentro de una sala,puedo crearla
+        if (ZoneManager.Instance.isEditingZone ) //Si no se ha creado la zona todavía y estoy dentro de una sala,puedo crearla
         {
             HandleZoneInput();
         }
@@ -207,9 +207,10 @@ public class GamemasterManager : MonoBehaviour
             else //Si ya habia una zona en el mapa, se guarda la zona editada en nextZone
             {
                 //Vector3 geoPosition = editableZone.GetComponent<ZonePositionWithLatLon>().GetGeoPosition();
-                provZone = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
-                provZone.transform.localScale = provZone.transform.localScale;
-                provZone.GetComponentInChildren<MeshRenderer>().material = provZoneMat;
+                newZonePosition = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
+                newZonePosition.transform.localScale = provZone.transform.localScale;
+                newZonePosition.GetComponentInChildren<MeshRenderer>().material = newZonePositionMat;
+                provZoneCreated = false;
             }      
         }
 
@@ -236,7 +237,7 @@ public class GamemasterManager : MonoBehaviour
 
     public IEnumerator CloseActualZone()
     {
-        float timeToClose = 10.0f;
+        float timeToClose = 2.0f;
         float t = 0;
         Vector3 InitialScale = staticZone.transform.localScale;
         Vector3 FinalScale = newZonePosition.transform.localScale;
@@ -256,7 +257,9 @@ public class GamemasterManager : MonoBehaviour
         staticZone = PhotonNetwork.Instantiate(zonePrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
         staticZone.transform.localScale = FinalScale;
         staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
-        newZonePosition.SetActive(false);
+
+        //newZonePosition.SetActive(false);
+        Destroy(newZonePosition);
         PhotonNetwork.Destroy(provZone);
 
     }
@@ -271,7 +274,8 @@ public class GamemasterManager : MonoBehaviour
 
 	public void HideProvZone()
 	{
-        provZone.SetActive(false);
+        //provZone.SetActive(false);
+        Destroy(provZone);
         provZoneCreated = false;
     }
 	#endregion

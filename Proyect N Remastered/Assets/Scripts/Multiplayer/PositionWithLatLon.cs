@@ -33,8 +33,6 @@ public class PositionWithLatLon : MonoBehaviour, IPunObservable
         {
             var map = LocationProviderFactory.Instance.mapManager;
             latLonCurrent = CalculateDropLatLon();
-            Debug.Log("+Center latituleLongitude" + latLonCurrent.ToString());
-            Debug.Log("Player latlon" + GameManager.Instance.myPlayer.GetComponent<PlayerPositionWithLatLon>().latLon.ToString());
 
         }
     }
