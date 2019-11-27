@@ -42,17 +42,13 @@ public class Player : MonoBehaviour
         else //Si soy yo,cojo los datos de mi escena
         {
             isGameMaster = PersistentData.isGM;
-            id = PhotonNetwork.LocalPlayer.ActorNumber;
-            if (!isGameMaster) //Si no soy gameMaster,desactivo los controles para crear la zona
-            {
-                
-            }
-        }
+            id = PhotonNetwork.LocalPlayer.ActorNumber;          
+			InitCamera();
+		}
 
         //Visual
         Color randomColor = new Color(Random.Range(0f,1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-        this.GetComponent<Renderer>().material.color = randomColor;
-        
+        this.GetComponent<Renderer>().material.color = randomColor;			           
     }
 
     public Photon.Realtime.Player getPlayerReference(int actorNumber){
@@ -129,5 +125,17 @@ public class Player : MonoBehaviour
         isGameMaster = GameObject.Find("GameMasterToggle").GetComponent<Toggle>().isOn;
         Debug.Log("Gamemaster = " + isGameMaster);
     }
+
+	private void InitCamera()
+	{
+		if (isGameMaster)
+		{
+			Camera.main.GetComponentInParent<CameraController>().UnlockCamera();
+		}
+		else
+		{
+			Camera.main.GetComponentInParent<CameraController>().LockCameraToPlayer(transform);
+		}
+	}
 
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -119,15 +120,36 @@ public class FreeCameraMovement : CameraMovement
 
     }
 
-	protected override void Initialize()
+	public override void Initialize()
 	{
 		m_camera.orthographic = true;
-		m_camera.orthographicSize = 45f;
+
+		float halfFrustumHeight = (m_camera.transform.position.y + 15) * Mathf.Tan(m_camera.fieldOfView * 0.5f * Mathf.Deg2Rad);
+		m_camera.orthographicSize = halfFrustumHeight;
+	
 
 		swivel.localRotation = Quaternion.Euler(startingSwivel);
 		stick.localPosition = startingStick;
 
 		zoom = Mathf.InverseLerp(zoomClamping.y, zoomClamping.x, m_camera.orthographicSize);
 		stick.transform.position = new Vector3(stick.transform.position.x, m_camera.orthographicSize, stick.transform.position.z);
+	}
+
+	public override IEnumerator DampCamera(Action onCoroutineFinished)
+	{
+		Vector3 _targetPosition = new Vector3(0, 0, -100);
+		Vector3 _targetRotation = new Vector3(90, 0, 0);
+
+		Vector3 _movementVelocity = Vector3.zero;
+		Vector3 _rotationVelocity = Vector3.zero;
+
+		while ((stick.localPosition - _targetPosition).magnitude > 1f)
+		{
+			stick.localPosition = Vector3.SmoothDamp(stick.localPosition, _targetPosition, ref _movementVelocity, smoothTime);
+			swivel.localRotation = Quaternion.Euler(Vector3.SmoothDamp(swivel.localRotation.eulerAngles, _targetRotation, ref _rotationVelocity, smoothTime));
+
+			yield return new WaitForEndOfFrame();
+		}
+		onCoroutineFinished();
 	}
 }

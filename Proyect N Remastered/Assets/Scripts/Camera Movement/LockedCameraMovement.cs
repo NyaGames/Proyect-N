@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,17 +15,11 @@ public class LockedCameraMovement : CameraMovement
     [Header("References")]
     [SerializeField] private Transform lockObjective;
 
-    private void OnEnable()
-    {        
-        Initialize();
-    }
-
-    private void FixedUpdate()
-    {
-        Vector3 newPos = lockObjective.position; 
-   
+     private void FixedUpdate()
+     {
+        Vector3 newPos = lockObjective.position;    
         transform.position = Vector3.Slerp(transform.position, newPos, smoothFactor);
-    }
+     }
 
     protected override void HandleInput()
     {
@@ -102,11 +97,37 @@ public class LockedCameraMovement : CameraMovement
 		stick.localPosition = new Vector3(0f, stick.localPosition.y, distance);
 	}
 
-    protected override void Initialize()
+    public override void Initialize()
     {
 		m_camera.orthographic = false;
-		m_camera.fieldOfView = 60;
-		swivel.localRotation = Quaternion.Euler(startingSwivel);
-		stick.localPosition = startingStick;
+		m_camera.fieldOfView = 60;		
     }
+
+	public void AssignObjective(Transform obj)
+	{
+		lockObjective = obj;
+
+		stick.localPosition = startingStick;
+		swivel.localRotation = Quaternion.Euler(startingSwivel);
+	}
+
+	public override IEnumerator DampCamera(Action onCoroutineFinished)
+	{	
+
+		Vector3 _targetPosition = startingStick;
+		Vector3 _targetRotation = startingSwivel;
+
+		Vector3 _movementVelocity = Vector3.zero;
+		Vector3 _rotationVelocity = Vector3.zero;
+
+		while ((stick.localPosition - _targetPosition).magnitude > 1f)
+		{
+			stick.localPosition = Vector3.SmoothDamp(stick.localPosition, _targetPosition, ref _movementVelocity, smoothTime);
+			swivel.localRotation = Quaternion.Euler(Vector3.SmoothDamp(swivel.localRotation.eulerAngles, _targetRotation, ref _rotationVelocity, smoothTime));
+
+			yield return new WaitForEndOfFrame();
+		}
+
+		onCoroutineFinished();
+	}
 }
