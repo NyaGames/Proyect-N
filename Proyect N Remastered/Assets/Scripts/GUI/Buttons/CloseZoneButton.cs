@@ -25,7 +25,7 @@ public class CloseZoneButton : MonoBehaviour
     {
         if (GameManager.Instance.gameStarted)
         {
-            GamemasterManager.Instance.CreateNewPosZone();
+            GamemasterManager.Instance.SendZoneToOtherPlayers();
             GameObject countDown = PhotonNetwork.Instantiate(countDownPrefab.name,Vector3.zero,Quaternion.identity);
             countDown.GetComponent<CountDown>().Create(mins * 60 + secs, "Zone close in", GameManager.Instance.CloseZone);
             countDown.GetComponent<CountDown>().StartCoundDown();

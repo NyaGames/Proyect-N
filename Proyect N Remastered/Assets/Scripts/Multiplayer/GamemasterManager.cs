@@ -237,7 +237,7 @@ public class GamemasterManager : MonoBehaviour
 
     public IEnumerator CloseActualZone()
     {
-        float timeToClose = 10.0f;
+        float timeToClose = 2.0f;
         float t = 0;
         Vector3 InitialScale = staticZone.transform.localScale;
         Vector3 FinalScale = newZonePosition.transform.localScale;
@@ -257,7 +257,9 @@ public class GamemasterManager : MonoBehaviour
         staticZone = PhotonNetwork.Instantiate(zonePrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
         staticZone.transform.localScale = FinalScale;
         staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
-        newZonePosition.SetActive(false);
+
+        //newZonePosition.SetActive(false);
+        Destroy(newZonePosition);
         PhotonNetwork.Destroy(provZone);
 
     }
@@ -272,7 +274,8 @@ public class GamemasterManager : MonoBehaviour
 
 	public void HideProvZone()
 	{
-        provZone.SetActive(false);
+        //provZone.SetActive(false);
+        Destroy(provZone);
         provZoneCreated = false;
     }
 	#endregion

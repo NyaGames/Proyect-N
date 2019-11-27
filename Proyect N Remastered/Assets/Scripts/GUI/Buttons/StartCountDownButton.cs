@@ -30,13 +30,13 @@ public class StartCountDownButton : MonoBehaviour
 		int.TryParse(secsText.text, out secs);
 		int.TryParse(minsText.text, out mins);
 
-        if((GamemasterManager.Instance.provZone == null || !GamemasterManager.Instance.provZone.activeSelf) || (secs > 60 || mins > 60) ||( mins == 0 && secs == 0)){
+        /*if((GamemasterManager.Instance.provZone == null || !GamemasterManager.Instance.provZone.activeSelf) || (secs > 60 || mins > 60) ||( mins == 0 && secs == 0)){
             button.interactable = false;
         }
         else
         {
             button.interactable = true;
-        }
+        }*/
 
 		if(GamemasterManager.Instance.provZone == null || !GamemasterManager.Instance.provZone.activeSelf)
 		{

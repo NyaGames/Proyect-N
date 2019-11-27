@@ -86,12 +86,10 @@ public class Zone : MonoBehaviour
             RaycastHit raycastHit;
             if (Physics.Raycast(raycast, out raycastHit))
             {
-                Debug.Log("Something Hit");
                 if (raycastHit.collider.gameObject == this.gameObject.transform.GetChild(0).gameObject)
                 {
                     //Destroy(this.gameObject);
                     tapped = true;
-                    Debug.Log("Drop tapped");
                 }
 
             }
