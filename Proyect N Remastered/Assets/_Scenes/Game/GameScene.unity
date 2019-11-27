@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1038,53 +1038,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 3
   m_AspectRatio: 0.89305556
---- !u!1 &334584057
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 334584059}
-  - component: {fileID: 334584058}
-  m_Layer: 0
-  m_Name: TileProvider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &334584058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 334584057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 756a01a914208439d8d2fc8dcd68b229, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cbtpOptions:
-    camera: {fileID: 1081047285}
-    visibleBuffer: 0
-    disposeBuffer: 0
---- !u!4 &334584059
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 334584057}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400009521}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &363929590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,7 +1131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &373642726
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1501,7 +1454,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _tileProvider
       value: 
-      objectReference: {fileID: 334584058}
+      objectReference: {fileID: 0}
     - target: {fileID: 114105500206378512, guid: 35ce2bb4caba9434db5e656796b632b1,
         type: 3}
       propertyPath: _imagery._layerProperty.sourceOptions.layerSource.Id
@@ -1535,12 +1488,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
---- !u!4 &400009521 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4310658642812482, guid: 35ce2bb4caba9434db5e656796b632b1,
-    type: 3}
-  m_PrefabInstance: {fileID: 400009520}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &440209947
 GameObject:
   m_ObjectHideFlags: 0
