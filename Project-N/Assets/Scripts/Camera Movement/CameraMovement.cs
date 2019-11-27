@@ -32,7 +32,7 @@ public abstract class CameraMovement : MonoBehaviour
 		lockedCameraMovement = GetComponent<LockedCameraMovement>();
 		freeCameraMovement = GetComponent<FreeCameraMovement>();
 
-		if (PersistentData.isGM)
+        /*if (PersistentData.isGM)
 		{
 			lockedCameraMovement.enabled = false;
 			freeCameraMovement.enabled = true;
@@ -41,13 +41,16 @@ public abstract class CameraMovement : MonoBehaviour
 		{
 			lockedCameraMovement.enabled = true;
 			freeCameraMovement.enabled = false;
-		}
-		
-	}
+		}*/
+
+        lockedCameraMovement.enabled = false;
+        freeCameraMovement.enabled = true;
+
+    }
 
     private void Update()
     {
-        //if (ZoneManager.Instance.isEditingZone) return;
+        if (ZoneManager.Instance.isEditingZone) return;
 
         if(Input.touchCount > 0)
         {
