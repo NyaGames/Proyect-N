@@ -12,27 +12,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public RoomSceneGUIController screenSceneGUIController;
     private List<RoomInfo> roomsAvaiable = new List<RoomInfo>();
 
-    /*public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
-        Debug.Log("Has entrado en el lobby, estas son las salas que hay disponibles");
-        UpdateCachedRoomList(roomList);
-    }
-    void UpdateCachedRoomList(List<RoomInfo> roomList)
-    {
-        foreach (RoomInfo r in roomList)
-        {
-            if (!roomsAvaiable.Contains(r)) //Si no teniamos esa sala guardada,la guardamos
-            {
-                ExitGames.Client.Photon.Hashtable table = r.CustomProperties;
-                roomsAvaiable.Add(r);
-            }
-            else //Si la sala etaba guardada, la borramos
-            {
-                roomsAvaiable.Remove(r);
-            }
-        }
-
-    }*/
+    public TextMeshProUGUI feedbackText;
 
     public string GenerateUniqueRoomID()
     {
@@ -49,6 +29,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     public void CreateRoom()
     {
+        feedbackText.text = "Creating room...";
+
         string roomName = "27";//GenerateUniqueRoomID();
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = (byte)screenSceneGUIController.maxPlayers.GetComponentInChildren<Slider>().value;
@@ -60,11 +42,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
+        feedbackText.text = "Room created!";
         SceneManager.LoadScene("LobbyScene");
     }
 
     public void JoinRoom()
     {
+        feedbackText.text = "Joining room...";
+
         string roomPassword = "27";//roompasswordInputText.text;
 
         if (roomPassword != "")
@@ -79,14 +64,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        Debug.Log("Te has unido a la sala " + PhotonNetwork.CurrentRoom.Name);
+        feedbackText.text = "You have joined Room: " + PhotonNetwork.CurrentRoom.Name;
         SceneManager.LoadScene("LobbyScene");
-        //myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
 
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
+        feedbackText.text = "Room doesnt exists or wrong room code";
         Debug.Log("La sala no existe o la contraseña es incorrecta");
     }
 

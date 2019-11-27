@@ -45,8 +45,9 @@ public class CountDown : MonoBehaviour,IPunObservable
     {
         secs--;
         secsSend = secs;
-        if (secsSend <= 0)
+        if (secsSend < 0)
         {
+            PhotonNetwork.Destroy(photonView);
             CancelInvoke("Countdown");
             onCountDownFinished();
             countdownActive = false;

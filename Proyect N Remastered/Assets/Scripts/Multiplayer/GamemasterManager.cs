@@ -68,7 +68,7 @@ public class GamemasterManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (ZoneManager.Instance.isEditingZone && PhotonNetwork.CurrentRoom != null) //Si no se ha creado la zona todavía y estoy dentro de una sala,puedo crearla
+        if (ZoneManager.Instance.isEditingZone ) //Si no se ha creado la zona todavía y estoy dentro de una sala,puedo crearla
         {
             HandleZoneInput();
         }
@@ -207,9 +207,10 @@ public class GamemasterManager : MonoBehaviour
             else //Si ya habia una zona en el mapa, se guarda la zona editada en nextZone
             {
                 //Vector3 geoPosition = editableZone.GetComponent<ZonePositionWithLatLon>().GetGeoPosition();
-                provZone = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
-                provZone.transform.localScale = provZone.transform.localScale;
-                provZone.GetComponentInChildren<MeshRenderer>().material = provZoneMat;
+                newZonePosition = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
+                newZonePosition.transform.localScale = provZone.transform.localScale;
+                newZonePosition.GetComponentInChildren<MeshRenderer>().material = newZonePositionMat;
+                provZoneCreated = false;
             }      
         }
 

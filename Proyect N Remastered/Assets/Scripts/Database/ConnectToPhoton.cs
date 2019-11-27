@@ -11,6 +11,9 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
 {
     public static ConnectToPhoton Instance { get; private set; }
 
+    public TextMeshProUGUI feedbackText;
+    public TMP_InputField usernametext;
+
     private void Awake()
     {
         if (!Instance)
@@ -26,20 +29,23 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
 
     public void Connect()
     {
+        feedbackText.text = "Trying to connect...";
         if (!PhotonNetwork.IsConnected)
         {
             if (PhotonNetwork.ConnectUsingSettings())
             {
-
+               
             }
-            else { 
-                Debug.Log("Failing connected to server");
+            else {
+                feedbackText.text = "Connection to server failed, try again";
             }
         }
     }
 
     public override void OnConnectedToMaster()
     {
+        feedbackText.text = "You have been connected";
+
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.JoinLobby(null);
         // SceneManager.LoadScene("MainMenuScreen");
