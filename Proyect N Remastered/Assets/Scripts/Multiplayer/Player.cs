@@ -11,8 +11,7 @@ public class Player : MonoBehaviour
     public PhotonView photonViewTransform;
 
     private BoxCollider playerCollider;
-
-    private bool newZoneCreated;
+    [HideInInspector] public bool insideZone = true;
 
     void Start()
     {
@@ -47,8 +46,17 @@ public class Player : MonoBehaviour
 		}
 
         //Visual
-        Color randomColor = new Color(Random.Range(0f,1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-        this.GetComponent<Renderer>().material.color = randomColor;			           
+        Color playerColor;
+        if (isGameMaster)
+        {
+            playerColor = new Color(0f, 255, 0f);
+        }
+        else
+        {
+            playerColor = new Color(0f, 0f, 255f);
+        }
+       
+        this.GetComponent<Renderer>().material.color = playerColor;			           
     }
 
     public Photon.Realtime.Player getPlayerReference(int actorNumber){
@@ -64,11 +72,13 @@ public class Player : MonoBehaviour
 
     public void OnTriggerEnter(Collider collision)
     {
+        //Drop collision
         if (collision.gameObject.CompareTag("Drop") && !isGameMaster) //Si un jugador normla choca con un drop
         {
             PickDrop(collision.gameObject);
             
         }
+
     }
 
     public void PickDrop(GameObject drop)
@@ -79,6 +89,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!insideZone)
+        {
+            this.GetComponent<Renderer>().material.color = new Color(255f, 0f, 0f);
+        }
        /* if (!isGameMaster)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))

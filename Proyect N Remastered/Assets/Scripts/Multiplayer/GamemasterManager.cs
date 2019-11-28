@@ -15,6 +15,7 @@ public class GamemasterManager : MonoBehaviour
 	public int numDrops = 3;
 
     [HideInInspector]public GameObject staticZone;
+    [HideInInspector] public MeshFilter staticZoneMeshFilter;
     [HideInInspector]public GameObject newZonePosition;
     [HideInInspector]public GameObject provZone;
 
@@ -32,6 +33,7 @@ public class GamemasterManager : MonoBehaviour
     Vector3 zoneCenter = new Vector3(0, 0, 0);
 
     [HideInInspector] public GameObject[] playersViewsList;
+    [HideInInspector] public Player[] playersList;
 
     private bool provZoneCreated = false;
 
@@ -54,13 +56,25 @@ public class GamemasterManager : MonoBehaviour
 
     public void Update()
     {
-        if(PhotonNetwork.CurrentRoom != null && playersViewsList.Length != PhotonNetwork.CurrentRoom.PlayerCount )
+        if(PhotonNetwork.CurrentRoom != null && playersViewsList.Length != PhotonNetwork.CurrentRoom.PlayerCount)
         {
             playersViewsList = GameObject.FindGameObjectsWithTag("Player");
+            for(int i = 0; i < playersViewsList.Length; i++)
+            {
+                playersList[i] = playersViewsList[i].GetComponent<Player>();
+            }
         }
-        else
-        {
 
+        if(staticZone != null) //Si ya hay una zona creada
+        {
+            for(int i = 0;i < playersViewsList.Length; i++)
+            {
+                if (playersList[i].insideZone && !staticZoneMeshFilter.mesh.bounds.Contains(playersViewsList[i].transform.position)) //Si algún jugador no está en la zona, se le avisa
+                {
+                    playersList[i].insideZone = false;
+                }
+            }
+            
         }
 
     }
@@ -203,6 +217,8 @@ public class GamemasterManager : MonoBehaviour
                 staticZone.transform.localScale = provZone.transform.localScale;
 				staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
                 HideProvZone();
+
+                staticZoneMeshFilter = staticZone.GetComponentInChildren<MeshFilter>();
             }
             else //Si ya habia una zona en el mapa, se guarda la zona editada en nextZone
             {
