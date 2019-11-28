@@ -27,18 +27,38 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
         }
     }
 
+    public void Start()
+    {
+        if (PhotonNetwork.IsConnected) //Si ya estoy conectado,mantengo mi nombre de usuario
+        {
+            usernametext.text = PhotonNetwork.LocalPlayer.NickName;
+        }
+    }
+
     public void Connect()
     {
-        feedbackText.text = "Trying to connect...";
-        if (!PhotonNetwork.IsConnected)
+        if(usernametext.text != "")
         {
-            if (PhotonNetwork.ConnectUsingSettings())
+            feedbackText.text = "Trying to connect...";
+            if (!PhotonNetwork.IsConnected)
             {
-               
+                if (PhotonNetwork.ConnectUsingSettings())
+                {
+
+                }
+                else
+                {
+                    feedbackText.text = "Connection to server failed, try again";
+                }
             }
-            else {
-                feedbackText.text = "Connection to server failed, try again";
+            else //Si ya estás conectado a Photon
+            {
+                SceneManager.LoadScene("RoomScreen");
             }
+        }
+        else
+        {
+            feedbackText.text = "Select an username before trying to connect";
         }
     }
 
@@ -46,9 +66,10 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
     {
         feedbackText.text = "You have been connected";
 
+        PhotonNetwork.LocalPlayer.NickName = usernametext.text;
+
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.JoinLobby(null);
-        // SceneManager.LoadScene("MainMenuScreen");
         SceneManager.LoadScene("RoomScreen");
     }
 }

@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class UserButton : MonoBehaviour
 {
-	private int actorNumber;
+    //private int actorNumber;
+    private string userNickname;
 
 	public void SelectUser()
 	{
-		actorNumber = int.Parse(GetComponentInChildren<Text>().text);
-		UsersPanelGUIController.Instance.SelectUser(actorNumber);
+        userNickname = GetComponentInChildren<Text>().text;
+		UsersPanelGUIController.Instance.SelectUser(userNickname);
 	}
 }

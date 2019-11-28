@@ -48,7 +48,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
     }
 
 	#region photos
-	public void SendImageToMaster(RawImage image, int playerInPhotoID)
+	public void SendImageToMaster(RawImage image, string playerNickname)
     {
         Texture2D sourceTexture = (Texture2D)image.texture;
         Color[] data = sourceTexture.GetPixels();
@@ -68,14 +68,14 @@ public class MessageSender : MonoBehaviourPunCallbacks
             byteArray[i] = downSampledImage.data[i];           
         }        
 
-        photonView.RPC("ReceiveImageFromPlayer", RpcTarget.MasterClient, byteArray as object, playerInPhotoID);
+        photonView.RPC("ReceiveImageFromPlayer", RpcTarget.MasterClient, byteArray as object, playerNickname);
 
     }
 
     [PunRPC]
-    void ReceiveImageFromPlayer(byte[] byteArray ,int playerToKill,PhotonMessageInfo info)
+    void ReceiveImageFromPlayer(byte[] byteArray ,string playerToKill,PhotonMessageInfo info)
     {
-        int sender = info.Sender.ActorNumber;
+        string sender = info.Sender.NickName;
 
         ImageManager.Instance.imagesList.Add(byteArray);
         Texture2D tex = getUncompressedTextureFromBytes(byteArray);
@@ -98,18 +98,18 @@ public class MessageSender : MonoBehaviourPunCallbacks
     #endregion
 
     #region MasterResponse
-    public void ConfirmKill(int sender,int playerToKill,bool killed){
+    public void ConfirmKill(string sender,string playerToKill,bool killed){
         byte lastGroup = photonView.Group;
 
         if (PhotonNetwork.IsMasterClient)
         {
             for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
             {
-                if (GamemasterManager.Instance.playersViewsList[i].GetPhotonView().CreatorActorNr == playerToKill)
+                if (GamemasterManager.Instance.playersViewsList[i].GetPhotonView().Owner.NickName == playerToKill)
                 {
-                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All, ImageManager.Instance.imagesList[0]);
+                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All, ImageManager.Instance.imagesList[0],sender);
                 }
-                if(GamemasterManager.Instance.playersViewsList[i].GetPhotonView().CreatorActorNr == sender)
+                if(GamemasterManager.Instance.playersViewsList[i].GetPhotonView().Owner.NickName == sender)
                 {
                     GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillReceived", RpcTarget.All, playerToKill, killed);
                 }
@@ -131,17 +131,14 @@ public class MessageSender : MonoBehaviourPunCallbacks
 
 
     [PunRPC]
-    public void KillYourself(byte [] image)
+    public void KillYourself(byte [] image, string killer)
     {
         Debug.Log("Matao");
         if (photonView.IsMine && !myPlayer.isGameMaster)
         {
             PhotonNetwork.Destroy(gameObject);
-            PhotonNetwork.LeaveRoom();
-            SceneManager.LoadScene("DeathScene");
-
-            //PhotosPanelGUIController.Instance.PlayerKilled(getUncompressedTextureFromBytes(image));
-            KillCamImageInfo.killcamImage = getUncompressedTextureFromBytes(image);
+            PhotosPanelGUIController.Instance.PlayerKilled(getUncompressedTextureFromBytes(image),killer);
+            
         }
         else
         {
@@ -156,10 +153,10 @@ public class MessageSender : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void KillReceived(int playerToKill,bool killed)
+    public void KillReceived(string playerToKill,bool killed)
     {
         if(!PhotonNetwork.IsMasterClient)
-        PhotosPanelGUIController.Instance.KillConfirmed();
+        PhotosPanelGUIController.Instance.KillConfirmed(playerToKill);
     }
 
     private Texture2D getUncompressedTextureFromBytes(byte[] byteArray)

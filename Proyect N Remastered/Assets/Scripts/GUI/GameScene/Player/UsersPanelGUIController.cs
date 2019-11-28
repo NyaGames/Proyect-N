@@ -47,17 +47,18 @@ public class UsersPanelGUIController : MonoBehaviour
                 buttonsRect.sizeDelta = new Vector2(buttonsRect.sizeDelta.x, buttonsRect.sizeDelta.y + userButtonPrefab.GetComponent<RectTransform>().rect.height + separation);
 				GameObject newButton = Instantiate(userButtonPrefab);
 				newButton.transform.SetParent(buttonsRect.transform, false);
-				newButton.GetComponentInChildren<Text>().text = players[i].ActorNumber.ToString();
-				users.Add(newButton);
+                //newButton.GetComponentInChildren<Text>().text = players[i].ActorNumber.ToString();
+                newButton.GetComponentInChildren<Text>().text = players[i].NickName;
+                users.Add(newButton);
 			}
 		}
 	}
 
-	public void SelectUser(int actorSelected)
+	public void SelectUser(string nicknameSelected)
 	{
 		PhotosPanelGUIController.Instance.CancelPhotoToSend();
 		gameObject.SetActive(false);		
-		GameManager.Instance.myPlayer.GetComponent<MessageSender>().SendImageToMaster(GameSceneGUIController.Instance.sourceImage, actorSelected);
+		GameManager.Instance.myPlayer.GetComponent<MessageSender>().SendImageToMaster(GameSceneGUIController.Instance.sourceImage, nicknameSelected);
 		
 	}
 
