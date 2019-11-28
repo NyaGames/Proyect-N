@@ -10,6 +10,7 @@ public class PhotosPanelGUIController : MonoBehaviour
 	public static PhotosPanelGUIController Instance { get; private set; }
 	[SerializeField] private GameObject photoConfirmationPanel;	
 	[SerializeField] private GameObject usersPanel;
+    public Button takePhotoButton;
 
     [SerializeField] private GameObject killedPanel;
     [SerializeField] private GameObject killConfirmedPanel;
@@ -28,8 +29,9 @@ public class PhotosPanelGUIController : MonoBehaviour
 
 	public void TakePhoto()
 	{
-		Debug.Log("Photo Taken!");
-		OpenPhotoConfirmationPanel();
+        Debug.Log("Photo Taken!");
+        OpenPhotoConfirmationPanel();
+        GameManager.Instance.myPlayer.GetComponent<Player>().currentAmmo--;
 	}
 
 	public void ConfirmPhotoToSend()

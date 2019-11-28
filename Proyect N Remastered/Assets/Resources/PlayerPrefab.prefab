@@ -252,6 +252,8 @@ MonoBehaviour:
   isGameMaster: 0
   photonViewTransform: {fileID: 3104748707656188120}
   insideZone: 1
+  maxAmmo: 3
+  currentAmmo: 0
 --- !u!114 &7569475190593564509
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,8 +13,12 @@ public class Player : MonoBehaviour
     private BoxCollider playerCollider;
     [HideInInspector] public bool insideZone = true;
 
+    public int maxAmmo;
+    [HideInInspector] public int currentAmmo;
+
     void Start()
     {
+        currentAmmo = maxAmmo;
 
         playerCollider = GetComponent<BoxCollider>();
         //Variables
