@@ -10,6 +10,7 @@ public class CameraWebPhoto : MonoBehaviour
     private bool camAvailable;
     WebCamTexture webCamTexture;
     WebCamTexture frontCam;
+    WebCamTexture finalCam;
     private Texture defaultBackground;
 
    
@@ -33,6 +34,7 @@ public class CameraWebPhoto : MonoBehaviour
         }
         for (int i = 0; i < devices.Length; i++)
         {
+            Debug.Log(devices.Length);
             if (!devices[i].isFrontFacing)
             {
                 webCamTexture = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
@@ -45,14 +47,17 @@ public class CameraWebPhoto : MonoBehaviour
         if (webCamTexture == null)
         {
             Debug.Log("BackCamera Unable");
-            frontCam.Play();
-            background.texture = frontCam;
-            return;
+            finalCam = frontCam;
+        }
+        else
+        {
+            finalCam = webCamTexture;
         }
 
-        webCamTexture.Play();
-        
-        background.texture = webCamTexture;
+
+        finalCam.Play();
+        background.texture = finalCam;
+
 
         camAvailable = true;
 
@@ -77,11 +82,11 @@ public class CameraWebPhoto : MonoBehaviour
             return;
         //float ratio = (float)frontCam.width / (float)frontCam.height;
         //fit.aspectRatio = ratio;
-
-        float scaleY = frontCam.videoVerticallyMirrored ? -1f : 1f;
+        
+        float scaleY = finalCam.videoVerticallyMirrored ? -1f : 1f;
         background.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
 
-        int orient = -frontCam.videoRotationAngle;
+        int orient = -finalCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
        
     }
@@ -132,7 +137,7 @@ public class CameraWebPhoto : MonoBehaviour
         Canvas canvas = null;
         foreach (var can in FindObjectsOfType<Canvas>())
         {
-            if(can.name == "GUI")
+            if(can.name == "GUI" || can.name == "Canvas")
             {
                 canvas = can;
             }
@@ -160,12 +165,13 @@ public class CameraWebPhoto : MonoBehaviour
         float newH = tamaño / h;
 
         
-        Texture2D tex = new Texture2D(frontCam.width, frontCam.height, TextureFormat.RGBA32, false);
-        tex.SetPixels32(frontCam.GetPixels32());
+        Texture2D tex = new Texture2D(finalCam.width, finalCam.height, TextureFormat.RGBA32, false);
+        tex.SetPixels32(finalCam.GetPixels32());
         tex.Apply();
-
-        snapTakenImage.texture = tex;
+        int orient = -finalCam.videoRotationAngle;
         
+        snapTakenImage.texture = tex;
+        snapTakenImage.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
         snapTakenImage.uvRect = new Rect(x, y, newW, newH);
      }
 
