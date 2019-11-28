@@ -11,14 +11,19 @@ public class Player : MonoBehaviour
     public PhotonView photonViewTransform;
 
     private BoxCollider playerCollider;
-    [HideInInspector] public bool insideZone = true;
+    public bool insideZone;
 
     public int maxAmmo;
     [HideInInspector] public int currentAmmo;
 
+    public int maxSecsOutOfZone;
+    [HideInInspector] public int currentSecsOutOfZone;
+    private bool outOfZoneActive = false;
+
     void Start()
     {
         currentAmmo = maxAmmo;
+        currentSecsOutOfZone = maxSecsOutOfZone;
 
         playerCollider = GetComponent<BoxCollider>();
         //Variables
@@ -53,7 +58,7 @@ public class Player : MonoBehaviour
         Color playerColor;
         if (isGameMaster)
         {
-            playerColor = new Color(0f, 255, 0f);
+            playerColor = new Color(0f, 255f, 0f);
         }
         else
         {
@@ -73,7 +78,6 @@ public class Player : MonoBehaviour
         }
         return null;
     }
-
     public void OnTriggerEnter(Collider collision)
     {
         //Drop collision
@@ -84,7 +88,6 @@ public class Player : MonoBehaviour
         }
 
     }
-
     public void PickDrop(GameObject drop)
     {
         Destroy(drop);
@@ -93,10 +96,24 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (!insideZone)
+        if (GameManager.Instance.gameStarted) //Si la partida ha empezado, miro si estoy dentro de la zona
         {
-            this.GetComponent<Renderer>().material.color = new Color(255f, 0f, 0f);
+            if (!insideZone)
+            {
+                GameManager.Instance.outOfZoneText.SetActive(true);
+                StartCoundDown();
+                this.GetComponent<Renderer>().material.color = new Color(255f, 0f, 0f);
+            }
+            else
+            {
+                GameManager.Instance.outOfZoneText.SetActive(false);
+                CancelInvoke("Countdown");
+                outOfZoneActive = false;
+                this.GetComponent<Renderer>().material.color = new Color(0f, 255f, 0f);
+            }
+
         }
+       
        /* if (!isGameMaster)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -155,5 +172,27 @@ public class Player : MonoBehaviour
 			Camera.main.GetComponentInParent<CameraController>().LockCameraToPlayer(transform);
 		}
 	}
+
+    #region OutOFZone
+    public void StartCoundDown()
+    {
+        if (!outOfZoneActive)
+        {
+            outOfZoneActive = true;
+            InvokeRepeating("Countdown", 1f, 1f);
+        }
+    }
+    private void Countdown()
+    {
+        currentSecsOutOfZone--;
+        if (currentSecsOutOfZone < 0)
+        {
+            CancelInvoke("Countdown");
+            outOfZoneActive = false;
+            Debug.Log("Te moriste por estar fuera de la zona");
+            PhotonNetwork.Destroy(gameObject);
+        }
+    }
+    #endregion
 
 }

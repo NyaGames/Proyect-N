@@ -251,9 +251,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameMaster: 0
   photonViewTransform: {fileID: 3104748707656188120}
-  insideZone: 1
+  insideZone: 0
   maxAmmo: 3
   currentAmmo: 0
+  maxSecsOutOfZone: 10
+  currentSecsOutOfZone: 0
 --- !u!114 &7569475190593564509
 MonoBehaviour:
   m_ObjectHideFlags: 0
