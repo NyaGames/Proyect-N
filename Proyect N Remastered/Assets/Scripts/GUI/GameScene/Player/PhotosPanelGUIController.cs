@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PhotosPanelGUIController : MonoBehaviour
@@ -8,6 +10,7 @@ public class PhotosPanelGUIController : MonoBehaviour
 	public static PhotosPanelGUIController Instance { get; private set; }
 	[SerializeField] private GameObject photoConfirmationPanel;	
 	[SerializeField] private GameObject usersPanel;
+    public Button takePhotoButton;
 
     [SerializeField] private GameObject killedPanel;
     [SerializeField] private GameObject killConfirmedPanel;
@@ -26,8 +29,9 @@ public class PhotosPanelGUIController : MonoBehaviour
 
 	public void TakePhoto()
 	{
-		Debug.Log("Photo Taken!");
-		OpenPhotoConfirmationPanel();
+        Debug.Log("Photo Taken!");
+        OpenPhotoConfirmationPanel();
+        GameManager.Instance.myPlayer.GetComponent<Player>().currentAmmo--;
 	}
 
 	public void ConfirmPhotoToSend()
@@ -49,14 +53,19 @@ public class PhotosPanelGUIController : MonoBehaviour
 
 	}
 
-    public void PlayerKilled(Texture2D killCam)
+    public void PlayerKilled(Texture2D killCam,string killer)
     {
-        killedPanel.SetActive(true);
+        //killedPanel.SetActive(true);
         //killedPanel.GetComponent<SetPhotoReceivedInImage>().SetImage(killCam);
+        PersistentData.killcam = killCam;
+        PersistentData.killer = killer;
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("DeathScene");
     }
 
-    public void KillConfirmed()
+    public void KillConfirmed(string playerKilled)
     {
         killConfirmedPanel.SetActive(true);
+        killConfirmedPanel.GetComponent<KillConfirmation>().SetPlayerKilled(playerKilled);
     }
 }

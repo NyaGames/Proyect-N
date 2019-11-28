@@ -54,13 +54,9 @@ public class GamemasterManager : MonoBehaviour
 
     public void Update()
     {
-        if(PhotonNetwork.CurrentRoom != null && playersViewsList.Length != PhotonNetwork.CurrentRoom.PlayerCount )
+        if(PhotonNetwork.CurrentRoom != null && playersViewsList.Length != PhotonNetwork.CurrentRoom.PlayerCount)
         {
             playersViewsList = GameObject.FindGameObjectsWithTag("Player");
-        }
-        else
-        {
-
         }
 
     }
@@ -203,6 +199,8 @@ public class GamemasterManager : MonoBehaviour
                 staticZone.transform.localScale = provZone.transform.localScale;
 				staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
                 HideProvZone();
+
+                staticZone.transform.GetChild(0).gameObject.AddComponent<ArePlayersInsideZone>();
             }
             else //Si ya habia una zona en el mapa, se guarda la zona editada en nextZone
             {

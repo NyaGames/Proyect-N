@@ -16,8 +16,8 @@ public class PhotosNotificationsManager : MonoBehaviour
 
 	[SerializeField] private RectTransform rectTransform;
 
-    private int PlayerToKill;
-    private int Sender;
+    private string PlayerToKill;
+    private string Sender;
 
     private Rect notificationsRect;
 
@@ -40,7 +40,7 @@ public class PhotosNotificationsManager : MonoBehaviour
 		notificationsRect = rectTransform.rect;
 	}
 
-	public void OnImageRecived(Texture2D newImage, int sender, int playerToKill)
+	public void OnImageRecived(Texture2D newImage, string sender, string playerToKill)
 	{
 		//notificationsRect.height += notificationPrefab.GetComponent<RectTransform>().rect.height + 10;
 		rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, rectTransform.sizeDelta.y + notificationPrefab.GetComponent<RectTransform>().rect.height + 5);
@@ -50,8 +50,8 @@ public class PhotosNotificationsManager : MonoBehaviour
 		GameObject notification = Instantiate(notificationPrefab);
 		notification.transform.SetParent(transform, false);
 
-		senderText.text = "Sent by: " + sender.ToString();
-		playerToKillText.text = "Do you want to kill " + playerToKill.ToString() + "?";
+		senderText.text = "Sent by: " + sender;
+		playerToKillText.text = "Do you want to kill " + playerToKill + "?";
 		notification.GetComponent<RawImage>().texture = newImage;
 
         PlayerToKill = playerToKill;

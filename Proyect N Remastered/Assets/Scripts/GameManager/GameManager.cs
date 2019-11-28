@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     UnityAction onCountDownFinished;
 
-    public Text actorNumberText;
+    public GameObject outOfZoneText;
 
     // Start is called before the first frame update
     void Awake()
@@ -100,6 +100,10 @@ public class GameManager : MonoBehaviour
 				playerCountDownText.text = countDownText + ": " + mins + " : " + secs;
 			}
 		}
+
+        if (outOfZoneText.activeSelf && myPlayer != null) {
+            outOfZoneText.GetComponent<TMPro.TextMeshProUGUI>().text = "You have " + myPlayer.GetComponent<Player>().currentSecsOutOfZone + " seconds to return to game area! Run now!";
+        }
 	}
 
 	/*private void Countdown()
