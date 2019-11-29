@@ -12,7 +12,7 @@ public class CameraWebPhoto : MonoBehaviour
     WebCamTexture frontCam;
     WebCamTexture finalCam;
     private Texture defaultBackground;
-
+    public AspectRatioFitter fit;
    
     public RawImage background;
     public RawImage snapTakenImage;
@@ -90,7 +90,7 @@ public class CameraWebPhoto : MonoBehaviour
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
        
     }
-    
+
     /*public void TakePhoto()
     {
        
@@ -131,8 +131,51 @@ public class CameraWebPhoto : MonoBehaviour
         
 
     }*/
-
-    public void TakePhotoGuarra()
+    public static Texture2D ResampleAndCrop(Texture2D source, int targetWidth, int targetHeight)
+    {
+        int sourceWidth = source.width;
+        int sourceHeight = source.height;
+        int xOffset = (sourceWidth - targetWidth) / 2;
+        int yOffset = (sourceHeight - targetHeight) / 2;
+        
+       
+        Color32[] data = source.GetPixels32();
+        Color32[] data2 = new Color32[targetWidth * targetHeight];
+        for (int y = yOffset; y < (targetHeight+yOffset); y++)
+        {
+            for (int x = xOffset; x < targetWidth+xOffset; x++)
+            {             
+                Color32 color = data[x + sourceWidth * y];
+                data2[(x - xOffset) + ((y - yOffset) * targetWidth)] = color;
+            }
+        }
+        var tex = new Texture2D(targetWidth, targetHeight);
+        tex.SetPixels32(data2);
+        tex.Apply(true);
+        return tex;
+    }
+    public void takePhotoGuarra()
+    {
+        Texture2D tex = new Texture2D(finalCam.width, finalCam.height, TextureFormat.RGBA32, false);
+        tex.SetPixels32(finalCam.GetPixels32());
+        tex.Apply();
+        if (tamaño > finalCam.width || tamaño > finalCam.height)
+        {
+            Debug.LogError("Tamaño mayor que imagen");
+            Debug.Log("Tamaño mayor que imagen");
+            while (tamaño > finalCam.width || tamaño > finalCam.height)
+            {
+                tamaño = tamaño / 2;
+            }
+        }
+        Debug.Log("Height: " + tex.height + "  Width: " + tex.width);
+        Texture photoTakenTex = ResampleAndCrop(tex, tamaño, tamaño);
+        int orient = -finalCam.videoRotationAngle;
+        Debug.Log("Height: "+ photoTakenTex.height + "  Width: "+ photoTakenTex.width);
+        snapTakenImage.texture = photoTakenTex;
+        snapTakenImage.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
+    }
+    /*public void TakePhotoGuarra()
     {
         Canvas canvas = null;
         foreach (var can in FindObjectsOfType<Canvas>())
@@ -173,6 +216,6 @@ public class CameraWebPhoto : MonoBehaviour
         snapTakenImage.texture = tex;
         snapTakenImage.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
         snapTakenImage.uvRect = new Rect(x, y, newW, newH);
-     }
+     }*/
 
 }

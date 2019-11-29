@@ -412,6 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63af0c2f969ce5c4aa12493f30d17c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fit: {fileID: 1495171485}
   background: {fileID: 1495171486}
   snapTakenImage: {fileID: 1202804301}
   "tama\xF1o": 128
@@ -579,7 +580,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 534669907}
-        m_MethodName: TakePhotoGuarra
+        m_MethodName: takePhotoGuarra
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -759,10 +760,10 @@ RectTransform:
   m_Father: {fileID: 1480258506}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 320, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1495171485
 MonoBehaviour:
