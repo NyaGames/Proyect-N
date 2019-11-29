@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UserButton : MonoBehaviour
 {
-    //private int actorNumber;
+    public int actorNumber;
     private string userNickname;
 
 	public void SelectUser()

@@ -174,11 +174,5 @@ public class MessageSender : MonoBehaviourPunCallbacks
         tex.Apply();
 
         return tex;
-    } 
-
-    private void OnDestroy()
-    {
-        Debug.Log("Pene");
-    }
-
+    }   
 }

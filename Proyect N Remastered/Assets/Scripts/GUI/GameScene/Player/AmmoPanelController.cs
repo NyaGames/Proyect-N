@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AmmoPanelController : MonoBehaviour
 {
     private Player myPlayer;
     public TMPro.TextMeshProUGUI ammoText;
+
+	[SerializeField] private Button photoButton;
 
     void Start()
     {
@@ -17,13 +20,13 @@ public class AmmoPanelController : MonoBehaviour
     {
         if(myPlayer.currentAmmo <= 0)
         {
-            PhotosPanelGUIController.Instance.takePhotoButton.interactable = false;
+			photoButton.interactable = false;
             ammoText.text = "You are out of ammo! Try to find some drops";
         }
         else
         {
             ammoText.text = myPlayer.currentAmmo + "/" + myPlayer.maxAmmo;
-            PhotosPanelGUIController.Instance.takePhotoButton.interactable = true;
+			photoButton.interactable = true;
         }
     }
 }
