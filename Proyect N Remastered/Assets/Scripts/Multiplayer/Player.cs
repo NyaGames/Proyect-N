@@ -8,23 +8,17 @@ public class Player : MonoBehaviour
 {
     public bool isGameMaster;
     public int id { get; set; }
+    public string nickName;
     public PhotonView photonViewTransform;
 
     private BoxCollider playerCollider;
-    public bool insideZone;
 
-    public int maxAmmo;
-    [HideInInspector] public int currentAmmo;
-
-    public int maxSecsOutOfZone;
-    [HideInInspector] public int currentSecsOutOfZone;
-    private bool outOfZoneActive = false;
-
+    private void Awake()
+    {
+        Debug.Log("AHORA SE CREA EL PLAYER");
+    }
     void Start()
     {
-        currentAmmo = maxAmmo;
-        currentSecsOutOfZone = maxSecsOutOfZone;
-
         playerCollider = GetComponent<BoxCollider>();
         //Variables
         if (!photonViewTransform.IsMine) //Si no soy yo, cojo los datos del servidor
@@ -32,6 +26,7 @@ public class Player : MonoBehaviour
             Photon.Realtime.Player playerReference = getPlayerReference(photonViewTransform.OwnerActorNr); 
             id = (int)playerReference.CustomProperties["id"];
             isGameMaster = (bool)playerReference.CustomProperties["isGameMaster"];
+            nickName = gameObject.GetPhotonView().Controller.NickName;
 
             if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["isGameMaster"]) //Si el cliente NO es game master, desactiva a los demás
             {
@@ -49,6 +44,7 @@ public class Player : MonoBehaviour
         }
         else //Si soy yo,cojo los datos de mi escena
         {
+            nickName = PhotonNetwork.NickName;
             isGameMaster = PersistentData.isGM;
             id = PhotonNetwork.LocalPlayer.ActorNumber;          
 			InitCamera();
@@ -96,23 +92,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.gameStarted) //Si la partida ha empezado, miro si estoy dentro de la zona
-        {
-            if (!insideZone)
-            {
-                GameManager.Instance.outOfZoneText.SetActive(true);
-                StartCoundDown();
-                this.GetComponent<Renderer>().material.color = new Color(255f, 0f, 0f);
-            }
-            else
-            {
-                GameManager.Instance.outOfZoneText.SetActive(false);
-                CancelInvoke("Countdown");
-                outOfZoneActive = false;
-                this.GetComponent<Renderer>().material.color = new Color(0f, 255f, 0f);
-            }
-
-        }
+      
        
        /* if (!isGameMaster)
         {
@@ -173,26 +153,5 @@ public class Player : MonoBehaviour
 		}
 	}
 
-    #region OutOFZone
-    public void StartCoundDown()
-    {
-        if (!outOfZoneActive)
-        {
-            outOfZoneActive = true;
-            InvokeRepeating("Countdown", 1f, 1f);
-        }
-    }
-    private void Countdown()
-    {
-        currentSecsOutOfZone--;
-        if (currentSecsOutOfZone < 0)
-        {
-            CancelInvoke("Countdown");
-            outOfZoneActive = false;
-            Debug.Log("Te moriste por estar fuera de la zona");
-            PhotonNetwork.Destroy(gameObject);
-        }
-    }
-    #endregion
 
 }

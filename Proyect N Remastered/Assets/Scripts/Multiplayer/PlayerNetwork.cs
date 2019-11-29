@@ -20,10 +20,15 @@ namespace Photon.Pun
         public bool isGameMaster;
         public int id { get; set; }
 
+        public void Awake()
+        {
+            Initialize();
+        }
+
         private void Start()
         {
             photonViewTransform = GetComponent<PhotonView>();
-            Initialize();
+            
 
             this.GetComponentInChildren<TextMesh>().text = GetComponent<Player>().id.ToString() + "/" + GetComponent<Player>().isGameMaster.ToString();
         }

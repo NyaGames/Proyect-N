@@ -14,27 +14,31 @@ public class ShowPlayerInfo : MonoBehaviour
 
 	[SerializeField] KillUserPanel killConfirmationPanel;
 
-	Photon.Realtime.Player player;
+    //Photon.Realtime.Player player;
+    GameObject playerGO;
 
 	public void ShowUserInfo(int actorNumber)
 	{
 		gameObject.SetActive(true);
 
-		Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;	
+        //Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;	
 
-		for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
 		{
-			if(players[i].ActorNumber == actorNumber)
+			if(GamemasterManager.Instance.playersViewsList[i].GetPhotonView().CreatorActorNr == actorNumber)
 			{
-				player = players[i];
-				username.text = player.NickName;
-			}
+				playerGO = GamemasterManager.Instance.playersViewsList[i];
+				username.text = playerGO.GetComponent<Player>().nickName;
+
+                ammo.text = playerGO.GetComponent<AmmoInfo>().currentAmmo + "/" + playerGO.GetComponent<AmmoInfo>().maxAmmo;
+
+            }
 		}		
 	}
 
 	public void AskForKillConfirmation()
 	{
-		killConfirmationPanel.AskForConfirmation(player);
+		killConfirmationPanel.AskForConfirmation(playerGO);
 	}
 
 	private void OnDisable()

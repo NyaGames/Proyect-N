@@ -29,6 +29,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
 
 	private void Start()
 	{
+        GameObject t = gameObject;
 		imageReceived = GameObject.FindGameObjectWithTag("TargetImage").GetComponent<GameSceneGUIController>().targetImage;
         photonView.Group = (byte)myPlayer.id;
         if (myPlayer.isGameMaster) //Si eres game master, tus grupos de interes son todos los jugadores

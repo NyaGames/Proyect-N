@@ -32,6 +32,7 @@ public class PlayerPositionWithLatLon : MonoBehaviour, IPunObservable
         }
         else
         {
+            
             var map = LocationProviderFactory.Instance.mapManager;
             Vector2d v = new Vector2d(latlonReceived.x, latlonReceived.y);
             transform.localPosition = map.GeoToWorldPosition(v);

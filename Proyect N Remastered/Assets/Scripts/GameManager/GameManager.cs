@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
 		}
 
         if (outOfZoneText.activeSelf && myPlayer != null) {
-            outOfZoneText.GetComponent<TMPro.TextMeshProUGUI>().text = "You have " + myPlayer.GetComponent<Player>().currentSecsOutOfZone + " seconds to return to game area! Run now!";
+            outOfZoneText.GetComponent<TMPro.TextMeshProUGUI>().text = "You have " + myPlayer.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone + " seconds to return to game area! Run now!";
         }
 	}
 

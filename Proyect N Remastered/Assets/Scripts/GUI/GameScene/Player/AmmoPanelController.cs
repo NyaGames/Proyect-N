@@ -5,27 +5,27 @@ using UnityEngine.UI;
 
 public class AmmoPanelController : MonoBehaviour
 {
-    private Player myPlayer;
+    private AmmoInfo myPlayerAmmoinfo;
     public TMPro.TextMeshProUGUI ammoText;
 
 	[SerializeField] private Button photoButton;
 
     void Start()
     {
-        myPlayer = GameManager.Instance.myPlayer.GetComponent<Player>();
+        myPlayerAmmoinfo = GameManager.Instance.myPlayer.GetComponent<AmmoInfo>();
     }
 
    
     void Update()
     {
-        if(myPlayer.currentAmmo <= 0)
+        if(myPlayerAmmoinfo.currentAmmo <= 0)
         {
 			photoButton.interactable = false;
             ammoText.text = "You are out of ammo! Try to find some drops";
         }
         else
         {
-            ammoText.text = myPlayer.currentAmmo + "/" + myPlayer.maxAmmo;
+            ammoText.text = myPlayerAmmoinfo.currentAmmo + "/" + myPlayerAmmoinfo.maxAmmo;
 			photoButton.interactable = true;
         }
     }

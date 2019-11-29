@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Photon.Realtime;
+using Photon.Pun;
 
 public class KillUserPanel : MonoBehaviour
 {
@@ -10,11 +11,11 @@ public class KillUserPanel : MonoBehaviour
 
 	private int actorNumber;
 
-	public void AskForConfirmation(Photon.Realtime.Player user)
+	public void AskForConfirmation(GameObject user)
 	{
 		gameObject.SetActive(true);
-		username.text = user.NickName;
-		actorNumber = user.ActorNumber;
+		username.text = user.GetComponent<Player>().nickName;
+		actorNumber = user.gameObject.GetPhotonView().CreatorActorNr;
 	}
 
     public void KillPlayer()

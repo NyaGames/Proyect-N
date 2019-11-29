@@ -9,7 +9,7 @@ public class ArePlayersInsideZone : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<Player>().insideZone = true;
+            other.gameObject.GetComponent<OutOfZoneInfo>().insideZone = true;
         }
         
     }
@@ -18,7 +18,7 @@ public class ArePlayersInsideZone : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<Player>().insideZone = false;
+            other.gameObject.GetComponent<OutOfZoneInfo>().insideZone = false;
         }
     }
 
@@ -27,7 +27,7 @@ public class ArePlayersInsideZone : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<Player>().insideZone = true;
+            other.gameObject.GetComponent<OutOfZoneInfo>().insideZone = true;
         }
 
     }

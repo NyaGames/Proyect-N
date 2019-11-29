@@ -31,7 +31,7 @@ public class PhotosPanelGUIController : MonoBehaviour
 	{
         Debug.Log("Photo Taken!");
         OpenPhotoConfirmationPanel();
-        GameManager.Instance.myPlayer.GetComponent<Player>().currentAmmo--;
+        GameManager.Instance.myPlayer.GetComponent<AmmoInfo>().currentAmmo--;
 	}
 
 	public void ConfirmPhotoToSend()
