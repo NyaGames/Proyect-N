@@ -32,9 +32,12 @@ public class ShowPlayerInfo : MonoBehaviour
 
                 ammo.text = playerGO.GetComponent<AmmoInfo>().currentAmmo + "/" + playerGO.GetComponent<AmmoInfo>().maxAmmo;
 
+				FindObjectOfType<FreeCameraMovement>().StartFollowingPlayer(GamemasterManager.Instance.playersViewsList[j].transform);
             }
-		}		
-	}
+						
+		}
+	}		
+	
 
 	public void AskForKillConfirmation()
 	{
@@ -44,5 +47,6 @@ public class ShowPlayerInfo : MonoBehaviour
 	private void OnDisable()
 	{
 		killConfirmationPanel.gameObject.SetActive(false);
+		FindObjectOfType<FreeCameraMovement>().StopFollowingPlayer();
 	}
 }

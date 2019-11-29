@@ -12,13 +12,28 @@ public class FreeCameraMovement : CameraMovement
     [SerializeField] private float rotationSpeed = 10f;
 
     private bool isFollowingPlayer = false;
+    private bool inputDisabled = false;
 
     private void OnEnable()
     {
 		Initialize();        
     }
 
-    protected override void HandleInput()
+	private Transform playerToFollow;
+
+	private void Update()
+	{
+		if (!inputDisabled)
+		{
+			base.Update();
+		}
+		else
+		{
+			FollowPlayer();
+		}
+	}
+
+	protected override void HandleInput()
     {    
         switch (Input.touchCount)
         {
@@ -67,7 +82,7 @@ public class FreeCameraMovement : CameraMovement
         stick.transform.position = new Vector3(stick.transform.position.x, size, stick.transform.position.z);
     }
 
-    private void AdjustRotation(Touch firstTouch, Touch secondTouch)
+    private void AdjustRotation (Touch firstTouch, Touch secondTouch)
     {
         if (Input.touchCount != 2) return;
 
@@ -107,13 +122,17 @@ public class FreeCameraMovement : CameraMovement
 
     public void StartFollowingPlayer(Transform playerToFollow)
     {
-        isFollowingPlayer = true;
+		inputDisabled = true;
+		this.playerToFollow = playerToFollow;
+		StartCoroutine(DampToPosition(playerToFollow.position));
     }
 
     public void StopFollowingPlayer()
     {
         isFollowingPlayer = false;
-    }
+		inputDisabled = false;
+
+	}
 
     public void CenterCamera()
     {
@@ -151,5 +170,24 @@ public class FreeCameraMovement : CameraMovement
 			yield return new WaitForEndOfFrame();
 		}
 		onCoroutineFinished();
+	}
+
+	private void FollowPlayer()
+	{
+		transform.position = Vector3.Slerp(transform.position, playerToFollow.position, 0.5f);
+	}
+
+	private IEnumerator DampToPosition(Vector3 target)
+	{
+		Vector3 _velocity = Vector3.zero;
+
+		while ((transform.position - target).magnitude > 1f)
+		{
+			transform.position = Vector3.SmoothDamp(transform.position, target, ref _velocity, smoothTime);		
+
+			yield return new WaitForEndOfFrame();
+		}
+
+		isFollowingPlayer = true;
 	}
 }
