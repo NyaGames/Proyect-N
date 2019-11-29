@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Realtime;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -38,6 +39,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CreateRoom(roomName, roomOptions, null);
         Debug.Log("Sala creada: " + roomName);
         PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
+
+        PhotonNetwork.NickName = screenSceneGUIController.usernameInput.text;
     }
 
     public override void OnCreatedRoom()
@@ -61,9 +64,23 @@ public class RoomManager : MonoBehaviourPunCallbacks
             Debug.Log("Introduce el código de la sala a la que quieres unirte");
         }
 
+        PhotonNetwork.NickName = screenSceneGUIController.usernameInput.text;
     }
     public override void OnJoinedRoom()
     {
+        Debug.Log("Unido a la sala");
+        //Antes de pasar al lobby, comprobamos que nuestro username es único
+        Photon.Realtime.Player[] playerList = PhotonNetwork.PlayerListOthers;
+        foreach (Photon.Realtime.Player p in playerList)
+        {
+            if (p.NickName.Equals(PhotonNetwork.LocalPlayer.NickName))
+            {
+                PhotonNetwork.LeaveRoom();
+                feedbackText.text = "Username already in use, please use other one";
+                return;
+            }
+        }
+
         feedbackText.text = "You have joined Room: " + PhotonNetwork.CurrentRoom.Name;
         SceneManager.LoadScene("LobbyScene");
 

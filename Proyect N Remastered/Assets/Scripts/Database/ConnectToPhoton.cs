@@ -12,7 +12,6 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
     public static ConnectToPhoton Instance { get; private set; }
 
     public TextMeshProUGUI feedbackText;
-    public TMP_InputField usernametext;
 
     private void Awake()
     {
@@ -27,48 +26,31 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
         }
     }
 
-    public void Start()
-    {
-        if (PhotonNetwork.IsConnected) //Si ya estoy conectado,mantengo mi nombre de usuario
-        {
-            usernametext.text = PhotonNetwork.LocalPlayer.NickName;
-        }
-    }
 
     public void Connect()
     {
-        if(usernametext.text != "")
+        feedbackText.text = "Trying to connect...";
+        if (!PhotonNetwork.IsConnected)
         {
-            feedbackText.text = "Trying to connect...";
-            if (!PhotonNetwork.IsConnected)
+            if (PhotonNetwork.ConnectUsingSettings())
             {
-                if (PhotonNetwork.ConnectUsingSettings())
-                {
 
-                }
-                else
-                {
-                    feedbackText.text = "Connection to server failed, try again";
-                }
             }
-            else //Si ya estás conectado a Photon
+            else
             {
-                SceneManager.LoadScene("RoomScreen");
+                feedbackText.text = "Connection to server failed, try again";
             }
         }
-        else
+        else //Si ya estás conectado a Photon
         {
-            feedbackText.text = "Select an username before trying to connect";
+            SceneManager.LoadScene("RoomScreen");
         }
     }
+
 
     public override void OnConnectedToMaster()
     {
         feedbackText.text = "You have been connected";
-
-        PhotonNetwork.LocalPlayer.NickName = usernametext.text;
-
-        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.JoinLobby(null);
         SceneManager.LoadScene("RoomScreen");
     }

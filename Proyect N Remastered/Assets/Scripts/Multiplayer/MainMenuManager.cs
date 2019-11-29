@@ -8,9 +8,5 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
-    public Button playButton;
 
-    public void startGame() {
-        SceneManager.LoadScene(3);
-    }
 }
