@@ -30,9 +30,9 @@ public class ShowPlayerInfo : MonoBehaviour
 				playerGO = GamemasterManager.Instance.playersViewsList[i];
 				username.text = playerGO.GetComponent<Player>().nickName;
 
-                ammo.text = playerGO.GetComponent<AmmoInfo>().currentAmmo + "/" + playerGO.GetComponent<AmmoInfo>().maxAmmo;
+                ammo.text = playerGO.GetComponent<AmmoInfo>().currentAmmo.ToString();
                 ozt.text = playerGO.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone.ToString();
-
+                playersKilled.text = playerGO.GetComponent<KillsInfo>().currentKills.ToString();
 
                 FindObjectOfType<FreeCameraMovement>().StartFollowingPlayer(playerGO.transform);
             }

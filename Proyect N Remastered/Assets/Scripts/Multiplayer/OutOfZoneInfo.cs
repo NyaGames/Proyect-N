@@ -12,41 +12,49 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
     private bool outOfZoneActive = false;
     public bool insideZone;
     private PhotonView photonView;
+    bool gm;
 
-    void Start()
+    public void Awake()
     {
         currentSecsOutOfZone = maxSecsOutOfZone;
         photonView = GetComponent<PhotonView>();
     }
 
+    public void Start()
+    {
+        gm = GameManager.Instance.myPlayer.GetComponent<Player>().isGameMaster;
+    }
+
     void Update()
     {
-
-        if (photonView.IsMine)
+        if (!gm)
         {
-            sendcurrentSecsOutOfZone = currentSecsOutOfZone;
-        }
-        else
-        {
-            currentSecsOutOfZone = receivedcurrentSecsOutOfZone;
-        }
-
-        if (GameManager.Instance.gameStarted) //Si la partida ha empezado, miro si estoy dentro de la zona
-        {
-            if (!insideZone)
+            if (photonView.IsMine)
             {
-                GameManager.Instance.outOfZoneText.SetActive(true);
-                StartCoundDown();
-                this.GetComponent<Renderer>().material.color = new Color(255f, 0f, 0f);
+                sendcurrentSecsOutOfZone = currentSecsOutOfZone;
             }
             else
             {
-                GameManager.Instance.outOfZoneText.SetActive(false);
-                CancelInvoke("Countdown");
-                outOfZoneActive = false;
-                this.GetComponent<Renderer>().material.color = new Color(0f, 255f, 0f);
+                currentSecsOutOfZone = receivedcurrentSecsOutOfZone;
             }
 
+            if (GameManager.Instance.gameStarted) //Si la partida ha empezado, miro si estoy dentro de la zona
+            {
+                if (!insideZone)
+                {
+                    GameManager.Instance.outOfZoneText.SetActive(true);
+                    StartCoundDown();
+                    this.GetComponent<Renderer>().material.color = new Color(255f, 0f, 0f);
+                }
+                else
+                {
+                    GameManager.Instance.outOfZoneText.SetActive(false);
+                    CancelInvoke("Countdown");
+                    outOfZoneActive = false;
+                    this.GetComponent<Renderer>().material.color = new Color(0f, 255f, 0f);
+                }
+
+            }
         }
     }
 

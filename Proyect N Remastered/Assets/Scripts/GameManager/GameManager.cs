@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-        if (outOfZoneText.activeSelf && myPlayer != null) {
+        if (outOfZoneText.activeSelf && myPlayer != null && !PhotonNetwork.LocalPlayer.IsMasterClient) {
             outOfZoneText.GetComponent<TMPro.TextMeshProUGUI>().text = "You have " + myPlayer.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone + " seconds to return to game area! Run now!";
         }
 	}

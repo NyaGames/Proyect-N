@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 114042656775179338}
   - component: {fileID: 4992442455535462994}
   - component: {fileID: 2875053876824187138}
+  - component: {fileID: 3220957023385101540}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -293,6 +294,7 @@ MonoBehaviour:
   - {fileID: 877655161397267938}
   - {fileID: 4992442455535462994}
   - {fileID: 2875053876824187138}
+  - {fileID: 3220957023385101540}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -372,3 +374,17 @@ MonoBehaviour:
   currentSecsOutOfZone: 0
   receivedcurrentSecsOutOfZone: 0
   insideZone: 0
+--- !u!114 &3220957023385101540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8844448876360683055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799aaaea9e0dee74699f32f9133f6505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentKills: 0
+  receivedKills: 0

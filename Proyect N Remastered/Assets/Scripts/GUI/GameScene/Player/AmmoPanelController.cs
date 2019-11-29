@@ -25,7 +25,7 @@ public class AmmoPanelController : MonoBehaviour
         }
         else
         {
-            ammoText.text = myPlayerAmmoinfo.currentAmmo + "/" + myPlayerAmmoinfo.maxAmmo;
+            ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString();
 			photoButton.interactable = true;
         }
     }

@@ -3,49 +3,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmmoInfo : MonoBehaviour,IPunObservable
+public class KillsInfo : MonoBehaviour,IPunObservable
 {
-    public int maxAmmo;
-    [HideInInspector] public int currentAmmo;
-    private int sendAmmo;
-    [HideInInspector] public int receivedAmmo;
+    [HideInInspector] public int currentKills;
+    private int sendKills;
+    [HideInInspector] public int receivedKills;
     PhotonView photonView;
 
     public void Awake()
     {
+        currentKills = 0;
         photonView = GetComponent<PhotonView>();
-
-        currentAmmo = maxAmmo;
     }
 
-    public void Update()
+
+    void Update()
     {
         if (photonView.IsMine)
         {
-            sendAmmo = currentAmmo;
+            sendKills = currentKills;
         }
         else
         {
-            currentAmmo = receivedAmmo;
+            currentKills = receivedKills;
         }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+
         if (stream.IsWriting)
         {
             if (photonView.IsMine)
             {
-                stream.SendNext(sendAmmo);
+                stream.SendNext(sendKills);
             }
-            
-        }else if (stream.IsReading)
+
+        }
+        else if (stream.IsReading)
         {
             if (!photonView.IsMine)
             {
-                receivedAmmo = (int)stream.ReceiveNext();
+                receivedKills = (int)stream.ReceiveNext();
             }
-           
+
         }
     }
 }

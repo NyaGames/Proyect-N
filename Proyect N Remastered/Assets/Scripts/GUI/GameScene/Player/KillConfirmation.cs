@@ -8,8 +8,8 @@ public class KillConfirmation : MonoBehaviour
 
     public Text usernameKilled;
 
-    public void SetPlayerKilled(string playerKilled)
+    public void SetPlayerKilled(string playerKilled,int numKills)
     {
-        usernameKilled.text = playerKilled;
+        usernameKilled.text = playerKilled + ". You have killed " + numKills + " people!";
     }
 }

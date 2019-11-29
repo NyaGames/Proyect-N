@@ -66,6 +66,8 @@ public class PhotosPanelGUIController : MonoBehaviour
     public void KillConfirmed(string playerKilled)
     {
         killConfirmedPanel.SetActive(true);
-        killConfirmedPanel.GetComponent<KillConfirmation>().SetPlayerKilled(playerKilled);
+        GameManager.Instance.myPlayer.GetComponent<KillsInfo>().currentKills += 1;
+        killConfirmedPanel.GetComponent<KillConfirmation>().SetPlayerKilled(playerKilled, GameManager.Instance.myPlayer.GetComponent<KillsInfo>().currentKills);
+        
     }
 }
