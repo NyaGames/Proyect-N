@@ -28,6 +28,14 @@ public class ShowPlayerInfo : MonoBehaviour
 			{
 				player = players[i];
 				username.text = player.NickName;
+
+				for (int j = 0; j < GamemasterManager.Instance.playersViewsList.Length; j++)
+				{
+					if(GamemasterManager.Instance.playersViewsList[j].GetComponent<Player>().id == actorNumber)
+					{
+						FindObjectOfType<FreeCameraMovement>().StartFollowingPlayer(GamemasterManager.Instance.playersViewsList[j].transform);
+					}
+				}			
 			}
 		}		
 	}
@@ -40,5 +48,6 @@ public class ShowPlayerInfo : MonoBehaviour
 	private void OnDisable()
 	{
 		killConfirmationPanel.gameObject.SetActive(false);
+		FindObjectOfType<FreeCameraMovement>().StopFollowingPlayer();
 	}
 }

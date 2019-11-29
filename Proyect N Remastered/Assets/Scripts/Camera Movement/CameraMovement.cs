@@ -27,7 +27,7 @@ public abstract class CameraMovement : MonoBehaviour
         stickRB = stick.GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    protected void Update()
     {
         if (ZoneManager.Instance.isEditingZone) return;
 
