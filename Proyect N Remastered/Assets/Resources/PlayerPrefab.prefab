@@ -269,8 +269,6 @@ MonoBehaviour:
   playerControlScripts:
   - {fileID: 3586165811260207714}
   - {fileID: 114042656775179338}
-  - {fileID: 4992442455535462994}
-  - {fileID: 2875053876824187138}
   photonViewTransform: {fileID: 3104748707656188120}
   isGameMaster: 0
 --- !u!114 &3104748707656188120
@@ -357,6 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAmmo: 3
   currentAmmo: 0
+  receivedAmmo: 0
 --- !u!114 &2875053876824187138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,4 +370,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSecsOutOfZone: 10
   currentSecsOutOfZone: 0
+  receivedcurrentSecsOutOfZone: 0
   insideZone: 0

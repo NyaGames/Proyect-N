@@ -31,8 +31,10 @@ public class ShowPlayerInfo : MonoBehaviour
 				username.text = playerGO.GetComponent<Player>().nickName;
 
                 ammo.text = playerGO.GetComponent<AmmoInfo>().currentAmmo + "/" + playerGO.GetComponent<AmmoInfo>().maxAmmo;
+                ozt.text = playerGO.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone.ToString();
 
-				FindObjectOfType<FreeCameraMovement>().StartFollowingPlayer(GamemasterManager.Instance.playersViewsList[j].transform);
+
+                FindObjectOfType<FreeCameraMovement>().StartFollowingPlayer(playerGO.transform);
             }
 						
 		}

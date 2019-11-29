@@ -8,6 +8,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public enum WaysToKillAPlayer
+{
+    Image, Zone, GMChoice
+}
+
 [RequireComponent(typeof(PhotonView))]
 public class MessageSender : MonoBehaviourPunCallbacks
 {
@@ -108,7 +113,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
             {
                 if (GamemasterManager.Instance.playersViewsList[i].GetPhotonView().Owner.NickName == playerToKill)
                 {
-                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All, ImageManager.Instance.imagesList[0],sender);
+                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All, ImageManager.Instance.imagesList[0],sender,WaysToKillAPlayer.Image);
                 }
                 if(GamemasterManager.Instance.playersViewsList[i].GetPhotonView().Owner.NickName == sender)
                 {
@@ -132,20 +137,34 @@ public class MessageSender : MonoBehaviourPunCallbacks
 
 
     [PunRPC]
-    public void KillYourself(byte [] image, string killer)
+    public void KillYourself(byte [] image, string killer, WaysToKillAPlayer way)
     {
-        Debug.Log("Matao");
-        if (photonView.IsMine && !myPlayer.isGameMaster)
+        switch (way)
         {
-            PhotonNetwork.Destroy(gameObject);
-            PhotosPanelGUIController.Instance.PlayerKilled(getUncompressedTextureFromBytes(image),killer);
-            
+            case WaysToKillAPlayer.Image:
+                Debug.Log("Matao");
+                if (photonView.IsMine && !myPlayer.isGameMaster)
+                {
+                    PhotonNetwork.Destroy(gameObject);
+                    PhotosPanelGUIController.Instance.PlayerKilled(getUncompressedTextureFromBytes(image), killer);
+                }
+                else
+                {
+                    Debug.Log("No es mio,creado por: " + photonView.CreatorActorNr + " y lo controla:" + photonView.ControllerActorNr);
+                }
+                break;
+
+            case WaysToKillAPlayer.Zone:
+                PhotonNetwork.Destroy(gameObject);
+                Debug.Log("TE MORISTE POR LA ZONA CRACK");
+                break;
+
+            case WaysToKillAPlayer.GMChoice:
+                PhotonNetwork.Destroy(gameObject);
+                Debug.Log("TE MATO EL GM CRACK");
+                break;
         }
-        else
-        {
-            Debug.Log("No es mio,creado por: " + photonView.CreatorActorNr + " y lo controla:" + photonView.ControllerActorNr);
-        }
-        
+
     }
 
     public override void OnLeftRoom()

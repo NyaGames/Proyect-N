@@ -7,16 +7,30 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
 {
     public int maxSecsOutOfZone;
     [HideInInspector] public int currentSecsOutOfZone;
+    private int sendcurrentSecsOutOfZone;
+    [HideInInspector] public int receivedcurrentSecsOutOfZone;
     private bool outOfZoneActive = false;
     public bool insideZone;
+    private PhotonView photonView;
 
     void Start()
     {
         currentSecsOutOfZone = maxSecsOutOfZone;
+        photonView = GetComponent<PhotonView>();
     }
 
     void Update()
     {
+
+        if (photonView.IsMine)
+        {
+            sendcurrentSecsOutOfZone = currentSecsOutOfZone;
+        }
+        else
+        {
+            currentSecsOutOfZone = receivedcurrentSecsOutOfZone;
+        }
+
         if (GameManager.Instance.gameStarted) //Si la partida ha empezado, miro si estoy dentro de la zona
         {
             if (!insideZone)
@@ -52,7 +66,9 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
             CancelInvoke("Countdown");
             outOfZoneActive = false;
             Debug.Log("Te moriste por estar fuera de la zona");
-            PhotonNetwork.Destroy(gameObject);
+            string s = "Zone kill";
+            GetComponent<MessageSender>().KillYourself(new byte [0] ,s,WaysToKillAPlayer.Zone);
+            
         }
     }
 
@@ -60,11 +76,11 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(currentSecsOutOfZone);
+            stream.SendNext(sendcurrentSecsOutOfZone);
         }
         else if (stream.IsReading)
         {
-            currentSecsOutOfZone = (int)stream.ReceiveNext();
+            receivedcurrentSecsOutOfZone = (int)stream.ReceiveNext();
         }
     }
 

@@ -9,18 +9,20 @@ public class KillUserPanel : MonoBehaviour
 {
 	[SerializeField] private TextMeshProUGUI username;
 
-	private int actorNumber;
+	private GameObject playerPrefab;
 
 	public void AskForConfirmation(GameObject user)
 	{
 		gameObject.SetActive(true);
 		username.text = user.GetComponent<Player>().nickName;
-		actorNumber = user.gameObject.GetPhotonView().CreatorActorNr;
+        playerPrefab = user;
 	}
 
     public void KillPlayer()
 	{
-		gameObject.SetActive(false);
+        string s = "GM killed you";
+        playerPrefab.GetPhotonView().RPC("KillYourself", RpcTarget.All, new byte[0], s,WaysToKillAPlayer.GMChoice);
+        gameObject.SetActive(false);
 		Debug.Log("Pum, " + username.text + " matao!");
 	}	
 }
