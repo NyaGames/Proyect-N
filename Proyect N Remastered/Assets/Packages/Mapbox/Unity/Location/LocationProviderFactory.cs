@@ -32,6 +32,9 @@ namespace Mapbox.Unity.Location
 		AbstractLocationProvider _transformLocationProvider;
 
 		[SerializeField]
+		AbstractLocationProvider _webGlLocationProvider;
+
+		[SerializeField]
 		bool _dontDestroyOnLoad;
 
 
@@ -175,6 +178,17 @@ namespace Mapbox.Unity.Location
 			{
 				Debug.LogFormat("LocationProviderFactory: Injected native Android DEVICE Location Provider - {0}", _deviceLocationProviderAndroid.GetType());
 				DefaultLocationProvider = _deviceLocationProviderAndroid;
+			}
+			else if (Application.platform == RuntimePlatform.WebGLPlayer)
+			{
+				_webGlLocationProvider.gameObject.SetActive(true);
+				Debug.LogFormat("LocationProviderFactory: Injected native WEBGL Location Provider - {0}", _webGlLocationProvider.GetType());
+				DefaultLocationProvider = _webGlLocationProvider;
+			}
+			else if (Application.platform == RuntimePlatform.WindowsPlayer)
+			{
+				Debug.LogFormat("LocationProviderFactory: Injected EDITOR Location Provider - {0}", _editorLocationProvider.GetType());
+				DefaultLocationProvider = _editorLocationProvider;
 			}
 			else
 			{

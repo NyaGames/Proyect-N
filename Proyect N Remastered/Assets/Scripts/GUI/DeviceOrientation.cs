@@ -18,9 +18,23 @@ public class DeviceOrientation : MonoBehaviour
         }
 	}
 
-	public void ChangeOrientation(bool changeToLandscape)
+	public void TriggerOrientation()
 	{
-		if (!changeToLandscape)
+		if (!PersistentData.isGM)
+		{
+			Screen.orientation = ScreenOrientation.Portrait;
+		}
+		else
+		{
+			Screen.orientation = ScreenOrientation.Landscape;
+		}
+
+		Invoke("EnableAutorotation", 2f);
+	}
+
+	private void EnableAutorotation()
+	{
+		if (!PersistentData.isGM)
 		{
 			Screen.orientation = ScreenOrientation.AutoRotation;
 			Screen.autorotateToPortrait = true;

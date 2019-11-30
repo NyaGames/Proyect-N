@@ -15,7 +15,7 @@ public abstract class CameraMovement : MonoBehaviour
     protected Rigidbody stickRB;
 
     protected float zoom;
-	protected float smoothTime = 0.5f;
+	protected float smoothTime = 1f;
 
 
 	private void Awake()

@@ -20,6 +20,7 @@ public class FreeCameraMovement : CameraMovement
     }
 
 	private Transform playerToFollow;
+	[HideInInspector] public Transform gameMaster;
 
 	private void Update()
 	{
@@ -124,7 +125,7 @@ public class FreeCameraMovement : CameraMovement
     {
 		inputDisabled = true;
 		this.playerToFollow = playerToFollow;
-		StartCoroutine(DampToPosition(playerToFollow.position));
+		StartCoroutine(DampToPosition(playerToFollow.position, SetFollowingPlayer));
     }
 
     public void StopFollowingPlayer()
@@ -133,11 +134,6 @@ public class FreeCameraMovement : CameraMovement
 		inputDisabled = false;
 
 	}
-
-    public void CenterCamera()
-    {
-
-    }
 
 	public override void Initialize()
 	{
@@ -177,7 +173,12 @@ public class FreeCameraMovement : CameraMovement
 		transform.position = Vector3.Slerp(transform.position, playerToFollow.position, 0.5f);
 	}
 
-	private IEnumerator DampToPosition(Vector3 target)
+	public void CenterCamera()
+	{
+		StartCoroutine(DampToPosition(gameMaster.position));
+	}
+
+	private IEnumerator DampToPosition(Vector3 target, Action OnCorotuineFinished = null)
 	{
 		Vector3 _velocity = Vector3.zero;
 
@@ -186,8 +187,16 @@ public class FreeCameraMovement : CameraMovement
 			transform.position = Vector3.SmoothDamp(transform.position, target, ref _velocity, smoothTime);		
 
 			yield return new WaitForEndOfFrame();
-		}
+		}	
 
+		if(OnCorotuineFinished != null)
+		{
+			OnCorotuineFinished();
+		}
+	}
+
+	private void SetFollowingPlayer()
+	{
 		isFollowingPlayer = true;
 	}
 }

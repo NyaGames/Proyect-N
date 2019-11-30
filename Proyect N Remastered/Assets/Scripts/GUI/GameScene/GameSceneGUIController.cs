@@ -33,7 +33,6 @@ public class GameSceneGUIController : MonoBehaviour
         GM = PersistentData.isGM;
 
         AdjustCamera();
-        AdjustOrientation();
         AdjustGUI();
     }
 
@@ -48,17 +47,7 @@ public class GameSceneGUIController : MonoBehaviour
             camera.rect = new Rect(0f, 0f, 1f, 1f);
         }
     }
-    private void AdjustOrientation()
-    {
-        if (GM)
-        {
-            DeviceOrientation.Instance.ChangeOrientation(true);
-        }
-        else
-        {
-            DeviceOrientation.Instance.ChangeOrientation(false);
-        }     
-    }
+   
     private void AdjustGUI()
     {
         if (GM)

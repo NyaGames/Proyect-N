@@ -146,6 +146,7 @@ public class Player : MonoBehaviour
 		if (isGameMaster)
 		{
 			Camera.main.GetComponentInParent<CameraController>().UnlockCamera();
+			Camera.main.GetComponentInParent<FreeCameraMovement>().gameMaster = transform;
 		}
 		else
 		{
