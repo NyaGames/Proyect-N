@@ -200,7 +200,7 @@ public class GamemasterManager : MonoBehaviour
 				staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
                 HideProvZone();
 
-                staticZone.transform.GetChild(0).gameObject.AddComponent<ArePlayersInsideZone>();
+                staticZone.transform.GetChild(1).gameObject.AddComponent<ArePlayersInsideZone>();
             }
             else //Si ya habia una zona en el mapa, se guarda la zona editada en nextZone
             {
@@ -209,6 +209,7 @@ public class GamemasterManager : MonoBehaviour
                 newZonePosition.transform.localScale = provZone.transform.localScale;
                 newZonePosition.GetComponentInChildren<MeshRenderer>().material = newZonePositionMat;
                 provZoneCreated = false;
+
             }      
         }
 
@@ -235,7 +236,7 @@ public class GamemasterManager : MonoBehaviour
 
     public IEnumerator CloseActualZone()
     {
-        float timeToClose = 2.0f;
+        float timeToClose = 3.0f;
         float t = 0;
         Vector3 InitialScale = staticZone.transform.localScale;
         Vector3 FinalScale = newZonePosition.transform.localScale;
@@ -255,6 +256,7 @@ public class GamemasterManager : MonoBehaviour
         staticZone = PhotonNetwork.Instantiate(zonePrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
         staticZone.transform.localScale = FinalScale;
         staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
+        staticZone.transform.GetChild(1).gameObject.AddComponent<ArePlayersInsideZone>();
 
         //newZonePosition.SetActive(false);
         Destroy(newZonePosition);

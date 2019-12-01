@@ -150,12 +150,15 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 }
                 else
                 {
+                    
                     Debug.Log("No es mio,creado por: " + photonView.CreatorActorNr + " y lo controla:" + photonView.ControllerActorNr);
                 }
                 break;
 
             case WaysToKillAPlayer.Zone:
                 PhotonNetwork.Destroy(gameObject);
+                PhotonNetwork.LeaveRoom();
+                SceneManager.LoadScene("DeathByZone");
                 Debug.Log("TE MORISTE POR LA ZONA CRACK");
                 break;
 

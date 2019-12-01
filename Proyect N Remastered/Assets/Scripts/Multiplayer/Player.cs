@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     public bool isGameMaster;
     public int id { get; set; }
-    public string nickName;
+    [HideInInspector] public string nickName;
     [HideInInspector]public PhotonView photonViewTransform;
 
     private BoxCollider playerCollider;
@@ -37,8 +37,6 @@ public class Player : MonoBehaviour
             isGameMaster = (bool)playerReference.CustomProperties["isGameMaster"];
             nickName = gameObject.GetPhotonView().Owner.NickName;
 
-           
-
         }
         else //Si soy yo,cojo los datos de mi escena
         {
@@ -49,11 +47,11 @@ public class Player : MonoBehaviour
         Color playerColor;
         if (isGameMaster)
         {
-            playerColor = new Color(0f, 255f, 0f);
+            playerColor = new Color(0f, 0f, 255f);
         }
         else
         {
-            playerColor = new Color(0f, 0f, 255f);
+            playerColor = new Color(0f, 255f, 0f);
         }
        
         this.GetComponent<Renderer>().material.color = playerColor;			           
