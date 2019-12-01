@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
             Photon.Realtime.Player playerReference = getPlayerReference(photonViewTransform.OwnerActorNr); 
             id = (int)playerReference.CustomProperties["id"];
             isGameMaster = (bool)playerReference.CustomProperties["isGameMaster"];
-            nickName = gameObject.GetPhotonView().Controller.NickName;
+            nickName = gameObject.GetPhotonView().Owner.NickName;
 
             if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["isGameMaster"]) //Si el cliente NO es game master, desactiva a los demás
             {
