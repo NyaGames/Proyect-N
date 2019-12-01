@@ -67,7 +67,7 @@ public class FreeCameraMovement : CameraMovement
 
         float distance = speed * 1000 * Time.deltaTime;
   
-        rb.AddForce(direction * distance);
+        rb.AddRelativeForce(direction * distance);
     }
 
     private void AdjustZoom(Touch firstTouch, Touch secondTouch)
