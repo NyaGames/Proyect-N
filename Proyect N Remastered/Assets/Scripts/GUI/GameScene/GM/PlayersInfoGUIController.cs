@@ -26,7 +26,7 @@ public class PlayersInfoGUIController : MonoBehaviour
 		ShowUsers();
 	}
 
-	private void OnValidate()
+	private void Awake()
 	{
 		if (!Instance)
 		{

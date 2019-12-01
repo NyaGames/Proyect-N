@@ -14,7 +14,7 @@ public class UsersPanelGUIController : MonoBehaviour
 
 	private List<GameObject> users = new List<GameObject>();
 
-	private void OnValidate()
+	private void Awake()
 	{
 		if (!Instance)
 		{
@@ -56,7 +56,8 @@ public class UsersPanelGUIController : MonoBehaviour
 
 	public void SelectUser(string nicknameSelected)
 	{
-		PhotosPanelGUIController.Instance.CancelPhotoToSend();
+		//PhotosPanelGUIController.Instance.CancelPhotoToSend();
+		GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().CancelPhotoToSend();
 		gameObject.SetActive(false);		
 		GameManager.Instance.myPlayer.GetComponent<MessageSender>().SendImageToMaster(GameSceneGUIController.Instance.sourceImage, nicknameSelected);
 		
