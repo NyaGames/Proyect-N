@@ -169,12 +169,33 @@ public class CameraWebPhoto : MonoBehaviour
             }
         }
         Debug.Log("Height: " + tex.height + "  Width: " + tex.width);
-        Texture photoTakenTex = ResampleAndCrop(tex, tamaño, tamaño);
+        Texture2D photoTakenTex = ResampleAndCrop(tex, tamaño, tamaño);
         int orient = -finalCam.videoRotationAngle;
+        if (orient != 0)
+            photoTakenTex = rotate(photoTakenTex);
         Debug.Log("Height: "+ photoTakenTex.height + "  Width: "+ photoTakenTex.width);
         snapTakenImage.texture = photoTakenTex;
-        snapTakenImage.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
+        //snapTakenImage.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
+        //Debug.Log(orient);
     }
+    public static Texture2D rotate(Texture2D t)
+    {
+        
+            Texture2D newTexture = new Texture2D(t.height, t.width, t.format, false);
+
+            for (int i = 0; i < t.width; i++)
+            {
+                for (int j = 0; j < t.height; j++)
+                {
+                    newTexture.SetPixel(j, i, t.GetPixel(t.width - i, j));
+                }
+            }
+            newTexture.Apply();
+            return newTexture;
+        
+    }
+   
+
     /*public void TakePhotoGuarra()
     {
         Canvas canvas = null;
