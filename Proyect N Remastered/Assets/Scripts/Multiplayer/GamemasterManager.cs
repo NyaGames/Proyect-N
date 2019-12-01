@@ -140,7 +140,7 @@ public class GamemasterManager : MonoBehaviour
             case TouchPhase.Moved:
                 if (provZone.activeSelf == true)
                 {
-                    float distanceFromCenterToTap = (Vector3.zero - touchInWorldCoord).magnitude;
+                    float distanceFromCenterToTap = (provZone.transform.position - touchInWorldCoord).magnitude;
                     provZone.transform.localScale = new Vector3(distanceFromCenterToTap * 2, 5f, distanceFromCenterToTap * 2);
                 }           
 
@@ -338,7 +338,7 @@ public class GamemasterManager : MonoBehaviour
 
 	public float getDistanceFromCameraToGround()
 	{
-		return (GameObject.Find("LocationBasedGame").transform.position - GameObject.Find("Main Camera").transform.position).magnitude;
+		return (GameObject.Find("LocationBasedGame").transform.position.y + GameObject.Find("Main Camera").transform.position.y);
 	}
 
 	//Player interaction methods
