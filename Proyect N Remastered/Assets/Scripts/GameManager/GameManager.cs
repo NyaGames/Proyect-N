@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject outOfZoneText;
 
     // Start is called before the first frame update
-    void Awake()
+    void OnValidate()
     {
 		if (!Instance)
 		{
@@ -36,11 +36,14 @@ public class GameManager : MonoBehaviour
 		else
 		{
 			Destroy(this);
-		}
-
-        myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
-        gameStarted = false;
+		}        
     }
+
+	private void Awake()
+	{
+		myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
+		gameStarted = false;
+	}
 
 	/*public void SetCountDown(int secs, string countDownText, UnityAction onCountDownFinished)
 	{
