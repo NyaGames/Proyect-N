@@ -11,8 +11,7 @@ public abstract class CameraMovement : MonoBehaviour
 	[SerializeField] protected Vector3 startingSwivel;
 
 	protected Transform swivel, stick;
-    protected Camera m_camera;
-    protected Rigidbody stickRB;
+    protected Camera m_camera;   
 
     protected float zoom;
 	protected float smoothTime = 1f;
@@ -22,9 +21,7 @@ public abstract class CameraMovement : MonoBehaviour
     {
         swivel = transform.GetChild(0);
         stick = swivel.GetChild(0);
-        m_camera = stick.GetChild(0).GetComponent<Camera>();
-
-        stickRB = stick.GetComponent<Rigidbody>();
+        m_camera = stick.GetChild(0).GetComponent<Camera>();		
     }
 
     protected void Update()
@@ -51,7 +48,7 @@ public abstract class CameraMovement : MonoBehaviour
     protected abstract void HandleInput();
     public abstract void Initialize();
 
-	public abstract IEnumerator DampCamera(Action onCoroutineFinished);
+	public abstract IEnumerator DampStick(Action onCoroutineFinished);
 
 
 }

@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
 	{
 		if (cameraLocked)
 		{ 
-			StartCoroutine(freeCameraMovement.DampCamera(UnlockCamera));
+			StartCoroutine(freeCameraMovement.DampStick(UnlockCamera));
 		}
 		else
 		{
@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
 			lockedCameraMovement.Initialize();
 
 
-			StartCoroutine(lockedCameraMovement.DampCamera(LockCamera));
+			StartCoroutine(lockedCameraMovement.DampStick(LockCamera));
 		}
 
 		cameraLocked = !cameraLocked;

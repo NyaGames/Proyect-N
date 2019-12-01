@@ -70,7 +70,8 @@ public class PlayersInfoGUIController : MonoBehaviour
 
 	public void ShowInfo(int actorNumber)
 	{
-		infoPanel.GetComponent<ShowPlayerInfo>().ShowUserInfo(actorNumber);
+
+		infoPanel.GetComponent<ShowPlayerInfo>().ShowUserInfo(actorNumber);		
 	}
 
 	private void OnDisable()

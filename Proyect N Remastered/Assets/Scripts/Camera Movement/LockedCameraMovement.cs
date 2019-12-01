@@ -111,7 +111,7 @@ public class LockedCameraMovement : CameraMovement
 		swivel.localRotation = Quaternion.Euler(startingSwivel);
 	}
 
-	public override IEnumerator DampCamera(Action onCoroutineFinished)
+	public override IEnumerator DampStick(Action onCoroutineFinished)
 	{	
 
 		Vector3 _targetPosition = startingStick;

@@ -22,6 +22,13 @@ public class FreeCameraMovement : CameraMovement
 	private Transform playerToFollow;
 	[HideInInspector] public Transform gameMaster;
 
+	private Rigidbody rb;
+
+	private void Start()
+	{
+		rb = GetComponent<Rigidbody>();
+	}
+
 	private void Update()
 	{
 		if (!inputDisabled)
@@ -54,13 +61,13 @@ public class FreeCameraMovement : CameraMovement
     {
         Vector2 touchDeltaPosition = touch.deltaPosition;
 
-        Vector3 direction = new Vector3(-touchDeltaPosition.x, -touchDeltaPosition.y, 0f).normalized;
+        Vector3 direction = new Vector3(-touchDeltaPosition.x, 0f, -touchDeltaPosition.y).normalized;
 
         float speed = Mathf.Lerp(moveSpeed.x, moveSpeed.y, zoom);
 
         float distance = speed * 1000 * Time.deltaTime;
   
-        stickRB.AddRelativeForce(direction * distance);
+        rb.AddForce(direction * distance);
     }
 
     private void AdjustZoom(Touch firstTouch, Touch secondTouch)
@@ -140,8 +147,7 @@ public class FreeCameraMovement : CameraMovement
 		m_camera.orthographic = true;
 
 		float halfFrustumHeight = (m_camera.transform.position.y + 15) * Mathf.Tan(m_camera.fieldOfView * 0.5f * Mathf.Deg2Rad);
-		m_camera.orthographicSize = halfFrustumHeight;
-	
+		m_camera.orthographicSize = halfFrustumHeight;	
 
 		swivel.localRotation = Quaternion.Euler(startingSwivel);
 		stick.localPosition = startingStick;
@@ -150,7 +156,7 @@ public class FreeCameraMovement : CameraMovement
 		stick.transform.position = new Vector3(stick.transform.position.x, m_camera.orthographicSize, stick.transform.position.z);
 	}
 
-	public override IEnumerator DampCamera(Action onCoroutineFinished)
+	public override IEnumerator DampStick(Action onCoroutineFinished)
 	{
 		Vector3 _targetPosition = new Vector3(0, 0, -100);
 		Vector3 _targetRotation = new Vector3(90, 0, 0);
@@ -158,7 +164,7 @@ public class FreeCameraMovement : CameraMovement
 		Vector3 _movementVelocity = Vector3.zero;
 		Vector3 _rotationVelocity = Vector3.zero;
 
-		while ((stick.localPosition - _targetPosition).magnitude > 1f)
+		while ((transform.localPosition - _targetPosition).magnitude > 1f)
 		{
 			stick.localPosition = Vector3.SmoothDamp(stick.localPosition, _targetPosition, ref _movementVelocity, smoothTime);
 			swivel.localRotation = Quaternion.Euler(Vector3.SmoothDamp(swivel.localRotation.eulerAngles, _targetRotation, ref _rotationVelocity, smoothTime));
@@ -179,20 +185,15 @@ public class FreeCameraMovement : CameraMovement
 	}
 
 	private IEnumerator DampToPosition(Vector3 target, Action OnCorotuineFinished = null)
-	{
+	{	
 		Vector3 _velocity = Vector3.zero;
 
-		while ((transform.position - target).magnitude > 1f)
+		while ((transform.position - target).magnitude > 0.1f)
 		{
-			transform.position = Vector3.SmoothDamp(transform.position, target, ref _velocity, smoothTime);		
+			transform.position = Vector3.SmoothDamp(transform.position, target, ref _velocity, 0.5f);		
 
 			yield return new WaitForEndOfFrame();
-		}	
-
-		if(OnCorotuineFinished != null)
-		{
-			OnCorotuineFinished();
-		}
+		}		
 	}
 
 	private void SetFollowingPlayer()

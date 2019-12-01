@@ -28,7 +28,7 @@ public class ShowPlayerInfo : MonoBehaviour
 			if(GamemasterManager.Instance.playersViewsList[i].GetPhotonView().CreatorActorNr == actorNumber)
 			{
 				playerGO = GamemasterManager.Instance.playersViewsList[i];
-				username.text = playerGO.GetComponent<Player>().nickName;
+				//username.text = playerGO.GetComponent<Player>().nickName;
 
                 ammo.text = playerGO.GetComponent<AmmoInfo>().currentAmmo.ToString();
                 ozt.text = playerGO.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone.ToString();
@@ -38,6 +38,7 @@ public class ShowPlayerInfo : MonoBehaviour
             }
 						
 		}
+		
 	}		
 	
 

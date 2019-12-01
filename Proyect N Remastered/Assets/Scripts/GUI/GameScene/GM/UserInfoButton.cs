@@ -7,7 +7,7 @@ public class UserInfoButton : MonoBehaviour
 	[HideInInspector] public int actorNumber;
 
     public void ShowUser()
-	{
-		PlayersInfoGUIController.Instance.ShowInfo(actorNumber);
+	{	
+		GameSceneGUIController.Instance.playersInfoPanel.GetComponent<PlayersInfoGUIController>().ShowInfo(actorNumber);
 	}
 }
