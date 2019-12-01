@@ -10,11 +10,12 @@ public class ChangeButtonText : MonoBehaviour
 
 	private int index = 0;
 
-	private Text text;
+	private TMPro.TextMeshProUGUI text;
 
 	private void Awake()
 	{
-		text = GetComponentInChildren<Text>();
+        GameObject g = gameObject;
+		text = GetComponentInChildren<TMPro.TextMeshProUGUI>();
 	}
 
 	public void ChangeText()

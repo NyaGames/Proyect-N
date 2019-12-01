@@ -13,16 +13,13 @@ public class ArePlayersInsideZone : MonoBehaviour
 
     public void Update()
     {
-        foreach(GameObject g in GamemasterManager.Instance.playersViewsList)
-        {
-            if (!zoneCollider.bounds.Contains(g.transform.position)) //Si el jugador está fuera de la zona y no está avisado, se le avisa
-            {
-                g.GetComponent<OutOfZoneInfo>().insideZone = false;
-            }else
-            {
-                g.GetComponent<OutOfZoneInfo>().insideZone = true;
-            }
 
+        if (!zoneCollider.bounds.Contains(GameManager.Instance.myPlayer.transform.position)) //Si el jugador está fuera de la zona y no está avisado, se le avisa
+        {
+            GameManager.Instance.myPlayer.GetComponent<OutOfZoneInfo>().insideZone = false;
+        }else
+        {
+            GameManager.Instance.myPlayer.GetComponent<OutOfZoneInfo>().insideZone = true;
         }
     }
 

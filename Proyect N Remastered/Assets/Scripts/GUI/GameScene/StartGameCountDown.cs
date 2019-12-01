@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class CountDown : MonoBehaviour,IPunObservable
+public class StartGameCountDown : MonoBehaviour, IPunObservable
 {
     int secs;
     int secsSend;
@@ -16,10 +16,11 @@ public class CountDown : MonoBehaviour,IPunObservable
     bool countdownActive;
 
     PhotonView photonView;
-    TextMeshProUGUI countDownText; 
+    TextMeshProUGUI countDownText;
 
     public void Awake()
     {
+        secs = 99;
         photonView = GetComponent<PhotonView>();
         GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
         countDownText = g.GetComponent<TextMeshProUGUI>();
@@ -32,7 +33,7 @@ public class CountDown : MonoBehaviour,IPunObservable
         this.secs = secs;
         this.countDownString = countDowntring;
         this.onCountDownFinished += onCountDownFinished;
-        
+
     }
 
     public void StartCoundDown()
@@ -47,12 +48,13 @@ public class CountDown : MonoBehaviour,IPunObservable
     {
         secs--;
         secsSend = secs;
-        if (secsSend < 0)
+        if (secsSend < -1)
         {
-            PhotonNetwork.Destroy(photonView);
+            GameManager.Instance.StartGame();
             CancelInvoke("Countdown");
             onCountDownFinished();
             countdownActive = false;
+            PhotonNetwork.Destroy(photonView);
         }
     }
 
@@ -61,11 +63,23 @@ public class CountDown : MonoBehaviour,IPunObservable
         if (photonView.IsMine)
         {
             secsSend = secs;
-            countDownText.text = countDownString + secsSend;
         }
         else
         {
-            countDownText.text = countDownString + secsReceived;
+            secs = secsReceived;
+            if(secs < 0)
+            {
+                GameManager.Instance.StartGame();
+            }
+        }
+
+        if(secs < 0)
+        {
+            countDownText.text = "0";
+        }
+        else
+        {
+            countDownText.text = countDownString + secs;
         }
        
     }
