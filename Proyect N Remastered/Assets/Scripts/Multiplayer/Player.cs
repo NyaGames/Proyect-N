@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     public bool isGameMaster;
     public int id { get; set; }
-    public string nickName;
+    [HideInInspector] public string nickName;
     [HideInInspector]public PhotonView photonViewTransform;
 
     private BoxCollider playerCollider;
