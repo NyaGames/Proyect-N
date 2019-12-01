@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(Button))]
 public class StartCountDownButton : MonoBehaviour
 {
-	[SerializeField] private Text minsText;
-	[SerializeField] private Text secsText;
+	[SerializeField] private TextMeshProUGUI minsText;
+	[SerializeField] private TextMeshProUGUI secsText;
 
-	[SerializeField] private Text timeWarning;
-	[SerializeField] private Text zoneWarning;
+	[SerializeField] private TextMeshProUGUI timeWarning;
+	[SerializeField] private TextMeshProUGUI zoneWarning;
 
 	private Button button;
 

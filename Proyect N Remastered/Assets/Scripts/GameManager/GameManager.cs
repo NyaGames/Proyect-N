@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject myPlayer { get; private set; }
     public bool gameStarted { get; private set; }
 
-	[SerializeField] private Text gmCountDownText;
-	[SerializeField] private Text playerCountDownText;
+	[SerializeField] private TextMeshProUGUI gmCountDownText;
+	[SerializeField] private TextMeshProUGUI playerCountDownText;
 	[SerializeField] private Button playerPhotoButton;
 
 	private int secsToGameStart;

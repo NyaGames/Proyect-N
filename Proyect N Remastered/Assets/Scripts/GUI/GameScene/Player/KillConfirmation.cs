@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class KillConfirmation : MonoBehaviour
 {
-
-    public Text usernameKilled;
+    public TextMeshProUGUI usernameKilled;
 
     public void SetPlayerKilled(string playerKilled,int numKills)
     {
