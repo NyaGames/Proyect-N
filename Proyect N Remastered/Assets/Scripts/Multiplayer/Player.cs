@@ -9,13 +9,21 @@ public class Player : MonoBehaviour
     public bool isGameMaster;
     public int id { get; set; }
     public string nickName;
-    public PhotonView photonViewTransform;
+    [HideInInspector]public PhotonView photonViewTransform;
 
     private BoxCollider playerCollider;
 
     private void Awake()
     {
+        photonViewTransform = GetComponent<PhotonView>();
         //Debug.Log("AHORA SE CREA EL PLAYER");
+        if (photonViewTransform.IsMine)
+        {
+            nickName = PhotonNetwork.NickName;
+            isGameMaster = PersistentData.isGM;
+            id = PhotonNetwork.LocalPlayer.ActorNumber;
+           
+        }
     }
 
     void Start()
@@ -29,27 +37,13 @@ public class Player : MonoBehaviour
             isGameMaster = (bool)playerReference.CustomProperties["isGameMaster"];
             nickName = gameObject.GetPhotonView().Owner.NickName;
 
-            if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["isGameMaster"]) //Si el cliente NO es game master, desactiva a los demás
-            {
-               // if (isGameMaster)
-                //{
-                 //   gameObject.SetActive(false);
-               // }
-               // else
-               // {
-                    Destroy(gameObject);
-               // }
-                
-            }
+           
 
         }
         else //Si soy yo,cojo los datos de mi escena
         {
-            nickName = PhotonNetwork.NickName;
-            isGameMaster = PersistentData.isGM;
-            id = PhotonNetwork.LocalPlayer.ActorNumber;          
-			InitCamera();
-		}
+            InitCamera();
+        }
 
         //Visual
         Color playerColor;
