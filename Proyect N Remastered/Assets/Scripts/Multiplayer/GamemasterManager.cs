@@ -35,7 +35,7 @@ public class GamemasterManager : MonoBehaviour
 
     private bool provZoneCreated = false;
 
-    private void Awake()
+    private void OnValidate()
     {
         if (!Instance)
         {

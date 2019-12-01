@@ -14,7 +14,7 @@ public class UsersPanelGUIController : MonoBehaviour
 
 	private List<GameObject> users = new List<GameObject>();
 
-	private void Awake()
+	private void OnValidate()
 	{
 		if (!Instance)
 		{
