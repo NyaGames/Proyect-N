@@ -9,8 +9,8 @@ public class UserButton : MonoBehaviour
     private string userNickname;
 
 	public void SelectUser()
-	{
-        userNickname = GetComponentInChildren<Text>().text;
-		UsersPanelGUIController.Instance.SelectUser(userNickname);
+	{ 		
+		//UsersPanelGUIController.Instance.SelectUser(userNickname);
+		GameSceneGUIController.Instance.userPanel.GetComponent<UsersPanelGUIController>().SelectUser(userNickname);
 	}
 }

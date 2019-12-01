@@ -12,6 +12,8 @@ public class GameSceneGUIController : MonoBehaviour
 	[SerializeField] private GameObject webCameraPanel;
 
 	public GameObject playersInfoPanel;
+	public GameObject userPanel;
+	public GameObject photosPanel;
 
 	public RawImage targetImage;
 	public RawImage sourceImage;

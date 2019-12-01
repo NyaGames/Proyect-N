@@ -35,7 +35,7 @@ public class GamemasterManager : MonoBehaviour
 
     private bool provZoneCreated = false;
 
-    private void OnValidate()
+    private void Awake()
     {
         if (!Instance)
         {
@@ -174,7 +174,7 @@ public class GamemasterManager : MonoBehaviour
         Vector2 firstTouchPrevPos = firstTouch.position - firstTouch.deltaPosition;
         Vector2 secondTouchPrevPos = secondTouch.position - secondTouch.deltaPosition;
 
-        float zoomSpeed = 1f;
+        float zoomSpeed = 0.5f;
 
         if (firstTouch.position.x / Screen.width < 0.66 && secondTouch.position.x / Screen.width < 0.66)
         {

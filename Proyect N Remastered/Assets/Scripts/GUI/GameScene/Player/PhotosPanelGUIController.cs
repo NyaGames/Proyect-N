@@ -42,7 +42,7 @@ public class PhotosPanelGUIController : MonoBehaviour
 
 	public void CancelPhotoToSend()
 	{
-		Debug.Log("Photo Canceled!");
+		//Debug.Log("Photo Canceled!");
 		photoConfirmationPanel.SetActive(false);
 	}
 
