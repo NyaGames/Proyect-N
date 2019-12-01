@@ -15,7 +15,7 @@ public class PhotosPanelGUIController : MonoBehaviour
     [SerializeField] private GameObject killedPanel;
     [SerializeField] private GameObject killConfirmedPanel;
 
-	private void Awake()
+	private void OnValidate()
 	{
 		if (!Instance)
 		{

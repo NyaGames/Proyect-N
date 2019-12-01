@@ -15,8 +15,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("AHORA SE CREA EL PLAYER");
+        //Debug.Log("AHORA SE CREA EL PLAYER");
     }
+
     void Start()
     {
         playerCollider = GetComponent<BoxCollider>();
