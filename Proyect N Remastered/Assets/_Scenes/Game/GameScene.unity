@@ -221,6 +221,7 @@ MonoBehaviour:
   playersInfoPanel: {fileID: 1064447030}
   userPanel: {fileID: 1944420771}
   photosPanel: {fileID: 1196780681}
+  photoReceivedPanel: {fileID: 1857199403}
   targetImage: {fileID: 38420528}
   sourceImage: {fileID: 1535490335}
 --- !u!114 &78903000
@@ -3739,7 +3740,7 @@ GameObject:
   - component: {fileID: 654080025}
   - component: {fileID: 654080024}
   m_Layer: 5
-  m_Name: Sender (TMP)
+  m_Name: Snapper (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12362,7 +12363,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Yes!
+  m_text: Snap!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14291,6 +14292,7 @@ GameObject:
   - component: {fileID: 1857199400}
   - component: {fileID: 1857199402}
   - component: {fileID: 1857199401}
+  - component: {fileID: 1857199403}
   m_Layer: 5
   m_Name: PhotoRecivedPanel
   m_TagString: Untagged
@@ -14354,6 +14356,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857199399}
   m_CullTransparentMesh: 0
+--- !u!114 &1857199403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857199399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fadd026ef347e0c43b8e35befdc19fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snap: {fileID: 38420528}
+  snappedText: {fileID: 683882884}
+  snapperText: {fileID: 654080024}
 --- !u!1 &1861464135
 GameObject:
   m_ObjectHideFlags: 0
@@ -14486,7 +14503,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: No!
+  m_text: Deny
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

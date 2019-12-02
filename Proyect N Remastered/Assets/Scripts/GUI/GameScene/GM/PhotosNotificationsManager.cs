@@ -51,10 +51,14 @@ public class PhotosNotificationsManager : MonoBehaviour
 		GameObject notification = Instantiate(notificationPrefab);
 		notification.transform.SetParent(transform, false);
 
-		senderText.text = "Sent by: \n" + sender;
-		playerToKillText.text = "Kill \n " + playerToKill + "?";
+		/*senderText.text = "Sent by: \n" + sender;
+		playerToKillText.text = "Kill \n " + playerToKill + "?";*/
+
+
 		//notification.GetComponent<Notification>().image.texture = newImage;
 		notification.GetComponent<Notification>().textureReceived = newImage;
+		notification.GetComponent<Notification>().snapped = playerToKill;
+		notification.GetComponent<Notification>().snapper = sender;
 
         PlayerToKill = playerToKill;
         Sender = sender;
@@ -63,13 +67,15 @@ public class PhotosNotificationsManager : MonoBehaviour
 
 	public void OpenNotification(GameObject notification)
 	{
+		Notification notif = notification.GetComponent<Notification>();
+
 		rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, rectTransform.sizeDelta.y - rectTransform.rect.width + 10);
-
-		Texture2D tex = (Texture2D)notification.GetComponent<Notification>().textureReceived;
+		
 		photoReceivedPanel.SetActive(true);
-		GameSceneGUIController.Instance.targetImage.texture = tex;
 
-		imagesReceived.Remove(tex);
+		GameSceneGUIController.Instance.photoReceivedPanel.SetInfo(notif.textureReceived, notif.snapped, notif.snapper);
+
+		imagesReceived.Remove(notif.textureReceived);
 		Destroy(notification);
 	}
 

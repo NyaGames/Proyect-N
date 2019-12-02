@@ -9,7 +9,7 @@ public static class DownSampling
 		//int referenceSide = 10000;
 		//byte compressionRate = (byte) ((uncompressedData.Length <= referenceSide) ? 1 : uncompressedData.Length / referenceSide);
 
-		byte compressionRate = 1;
+		byte compressionRate = 2;
 		int imageRowSize = (int)Mathf.Sqrt(uncompressedData.Length);	
 
 		byte[] compressedData = new byte[uncompressedData.Length / (compressionRate * compressionRate)];
