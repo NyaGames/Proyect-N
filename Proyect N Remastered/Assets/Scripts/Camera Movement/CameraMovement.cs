@@ -13,8 +13,9 @@ public abstract class CameraMovement : MonoBehaviour
 	protected Transform swivel, stick;
     protected Camera m_camera;   
 
-    protected float zoom;
-	protected float smoothTime = 1f;
+	[Range(0, 1)]
+    public float zoom;
+	protected float smoothTime = 0.5f;
 
 
 	private void Awake()
@@ -26,7 +27,7 @@ public abstract class CameraMovement : MonoBehaviour
 
     protected void Update()
     {
-        if (ZoneManager.Instance.isEditingZone) return;
+        //if (ZoneManager.Instance.isEditingZone) return;
 
         if(Input.touchCount > 0)
         {

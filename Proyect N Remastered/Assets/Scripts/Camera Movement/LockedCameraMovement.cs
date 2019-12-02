@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mapbox.Unity.Map;
 
 public class LockedCameraMovement : CameraMovement
 {
@@ -15,10 +16,35 @@ public class LockedCameraMovement : CameraMovement
     [Header("References")]
     [SerializeField] private Transform lockObjective;
 
-     private void FixedUpdate()
+
+	 public bool cameraIsDamping = false;
+
+	private void Start()
+	{
+		zoom = 0.2f;
+
+		float angle = Mathf.Lerp(swivelZoom.x, swivelZoom.y, zoom);
+		swivel.localRotation = Quaternion.Euler(angle, 0f, 0f);
+
+		float distance = Mathf.Lerp(stickZoom.x, stickZoom.y, zoom);
+		stick.localPosition = new Vector3(0f, stick.localPosition.y, distance);
+	
+
+	}
+
+	private void FixedUpdate()
      {
-        Vector3 newPos = lockObjective.position;    
-        transform.position = Vector3.Slerp(transform.position, newPos, smoothFactor);
+		if (!cameraIsDamping)
+		{
+			Vector3 newPos = lockObjective.position;
+			transform.position = Vector3.Slerp(transform.position, newPos, smoothFactor);
+
+			float angle = Mathf.Lerp(swivelZoom.x, swivelZoom.y, zoom);
+			swivel.localRotation = Quaternion.Euler(angle, 0f, 0f);
+
+			float distance = Mathf.Lerp(stickZoom.x, stickZoom.y, zoom);
+			stick.localPosition = new Vector3(0f, stick.localPosition.y, distance);
+		}
      }
 
     protected override void HandleInput()
@@ -94,14 +120,15 @@ public class LockedCameraMovement : CameraMovement
 		swivel.localRotation = Quaternion.Euler(angle, 0f, 0f);
 
 		float distance = Mathf.Lerp(stickZoom.x, stickZoom.y, zoom);
-		stick.localPosition = new Vector3(0f, stick.localPosition.y, distance);
-	}
+		stick.localPosition = new Vector3(0f, stick.localPosition.y, distance);	}
 
     public override void Initialize()
     {
 		m_camera.orthographic = false;
-		m_camera.fieldOfView = 60;		
-    }
+		m_camera.fieldOfView = 60;
+
+		FindObjectOfType<AbstractMap>().SetExtentOptions(new RangeAroundTransformTileProviderOptions { targetTransform = lockObjective, disposeBuffer = 4, visibleBuffer = 4 });
+	}
 
 	public void AssignObjective(Transform obj)
 	{
@@ -112,22 +139,24 @@ public class LockedCameraMovement : CameraMovement
 	}
 
 	public override IEnumerator DampStick(Action onCoroutineFinished)
-	{	
+	{
 
 		Vector3 _targetPosition = startingStick;
 		Vector3 _targetRotation = startingSwivel;
 
 		Vector3 _movementVelocity = Vector3.zero;
 		Vector3 _rotationVelocity = Vector3.zero;
+		Vector3 _velocity = Vector3.zero;
 
-		while ((stick.localPosition - _targetPosition).magnitude > 1f)
+		while ((transform.position - lockObjective.position).magnitude > 1f)
 		{
+			transform.position = Vector3.SmoothDamp(transform.position, lockObjective.position, ref _velocity, smoothTime);
 			stick.localPosition = Vector3.SmoothDamp(stick.localPosition, _targetPosition, ref _movementVelocity, smoothTime);
 			swivel.localRotation = Quaternion.Euler(Vector3.SmoothDamp(swivel.localRotation.eulerAngles, _targetRotation, ref _rotationVelocity, smoothTime));
 
 			yield return new WaitForEndOfFrame();
 		}
 
-		onCoroutineFinished();
+		onCoroutineFinished();		
 	}
 }

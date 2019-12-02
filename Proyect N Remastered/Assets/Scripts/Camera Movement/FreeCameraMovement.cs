@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mapbox.Unity.Map;
 
 public class FreeCameraMovement : CameraMovement
 {
@@ -37,7 +38,10 @@ public class FreeCameraMovement : CameraMovement
 		}
 		else
 		{
-			FollowPlayer();
+			if (isFollowingPlayer)
+			{
+				FollowPlayer();
+			}
 		}
 	}
 
@@ -132,14 +136,14 @@ public class FreeCameraMovement : CameraMovement
     {
 		inputDisabled = true;
 		this.playerToFollow = playerToFollow;
-		StartCoroutine(DampToPosition(playerToFollow.position, SetFollowingPlayer));
+		StartCoroutine(DampToPosition(playerToFollow.position, delegate () { isFollowingPlayer = true; }));
     }
 
     public void StopFollowingPlayer()
     {
+		StopAllCoroutines();
         isFollowingPlayer = false;
 		inputDisabled = false;
-
 	}
 
 	public override void Initialize()
@@ -154,9 +158,12 @@ public class FreeCameraMovement : CameraMovement
 
 		zoom = Mathf.InverseLerp(zoomClamping.x, zoomClamping.y, m_camera.orthographicSize);
 		stick.transform.position = new Vector3(stick.transform.position.x, m_camera.orthographicSize, stick.transform.position.z);
+		
+		FindObjectOfType<AbstractMap>().SetExtentOptions(new RangeAroundTransformTileProviderOptions { targetTransform = transform, disposeBuffer = 3, visibleBuffer = 3});
+
 	}
 
-	public override IEnumerator DampStick(Action onCoroutineFinished)
+	public override IEnumerator DampStick(Action onCoroutineFinished = null)
 	{
 		Vector3 _targetPosition = new Vector3(0, 0, -100);
 		Vector3 _targetRotation = new Vector3(90, 0, 0);
@@ -164,14 +171,15 @@ public class FreeCameraMovement : CameraMovement
 		Vector3 _movementVelocity = Vector3.zero;
 		Vector3 _rotationVelocity = Vector3.zero;
 
-		while ((transform.localPosition - _targetPosition).magnitude > 1f)
+		while ((stick.localPosition - _targetPosition).magnitude > 1f)
 		{
 			stick.localPosition = Vector3.SmoothDamp(stick.localPosition, _targetPosition, ref _movementVelocity, smoothTime);
 			swivel.localRotation = Quaternion.Euler(Vector3.SmoothDamp(swivel.localRotation.eulerAngles, _targetRotation, ref _rotationVelocity, smoothTime));
 
 			yield return new WaitForEndOfFrame();
 		}
-		onCoroutineFinished();
+
+		onCoroutineFinished?.Invoke();
 	}
 
 	private void FollowPlayer()
@@ -181,7 +189,9 @@ public class FreeCameraMovement : CameraMovement
 
 	public void CenterCamera()
 	{
-		StartCoroutine(DampToPosition(gameMaster.position));
+		if (inputDisabled) return;
+		inputDisabled = true;
+		StartCoroutine(DampToPosition(gameMaster.position, delegate() { inputDisabled = false; }));
 	}
 
 	private IEnumerator DampToPosition(Vector3 target, Action OnCorotuineFinished = null)
@@ -193,11 +203,9 @@ public class FreeCameraMovement : CameraMovement
 			transform.position = Vector3.SmoothDamp(transform.position, target, ref _velocity, 0.5f);		
 
 			yield return new WaitForEndOfFrame();
-		}		
-	}
+		}
 
-	private void SetFollowingPlayer()
-	{
-		isFollowingPlayer = true;
+		OnCorotuineFinished?.Invoke();
 	}
+	
 }

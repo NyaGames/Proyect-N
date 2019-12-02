@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class ChangeButtonText : MonoBehaviour
 {
@@ -10,11 +10,11 @@ public class ChangeButtonText : MonoBehaviour
 
 	private int index = 0;
 
-	private Text text;
+	private TextMeshProUGUI text;
 
 	private void Awake()
 	{
-		text = GetComponentInChildren<Text>();
+		text = GetComponentInChildren<TextMeshProUGUI>();
 	}
 
 	public void ChangeText()

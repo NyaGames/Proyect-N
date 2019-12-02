@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mapbox.Unity.Map;
 
 [RequireComponent(typeof(FreeCameraMovement), typeof(LockedCameraMovement))]
 public class CameraController : MonoBehaviour
@@ -18,17 +19,21 @@ public class CameraController : MonoBehaviour
 
 	public void TriggerCameraLocking()
 	{
+		if (lockedCameraMovement.cameraIsDamping) return;
+
 		if (cameraLocked)
-		{ 
+		{
+			lockedCameraMovement.cameraIsDamping = true;
 			StartCoroutine(freeCameraMovement.DampStick(UnlockCamera));
 		}
 		else
 		{
+			lockedCameraMovement.cameraIsDamping = true;
+
 			lockedCameraMovement.enabled = true;
 			freeCameraMovement.enabled = false;
 
-			lockedCameraMovement.Initialize();
-
+			lockedCameraMovement.Initialize();		
 
 			StartCoroutine(lockedCameraMovement.DampStick(LockCamera));
 		}
@@ -40,15 +45,16 @@ public class CameraController : MonoBehaviour
 	{
 		lockedCameraMovement.enabled = false;
 		freeCameraMovement.enabled = true;
-
-		freeCameraMovement.Initialize();
+		lockedCameraMovement.cameraIsDamping = false;
+		freeCameraMovement.Initialize();		
 	}
 
 	public void LockCameraToPlayer(Transform player)
 	{
+		lockedCameraMovement.AssignObjective(player);
 		lockedCameraMovement.Initialize();
 		lockedCameraMovement.enabled = true;
-		lockedCameraMovement.AssignObjective(player);
+
 
 		freeCameraMovement.enabled = false;
 	}
@@ -57,5 +63,6 @@ public class CameraController : MonoBehaviour
 	{
 		lockedCameraMovement.enabled = true;
 		freeCameraMovement.enabled = false;
+		lockedCameraMovement.cameraIsDamping = false;		
 	}
 }
