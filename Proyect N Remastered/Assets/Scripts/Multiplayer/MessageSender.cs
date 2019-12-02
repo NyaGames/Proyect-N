@@ -35,7 +35,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
 	private void Start()
 	{
         GameObject t = gameObject;
-		imageReceived = GameObject.FindGameObjectWithTag("TargetImage").GetComponent<GameSceneGUIController>().targetImage;
+		imageReceived = GameSceneGUIController.Instance.targetImage;
         photonView.Group = (byte)myPlayer.id;
         if (myPlayer.isGameMaster) //Si eres game master, tus grupos de interes son todos los jugadores
         {
@@ -79,7 +79,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void ReceiveImageFromPlayer(byte[] byteArray ,string playerToKill,PhotonMessageInfo info)
+    void ReceiveImageFromPlayer(byte[] byteArray, string playerToKill,PhotonMessageInfo info)
     {
         string sender = info.Sender.NickName;
 
@@ -146,7 +146,8 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 if (photonView.IsMine && !myPlayer.isGameMaster)
                 {
                     PhotonNetwork.Destroy(gameObject);
-                    PhotosPanelGUIController.Instance.PlayerKilled(getUncompressedTextureFromBytes(image), killer);
+                    //PhotosPanelGUIController.Instance.PlayerKilled(getUncompressedTextureFromBytes(image), killer);
+                    GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().PlayerKilled(getUncompressedTextureFromBytes(image), killer);
                 }
                 else
                 {
@@ -156,10 +157,13 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 break;
 
             case WaysToKillAPlayer.Zone:
-                PhotonNetwork.Destroy(gameObject);
-                PhotonNetwork.LeaveRoom();
-                SceneManager.LoadScene("DeathByZone");
-                Debug.Log("TE MORISTE POR LA ZONA CRACK");
+                if (photonView.IsMine)
+                {
+                    PhotonNetwork.Destroy(gameObject);
+                    PhotonNetwork.LeaveRoom();
+                    SceneManager.LoadScene("DeathByZone");
+                    Debug.Log("TE MORISTE POR LA ZONA CRACK");
+                }
                 break;
 
             case WaysToKillAPlayer.GMChoice:
@@ -178,8 +182,9 @@ public class MessageSender : MonoBehaviourPunCallbacks
     [PunRPC]
     public void KillReceived(string playerToKill,bool killed)
     {
-        if(!PhotonNetwork.IsMasterClient)
-        PhotosPanelGUIController.Instance.KillConfirmed(playerToKill);
+        if (!PhotonNetwork.IsMasterClient)
+            GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().KillConfirmed(playerToKill);
+        //PhotosPanelGUIController.Instance.KillConfirmed(playerToKill);
     }
 
     private Texture2D getUncompressedTextureFromBytes(byte[] byteArray)

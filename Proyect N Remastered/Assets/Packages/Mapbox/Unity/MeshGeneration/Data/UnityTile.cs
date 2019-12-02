@@ -194,6 +194,8 @@ namespace Mapbox.Unity.MeshGeneration.Data
 			gameObject.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
 			gameObject.SetActive(true);
 
+			gameObject.layer = 8;
+
 			IsRecycled = false;
 
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class UserButton : MonoBehaviour
 {
@@ -9,8 +9,8 @@ public class UserButton : MonoBehaviour
     private string userNickname;
 
 	public void SelectUser()
-	{ 		
-		//UsersPanelGUIController.Instance.SelectUser(userNickname);
+	{
+		userNickname = GetComponentInChildren<TextMeshProUGUI>().text; 
 		GameSceneGUIController.Instance.userPanel.GetComponent<UsersPanelGUIController>().SelectUser(userNickname);
 	}
 }

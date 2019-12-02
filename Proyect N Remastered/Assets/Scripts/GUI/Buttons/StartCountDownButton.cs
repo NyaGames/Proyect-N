@@ -8,8 +8,8 @@ using TMPro;
 [RequireComponent(typeof(Button))]
 public class StartCountDownButton : MonoBehaviour
 {
-	[SerializeField] private TextMeshProUGUI minsText;
-	[SerializeField] private TextMeshProUGUI secsText;
+	[SerializeField] private TMP_InputField minsText;
+	[SerializeField] private TMP_InputField secsText;
 
 	[SerializeField] private TextMeshProUGUI timeWarning;
 	[SerializeField] private TextMeshProUGUI zoneWarning;
@@ -18,7 +18,7 @@ public class StartCountDownButton : MonoBehaviour
 
 	int secs, mins;
 
-    public GameObject countDownPrefab;
+    public GameObject startGameCountDownPrefab;
 
     private void Awake()
 	{
@@ -62,8 +62,8 @@ public class StartCountDownButton : MonoBehaviour
 	{
         GamemasterManager.Instance.SendZoneToOtherPlayers();
 
-        GameObject countDown = PhotonNetwork.Instantiate(countDownPrefab.name, Vector3.zero, Quaternion.identity);
-        countDown.GetComponent<CountDown>().Create(mins * 60 + secs, "Game starts in", GameManager.Instance.StartGame);
-        countDown.GetComponent<CountDown>().StartCoundDown();
+        GameObject countDown = PhotonNetwork.Instantiate(startGameCountDownPrefab.name, Vector3.zero, Quaternion.identity);
+        countDown.GetComponent<StartGameCountDown>().Create(mins * 60 + secs, "Game starts in ", GameManager.Instance.StartGame);
+        countDown.GetComponent<StartGameCountDown>().StartCoundDown();
     }
 }

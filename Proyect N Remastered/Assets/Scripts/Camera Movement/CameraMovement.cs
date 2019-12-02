@@ -13,8 +13,9 @@ public abstract class CameraMovement : MonoBehaviour
 	protected Transform swivel, stick;
     protected Camera m_camera;   
 
-    protected float zoom;
-	protected float smoothTime = 1f;
+	[Range(0, 1)]
+    public float zoom;
+	protected float smoothTime = 0.5f;
 
 
 	private void Awake()

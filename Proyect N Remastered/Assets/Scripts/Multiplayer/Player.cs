@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
             playerColor = new Color(0f, 255f, 0f);
         }
        
-        this.GetComponent<Renderer>().material.color = playerColor;			           
+        //this.GetComponentInChildren<Renderer>().material.color = playerColor;			           
     }
 
     public Photon.Realtime.Player getPlayerReference(int actorNumber){

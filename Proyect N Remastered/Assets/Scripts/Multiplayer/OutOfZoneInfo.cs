@@ -40,7 +40,7 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
 
             if (GameManager.Instance.gameStarted) //Si la partida ha empezado, miro si estoy dentro de la zona
             {
-                if (!insideZone)
+                /*if (!insideZone)
                 {
                     GameManager.Instance.outOfZoneText.SetActive(true);
                     StartCoundDown();
@@ -52,7 +52,7 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
                     CancelInvoke("Countdown");
                     outOfZoneActive = false;
                     this.GetComponent<Renderer>().material.color = new Color(0f, 255f, 0f);
-                }
+                }*/
 
             }
         }
@@ -75,7 +75,7 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
             outOfZoneActive = false;
             Debug.Log("Te moriste por estar fuera de la zona");
             string s = "Zone kill";
-            GetComponent<MessageSender>().KillYourself(new byte [0] ,s,WaysToKillAPlayer.Zone);
+            photonView.RPC("KillYourself",RpcTarget.All,new byte [0] ,s,WaysToKillAPlayer.Zone);
             
         }
     }

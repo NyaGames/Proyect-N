@@ -9,6 +9,7 @@ public class GamemasterManager : MonoBehaviour
     public static GamemasterManager Instance { get; private set; }
 
 	public GameObject zonePrefab;
+    public GameObject zoneCantGetOutPrefab;
 	public GameObject dropPrefab;
 
 	public bool creatingDrop = false;
@@ -195,12 +196,12 @@ public class GamemasterManager : MonoBehaviour
         {
             if (staticZone == null) //Si no hay ninguna zona todavia, se guarda la zona editada en actualZone
             {
-                staticZone = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
+                staticZone = PhotonNetwork.Instantiate(zoneCantGetOutPrefab.name, provZone.transform.position, Quaternion.identity);
                 staticZone.transform.localScale = provZone.transform.localScale;
 				staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
                 HideProvZone();
 
-                staticZone.transform.GetChild(1).gameObject.AddComponent<ArePlayersInsideZone>();
+              
             }
             else //Si ya habia una zona en el mapa, se guarda la zona editada en nextZone
             {
@@ -253,14 +254,14 @@ public class GamemasterManager : MonoBehaviour
         staticZone.transform.localScale = FinalScale;
         staticZone.transform.position = Finalpos;
         PhotonNetwork.Destroy(staticZone);
-        staticZone = PhotonNetwork.Instantiate(zonePrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
+        staticZone = PhotonNetwork.Instantiate(zoneCantGetOutPrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
         staticZone.transform.localScale = FinalScale;
         staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
-        staticZone.transform.GetChild(1).gameObject.AddComponent<ArePlayersInsideZone>();
 
+        PhotonNetwork.Destroy(newZonePosition);
         //newZonePosition.SetActive(false);
         Destroy(newZonePosition);
-        PhotonNetwork.Destroy(provZone);
+        //PhotonNetwork.Destroy(provZone);
 
     }
 
