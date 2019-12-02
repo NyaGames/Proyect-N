@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mapbox.Unity.Map;
 
-[ExecuteInEditMode]
 public class FreeCameraMovement : CameraMovement
 {
 	[Header("Parameters")]
@@ -44,11 +43,6 @@ public class FreeCameraMovement : CameraMovement
 				FollowPlayer();
 			}
 		}
-
-		float size = Mathf.Lerp(zoomClamping.x, zoomClamping.y, zoom);
-		m_camera.orthographicSize = size;
-
-		stick.transform.position = new Vector3(stick.transform.position.x, size, stick.transform.position.z);
 	}
 
 	protected override void HandleInput()
