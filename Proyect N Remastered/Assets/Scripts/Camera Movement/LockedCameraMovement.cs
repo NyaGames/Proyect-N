@@ -49,6 +49,7 @@ public class LockedCameraMovement : CameraMovement
 
     protected override void HandleInput()
     {
+        if (cameraIsDamping) return;
         switch (Input.touchCount)
         {
             case 1:
@@ -133,6 +134,7 @@ public class LockedCameraMovement : CameraMovement
 	public void AssignObjective(Transform obj)
 	{
 		lockObjective = obj;
+        transform.position = obj.position;
 
 		stick.localPosition = startingStick;
 		swivel.localRotation = Quaternion.Euler(startingSwivel);
