@@ -12001,75 +12001,6 @@ MonoBehaviour:
   - {fileID: 1757003001}
   - {fileID: 902224704}
   - {fileID: 1064447030}
---- !u!1001 &1565007181
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 100138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_Name
-      value: mixamo model
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
 --- !u!1 &1566051244
 GameObject:
   m_ObjectHideFlags: 0
@@ -15634,10 +15565,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingStick: {x: 0, y: 0, z: -20}
   startingSwivel: {x: 90, y: 0, z: 0}
-  zoom: 0.2617232
-  moveSpeed: {x: 30, y: 100}
-  zoomSpeed: 0.5
-  zoomClamping: {x: 10, y: 50}
+  zoom: 1
+  moveSpeed: {x: 20, y: 100}
+  zoomSpeed: 0.25
+  zoomClamping: {x: 10, y: 100}
   rotationSpeed: 60
   gameMaster: {fileID: 0}
 --- !u!4 &2047152460
