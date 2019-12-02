@@ -75,7 +75,7 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
             outOfZoneActive = false;
             Debug.Log("Te moriste por estar fuera de la zona");
             string s = "Zone kill";
-            GetComponent<MessageSender>().KillYourself(new byte [0] ,s,WaysToKillAPlayer.Zone);
+            photonView.RPC("KillYourself",RpcTarget.All,new byte [0] ,s,WaysToKillAPlayer.Zone);
             
         }
     }

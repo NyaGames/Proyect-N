@@ -156,10 +156,13 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 break;
 
             case WaysToKillAPlayer.Zone:
-                PhotonNetwork.Destroy(gameObject);
-                PhotonNetwork.LeaveRoom();
-                SceneManager.LoadScene("DeathByZone");
-                Debug.Log("TE MORISTE POR LA ZONA CRACK");
+                if (photonView.IsMine)
+                {
+                    PhotonNetwork.Destroy(gameObject);
+                    PhotonNetwork.LeaveRoom();
+                    SceneManager.LoadScene("DeathByZone");
+                    Debug.Log("TE MORISTE POR LA ZONA CRACK");
+                }
                 break;
 
             case WaysToKillAPlayer.GMChoice:
