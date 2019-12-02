@@ -257,11 +257,11 @@ public class GamemasterManager : MonoBehaviour
         staticZone = PhotonNetwork.Instantiate(zoneCantGetOutPrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
         staticZone.transform.localScale = FinalScale;
         staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
-        
 
+        PhotonNetwork.Destroy(newZonePosition);
         //newZonePosition.SetActive(false);
         Destroy(newZonePosition);
-        PhotonNetwork.Destroy(provZone);
+        //PhotonNetwork.Destroy(provZone);
 
     }
 
