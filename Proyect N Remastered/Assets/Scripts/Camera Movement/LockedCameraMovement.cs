@@ -3,21 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mapbox.Unity.Map;
+using DG.Tweening;
 
 public class LockedCameraMovement : CameraMovement
 {
 	[Header("Parameters")]
-    [Range(0.01f, 1.0f), SerializeField] private float smoothFactor = 0.5f;    
-    [SerializeField] private float rotationSpeed = 10f;
+	[Range(0.01f, 1.0f), SerializeField] private float smoothFactor = 0.5f;
+	[SerializeField] private float rotationSpeed = 10f;
 	[SerializeField] private float zoomSpeed = 10f;
 	[SerializeField] private Vector2 swivelZoom;
 	[SerializeField] private Vector2 stickZoom;
 
-    [Header("References")]
-    [SerializeField] private Transform lockObjective;
+	[Header("References")]
+	[SerializeField] private Transform lockObjective;
 
 
-	 public bool cameraIsDamping = false;
+	public bool cameraIsDamping = false;
 
 	private void Start()
 	{
@@ -28,12 +29,12 @@ public class LockedCameraMovement : CameraMovement
 
 		float distance = Mathf.Lerp(stickZoom.x, stickZoom.y, zoom);
 		stick.localPosition = new Vector3(0f, stick.localPosition.y, distance);
-	
+
 
 	}
 
 	private void FixedUpdate()
-     {
+	{
 		if (!cameraIsDamping)
 		{
 			Vector3 newPos = lockObjective.position;
@@ -45,67 +46,67 @@ public class LockedCameraMovement : CameraMovement
 			float distance = Mathf.Lerp(stickZoom.x, stickZoom.y, zoom);
 			stick.localPosition = new Vector3(0f, stick.localPosition.y, distance);
 		}
-     }
+	}
 
-    protected override void HandleInput()
-    {
-        if (cameraIsDamping) return;
-        switch (Input.touchCount)
-        {
-            case 1:
-                RotateAroundPlayer(Input.GetTouch(0));
-                break;
-            case 2:
+	protected override void HandleInput()
+	{
+		if (cameraIsDamping) return;
+		switch (Input.touchCount)
+		{
+			case 1:			
+				RotateAroundPlayer(Input.GetTouch(0));
+				break;
+			case 2:
 				AdjustZoom(Input.GetTouch(0), Input.GetTouch(1));
-                break;
-            default:
-                break;
-        }
-    }
-    
-    private void RotateAroundPlayer(Touch touch)
-    {
-        Vector2 touchDeltaPosition = touch.deltaPosition;     
+				break;
+			default:
+				break;
+		}
+	}
 
-        float delta;
+	private void RotateAroundPlayer(Touch touch)
+	{
+		Vector2 touchDeltaPosition = touch.deltaPosition;
 
-        if (touch.phase == TouchPhase.Moved)
-        {
-            if (Mathf.Abs(touchDeltaPosition.x) > Mathf.Abs(touchDeltaPosition.y))
-            {
-                delta = touchDeltaPosition.x * rotationSpeed;
+		float delta;
 
-                if (touch.position.y / Screen.height > 0.5f)
-                {
-                    transform.Rotate(Vector3.up,  -delta);
-                }
-                else
-                {
-					transform.Rotate(Vector3.up, delta);
-				}
+		if (touch.phase == TouchPhase.Moved)
+		{
+			if (Mathf.Abs(touchDeltaPosition.x) > Mathf.Abs(touchDeltaPosition.y))
+			{
+				delta = touchDeltaPosition.x * rotationSpeed;
 
-            }
-            else
-            {
-                delta = touchDeltaPosition.y * rotationSpeed;
-
-                if (touch.position.x / Screen.width > 0.5f)
-                {
-					transform.Rotate(Vector3.up, delta);
-                }
-                else
-                {
+				if (touch.position.y / Screen.height > 0.5f)
+				{
 					transform.Rotate(Vector3.up, -delta);
 				}
-            }
-          
-        }
-  
-    }
+				else
+				{
+					transform.Rotate(Vector3.up, delta);
+				}
+
+			}
+			else
+			{
+				delta = touchDeltaPosition.y * rotationSpeed;
+
+				if (touch.position.x / Screen.width > 0.5f)
+				{
+					transform.Rotate(Vector3.up, delta);
+				}
+				else
+				{
+					transform.Rotate(Vector3.up, -delta);
+				}
+			}
+
+		}
+
+	}
 
 	private void AdjustZoom(Touch firstTouch, Touch secondTouch)
 	{
-		if (Input.touchCount != 2) return;	
+		if (Input.touchCount != 2) return;
 
 		Vector2 firstTouchPrevPos = firstTouch.position - firstTouch.deltaPosition;
 		Vector2 secondTouchPrevPos = secondTouch.position - secondTouch.deltaPosition;
@@ -121,10 +122,11 @@ public class LockedCameraMovement : CameraMovement
 		swivel.localRotation = Quaternion.Euler(angle, 0f, 0f);
 
 		float distance = Mathf.Lerp(stickZoom.x, stickZoom.y, zoom);
-		stick.localPosition = new Vector3(0f, stick.localPosition.y, distance);	}
+		stick.localPosition = new Vector3(0f, stick.localPosition.y, distance);
+	}
 
-    public override void Initialize()
-    {
+	public override void Initialize()
+	{
 		m_camera.orthographic = false;
 		m_camera.fieldOfView = 60;
 
@@ -134,7 +136,7 @@ public class LockedCameraMovement : CameraMovement
 	public void AssignObjective(Transform obj)
 	{
 		lockObjective = obj;
-        transform.position = obj.position;
+		transform.position = obj.position;
 
 		stick.localPosition = startingStick;
 		swivel.localRotation = Quaternion.Euler(startingSwivel);
@@ -159,6 +161,11 @@ public class LockedCameraMovement : CameraMovement
 			yield return new WaitForEndOfFrame();
 		}
 
-		onCoroutineFinished();		
+		onCoroutineFinished();
 	}
+
+	public void LockNorth()
+	{		
+		transform.DORotate(new Vector3(0, 0, 0), 1f);
+	}	
 }

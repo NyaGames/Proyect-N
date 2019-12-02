@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 4992442455535462994}
   - component: {fileID: 2875053876824187138}
   - component: {fileID: 3220957023385101540}
+  - component: {fileID: 2235235041969897489}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -323,6 +324,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentKills: 0
   receivedKills: 0
+--- !u!114 &2235235041969897489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8844448876360683055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc062ea1e23141841997e959eb3bda80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useDeviceOrientation: 1
+  _subtractUserHeading: 0
+  _rotationFollowFactor: 1
+  _rotateZ: 0
+  _useNegativeAngle: 1
+  _useTransformLocationProvider: 0
 --- !u!1001 &5765318874026129265
 PrefabInstance:
   m_ObjectHideFlags: 0
