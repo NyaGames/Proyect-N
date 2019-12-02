@@ -146,7 +146,8 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 if (photonView.IsMine && !myPlayer.isGameMaster)
                 {
                     PhotonNetwork.Destroy(gameObject);
-                    PhotosPanelGUIController.Instance.PlayerKilled(getUncompressedTextureFromBytes(image), killer);
+                    //PhotosPanelGUIController.Instance.PlayerKilled(getUncompressedTextureFromBytes(image), killer);
+                    GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().PlayerKilled(getUncompressedTextureFromBytes(image), killer);
                 }
                 else
                 {
@@ -181,8 +182,9 @@ public class MessageSender : MonoBehaviourPunCallbacks
     [PunRPC]
     public void KillReceived(string playerToKill,bool killed)
     {
-        if(!PhotonNetwork.IsMasterClient)
-        PhotosPanelGUIController.Instance.KillConfirmed(playerToKill);
+        if (!PhotonNetwork.IsMasterClient)
+            GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().KillConfirmed(playerToKill);
+        //PhotosPanelGUIController.Instance.KillConfirmed(playerToKill);
     }
 
     private Texture2D getUncompressedTextureFromBytes(byte[] byteArray)
