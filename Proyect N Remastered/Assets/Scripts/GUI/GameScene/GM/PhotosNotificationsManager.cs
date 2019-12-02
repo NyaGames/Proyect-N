@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PhotosNotificationsManager : MonoBehaviour
 {
@@ -11,8 +12,8 @@ public class PhotosNotificationsManager : MonoBehaviour
 
 	[SerializeField] private GameObject photoReceivedPanel;
  	[SerializeField] private GameObject notificationPrefab;
-	[SerializeField] private Text senderText;
-	[SerializeField] private Text playerToKillText;
+	[SerializeField] private TextMeshProUGUI senderText;
+	[SerializeField] private TextMeshProUGUI playerToKillText;
 
 	[SerializeField] private RectTransform rectTransform;
 
@@ -43,16 +44,17 @@ public class PhotosNotificationsManager : MonoBehaviour
 	public void OnImageRecived(Texture2D newImage, string sender, string playerToKill)
 	{
 		//notificationsRect.height += notificationPrefab.GetComponent<RectTransform>().rect.height + 10;
-		rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, rectTransform.sizeDelta.y + notificationPrefab.GetComponent<RectTransform>().rect.height + 5);
+		rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, rectTransform.sizeDelta.y + rectTransform.rect.width + 10);
 
 		imagesReceived.Add(newImage);
 
 		GameObject notification = Instantiate(notificationPrefab);
 		notification.transform.SetParent(transform, false);
 
-		senderText.text = "Sent by: " + sender;
-		playerToKillText.text = "Do you want to kill " + playerToKill + "?";
-		notification.GetComponent<RawImage>().texture = newImage;
+		senderText.text = "Sent by: \n" + sender;
+		playerToKillText.text = "Kill \n " + playerToKill + "?";
+		//notification.GetComponent<Notification>().image.texture = newImage;
+		notification.GetComponent<Notification>().textureReceived = newImage;
 
         PlayerToKill = playerToKill;
         Sender = sender;
@@ -61,11 +63,11 @@ public class PhotosNotificationsManager : MonoBehaviour
 
 	public void OpenNotification(GameObject notification)
 	{
-		rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, rectTransform.sizeDelta.y - (notificationPrefab.GetComponent<RectTransform>().rect.height + 5));
+		rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, rectTransform.sizeDelta.y - rectTransform.rect.width + 10);
 
-		Texture2D tex = (Texture2D)notification.GetComponent<RawImage>().texture;
+		Texture2D tex = (Texture2D)notification.GetComponent<Notification>().textureReceived;
 		photoReceivedPanel.SetActive(true);
-		photoReceivedPanel.GetComponentInChildren<RawImage>().texture = tex;
+		GameSceneGUIController.Instance.targetImage.texture = tex;
 
 		imagesReceived.Remove(tex);
 		Destroy(notification);

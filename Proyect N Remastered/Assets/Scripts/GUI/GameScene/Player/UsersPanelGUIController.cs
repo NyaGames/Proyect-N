@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 using Photon.Pun;
 
 public class UsersPanelGUIController : MonoBehaviour
@@ -46,9 +46,8 @@ public class UsersPanelGUIController : MonoBehaviour
 			{
                 buttonsRect.sizeDelta = new Vector2(buttonsRect.sizeDelta.x, buttonsRect.sizeDelta.y + userButtonPrefab.GetComponent<RectTransform>().rect.height + separation);
 				GameObject newButton = Instantiate(userButtonPrefab);
-				newButton.transform.SetParent(buttonsRect.transform, false);
-                //newButton.GetComponentInChildren<Text>().text = players[i].ActorNumber.ToString();
-                newButton.GetComponentInChildren<Text>().text = players[i].NickName;
+				newButton.transform.SetParent(buttonsRect.transform, false);        
+                newButton.GetComponentInChildren<TextMeshProUGUI>().text = players[i].NickName;
                 users.Add(newButton);
 			}
 		}
