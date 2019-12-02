@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mapbox.Unity.Map;
 
+[ExecuteInEditMode]
 public class FreeCameraMovement : CameraMovement
 {
 	[Header("Parameters")]
@@ -43,6 +44,11 @@ public class FreeCameraMovement : CameraMovement
 				FollowPlayer();
 			}
 		}
+
+		float size = Mathf.Lerp(zoomClamping.x, zoomClamping.y, zoom);
+		m_camera.orthographicSize = size;
+
+		stick.transform.position = new Vector3(stick.transform.position.x, size, stick.transform.position.z);
 	}
 
 	protected override void HandleInput()
@@ -107,7 +113,6 @@ public class FreeCameraMovement : CameraMovement
         Vector3 worldRotationPivot = m_camera.ScreenToWorldPoint(new Vector3(middlePoint.x, middlePoint.y, 0));
 
         Vector3 stickPosition = stick.position;     
-
         stick.position = stickPosition;
 
 
@@ -129,7 +134,7 @@ public class FreeCameraMovement : CameraMovement
 
         float angularDiff = actualAngularDifference - prevAngularDifference;
 
-        swivel.Rotate(0, 0, -angularDiff * rotationSpeed * Time.deltaTime);
+        transform.Rotate(0, angularDiff * rotationSpeed * Time.deltaTime, 0);
     }
 
     public void StartFollowingPlayer(Transform playerToFollow)
@@ -206,6 +211,6 @@ public class FreeCameraMovement : CameraMovement
 		}
 
 		OnCorotuineFinished?.Invoke();
-	}
-	
+	}		
+
 }
