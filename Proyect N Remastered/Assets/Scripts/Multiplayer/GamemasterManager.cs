@@ -36,6 +36,8 @@ public class GamemasterManager : MonoBehaviour
 
     private bool provZoneCreated = false;
 
+    [HideInInspector] public int secsClosingZone;
+
     private void Awake()
     {
         if (!Instance)
@@ -237,20 +239,37 @@ public class GamemasterManager : MonoBehaviour
 
     public IEnumerator CloseActualZone()
     {
-        float timeToClose = 3.0f;
+        float timeToClose = secsClosingZone;
         float t = 0;
+        float currentTime = 0;
         Vector3 InitialScale = staticZone.transform.localScale;
         Vector3 FinalScale = newZonePosition.transform.localScale;
         Vector3 Initialpos = staticZone.transform.position;
         Vector3 Finalpos = newZonePosition.transform.position;
 
+        foreach (GameObject g in playersViewsList)
+        {
+            g.GetComponent<PhotonView>().RPC("ActivateCountdownText", RpcTarget.All);
+        }
+
         while (t <= 1)
         {
+            currentTime += Time.deltaTime;
+            foreach (GameObject g in playersViewsList)
+            {
+                g.GetComponent<PhotonView>().RPC("ReceiveZoneClosingCountdown", RpcTarget.All, Mathf.RoundToInt(currentTime),(int)timeToClose);
+            }
             staticZone.transform.localScale = Vector3.Lerp(InitialScale, FinalScale, t);
             staticZone.transform.position = Vector3.Lerp(Initialpos, Finalpos, t);
             t += Time.deltaTime / timeToClose;
             yield return null;
         }
+
+        foreach (GameObject g in playersViewsList)
+        {
+            g.GetComponent<PhotonView>().RPC("DeactivateCountdownText", RpcTarget.All);
+        }
+
         staticZone.transform.localScale = FinalScale;
         staticZone.transform.position = Finalpos;
         PhotonNetwork.Destroy(staticZone);
