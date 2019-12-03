@@ -39,5 +39,6 @@ MonoBehaviour:
   - ReceiveSecsToEndClosing
   - ActivateCountdownText
   - DeactivateCountdownText
+  - TryDestroyAnimation
   DisableAutoOpenWizard: 1
   ShowSettings: 0
