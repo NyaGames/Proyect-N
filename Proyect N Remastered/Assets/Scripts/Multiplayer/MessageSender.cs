@@ -189,7 +189,13 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 break;
 
             case WaysToKillAPlayer.GMChoice:
-                PhotonNetwork.Destroy(gameObject);
+                if (photonView.IsMine)
+                {
+                    PhotonNetwork.Destroy(gameObject);
+                    PhotonNetwork.LeaveRoom();
+                    SceneManager.LoadScene("DeathByGM");
+                    Debug.Log("TE MORISTE POR LA ZONA CRACK");
+                }
                 Debug.Log("TE MATO EL GM CRACK");
                 break;
         }

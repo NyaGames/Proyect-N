@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject outOfZoneText;
 
+    public GameObject winningPanel;
+    private int playerCountAtStart;
+
 	private void Awake()
 	{
 		if (!Instance)
@@ -40,7 +44,9 @@ public class GameManager : MonoBehaviour
 
 		myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
 		gameStarted = false;
-	}
+        playerCountAtStart = PhotonNetwork.CurrentRoom.PlayerCount - 1;
+
+    }
 
 	/*public void SetCountDown(int secs, string countDownText, UnityAction onCountDownFinished)
 	{
@@ -104,23 +110,27 @@ public class GameManager : MonoBehaviour
         if (outOfZoneText.activeSelf && myPlayer != null && !PhotonNetwork.LocalPlayer.IsMasterClient) {
             outOfZoneText.GetComponent<TMPro.TextMeshProUGUI>().text = "You have " + myPlayer.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone + " seconds to return to game area! Run now!";
         }
-	}
+        if (PhotonNetwork.CurrentRoom.PlayerCount <= 2 && !PhotonNetwork.LocalPlayer.IsMasterClient && !winningPanel.activeSelf) //Si solo quedais tu y el gm, has ganado
+        {
+            winningPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "You have killed " + myPlayer.GetComponent<KillsInfo>().currentKills;
+            winningPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = PhotonNetwork.CurrentRoom.PlayerCount - 1  + "/" + playerCountAtStart;
+            winningPanel.SetActive(true);
+           
+        }
 
-	/*private void Countdown()
-	{
-		secsToGameStart--;
-		myPlayer.GetComponent<MessageSender>().SendCountdown(secsToGameStart, "ReceiveGameStartCountdown");
-		if(secsToGameStart <= 0)
-		{
-			CancelInvoke("Countdown");
-            onCountDownFinished();
-            countdownActive = false;
-		}
-	}*/
+	}
 
     public void CloseZone()
     {
         GamemasterManager.Instance.StartClosingZone();
         Debug.Log("Closing zone");
+    }
+
+    public void ReturnToMainMenu()
+    {
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.NickName = "";
+        SceneManager.LoadScene("MainMenuScreen");
+        Debug.Log("Dejaste la partida");
     }
 }
