@@ -9,6 +9,7 @@ public class UI_Manager : MonoBehaviour
     public Button button;
     public GameObject Halo;
     public GameObject Points;
+    public Animator anim;
     public bool GM;
 
 
@@ -27,7 +28,7 @@ public class UI_Manager : MonoBehaviour
 
     }
 
-    public void Onclick()
+    public void ChangeGM()
     {
         if(GM == true)
         {
@@ -36,5 +37,12 @@ public class UI_Manager : MonoBehaviour
         {
             GM = true;
         }
+    }
+
+    public void StartGame()
+    {
+     
+     anim = gameObject.GetComponent<Animator>();
+     anim.SetTrigger("Active");
     }
 }
