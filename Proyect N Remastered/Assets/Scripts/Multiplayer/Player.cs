@@ -79,8 +79,8 @@ public class Player : MonoBehaviour
     }
     public void PickDrop(GameObject drop)
     {
-        Destroy(drop);
-        Debug.Log("Cogiste un drop!");
+        /*Destroy(drop);
+        Debug.Log("Cogiste un drop!");*/
     }
 
     void Update()
