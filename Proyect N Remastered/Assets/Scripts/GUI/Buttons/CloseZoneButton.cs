@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using UnityEngine.Events;
 using Photon.Pun;
 
 public class CloseZoneButton : MonoBehaviour
 {
+    [SerializeField] private Text minsText;
+    [SerializeField] private Text secsText;
     [SerializeField] private Text minsForClosingText;
     [SerializeField] private Text secsForClosingText;
-    [SerializeField] private TextMeshProUGUI minsText;
-    [SerializeField] private TextMeshProUGUI secsText;
 
     private Button button;
 

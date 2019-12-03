@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
-using Photon.Pun;
 
 [RequireComponent(typeof(DropAnimation))]
 public class Drop : MonoBehaviour
 {
     public bool movingObject;
     public bool creatingObject;
+
 
 	[SerializeField] private float pickUpRange = 5f;
 	[SerializeField] private GameObject rangeScaler;
@@ -50,60 +50,21 @@ public class Drop : MonoBehaviour
         }
 
 		//Animaciones
-		if (!pickable)
+		if (!pickable) return;
+
+		if (!dropAnimation.activated)
 		{
-			//GM
-			if (!dropAnimation.activated)
+			if (Vector3.Distance(transform.position, player.transform.position) <= pickUpRange)
 			{
-
-				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
-				{
-					
-					GameObject player = GamemasterManager.Instance.playersViewsList[i];
-
-					if (!player.GetPhotonView().Owner.IsMasterClient)
-					{
-						if (Vector3.Distance(player.transform.position, transform.position) <= pickUpRange)
-						{
-							dropAnimation.ActivateDrop();
-						}
-					}
-				}
-			}
-			else
-			{
-				bool someoneInRange = false;
-				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
-				{
-					GameObject player = GamemasterManager.Instance.playersViewsList[i];
-					if (Vector3.Distance(player.transform.position, transform.position) <= pickUpRange)
-					{
-						someoneInRange = true;
-					}
-				}
-
-				if (!someoneInRange)
-				{
-					dropAnimation.DeactivateDrop();
-				}
+				dropAnimation.ActivateDrop();
 			}
 		}
 		else
 		{
-			//Player
-			if (!dropAnimation.activated)
+			if (Vector3.Distance(transform.position, player.transform.position) > pickUpRange)
 			{
-				if (Vector3.Distance(transform.position, player.transform.position) <= pickUpRange)
-				{
-					dropAnimation.ActivateDrop();
-				}
-			}
-			else
-			{
-				if (Vector3.Distance(transform.position, player.transform.position) > pickUpRange)
-				{
-					dropAnimation.DeactivateDrop();					
-				}
+				dropAnimation.DeactivateDrop();
+				PickUpDrop();
 			}
 		}
     }
@@ -118,18 +79,16 @@ public class Drop : MonoBehaviour
             {
                 Debug.Log("Something Hit");
                 if (raycastHit.collider.gameObject == this.gameObject)
-                {					
+                {
+                    lastTouchedDrop();
+					
                     movingObject = true;
                     Debug.Log("Drop tapped");
                 }
 
 				if (raycastHit.collider.tag.Equals("Drop"))
 				{
-					//dropAnimation.TryDestroyAnimation();
-					if (!GameManager.Instance.myPlayer.GetPhotonView().Owner.IsMasterClient)
-					{
-						PickUpDrop();
-					}
+					dropAnimation.TryDestroyAnimation();
 				}
 
             }
@@ -138,7 +97,8 @@ public class Drop : MonoBehaviour
     public void moveObject()
     {
         if (Input.touchCount > 0)
-        {           
+        {
+            lastTouchedDrop();
             Touch touch = Input.GetTouch(0);
             float cameraDistanceToGround = GamemasterManager.Instance.getDistanceFromCameraToGround();
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
@@ -154,6 +114,17 @@ public class Drop : MonoBehaviour
                     break;
             }
         }
+    }
+
+    //Informa al gamemaster manager de que ESTE ha sido el último drop clickado
+    public void lastTouchedDrop() 
+    {
+        if(GamemasterManager.Instance.lastDropTapped != null)
+        {
+            GamemasterManager.Instance.lastDropTapped.GetComponent<Renderer>().material.color = Color.white;
+        }
+        this.gameObject.GetComponent<Renderer>().material.color = Color.green;
+        GamemasterManager.Instance.lastDropTapped = this.gameObject;
     }
 
 	//Se está cerca de un drop y se ha pulsado, 

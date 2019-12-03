@@ -32,13 +32,11 @@
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
-				float2 uv1 : TEXCOORD1;
             };
 
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-				float2 uv1 : TEXCOORD1;
                 float4 vertex : SV_POSITION;
             };
 
@@ -56,10 +54,8 @@
             {
                 v2f o;
                 v.vertex.x += sin(_Time.y * _Speed + v.vertex.y * _Amplitude) * _Distance * _Amount;
-				v.vertex.z += sin(_Time.z * _Speed + v.vertex.z * _Amplitude) * _Distance * _Amount;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-				o.uv1 = TRANSFORM_TEX(v.uv1, _MainTex);
                 return o;
             }
 
@@ -67,7 +63,6 @@
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv) + _TintColor;
-
                 //col.a = _Transparency;
                 clip(col.r - _CutoutThresh);
                 return col;

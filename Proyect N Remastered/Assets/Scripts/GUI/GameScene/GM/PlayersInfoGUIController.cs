@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-using TMPro;
 
 public class PlayersInfoGUIController : MonoBehaviour
 {
@@ -50,7 +49,7 @@ public class PlayersInfoGUIController : MonoBehaviour
 				usersRect.sizeDelta = new Vector2(usersRect.sizeDelta.x, usersRect.sizeDelta.y + userInfoPrefab.GetComponent<RectTransform>().rect.height + separation);
 				GameObject newButton = Instantiate(userInfoPrefab);
 				newButton.transform.SetParent(usersRect.transform, false);
-				newButton.GetComponentInChildren<TextMeshProUGUI>().text = players[i].NickName;
+				newButton.GetComponentInChildren<Text>().text = players[i].NickName;
 				newButton.GetComponent<UserInfoButton>().actorNumber = players[i].ActorNumber;
 				users.Add(newButton);
 			}
