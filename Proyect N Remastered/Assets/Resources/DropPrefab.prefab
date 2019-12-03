@@ -371,6 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activated: 0
+  model: {fileID: 0}
 --- !u!1 &7864363253354405370
 GameObject:
   m_ObjectHideFlags: 0

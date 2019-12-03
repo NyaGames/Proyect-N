@@ -305,7 +305,7 @@ public class GamemasterManager : MonoBehaviour
 	#region Drops
 	public void CreateDrop()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount == 1 )
         {
             Touch touch = Input.GetTouch(0);
 

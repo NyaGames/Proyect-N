@@ -10,7 +10,7 @@ public class DropAnimation : MonoBehaviour
 {
 	public bool activated = false;
 
-	private Transform model;
+	public Transform model;
 
 
     // Start is called before the first frame update
