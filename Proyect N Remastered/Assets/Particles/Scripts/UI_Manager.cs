@@ -44,7 +44,10 @@ public class UI_Manager : MonoBehaviour
     {
      
      anim = gameObject.GetComponent<Animator>();
+        Halo.Destroy();
+        Points.Destroy();
         StartCoroutine(LoadScene());
+       
     }
     IEnumerator LoadScene()
     {
