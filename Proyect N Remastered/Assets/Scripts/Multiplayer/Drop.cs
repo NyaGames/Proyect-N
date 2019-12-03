@@ -79,9 +79,7 @@ public class Drop : MonoBehaviour
             {
                 Debug.Log("Something Hit");
                 if (raycastHit.collider.gameObject == this.gameObject)
-                {
-                    lastTouchedDrop();
-					
+                {					
                     movingObject = true;
                     Debug.Log("Drop tapped");
                 }
@@ -97,8 +95,7 @@ public class Drop : MonoBehaviour
     public void moveObject()
     {
         if (Input.touchCount > 0)
-        {
-            lastTouchedDrop();
+        {           
             Touch touch = Input.GetTouch(0);
             float cameraDistanceToGround = GamemasterManager.Instance.getDistanceFromCameraToGround();
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
@@ -114,17 +111,6 @@ public class Drop : MonoBehaviour
                     break;
             }
         }
-    }
-
-    //Informa al gamemaster manager de que ESTE ha sido el último drop clickado
-    public void lastTouchedDrop() 
-    {
-        if(GamemasterManager.Instance.lastDropTapped != null)
-        {
-            GamemasterManager.Instance.lastDropTapped.GetComponent<Renderer>().material.color = Color.white;
-        }
-        this.gameObject.GetComponent<Renderer>().material.color = Color.green;
-        GamemasterManager.Instance.lastDropTapped = this.gameObject;
     }
 
 	//Se está cerca de un drop y se ha pulsado, 
