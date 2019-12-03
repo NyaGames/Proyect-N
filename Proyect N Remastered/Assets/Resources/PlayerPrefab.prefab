@@ -349,10 +349,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7061601681922533338}
     m_Modifications:
-    - target: {fileID: 100138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
-      propertyPath: m_Name
-      value: mixamo model
-      objectReference: {fileID: 0}
     - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -408,6 +404,10 @@ PrefabInstance:
     - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
       propertyPath: m_LocalScale.z
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
+      propertyPath: m_Name
+      value: mixamo model
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
       propertyPath: m_Controller
