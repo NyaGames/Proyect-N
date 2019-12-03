@@ -18,10 +18,6 @@ public class GamemasterManager : MonoBehaviour
     [HideInInspector]public GameObject newZonePosition;
     [HideInInspector]public GameObject provZone;
 
-	[SerializeField] private Material provZoneMat;
-	[SerializeField] private Material staticZoneMat;
-	[SerializeField] private Material newZonePositionMat;
-
 	private List<GameObject> provDropList = new List<GameObject>();
 	private List<GameObject> dropList = new List<GameObject>();
 
@@ -34,6 +30,8 @@ public class GamemasterManager : MonoBehaviour
     [HideInInspector] public GameObject[] playersViewsList;
 
     private bool provZoneCreated = false;
+
+    [HideInInspector] public int secsClosingZone;
 
     private void Awake()
     {
@@ -49,7 +47,7 @@ public class GamemasterManager : MonoBehaviour
 
     public void Start()
     {
-       
+
     }
 
     public void Update()
@@ -124,7 +122,6 @@ public class GamemasterManager : MonoBehaviour
                     if (provZone == null)
                     {                      
                         provZone = Instantiate(zonePrefab, touchInWorldCoord, Quaternion.identity);
-                        provZone.GetComponentInChildren<MeshRenderer>().material = provZoneMat;
                     }
                     else
                     {
@@ -200,7 +197,6 @@ public class GamemasterManager : MonoBehaviour
             {
                 staticZone = PhotonNetwork.Instantiate(zoneCantGetOutPrefab.name, provZone.transform.position, Quaternion.identity);
                 staticZone.transform.localScale = provZone.transform.localScale;
-				staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
                 HideProvZone();
 
               
@@ -210,7 +206,6 @@ public class GamemasterManager : MonoBehaviour
                 //Vector3 geoPosition = editableZone.GetComponent<ZonePositionWithLatLon>().GetGeoPosition();
                 newZonePosition = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
                 newZonePosition.transform.localScale = provZone.transform.localScale;
-                newZonePosition.GetComponentInChildren<MeshRenderer>().material = newZonePositionMat;
                 provZoneCreated = false;
 
             }      
@@ -223,7 +218,6 @@ public class GamemasterManager : MonoBehaviour
         if (newZonePosition == null)
         {
             newZonePosition = Instantiate(zonePrefab);
-            newZonePosition.GetComponentInChildren<MeshRenderer>().material = newZonePositionMat;
         }
 
         newZonePosition.transform.position = provZone.transform.position;
@@ -239,26 +233,42 @@ public class GamemasterManager : MonoBehaviour
 
     public IEnumerator CloseActualZone()
     {
-        float timeToClose = 3.0f;
+        float timeToClose = secsClosingZone;
         float t = 0;
+        float currentTime = 0;
         Vector3 InitialScale = staticZone.transform.localScale;
         Vector3 FinalScale = newZonePosition.transform.localScale;
         Vector3 Initialpos = staticZone.transform.position;
         Vector3 Finalpos = newZonePosition.transform.position;
 
+        foreach (GameObject g in playersViewsList)
+        {
+            g.GetComponent<PhotonView>().RPC("ActivateCountdownText", RpcTarget.All);
+        }
+
         while (t <= 1)
         {
+            currentTime += Time.deltaTime;
+            foreach (GameObject g in playersViewsList)
+            {
+                g.GetComponent<PhotonView>().RPC("ReceiveZoneClosingCountdown", RpcTarget.All, Mathf.RoundToInt(currentTime),(int)timeToClose);
+            }
             staticZone.transform.localScale = Vector3.Lerp(InitialScale, FinalScale, t);
             staticZone.transform.position = Vector3.Lerp(Initialpos, Finalpos, t);
             t += Time.deltaTime / timeToClose;
             yield return null;
         }
+
+        foreach (GameObject g in playersViewsList)
+        {
+            g.GetComponent<PhotonView>().RPC("DeactivateCountdownText", RpcTarget.All);
+        }
+
         staticZone.transform.localScale = FinalScale;
         staticZone.transform.position = Finalpos;
         PhotonNetwork.Destroy(staticZone);
         staticZone = PhotonNetwork.Instantiate(zoneCantGetOutPrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
-        staticZone.transform.localScale = FinalScale;
-        staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
+        staticZone.transform.localScale = FinalScale;;
 
         PhotonNetwork.Destroy(newZonePosition);
         //newZonePosition.SetActive(false);
@@ -286,7 +296,7 @@ public class GamemasterManager : MonoBehaviour
 	#region Drops
 	public void CreateDrop()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount == 1 )
         {
             Touch touch = Input.GetTouch(0);
 
@@ -327,12 +337,16 @@ public class GamemasterManager : MonoBehaviour
     {
 		dropList = provDropList;
 
+        GameObject n = null;
         foreach (GameObject g in provDropList)
         {
-            GameObject n = PhotonNetwork.Instantiate(dropPrefab.name, g.transform.position, Quaternion.identity);
+            n = PhotonNetwork.Instantiate(dropPrefab.name, g.transform.position, Quaternion.identity);
             n.transform.localScale = g.transform.localScale;
 			n.GetComponentInChildren<MeshRenderer>().material.color = Color.red;          
         }
+
+        n.GetPhotonView().RPC("ReceiveDropNotification", RpcTarget.Others);
+        
 
 		DeleteProvDrops();
 

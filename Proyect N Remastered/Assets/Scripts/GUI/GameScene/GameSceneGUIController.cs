@@ -16,6 +16,7 @@ public class GameSceneGUIController : MonoBehaviour
 	public GameObject photosPanel;
 	public PhotoReceivedPanel photoReceivedPanel;
 	public GmHelpMessages gmHelp;
+	public PlayerMessages playerMessages;
 
 	public RawImage targetImage;
 	public RawImage sourceImage;

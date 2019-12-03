@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -11,9 +12,11 @@ public class LobbyManager : MonoBehaviour
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ReturnToRoomScene()
     {
-        
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.NickName = "";
+        SceneManager.LoadScene("RoomScreen");
+        Debug.Log("Dejaste la sala");
     }
 }

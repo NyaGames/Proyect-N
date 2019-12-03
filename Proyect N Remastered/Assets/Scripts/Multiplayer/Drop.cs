@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 
 [RequireComponent(typeof(DropAnimation))]
 public class Drop : MonoBehaviour
@@ -12,12 +13,17 @@ public class Drop : MonoBehaviour
 
 	[SerializeField] private Transform player;
 
+    private PhotonView photonView;
+    [HideInInspector]public int dropAmmo;
+
 	DropAnimation dropAnimation;
 	bool pickable = false;
 
 	private void Awake()
 	{
-		dropAnimation = GetComponent<DropAnimation>();
+        photonView = GetComponent<PhotonView>();
+        dropAmmo = Random.Range(3,6);
+        dropAnimation = GetComponent<DropAnimation>();
 
 		if (!GameManager.Instance.myPlayer.GetComponent<Player>().isGameMaster)
 		{
@@ -52,9 +58,21 @@ public class Drop : MonoBehaviour
 		//Animaciones
 		if (!pickable) return;
 
-		if (!dropAnimation.activated)
-		{
-			if (Vector3.Distance(transform.position, player.transform.position) <= pickUpRange)
+				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
+				{
+					
+					GameObject player = GamemasterManager.Instance.playersViewsList[i];
+
+					if (!player.GetPhotonView().Owner.IsMasterClient)
+					{
+						if (Vector3.Distance(player.transform.position, transform.position) <= pickUpRange)
+						{
+							dropAnimation.ActivateDrop();
+						}
+					}
+				}
+			}
+			else
 			{
 				dropAnimation.ActivateDrop();
 			}
@@ -63,8 +81,17 @@ public class Drop : MonoBehaviour
 		{
 			if (Vector3.Distance(transform.position, player.transform.position) > pickUpRange)
 			{
-				dropAnimation.DeactivateDrop();
-				PickUpDrop();
+				if (Vector3.Distance(transform.position, player.transform.position) <= pickUpRange)
+				{
+					dropAnimation.ActivateDrop();
+				}
+			}
+			else
+			{
+				if (Vector3.Distance(transform.position, player.transform.position) > pickUpRange)
+				{
+					dropAnimation.DeactivateDrop();					
+				}
 			}
 		}
     }
@@ -78,16 +105,15 @@ public class Drop : MonoBehaviour
             if (Physics.Raycast(raycast, out raycastHit))
             {
                 Debug.Log("Something Hit");
-                if (raycastHit.collider.gameObject == this.gameObject)
-                {					
+                if (raycastHit.collider.gameObject == dropAnimation.model.gameObject)
+                {
+                    if (!GameManager.Instance.myPlayer.GetPhotonView().Owner.IsMasterClient && dropAnimation.activated)
+                    {
+                        PickUpDrop();
+                    }
                     movingObject = true;
                     Debug.Log("Drop tapped");
                 }
-
-				if (raycastHit.collider.tag.Equals("Drop"))
-				{
-					dropAnimation.TryDestroyAnimation();
-				}
 
             }
         }
@@ -116,6 +142,15 @@ public class Drop : MonoBehaviour
 	//Se está cerca de un drop y se ha pulsado, 
 	public void PickUpDrop()
 	{
-		//TODO: Darle munición a este jugador y llamar a dropAnimation.TryDestroyAnimation en todos los clientes
-	}	
+        //TODO: Darle munición a este jugador y llamar a dropAnimation.TryDestroyAnimation en todos los clientes
+        GameManager.Instance.myPlayer.GetComponent<AmmoInfo>().currentAmmo += dropAmmo;
+        photonView.RPC("TryDestroyAnimation",RpcTarget.All);
+
+    }	
+
+    [PunRPC]
+    public void ReceiveDropNotification()
+    {
+        GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("New Drops!", 3, 5f));
+    }
 }

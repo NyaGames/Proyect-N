@@ -8,12 +8,15 @@ using Photon.Pun;
 
 public class CloseZoneButton : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI minsText;
-    [SerializeField] private TextMeshProUGUI secsText;
+    [SerializeField] private TMP_InputField minsForClosingText;
+    [SerializeField] private TMP_InputField secsForClosingText;
+    [SerializeField] private TMP_InputField minsText;
+    [SerializeField] private TMP_InputField secsText;
 
     private Button button;
 
     int secs, mins;
+    int secsForClosing, minsForClosing;
 
     public GameObject countDownPrefab;
 
@@ -28,7 +31,7 @@ public class CloseZoneButton : MonoBehaviour
         {
             GamemasterManager.Instance.SendZoneToOtherPlayers();
             GameObject countDown = PhotonNetwork.Instantiate(countDownPrefab.name,Vector3.zero,Quaternion.identity);
-            countDown.GetComponent<CountDown>().Create(mins * 60 + secs, "Zone close in", GameManager.Instance.CloseZone);
+            countDown.GetComponent<CountDown>().Create(mins * 60 + secs, "NEW ZONE! Closes in ", GameManager.Instance.CloseZone);
             countDown.GetComponent<CountDown>().StartCoundDown();
         }
     }
@@ -38,8 +41,12 @@ public class CloseZoneButton : MonoBehaviour
         int.TryParse(secsText.text, out secs);
         int.TryParse(minsText.text, out mins);
 
-        if (secs <= 60 && mins <= 60 && !(mins == 0 && secs == 0) && GameManager.Instance.gameStarted && (GamemasterManager.Instance.provZone != null && GamemasterManager.Instance.provZone.activeSelf))
+        int.TryParse(secsForClosingText.text, out secsForClosing);
+        int.TryParse(minsForClosingText.text, out minsForClosing);
+
+        if ((secsForClosing <= 60 && minsForClosing <= 60 && !(minsForClosing == 0 && secsForClosing == 0)) && (secs <= 60 && mins <= 60 && !(mins == 0 && secs == 0)) && GameManager.Instance.gameStarted && (GamemasterManager.Instance.provZone != null && GamemasterManager.Instance.provZone.activeSelf))
         {
+            GamemasterManager.Instance.secsClosingZone = minsForClosing * 60 + secsForClosing;
             button.interactable = true;
         }
         else

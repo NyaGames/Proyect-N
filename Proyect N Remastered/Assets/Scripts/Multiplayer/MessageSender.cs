@@ -4,6 +4,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -101,6 +102,13 @@ public class MessageSender : MonoBehaviourPunCallbacks
 	{
 		//GameManager.Instance.OnCountDownReceived(countDown);
 	}
+
+    //Envia segundos que quedan para que la zona termine de cerrarse
+    [PunRPC]
+    public void ReceiveSecsToEndClosing()
+    {
+
+    }
     #endregion
 
     #region MasterResponse
@@ -127,11 +135,41 @@ public class MessageSender : MonoBehaviourPunCallbacks
         }
 
     }
-
     [PunRPC]
-    public void ReceiveZoneClosingCountdown(int countDown)
+    public void ActivateCountdownText()
     {
-       
+        GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
+        g.gameObject.SetActive(true);
+
+    }
+    [PunRPC]
+    public void ReceiveZoneClosingCountdown(int currentTime,int maxTime)
+    {
+        TextMeshProUGUI text = GameObject.FindGameObjectWithTag("CountDownText").GetComponentInChildren<TextMeshProUGUI>();
+
+        int secondsLeft = maxTime - currentTime;
+
+        string mins = Mathf.FloorToInt(secondsLeft / 60).ToString();
+        if (Mathf.FloorToInt(secondsLeft / 60) < 10)
+        {
+            mins = "0" + mins;
+        }
+
+        string secs = Mathf.FloorToInt(secondsLeft % 60).ToString();
+
+        if (Mathf.FloorToInt(secondsLeft % 60) < 10)
+        {
+            secs = "0" + secs;
+        }
+
+        text.text = mins + ":" + secs; 
+    }
+    [PunRPC]
+    public void DeactivateCountdownText()
+    {
+        GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
+        g.transform.GetChild(0).gameObject.SetActive(false);
+        g.transform.GetChild(1).gameObject.SetActive(false);
     }
     #endregion
 
@@ -167,7 +205,13 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 break;
 
             case WaysToKillAPlayer.GMChoice:
-                PhotonNetwork.Destroy(gameObject);
+                if (photonView.IsMine)
+                {
+                    PhotonNetwork.Destroy(gameObject);
+                    PhotonNetwork.LeaveRoom();
+                    SceneManager.LoadScene("DeathByGM");
+                    Debug.Log("TE MORISTE POR LA ZONA CRACK");
+                }
                 Debug.Log("TE MATO EL GM CRACK");
                 break;
         }

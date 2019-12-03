@@ -66,4 +66,5 @@ public class StartCountDownButton : MonoBehaviour
         countDown.GetComponent<StartGameCountDown>().Create(mins * 60 + secs, "Game starts in ", GameManager.Instance.StartGame);
         countDown.GetComponent<StartGameCountDown>().StartCoundDown();
     }
+
 }

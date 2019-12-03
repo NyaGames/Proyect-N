@@ -32,7 +32,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         feedbackText.text = "Creating room...";
 
-        string roomName = "88";//GenerateUniqueRoomID();
+        string roomName = "90";//GenerateUniqueRoomID();
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = (byte)screenSceneGUIController.maxPlayers.GetComponentInChildren<Slider>().value;
         roomOptions.IsVisible = false; //FALSE = Hace la sala privada
@@ -53,7 +53,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         feedbackText.text = "Joining room...";
 
-        string roomPassword = "88";//roompasswordInputText.text;
+        string roomPassword = "90";//roompasswordInputText.text;
 
         if (roomPassword != "")
         {
@@ -92,4 +92,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Debug.Log("La sala no existe o la contraseña es incorrecta");
     }
 
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScreen");
+    }
 }
