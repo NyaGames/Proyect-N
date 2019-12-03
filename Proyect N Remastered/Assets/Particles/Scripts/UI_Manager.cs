@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
@@ -43,6 +44,16 @@ public class UI_Manager : MonoBehaviour
     {
      
      anim = gameObject.GetComponent<Animator>();
-     anim.SetTrigger("Active");
+        Halo.Destroy();
+        Points.Destroy();
+        StartCoroutine(LoadScene());
+       
     }
+    IEnumerator LoadScene()
+    {
+        anim.SetTrigger("StartGame");
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene("GameScene");
+    }
+
 }
