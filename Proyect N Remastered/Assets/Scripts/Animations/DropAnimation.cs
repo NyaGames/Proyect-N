@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine.Events;
+using Photon.Pun;
 
 public class DropAnimation : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class DropAnimation : MonoBehaviour
 	}
 
 	[Button]
+    [PunRPC]
 	public void TryDestroyAnimation()
 	{
 		if (!activated) return;
@@ -55,8 +57,9 @@ public class DropAnimation : MonoBehaviour
 		Sequence seq = DOTween.Sequence();
 		model.GetComponent<FloatingRotator>().AccelerateRotation(50);
 		seq.Append(model.DOScale(new Vector3(5, 5, 5), 0.1f));
-		seq.Append(model.DOScale(new Vector3(0, 0, 0), 1f));	
-		seq.AppendCallback(() => gameObject.Destroy());
+		seq.Append(model.DOScale(new Vector3(0, 0, 0), 1f));
+        seq.AppendCallback(() => PhotonNetwork.Destroy(this.gameObject));
+        //seq.AppendCallback(() => gameObject.Destroy());
 
-	}
+    }
 }

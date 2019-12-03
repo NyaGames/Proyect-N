@@ -8,10 +8,10 @@ using Photon.Pun;
 
 public class CloseZoneButton : MonoBehaviour
 {
-    [SerializeField] private Text minsForClosingText;
-    [SerializeField] private Text secsForClosingText;
-    [SerializeField] private TextMeshProUGUI minsText;
-    [SerializeField] private TextMeshProUGUI secsText;
+    [SerializeField] private TMP_InputField minsForClosingText;
+    [SerializeField] private TMP_InputField secsForClosingText;
+    [SerializeField] private TMP_InputField minsText;
+    [SerializeField] private TMP_InputField secsText;
 
     private Button button;
 

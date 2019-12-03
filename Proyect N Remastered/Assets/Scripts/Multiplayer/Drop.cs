@@ -12,12 +12,17 @@ public class Drop : MonoBehaviour
 
 	[SerializeField] private Transform player;
 
+    private PhotonView photonView;
+    [HideInInspector]public int dropAmmo;
+
 	DropAnimation dropAnimation;
 	bool pickable = false;
 
 	private void Awake()
 	{
-		dropAnimation = GetComponent<DropAnimation>();
+        photonView = GetComponent<PhotonView>();
+        dropAmmo = Random.Range(3,6);
+        dropAnimation = GetComponent<DropAnimation>();
 
 		if (!GameManager.Instance.myPlayer.GetComponent<Player>().isGameMaster)
 		{
@@ -125,7 +130,6 @@ public class Drop : MonoBehaviour
 
 				if (raycastHit.collider.tag.Equals("Drop"))
 				{
-					//dropAnimation.TryDestroyAnimation();
 					if (!GameManager.Instance.myPlayer.GetPhotonView().Owner.IsMasterClient)
 					{
 						PickUpDrop();
@@ -159,6 +163,9 @@ public class Drop : MonoBehaviour
 	//Se está cerca de un drop y se ha pulsado, 
 	public void PickUpDrop()
 	{
-		//TODO: Darle munición a este jugador y llamar a dropAnimation.TryDestroyAnimation en todos los clientes
-	}	
+        //TODO: Darle munición a este jugador y llamar a dropAnimation.TryDestroyAnimation en todos los clientes
+        GameManager.Instance.myPlayer.GetComponent<AmmoInfo>().currentAmmo += dropAmmo;
+        photonView.RPC("TryDestroyAnimation",RpcTarget.All);
+
+    }	
 }
