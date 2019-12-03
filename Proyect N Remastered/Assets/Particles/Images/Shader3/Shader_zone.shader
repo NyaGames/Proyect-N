@@ -3,6 +3,8 @@
     Properties
     {
         _MainTex ("Albedo Texture", 2D) = "white" {}
+		_SurfaceNoise("Surface Noise", 2D) = "white" {}
+		_SurfaceNoiseCutoff("Surface Noise Cutoff", Range(0, 1)) = 0.777
         _TintColor("Tint Color", Color) = (1,1,1,1)
         _Transparency("Transparency", Range(0.0,0.5)) = 0.25
         _CutoutThresh("Cutout Threshold", Range(0.0,1.0)) = 0.2
@@ -10,6 +12,7 @@
         _Amplitude("Amplitude", Float) = 1
         _Speed ("Speed", Float) = 1
         _Amount("Amount", Range(0.0,1.0)) = 1
+
     }
 
     SubShader
@@ -31,7 +34,7 @@
             struct appdata
             {
                 float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
+                float4 uv : TEXCOORD0;
 				float2 uv1 : TEXCOORD1;
             };
 
@@ -39,6 +42,7 @@
             {
                 float2 uv : TEXCOORD0;
 				float2 uv1 : TEXCOORD1;
+				float2 noiseuv : TEXCOORD3;
                 float4 vertex : SV_POSITION;
             };
 
@@ -51,15 +55,20 @@
             float _Amplitude;
             float _Speed;
             float _Amount;
+			sampler2D _SurfaceNoise;
+			float4 _SurfaceNoise_ST;
+			float _SurfaceNoiseCutoff;
 
             v2f vert (appdata v)
             {
+				
                 v2f o;
                 v.vertex.x += sin(_Time.y * _Speed + v.vertex.y * _Amplitude) * _Distance * _Amount;
 				v.vertex.z += sin(_Time.z * _Speed + v.vertex.z * _Amplitude) * _Distance * _Amount;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				o.uv1 = TRANSFORM_TEX(v.uv1, _MainTex);
+				o.noiseuv = TRANSFORM_TEX(v.uv, _SurfaceNoise);
                 return o;
             }
 
@@ -68,9 +77,12 @@
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv) + _TintColor;
 
+				float surfaceNoiseSample = tex2D(_SurfaceNoise, i.noiseuv).r;
+				float surfaceNoise = surfaceNoiseSample > _SurfaceNoiseCutoff ? 1 : 0;
+
                 //col.a = _Transparency;
-                clip(col.r - _CutoutThresh);
-                return col;
+                clip(col.r + surfaceNoise - _CutoutThresh);
+                return col ;
             }
             ENDCG
         }
