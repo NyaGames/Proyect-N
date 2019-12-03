@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 
 [RequireComponent(typeof(DropAnimation))]
 public class Drop : MonoBehaviour
@@ -57,10 +58,15 @@ public class Drop : MonoBehaviour
 
 				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
 				{
+					
 					GameObject player = GamemasterManager.Instance.playersViewsList[i];
-					if(Vector3.Distance(player.transform.position, transform.position) <= pickUpRange)
+
+					if (!player.GetPhotonView().Owner.IsMasterClient)
 					{
-						dropAnimation.ActivateDrop();
+						if (Vector3.Distance(player.transform.position, transform.position) <= pickUpRange)
+						{
+							dropAnimation.ActivateDrop();
+						}
 					}
 				}
 			}
@@ -96,8 +102,7 @@ public class Drop : MonoBehaviour
 			{
 				if (Vector3.Distance(transform.position, player.transform.position) > pickUpRange)
 				{
-					dropAnimation.DeactivateDrop();
-					PickUpDrop();
+					dropAnimation.DeactivateDrop();					
 				}
 			}
 		}
@@ -120,7 +125,11 @@ public class Drop : MonoBehaviour
 
 				if (raycastHit.collider.tag.Equals("Drop"))
 				{
-					dropAnimation.TryDestroyAnimation();
+					//dropAnimation.TryDestroyAnimation();
+					if (!GameManager.Instance.myPlayer.GetPhotonView().Owner.IsMasterClient)
+					{
+						PickUpDrop();
+					}
 				}
 
             }
