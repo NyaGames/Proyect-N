@@ -4,6 +4,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -101,6 +102,13 @@ public class MessageSender : MonoBehaviourPunCallbacks
 	{
 		//GameManager.Instance.OnCountDownReceived(countDown);
 	}
+
+    //Envia segundos que quedan para que la zona termine de cerrarse
+    [PunRPC]
+    public void ReceiveSecsToEndClosing()
+    {
+
+    }
     #endregion
 
     #region MasterResponse
@@ -127,11 +135,25 @@ public class MessageSender : MonoBehaviourPunCallbacks
         }
 
     }
-
     [PunRPC]
-    public void ReceiveZoneClosingCountdown(int countDown)
+    public void ActivateCountdownText()
     {
-       
+        GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
+        g.transform.GetChild(0).gameObject.SetActive(true);
+        g.transform.GetChild(1).gameObject.SetActive(true);
+    }
+    [PunRPC]
+    public void ReceiveZoneClosingCountdown(int currentTime,int maxTime)
+    {
+        TextMeshProUGUI text = GameObject.FindGameObjectWithTag("CountDownText").GetComponentInChildren<TextMeshProUGUI>();
+        text.text = "Zone will be closed in " + (maxTime - currentTime); 
+    }
+    [PunRPC]
+    public void DeactivateCountdownText()
+    {
+        GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
+        g.transform.GetChild(0).gameObject.SetActive(false);
+        g.transform.GetChild(1).gameObject.SetActive(false);
     }
     #endregion
 

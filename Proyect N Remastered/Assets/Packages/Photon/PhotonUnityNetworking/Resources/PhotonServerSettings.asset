@@ -36,5 +36,8 @@ MonoBehaviour:
   - ReceiveGameStartCountdown
   - ReceiveImageFromPlayer
   - ReceiveZoneClosingCountdown
+  - ReceiveSecsToEndClosing
+  - ActivateCountdownText
+  - DeactivateCountdownText
   DisableAutoOpenWizard: 1
   ShowSettings: 0

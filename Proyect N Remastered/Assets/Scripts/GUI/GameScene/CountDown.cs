@@ -11,18 +11,20 @@ public class CountDown : MonoBehaviour,IPunObservable
     int secs;
     int secsSend;
     int secsReceived;
-    string countDownString;
+    string countDownString = "NEW ZONE! Closes in ";
     UnityAction onCountDownFinished;
     bool countdownActive;
 
     PhotonView photonView;
-    TextMeshProUGUI countDownText; 
-
+    TextMeshProUGUI countDownText;
     public void Awake()
     {
+        secs = 99;
         photonView = GetComponent<PhotonView>();
         GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
-        countDownText = g.GetComponent<TextMeshProUGUI>();
+        g.transform.GetChild(0).gameObject.SetActive(true);
+        g.transform.GetChild(1).gameObject.SetActive(true);
+        countDownText = g.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void Create(int secs, string countDowntring, UnityAction onCountDownFinished)
@@ -32,7 +34,7 @@ public class CountDown : MonoBehaviour,IPunObservable
         this.secs = secs;
         this.countDownString = countDowntring;
         this.onCountDownFinished += onCountDownFinished;
-        
+
     }
 
     public void StartCoundDown()
@@ -47,12 +49,13 @@ public class CountDown : MonoBehaviour,IPunObservable
     {
         secs--;
         secsSend = secs;
-        if (secsSend < 0)
+        if (secsSend < -1)
         {
-            PhotonNetwork.Destroy(photonView);
+            GameManager.Instance.StartGame();
             CancelInvoke("Countdown");
             onCountDownFinished();
             countdownActive = false;
+            PhotonNetwork.Destroy(photonView);
         }
     }
 
@@ -61,13 +64,32 @@ public class CountDown : MonoBehaviour,IPunObservable
         if (photonView.IsMine)
         {
             secsSend = secs;
-            countDownText.text = countDownString + secsSend;
         }
         else
         {
-            countDownText.text = countDownString + secsReceived;
+            secs = secsReceived;
+            if (secs < 0)
+            {
+                GameManager.Instance.StartGame();
+            }
         }
-       
+
+        if (secs < 0)
+        {
+            countDownText.text = "CLOSING!";
+        }
+        else
+        {
+            countDownText.text = countDownString + secs + "...";
+        }
+
+    }
+
+
+    public void OnDestroy()
+    {
+        //GameObject.FindGameObjectWithTag("CountDownText").transform.GetChild(0).gameObject.SetActive(false);
+       // GameObject.FindGameObjectWithTag("CountDownText").transform.GetChild(1).gameObject.SetActive(false);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

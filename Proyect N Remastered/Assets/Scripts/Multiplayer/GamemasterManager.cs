@@ -13,7 +13,6 @@ public class GamemasterManager : MonoBehaviour
 	public GameObject dropPrefab;
 
 	public bool creatingDrop = false;
-	public int numDrops = 3;
 
     [HideInInspector]public GameObject staticZone;
     [HideInInspector]public GameObject newZonePosition;
@@ -23,10 +22,10 @@ public class GamemasterManager : MonoBehaviour
 	[SerializeField] private Material staticZoneMat;
 	[SerializeField] private Material newZonePositionMat;
 
+	private List<GameObject> provDropList = new List<GameObject>();
 	private List<GameObject> dropList = new List<GameObject>();
 
 	[HideInInspector] public GameObject dropPos;
-	[HideInInspector] public GameObject lastDropTapped;
 
 
 	Vector3 lasPositionTapped = new Vector3(0, 0, 0);
@@ -35,6 +34,8 @@ public class GamemasterManager : MonoBehaviour
     [HideInInspector] public GameObject[] playersViewsList;
 
     private bool provZoneCreated = false;
+
+    [HideInInspector] public int secsClosingZone;
 
     private void Awake()
     {
@@ -65,17 +66,16 @@ public class GamemasterManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (ZoneManager.Instance.isEditingZone ) //Si no se ha creado la zona todavía y estoy dentro de una sala,puedo crearla
+        if (ZoneManager.Instance.isEditingZone) //Si no se ha creado la zona todavía y estoy dentro de una sala,puedo crearla
         {
             HandleZoneInput();
         }
 
 
-        if (creatingDrop) //Si el botón de los drops está holdeado, se puede crear un drop
+        if (ZoneManager.Instance.isEditingDrops) //Si el botón de los drops está holdeado, se puede crear un drop
         {
             CreateDrop();
         }
-
     } 
 
 	#region Zone
@@ -134,7 +134,9 @@ public class GamemasterManager : MonoBehaviour
                         provZone.transform.localScale = Vector3.one * 5;
                         provZone.transform.position = touchInWorldCoord;
                     }
-                }
+
+					GameSceneGUIController.Instance.gmHelp.SetMessage("Move to scale the zone");
+				}
                 break;
 
             // Determine direction by comparing the current touch position with the initial one.
@@ -153,8 +155,10 @@ public class GamemasterManager : MonoBehaviour
                 {
                     provZone.GetComponent<Zone>().creatingObject = false;
                 }
-             
-                provZoneCreated = true;
+
+				GameSceneGUIController.Instance.gmHelp.SetMessage("Try moving and scaling!");
+
+				provZoneCreated = true;
                 break;
         }
     }
@@ -237,20 +241,37 @@ public class GamemasterManager : MonoBehaviour
 
     public IEnumerator CloseActualZone()
     {
-        float timeToClose = 3.0f;
+        float timeToClose = secsClosingZone;
         float t = 0;
+        float currentTime = 0;
         Vector3 InitialScale = staticZone.transform.localScale;
         Vector3 FinalScale = newZonePosition.transform.localScale;
         Vector3 Initialpos = staticZone.transform.position;
         Vector3 Finalpos = newZonePosition.transform.position;
 
+        foreach (GameObject g in playersViewsList)
+        {
+            g.GetComponent<PhotonView>().RPC("ActivateCountdownText", RpcTarget.All);
+        }
+
         while (t <= 1)
         {
+            currentTime += Time.deltaTime;
+            foreach (GameObject g in playersViewsList)
+            {
+                g.GetComponent<PhotonView>().RPC("ReceiveZoneClosingCountdown", RpcTarget.All, Mathf.RoundToInt(currentTime),(int)timeToClose);
+            }
             staticZone.transform.localScale = Vector3.Lerp(InitialScale, FinalScale, t);
             staticZone.transform.position = Vector3.Lerp(Initialpos, Finalpos, t);
             t += Time.deltaTime / timeToClose;
             yield return null;
         }
+
+        foreach (GameObject g in playersViewsList)
+        {
+            g.GetComponent<PhotonView>().RPC("DeactivateCountdownText", RpcTarget.All);
+        }
+
         staticZone.transform.localScale = FinalScale;
         staticZone.transform.position = Finalpos;
         PhotonNetwork.Destroy(staticZone);
@@ -287,6 +308,8 @@ public class GamemasterManager : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
+
+			if (touch.position.x / Screen.width > 0.66) return;
             float cameraDistanceToGround = getDistanceFromCameraToGround();
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
             worldPosition.y = 0;
@@ -300,14 +323,15 @@ public class GamemasterManager : MonoBehaviour
 
                 case TouchPhase.Ended:
                     Destroy(dropPos);
-                    numDrops--;
+                  
                     creatingDrop = false;
                     GameObject newDrop = Instantiate(dropPrefab, worldPosition, Quaternion.identity);
                     newDrop.GetComponent<Drop>().creatingObject = false;
-                    dropList.Add(newDrop);
-                    newDrop.GetComponent<Drop>().lastTouchedDrop();
+                    provDropList.Add(newDrop);
                     break;
             }
+
+			GameSceneGUIController.Instance.gmHelp.SetMessage("To erase drops, exit edition mode");
         }
         else
         {
@@ -320,20 +344,25 @@ public class GamemasterManager : MonoBehaviour
     }
     public void SendDropsToOtherPlayers()
     {
-        foreach (GameObject g in dropList)
+		dropList = provDropList;
+
+        foreach (GameObject g in provDropList)
         {
             GameObject n = PhotonNetwork.Instantiate(dropPrefab.name, g.transform.position, Quaternion.identity);
             n.transform.localScale = g.transform.localScale;
-            Destroy(g);
+			n.GetComponentInChildren<MeshRenderer>().material.color = Color.red;          
         }
-        dropList.Clear();
+
+		DeleteProvDrops();
+
+		ZoneManager.Instance.TriggerDropsMode();
 
     }
     public void DeleteDrop()
     {
-        dropList.Remove(lastDropTapped);
-        Destroy(lastDropTapped);
-        numDrops++;
+		GameObject lastDropTapped = provDropList[provDropList.Count - 1];
+        provDropList.Remove(lastDropTapped);
+        Destroy(lastDropTapped);      
     }
 	#endregion
 
@@ -362,5 +391,15 @@ public class GamemasterManager : MonoBehaviour
 			}
 		}
 	}    
+
+	public void DeleteProvDrops()
+	{
+		foreach (var gameObject in provDropList)
+		{
+			Destroy(gameObject);
+		}
+
+		provDropList.Clear();
+	}
 
 }

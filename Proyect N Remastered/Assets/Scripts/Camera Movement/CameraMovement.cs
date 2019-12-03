@@ -27,7 +27,7 @@ public abstract class CameraMovement : MonoBehaviour
 
     protected void Update()
     {
-        if (ZoneManager.Instance.isEditingZone) return;
+        if (ZoneManager.Instance.isEditingZone || ZoneManager.Instance.isEditingDrops) return;
 
         if(Input.touchCount > 0)
         {
