@@ -33,4 +33,9 @@ public class FloatingRotator : MonoBehaviour
 
 		transform.position = tempPos;
 	}
+
+	public void AccelerateRotation(float acc)
+	{
+		rotationSpeed *= acc;
+	}
 }
