@@ -18,10 +18,6 @@ public class GamemasterManager : MonoBehaviour
     [HideInInspector]public GameObject newZonePosition;
     [HideInInspector]public GameObject provZone;
 
-	[SerializeField] private Material provZoneMat;
-	[SerializeField] private Material staticZoneMat;
-	[SerializeField] private Material newZonePositionMat;
-
 	private List<GameObject> provDropList = new List<GameObject>();
 	private List<GameObject> dropList = new List<GameObject>();
 
@@ -51,7 +47,7 @@ public class GamemasterManager : MonoBehaviour
 
     public void Start()
     {
-       
+
     }
 
     public void Update()
@@ -126,7 +122,6 @@ public class GamemasterManager : MonoBehaviour
                     if (provZone == null)
                     {                      
                         provZone = Instantiate(zonePrefab, touchInWorldCoord, Quaternion.identity);
-                        provZone.GetComponentInChildren<MeshRenderer>().material = provZoneMat;
                     }
                     else
                     {
@@ -202,7 +197,6 @@ public class GamemasterManager : MonoBehaviour
             {
                 staticZone = PhotonNetwork.Instantiate(zoneCantGetOutPrefab.name, provZone.transform.position, Quaternion.identity);
                 staticZone.transform.localScale = provZone.transform.localScale;
-				staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
                 HideProvZone();
 
               
@@ -212,7 +206,6 @@ public class GamemasterManager : MonoBehaviour
                 //Vector3 geoPosition = editableZone.GetComponent<ZonePositionWithLatLon>().GetGeoPosition();
                 newZonePosition = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
                 newZonePosition.transform.localScale = provZone.transform.localScale;
-                newZonePosition.GetComponentInChildren<MeshRenderer>().material = newZonePositionMat;
                 provZoneCreated = false;
 
             }      
@@ -225,7 +218,6 @@ public class GamemasterManager : MonoBehaviour
         if (newZonePosition == null)
         {
             newZonePosition = Instantiate(zonePrefab);
-            newZonePosition.GetComponentInChildren<MeshRenderer>().material = newZonePositionMat;
         }
 
         newZonePosition.transform.position = provZone.transform.position;
@@ -276,8 +268,7 @@ public class GamemasterManager : MonoBehaviour
         staticZone.transform.position = Finalpos;
         PhotonNetwork.Destroy(staticZone);
         staticZone = PhotonNetwork.Instantiate(zoneCantGetOutPrefab.name, Finalpos, Quaternion.identity); //NextZone pasa a ser nuestra actualZone y borramos nextZone
-        staticZone.transform.localScale = FinalScale;
-        staticZone.GetComponentInChildren<MeshRenderer>().material = staticZoneMat;
+        staticZone.transform.localScale = FinalScale;;
 
         PhotonNetwork.Destroy(newZonePosition);
         //newZonePosition.SetActive(false);

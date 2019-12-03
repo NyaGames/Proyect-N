@@ -12,6 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df4fef210c329d147968f4a41a8d16a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5241502125260067627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5765318874026160219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db0d7a3f96a0b540a0d97d97ed96b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gmSurfaceColor: {r: 0.063412234, g: 0.24848214, b: 0.8962264, a: 1}
+  gmJointsColor: {r: 0.29636884, g: 0.3562953, b: 0.5660378, a: 1}
+  playerSurfaceColor: {r: 0.09211465, g: 0.8490566, b: 0.17506723, a: 1}
+  playerJointsColor: {r: 0.1516554, g: 0.4528302, b: 0.18466088, a: 1}
 --- !u!1 &7848971255275303285
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +368,14 @@ PrefabInstance:
     - target: {fileID: 100138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
       propertyPath: m_Name
       value: mixamo model
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400138, guid: acbae5776d1b1b0449b7b24938e3aa7d, type: 3}
       propertyPath: m_LocalPosition.x
