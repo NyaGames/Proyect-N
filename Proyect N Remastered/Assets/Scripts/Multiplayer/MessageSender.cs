@@ -139,14 +139,30 @@ public class MessageSender : MonoBehaviourPunCallbacks
     public void ActivateCountdownText()
     {
         GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
-        g.transform.GetChild(0).gameObject.SetActive(true);
-        g.transform.GetChild(1).gameObject.SetActive(true);
+        g.gameObject.SetActive(true);
+
     }
     [PunRPC]
     public void ReceiveZoneClosingCountdown(int currentTime,int maxTime)
     {
         TextMeshProUGUI text = GameObject.FindGameObjectWithTag("CountDownText").GetComponentInChildren<TextMeshProUGUI>();
-        text.text = "Zone will be closed in " + (maxTime - currentTime); 
+
+        int secondsLeft = maxTime - currentTime;
+
+        string mins = Mathf.FloorToInt(secondsLeft / 60).ToString();
+        if (Mathf.FloorToInt(secondsLeft / 60) < 10)
+        {
+            mins = "0" + mins;
+        }
+
+        string secs = Mathf.FloorToInt(secondsLeft % 60).ToString();
+
+        if (Mathf.FloorToInt(secondsLeft % 60) < 10)
+        {
+            secs = "0" + secs;
+        }
+
+        text.text = mins + ":" + secs; 
     }
     [PunRPC]
     public void DeactivateCountdownText()

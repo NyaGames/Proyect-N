@@ -38,13 +38,7 @@ public class LockedCameraMovement : CameraMovement
 		if (!cameraIsDamping)
 		{
 			Vector3 newPos = lockObjective.position;
-			transform.position = Vector3.Slerp(transform.position, newPos, smoothFactor);
-
-			float angle = Mathf.Lerp(swivelZoom.x, swivelZoom.y, zoom);
-			swivel.localRotation = Quaternion.Euler(angle, 0f, 0f);
-
-			float distance = Mathf.Lerp(stickZoom.x, stickZoom.y, zoom);
-			stick.localPosition = new Vector3(0f, stick.localPosition.y, distance);
+			transform.position = Vector3.Slerp(transform.position, newPos, smoothFactor);			
 		}
 	}
 
