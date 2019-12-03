@@ -6,7 +6,6 @@ public class Drop : MonoBehaviour
     public bool movingObject;
     public bool creatingObject;
 
-
 	[SerializeField] private float pickUpRange = 5f;
 	[SerializeField] private GameObject rangeScaler;
 
@@ -50,21 +49,56 @@ public class Drop : MonoBehaviour
         }
 
 		//Animaciones
-		if (!pickable) return;
-
-		if (!dropAnimation.activated)
+		if (!pickable)
 		{
-			if (Vector3.Distance(transform.position, player.transform.position) <= pickUpRange)
+			//GM
+			if (!dropAnimation.activated)
 			{
-				dropAnimation.ActivateDrop();
+
+				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
+				{
+					GameObject player = GamemasterManager.Instance.playersViewsList[i];
+					if(Vector3.Distance(player.transform.position, transform.position) <= pickUpRange)
+					{
+						dropAnimation.ActivateDrop();
+					}
+				}
+			}
+			else
+			{
+				bool someoneInRange = false;
+				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
+				{
+					GameObject player = GamemasterManager.Instance.playersViewsList[i];
+					if (Vector3.Distance(player.transform.position, transform.position) <= pickUpRange)
+					{
+						someoneInRange = true;
+					}
+				}
+
+				if (!someoneInRange)
+				{
+					dropAnimation.DeactivateDrop();
+				}
 			}
 		}
 		else
 		{
-			if (Vector3.Distance(transform.position, player.transform.position) > pickUpRange)
+			//Player
+			if (!dropAnimation.activated)
 			{
-				dropAnimation.DeactivateDrop();
-				PickUpDrop();
+				if (Vector3.Distance(transform.position, player.transform.position) <= pickUpRange)
+				{
+					dropAnimation.ActivateDrop();
+				}
+			}
+			else
+			{
+				if (Vector3.Distance(transform.position, player.transform.position) > pickUpRange)
+				{
+					dropAnimation.DeactivateDrop();
+					PickUpDrop();
+				}
 			}
 		}
     }
