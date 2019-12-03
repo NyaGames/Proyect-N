@@ -7,6 +7,7 @@ public class Drop : MonoBehaviour
     public bool movingObject;
     public bool creatingObject;
 
+
 	[SerializeField] private float pickUpRange = 5f;
 	[SerializeField] private GameObject rangeScaler;
 
@@ -55,11 +56,7 @@ public class Drop : MonoBehaviour
         }
 
 		//Animaciones
-		if (!pickable)
-		{
-			//GM
-			if (!dropAnimation.activated)
-			{
+		if (!pickable) return;
 
 				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
 				{
@@ -77,26 +74,12 @@ public class Drop : MonoBehaviour
 			}
 			else
 			{
-				bool someoneInRange = false;
-				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
-				{
-					GameObject player = GamemasterManager.Instance.playersViewsList[i];
-					if (Vector3.Distance(player.transform.position, transform.position) <= pickUpRange)
-					{
-						someoneInRange = true;
-					}
-				}
-
-				if (!someoneInRange)
-				{
-					dropAnimation.DeactivateDrop();
-				}
+				dropAnimation.ActivateDrop();
 			}
 		}
 		else
 		{
-			//Player
-			if (!dropAnimation.activated)
+			if (Vector3.Distance(transform.position, player.transform.position) > pickUpRange)
 			{
 				if (Vector3.Distance(transform.position, player.transform.position) <= pickUpRange)
 				{
