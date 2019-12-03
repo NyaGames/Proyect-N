@@ -147,5 +147,10 @@ public class Player : MonoBehaviour
 		}
 	}
 
+    [PunRPC]
+    public void OnKillReceived(string playerName)
+    {
+        GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage(playerName + " has died!", 3, 5f));
+    }
 
 }

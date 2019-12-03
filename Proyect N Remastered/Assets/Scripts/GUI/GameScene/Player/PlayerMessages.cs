@@ -17,7 +17,7 @@ public class PlayerMessages : MonoBehaviour
         if (messages.Count <= 0)
         {
             gameObject.SetActive(false);
-        }       
+        }        
     }
 
     public void AddMessage(PlayerMessage newMessage)
@@ -59,6 +59,7 @@ public class PlayerMessages : MonoBehaviour
 
     private void ShowMessage()
     {
+        gameObject.SetActive(true);
         currentMessage = messages[0];
         messageText.text = currentMessage.message;
         Invoke("NextMesage", currentMessage.duration);

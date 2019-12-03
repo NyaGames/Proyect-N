@@ -1,10 +1,12 @@
 ﻿using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class GamemasterManager : MonoBehaviour
+public class GamemasterManager : MonoBehaviourPunCallbacks
 {
     public static GamemasterManager Instance { get; private set; }
 
@@ -396,5 +398,13 @@ public class GamemasterManager : MonoBehaviour
 
 		provDropList.Clear();
 	}
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        foreach (GameObject g in playersViewsList)
+        {
+            g.GetComponent<PhotonView>().RPC("OnKillReceived", RpcTarget.Others, otherPlayer.NickName);
+        }
+    }
 
 }
