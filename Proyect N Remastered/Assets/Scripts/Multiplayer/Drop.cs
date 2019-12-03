@@ -1,18 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(DropAnimation))]
 public class Drop : MonoBehaviour
 {
-
     public bool movingObject;
     public bool creatingObject;
 
-    private void Start()
+
+	[SerializeField] private float pickUpRange = 5f;
+	[SerializeField] private GameObject rangeScaler;
+
+	[SerializeField] private Transform player;
+
+	DropAnimation dropAnimation;
+	bool pickable = false;
+
+	private void Awake()
+	{
+		dropAnimation = GetComponent<DropAnimation>();
+
+		if (!GameManager.Instance.myPlayer.GetComponent<Player>().isGameMaster)
+		{
+			pickable = true;
+			player = GameManager.Instance.myPlayer.transform;
+		}
+	}
+
+	private void OnValidate()
+	{
+		rangeScaler.transform.localScale = Vector3.one * (pickUpRange * 0.25f);
+	}
+
+	private void Start()
     {
         movingObject = false;
-    }
-    private void Update()
+
+		rangeScaler.transform.localScale = Vector3.one * (pickUpRange * 0.25f);
+	}
+
+	private void Update()
     {
         if (!movingObject ) //Si no se mueve y no se esta creando, lo detectamos
         {
@@ -22,6 +48,25 @@ public class Drop : MonoBehaviour
         {
             moveObject();
         }
+
+		//Animaciones
+		if (!pickable) return;
+
+		if (!dropAnimation.activated)
+		{
+			if (Vector3.Distance(transform.position, player.transform.position) <= pickUpRange)
+			{
+				dropAnimation.ActivateDrop();
+			}
+		}
+		else
+		{
+			if (Vector3.Distance(transform.position, player.transform.position) > pickUpRange)
+			{
+				dropAnimation.DeactivateDrop();
+				PickUpDrop();
+			}
+		}
     }
 
     public void detectObjectTapped()
@@ -36,9 +81,15 @@ public class Drop : MonoBehaviour
                 if (raycastHit.collider.gameObject == this.gameObject)
                 {
                     lastTouchedDrop();
+					
                     movingObject = true;
                     Debug.Log("Drop tapped");
                 }
+
+				if (raycastHit.collider.tag.Equals("Drop"))
+				{
+					dropAnimation.TryDestroyAnimation();
+				}
 
             }
         }
@@ -76,5 +127,9 @@ public class Drop : MonoBehaviour
         GamemasterManager.Instance.lastDropTapped = this.gameObject;
     }
 
-
+	//Se está cerca de un drop y se ha pulsado, 
+	public void PickUpDrop()
+	{
+		//TODO: Darle munición a este jugador y llamar a dropAnimation.TryDestroyAnimation en todos los clientes
+	}	
 }
