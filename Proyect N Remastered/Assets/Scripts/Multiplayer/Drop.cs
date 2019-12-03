@@ -164,4 +164,10 @@ public class Drop : MonoBehaviour
         photonView.RPC("TryDestroyAnimation",RpcTarget.All);
 
     }	
+
+    [PunRPC]
+    public void ReceiveDropNotification()
+    {
+        GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("New Drops!", 3, 5f));
+    }
 }

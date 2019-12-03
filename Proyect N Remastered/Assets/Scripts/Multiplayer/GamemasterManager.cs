@@ -337,12 +337,16 @@ public class GamemasterManager : MonoBehaviour
     {
 		dropList = provDropList;
 
+        GameObject n = null;
         foreach (GameObject g in provDropList)
         {
-            GameObject n = PhotonNetwork.Instantiate(dropPrefab.name, g.transform.position, Quaternion.identity);
+            n = PhotonNetwork.Instantiate(dropPrefab.name, g.transform.position, Quaternion.identity);
             n.transform.localScale = g.transform.localScale;
 			n.GetComponentInChildren<MeshRenderer>().material.color = Color.red;          
         }
+
+        n.GetPhotonView().RPC("ReceiveDropNotification", RpcTarget.Others);
+        
 
 		DeleteProvDrops();
 

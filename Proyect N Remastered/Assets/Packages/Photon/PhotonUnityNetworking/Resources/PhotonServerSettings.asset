@@ -40,5 +40,6 @@ MonoBehaviour:
   - ActivateCountdownText
   - DeactivateCountdownText
   - TryDestroyAnimation
+  - ReceiveDropNotification
   DisableAutoOpenWizard: 1
   ShowSettings: 0

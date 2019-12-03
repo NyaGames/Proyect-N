@@ -223,6 +223,7 @@ MonoBehaviour:
   photosPanel: {fileID: 1196780681}
   photoReceivedPanel: {fileID: 1857199403}
   gmHelp: {fileID: 1385288001}
+  playerMessages: {fileID: 404225065}
   targetImage: {fileID: 38420528}
   sourceImage: {fileID: 1535490335}
 --- !u!114 &78903000
@@ -5044,8 +5045,8 @@ RectTransform:
   m_Children:
   - {fileID: 490966404}
   - {fileID: 1064447031}
-  - {fileID: 902224705}
   - {fileID: 1554217825}
+  - {fileID: 902224705}
   - {fileID: 1938969188}
   m_Father: {fileID: 1413504831}
   m_RootOrder: 0
@@ -5110,7 +5111,7 @@ GameObject:
   - component: {fileID: 557376870}
   - component: {fileID: 557376869}
   m_Layer: 5
-  m_Name: Seconds
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9472,7 +9473,7 @@ RectTransform:
   m_Children:
   - {fileID: 1535707445}
   m_Father: {fileID: 546428590}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.1227742}
   m_AnchorMax: {x: 1, y: 1}
@@ -16226,7 +16227,7 @@ RectTransform:
   - {fileID: 1908333459}
   - {fileID: 1140597083}
   m_Father: {fileID: 546428590}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.1227742}
