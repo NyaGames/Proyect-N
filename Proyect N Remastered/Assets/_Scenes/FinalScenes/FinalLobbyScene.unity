@@ -11806,9 +11806,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15043adef66628b419ac3a8ac0aa2098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 0}
+  button: {fileID: 1708842082}
   Halo: {fileID: 204523964}
   Points: {fileID: 972569039}
+  Clickar: {fileID: 0}
   anim: {fileID: 0}
   GM: 0
 --- !u!199 &1708842087
