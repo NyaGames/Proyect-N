@@ -200,6 +200,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
                 staticZone = PhotonNetwork.Instantiate(zoneCantGetOutPrefab.name, provZone.transform.position, Quaternion.identity);
                 staticZone.transform.localScale = provZone.transform.localScale;
                 HideProvZone();
+				staticZone.GetPhotonView().RPC("NewZoneReceived", RpcTarget.Others);
 
               
             }
@@ -209,8 +210,8 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
                 newZonePosition = PhotonNetwork.Instantiate(zonePrefab.name, provZone.transform.position, Quaternion.identity);
                 newZonePosition.transform.localScale = provZone.transform.localScale;
                 provZoneCreated = false;
-
-            }      
+				staticZone.GetPhotonView().RPC("NewZoneReceived", RpcTarget.Others);
+			}      
         }
 
     }
@@ -231,7 +232,8 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
     public void StartClosingZone()
     {   
         StartCoroutine(CloseActualZone());
-    }
+		GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("Zone is closing!", 1, 5f));
+	}
 
     public IEnumerator CloseActualZone()
     {

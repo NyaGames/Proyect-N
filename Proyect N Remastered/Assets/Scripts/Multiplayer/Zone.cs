@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Zone : MonoBehaviour
 {
@@ -116,6 +117,12 @@ public class Zone : MonoBehaviour
             }
         }
     }
+
+	[PunRPC]
+	public void NewZoneReceived()
+	{
+		GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("A new zone was created!", 2, 5f));
+	}
 
    
 

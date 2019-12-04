@@ -42,5 +42,6 @@ MonoBehaviour:
   - TryDestroyAnimation
   - ReceiveDropNotification
   - OnKillReceived
+  - NewZoneReceived
   DisableAutoOpenWizard: 1
   ShowSettings: 0

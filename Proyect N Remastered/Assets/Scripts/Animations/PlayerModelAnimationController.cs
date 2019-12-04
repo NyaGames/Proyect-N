@@ -10,28 +10,41 @@ public class PlayerModelAnimationController : MonoBehaviour
 
 	Animator anim;
 
+	Vector3 prevPos;
+
 	private void Awake()
 	{
 		anim = GetComponent<Animator>();
-	}
 
-	private void Update()
+		InvokeRepeating("CheckMovement", 0f, 0.5f);
+	}	
+
+	void CheckMovement()
 	{
-		if (!isWalking)
+		if(prevPos == null)
 		{
-			if(LocationProviderFactory.Instance.DefaultLocationProvider.CurrentLocation.SpeedMetersPerSecond > 0f)
-			{
-				isWalking = true;
-				anim.SetBool("IsWalking", isWalking);
-			}
+			prevPos = transform.position;
 		}
 		else
 		{
-			if (LocationProviderFactory.Instance.DefaultLocationProvider.CurrentLocation.SpeedKmPerHour <= 0f)
+			if (isWalking)
 			{
-				isWalking = false;
-				anim.SetBool("IsWalking", isWalking);
+				if(transform.position == prevPos)
+				{
+					isWalking = false;
+					anim.SetBool("IsWalking", isWalking);
+				}
 			}
+			else
+			{
+				if (transform.position != prevPos)
+				{
+					isWalking = true;
+					anim.SetBool("IsWalking", isWalking);
+				}
+			}
+
+			prevPos = transform.position;
 		}
 	}
 }
