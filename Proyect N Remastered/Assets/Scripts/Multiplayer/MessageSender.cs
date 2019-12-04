@@ -93,7 +93,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
 	#endregion
 
     #region MasterResponse
-    public void ConfirmKill(string sender,string playerToKill,bool killed, byte[] image){
+    public void ConfirmKill(string sender,string playerToKill, bool killed, byte[] image){
         byte lastGroup = photonView.Group;
 
         if (PhotonNetwork.IsMasterClient)
