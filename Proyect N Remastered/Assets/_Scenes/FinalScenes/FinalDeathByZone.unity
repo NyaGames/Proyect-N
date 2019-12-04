@@ -456,7 +456,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: you have been eliminated by gm
+  m_text: 'you have been eliminated by
+
+    zone'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -525,7 +527,7 @@ MonoBehaviour:
   m_margin: {x: 61.446655, y: 801.94434, z: 58.775024, w: 803.6299}
   m_textInfo:
     textComponent: {fileID: 943321945}
-    characterCount: 30
+    characterCount: 32
     spriteCount: 0
     spaceCount: 5
     wordCount: 6
@@ -972,7 +974,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 56.65
+  m_fontSize: 66.9
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

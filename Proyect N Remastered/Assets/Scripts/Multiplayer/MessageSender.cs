@@ -17,6 +17,7 @@ public enum WaysToKillAPlayer
 [RequireComponent(typeof(PhotonView))]
 public class MessageSender : MonoBehaviourPunCallbacks
 {
+    public GameObject skullPrefab;
     PhotonView photonView;
     Player myPlayer;
 
@@ -91,26 +92,6 @@ public class MessageSender : MonoBehaviourPunCallbacks
     }
 	#endregion
 
-	#region countDown
-	public void SendCountdown(int countDown, string callbackMethod)
-	{
-		photonView.RPC(callbackMethod, RpcTarget.Others, countDown);
-	}
-
-	[PunRPC]
-	public void ReceiveGameStartCountdown(int countDown)
-	{
-		//GameManager.Instance.OnCountDownReceived(countDown);
-	}
-
-    //Envia segundos que quedan para que la zona termine de cerrarse
-    [PunRPC]
-    public void ReceiveSecsToEndClosing()
-    {
-
-    }
-    #endregion
-
     #region MasterResponse
     public void ConfirmKill(string sender,string playerToKill,bool killed){
         byte lastGroup = photonView.Group;
@@ -168,8 +149,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
     public void DeactivateCountdownText()
     {
         GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
-        g.transform.GetChild(0).gameObject.SetActive(false);
-        g.transform.GetChild(1).gameObject.SetActive(false);
+        g.GetComponentInChildren<TextMeshProUGUI>().text = "";
     }
     #endregion
 
@@ -184,13 +164,10 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 if (photonView.IsMine && !myPlayer.isGameMaster)
                 {
                     PhotonNetwork.Destroy(gameObject);
-                    //PhotosPanelGUIController.Instance.PlayerKilled(getUncompressedTextureFromBytes(image), killer);
+                    SpawnSkull();
                     GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().PlayerKilled(getUncompressedTextureFromBytes(image), killer);
-                }
-                else
-                {
-                    
-                    Debug.Log("No es mio,creado por: " + photonView.CreatorActorNr + " y lo controla:" + photonView.ControllerActorNr);
+                    PhotonNetwork.LeaveRoom();
+                    //TODO: TRANSFERIR OWNERSHIP
                 }
                 break;
 
@@ -198,6 +175,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 if (photonView.IsMine)
                 {
                     PhotonNetwork.Destroy(gameObject);
+                    SpawnSkull();
                     PhotonNetwork.LeaveRoom();
                     SceneManager.LoadScene("DeathByZone");
                     Debug.Log("TE MORISTE POR LA ZONA CRACK");
@@ -208,6 +186,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 if (photonView.IsMine)
                 {
                     PhotonNetwork.Destroy(gameObject);
+                    SpawnSkull();
                     PhotonNetwork.LeaveRoom();
                     SceneManager.LoadScene("DeathByGM");
                     Debug.Log("TE MORISTE POR LA ZONA CRACK");
@@ -215,6 +194,13 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 Debug.Log("TE MATO EL GM CRACK");
                 break;
         }
+
+    }
+
+    public void SpawnSkull()
+    {
+        GameObject skull = PhotonNetwork.Instantiate(skullPrefab.name, gameObject.transform.position, Quaternion.identity);
+        skull.GetPhotonView().TransferOwnership(PhotonNetwork.MasterClient);
 
     }
 

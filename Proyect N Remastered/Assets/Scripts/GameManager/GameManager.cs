@@ -111,13 +111,14 @@ public class GameManager : MonoBehaviour
         if (outOfZoneText.activeSelf && myPlayer != null && !PhotonNetwork.LocalPlayer.IsMasterClient) {
             outOfZoneText.GetComponent<TMPro.TextMeshProUGUI>().text = "You have " + myPlayer.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone + " seconds to return to game area! Run now!";
         }
-        if (PhotonNetwork.CurrentRoom.PlayerCount <= 2 && !PhotonNetwork.LocalPlayer.IsMasterClient && !winningPanel.activeSelf) //Si solo quedais tu y el gm, has ganado
+
+        /*if (PhotonNetwork.CurrentRoom.PlayerCount <= 2 && !PhotonNetwork.LocalPlayer.IsMasterClient && !winningPanel.activeSelf) //Si solo quedais tu y el gm, has ganado
         {
             winningPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "You have killed " + myPlayer.GetComponent<KillsInfo>().currentKills;
             winningPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = PhotonNetwork.CurrentRoom.PlayerCount - 1  + "/" + playerCountAtStart;
             winningPanel.SetActive(true);
            
-        }
+        }*/
 
 	}
 
