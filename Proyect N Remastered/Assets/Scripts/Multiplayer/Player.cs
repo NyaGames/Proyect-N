@@ -67,21 +67,6 @@ public class Player : MonoBehaviour
         }
         return null;
     }
-    public void OnTriggerEnter(Collider collision)
-    {
-        //Drop collision
-        if (collision.gameObject.CompareTag("Drop") && !isGameMaster) //Si un jugador normla choca con un drop
-        {
-            PickDrop(collision.gameObject);
-            
-        }
-
-    }
-    public void PickDrop(GameObject drop)
-    {
-        Destroy(drop);
-        Debug.Log("Cogiste un drop!");
-    }
 
     void Update()
     {
