@@ -229,7 +229,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsMasterClient)
             GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().KillConfirmed(playerToKill);
         //PhotosPanelGUIController.Instance.KillConfirmed(playerToKill);
-    }
+    }		
 
     private Texture2D getUncompressedTextureFromBytes(byte[] byteArray)
     {

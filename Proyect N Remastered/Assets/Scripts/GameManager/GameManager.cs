@@ -63,8 +63,9 @@ public class GameManager : MonoBehaviour
 
 	public void StartGame()
 	{
-		Debug.Log("Game Started!");
-        gameStarted = true;
+		gameStarted = true;
+
+		//GameSceneGUIController.Instance.playerMessages.gameObject.SetActive(false);
 
         if (!PersistentData.isGM)
         {
