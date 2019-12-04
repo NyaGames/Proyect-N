@@ -161,7 +161,7 @@ public class Drop : MonoBehaviour
 	{
         //TODO: Darle munición a este jugador y llamar a dropAnimation.TryDestroyAnimation en todos los clientes
         GameManager.Instance.myPlayer.GetComponent<AmmoInfo>().currentAmmo += dropAmmo;
-        photonView.RPC("TryDestroyAnimation",RpcTarget.All);
+        photonView.RPC("TryDestroyAnimation", RpcTarget.All);
 
     }	
 
