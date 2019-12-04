@@ -2622,15 +2622,15 @@ RectTransform:
   m_GameObject: {fileID: 950275840}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7.4309006, y: 7.4309006, z: 7.4309006}
+  m_LocalScale: {x: 5.795421, y: 5.795421, z: 5.795421}
   m_Children: []
   m_Father: {fileID: 913941234}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -37, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: -426, y: -352}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &950275842
 MonoBehaviour:
@@ -2973,7 +2973,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 47.58
+      scalar: 60
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -7960,10 +7960,10 @@ RectTransform:
   m_Father: {fileID: 913941234}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.22086498, y: 0.404}
-  m_AnchorMax: {x: 0.6517117, y: 0.5957456}
-  m_AnchoredPosition: {x: -31.5, y: 0}
-  m_SizeDelta: {x: -27, y: -36}
+  m_AnchorMin: {x: 0.21772122, y: 0.39812696}
+  m_AnchorMax: {x: 0.64981973, y: 0.5984985}
+  m_AnchoredPosition: {x: -29.5, y: 1}
+  m_SizeDelta: {x: -29, y: -42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1210538331
 MonoBehaviour:
@@ -8011,7 +8011,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 39.65
+  m_fontSize: 38.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9412,26 +9412,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.99848443
       objectReference: {fileID: 0}
-    - target: {fileID: 2020014951825056247, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
-        type: 3}
-      propertyPath: lengthInSec
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2020014951825056247, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
-        type: 3}
-      propertyPath: startDelay.scalar
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2020014951825056247, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2020014951825056247, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
-        type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6994151592888609916, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9456,6 +9436,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.96937877
+      objectReference: {fileID: 0}
+    - target: {fileID: 2020014951825056247, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2020014951825056247, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
+        type: 3}
+      propertyPath: startDelay.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2020014951825056247, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2020014951825056247, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8366670506942188274, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
         type: 3}
@@ -20810,15 +20810,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1831812731}
     m_Modifications:
-    - target: {fileID: 1800981567196435782, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
-        type: 3}
-      propertyPath: m_Name
-      value: SettingsButton
-      objectReference: {fileID: 0}
     - target: {fileID: 6711466215582360277, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
         type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800981567196435782, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
+        type: 3}
+      propertyPath: m_Name
+      value: SettingsButton
       objectReference: {fileID: 0}
     - target: {fileID: 1800981567196435783, guid: 4efb9ac0d83f01843ac5f5817bcf839c,
         type: 3}
