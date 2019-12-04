@@ -88,7 +88,7 @@ public class StartGameCountDown : MonoBehaviour, IPunObservable
 
     public void OnDestroy()
     {
-        GameObject.FindGameObjectWithTag("CountDownText").transform.gameObject.SetActive(false);
+        //GameObject.FindGameObjectWithTag("CountDownText").transform.gameObject.SetActive(false);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
