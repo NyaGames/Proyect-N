@@ -23,7 +23,7 @@ public class CountDown : MonoBehaviour,IPunObservable
         photonView = GetComponent<PhotonView>();
         GameObject g = GameObject.FindGameObjectWithTag("CountDownText");    
         countDownText = g.GetComponentInChildren<TextMeshProUGUI>();
-        g.gameObject.SetActive(false);
+        //g.gameObject.SetActive(false);
     }
 
     public void Create(int secs, string countDowntring, UnityAction onCountDownFinished)
