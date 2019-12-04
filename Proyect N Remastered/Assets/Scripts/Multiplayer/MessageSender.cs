@@ -92,28 +92,8 @@ public class MessageSender : MonoBehaviourPunCallbacks
     }
 	#endregion
 
-	#region countDown
-	public void SendCountdown(int countDown, string callbackMethod)
-	{
-		photonView.RPC(callbackMethod, RpcTarget.Others, countDown);
-	}
-
-	[PunRPC]
-	public void ReceiveGameStartCountdown(int countDown)
-	{
-		//GameManager.Instance.OnCountDownReceived(countDown);
-	}
-
-    //Envia segundos que quedan para que la zona termine de cerrarse
-    [PunRPC]
-    public void ReceiveSecsToEndClosing()
-    {
-
-    }
-    #endregion
-
     #region MasterResponse
-    public void ConfirmKill(string sender,string playerToKill,bool killed){
+    public void ConfirmKill(string sender,string playerToKill,bool killed, byte[] image){
         byte lastGroup = photonView.Group;
 
         if (PhotonNetwork.IsMasterClient)
@@ -122,7 +102,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
             {
                 if (GamemasterManager.Instance.playersViewsList[i].GetPhotonView().Owner.NickName == playerToKill)
                 {
-                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All, ImageManager.Instance.imagesList[0],sender,WaysToKillAPlayer.Image);
+                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All, image, sender, WaysToKillAPlayer.Image);
                 }
                 if(GamemasterManager.Instance.playersViewsList[i].GetPhotonView().Owner.NickName == sender)
                 {
@@ -169,8 +149,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
     public void DeactivateCountdownText()
     {
         GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
-        g.transform.GetChild(0).gameObject.SetActive(false);
-        g.transform.GetChild(1).gameObject.SetActive(false);
+        g.GetComponentInChildren<TextMeshProUGUI>().text = "";
     }
     #endregion
 

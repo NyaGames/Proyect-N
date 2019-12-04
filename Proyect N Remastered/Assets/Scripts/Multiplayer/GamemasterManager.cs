@@ -23,9 +23,6 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
 	private List<GameObject> provDropList = new List<GameObject>();
 	private List<GameObject> dropList = new List<GameObject>();
 
-	[HideInInspector] public GameObject dropPos;
-
-
 	Vector3 lasPositionTapped = new Vector3(0, 0, 0);
     Vector3 zoneCenter = new Vector3(0, 0, 0);
 
@@ -300,7 +297,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
 	#region Drops
 	public void CreateDrop()
     {
-        if (Input.touchCount == 1 )
+        if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
 
@@ -310,19 +307,24 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
             worldPosition.y = 0;
             switch (touch.phase)
             {
+                case TouchPhase.Began:
+                    creatingDrop = true;
+                    break;
                 case TouchPhase.Moved:
 
-                    dropPos.transform.position = worldPosition;
 
                     break;
 
                 case TouchPhase.Ended:
-                    Destroy(dropPos);
-                  
-                    creatingDrop = false;
-                    GameObject newDrop = Instantiate(dropPrefab, worldPosition, Quaternion.identity);
-                    newDrop.GetComponent<Drop>().creatingObject = false;
-                    provDropList.Add(newDrop);
+
+                    if (creatingDrop)
+                    {
+                        GameObject newDrop = Instantiate(dropPrefab, worldPosition, Quaternion.identity);
+                        newDrop.GetComponent<Drop>().creatingObject = false;
+                        provDropList.Add(newDrop);
+                        creatingDrop = false;
+                    }
+                    
                     break;
             }
 
@@ -330,11 +332,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            //Si no se detecta bien el input del dedo, se borra la imagen del drop, ese intento de crear el drop no cuenta
-            if (dropPos != null)
-            {
-                Destroy(dropPos);
-            }
+
         }
     }
     public void SendDropsToOtherPlayers()
@@ -407,6 +405,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
         {
             g.GetComponent<PhotonView>().RPC("OnKillReceived", RpcTarget.Others, otherPlayer.NickName);
         }
+
     }
 
 }

@@ -15,10 +15,7 @@ public class PhotosNotificationsManager : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI senderText;
 	[SerializeField] private TextMeshProUGUI playerToKillText;
 
-	[SerializeField] private RectTransform rectTransform;
-
-    private string PlayerToKill;
-    private string Sender;
+	[SerializeField] private RectTransform rectTransform;  
 
     private Rect notificationsRect;
 
@@ -58,10 +55,7 @@ public class PhotosNotificationsManager : MonoBehaviour
 		//notification.GetComponent<Notification>().image.texture = newImage;
 		notification.GetComponent<Notification>().textureReceived = newImage;
 		notification.GetComponent<Notification>().snapped = playerToKill;
-		notification.GetComponent<Notification>().snapper = sender;
-
-        PlayerToKill = playerToKill;
-        Sender = sender;
+		notification.GetComponent<Notification>().snapper = sender;        
     }
 
 
@@ -79,10 +73,10 @@ public class PhotosNotificationsManager : MonoBehaviour
 		Destroy(notification);
 	}
 
-	public void ConfirmDeath()
+	public void ConfirmDeath(string Sender, string PlayerToKill, byte[] killImage)
 	{
 		photoReceivedPanel.SetActive(false);
-        GameManager.Instance.myPlayer.GetComponent<MessageSender>().ConfirmKill(Sender,PlayerToKill,true);
+        GameManager.Instance.myPlayer.GetComponent<MessageSender>().ConfirmKill(Sender, PlayerToKill, true, killImage);
 
 		Debug.Log("Player Killed!");
 	}

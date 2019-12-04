@@ -16,5 +16,11 @@ public class PhotoReceivedPanel : MonoBehaviour
 		snapperText.text = "Snapper: " + snapper;
 	}
 
+	public void KillPlayer()
+	{
+		Texture2D tex = snap.texture as Texture2D;
+		byte[] bytes = tex.GetRawTextureData();
+		PhotosNotificationsManager.Instance.ConfirmDeath(snapperText.text, snappedText.text, bytes);
+	}
 	
 }
