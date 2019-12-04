@@ -295,6 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce3de3e0f2984f4799aa75b3eca751a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skullPrefab: {fileID: 714640910401667126, guid: c44a101c83a12524b827860869c7fe67,
+    type: 3}
 --- !u!114 &4992442455535462994
 MonoBehaviour:
   m_ObjectHideFlags: 0
