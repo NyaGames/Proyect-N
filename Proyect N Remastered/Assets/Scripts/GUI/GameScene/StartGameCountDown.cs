@@ -23,9 +23,8 @@ public class StartGameCountDown : MonoBehaviour, IPunObservable
         secs = 99;
         photonView = GetComponent<PhotonView>();
         GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
-        g.transform.GetChild(0).gameObject.SetActive(true);
-        g.transform.GetChild(1).gameObject.SetActive(true);
         countDownText = g.GetComponentInChildren<TextMeshProUGUI>();
+        //g.transform.gameObject.SetActive(false);
     }
 
     public void Create(int secs, string countDowntring, UnityAction onCountDownFinished)
@@ -89,8 +88,7 @@ public class StartGameCountDown : MonoBehaviour, IPunObservable
 
     public void OnDestroy()
     {
-        GameObject.FindGameObjectWithTag("CountDownText").transform.GetChild(0).gameObject.SetActive(false);
-        GameObject.FindGameObjectWithTag("CountDownText").transform.GetChild(1).gameObject.SetActive(false);
+        GameObject.FindGameObjectWithTag("CountDownText").transform.gameObject.SetActive(false);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
