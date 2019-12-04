@@ -49,7 +49,7 @@ public class StartGameCountDown : MonoBehaviour, IPunObservable
     {
         secs--;
         secsSend = secs;
-        if (secsSend < -1)
+        if (secsSend < 0)
         {
             GameManager.Instance.StartGame();
             CancelInvoke("Countdown");
@@ -83,12 +83,6 @@ public class StartGameCountDown : MonoBehaviour, IPunObservable
             countDownText.text = countDownString + secs;
         }
        
-    }
-
-
-    public void OnDestroy()
-    {
-        //GameObject.FindGameObjectWithTag("CountDownText").transform.gameObject.SetActive(false);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

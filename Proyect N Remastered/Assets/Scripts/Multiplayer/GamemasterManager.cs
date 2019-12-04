@@ -300,7 +300,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
 	#region Drops
 	public void CreateDrop()
     {
-        if (Input.touchCount == 1 )
+        if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
 
@@ -407,6 +407,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
         {
             g.GetComponent<PhotonView>().RPC("OnKillReceived", RpcTarget.Others, otherPlayer.NickName);
         }
+
     }
 
 }
