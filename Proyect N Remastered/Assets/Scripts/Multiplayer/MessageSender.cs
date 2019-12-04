@@ -93,7 +93,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
 	#endregion
 
     #region MasterResponse
-    public void ConfirmKill(string sender,string playerToKill,bool killed){
+    public void ConfirmKill(string sender,string playerToKill,bool killed, byte[] image){
         byte lastGroup = photonView.Group;
 
         if (PhotonNetwork.IsMasterClient)
@@ -102,7 +102,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
             {
                 if (GamemasterManager.Instance.playersViewsList[i].GetPhotonView().Owner.NickName == playerToKill)
                 {
-                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All, ImageManager.Instance.imagesList[0],sender,WaysToKillAPlayer.Image);
+                    GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillYourself", RpcTarget.All, image, sender, WaysToKillAPlayer.Image);
                 }
                 if(GamemasterManager.Instance.playersViewsList[i].GetPhotonView().Owner.NickName == sender)
                 {
