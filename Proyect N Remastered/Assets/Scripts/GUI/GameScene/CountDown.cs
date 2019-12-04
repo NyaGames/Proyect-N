@@ -21,9 +21,7 @@ public class CountDown : MonoBehaviour,IPunObservable
     {
         secs = 99;
         photonView = GetComponent<PhotonView>();
-        GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
-        g.transform.GetChild(0).gameObject.SetActive(true);
-        g.transform.GetChild(1).gameObject.SetActive(true);
+        GameObject g = GameObject.FindGameObjectWithTag("CountDownText");    
         countDownText = g.GetComponentInChildren<TextMeshProUGUI>();
     }
 
