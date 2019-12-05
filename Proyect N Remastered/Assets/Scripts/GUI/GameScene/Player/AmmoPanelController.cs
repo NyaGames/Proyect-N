@@ -17,16 +17,7 @@ public class AmmoPanelController : MonoBehaviour
 
    
     void Update()
-    {
-        if(myPlayerAmmoinfo.currentAmmo <= 0)
-        {
-			photoButton.interactable = false;
-            ammoText.text = "You are out of ammo! Try to find some drops";
-        }
-        else
-        {
-            ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString();
-			photoButton.interactable = true;
-        }
+    {   
+       ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString();	
     }
 }
