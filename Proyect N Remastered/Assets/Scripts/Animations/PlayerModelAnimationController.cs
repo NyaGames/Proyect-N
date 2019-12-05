@@ -33,7 +33,7 @@ public class PlayerModelAnimationController : MonoBehaviour
 
 			if (isWalking)
 			{
-				if((prevPos - transform.position).magnitude < threshold)
+				if(prevPos == transform.position)
 				{
 					isWalking = false;
 					anim.SetBool("IsWalking", isWalking);
@@ -41,7 +41,7 @@ public class PlayerModelAnimationController : MonoBehaviour
 			}
 			else
 			{
-				if ((prevPos - transform.position).magnitude >= threshold)
+				if (prevPos != transform.position)
 				{
 					isWalking = true;
 					anim.SetBool("IsWalking", isWalking);
