@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13098,6 +13098,8 @@ MonoBehaviour:
   zoneCantGetOutPrefab: {fileID: 2674037639062472761, guid: fd52cf957d6da7f448892de4ef21ea4d,
     type: 3}
   dropPrefab: {fileID: 7291670006575766536, guid: 131d60eb84b431440ac933a227a29ca5,
+    type: 3}
+  mobilePrefab: {fileID: 714640910401667126, guid: c44a101c83a12524b827860869c7fe67,
     type: 3}
   creatingDrop: 0
   staticZone: {fileID: 0}

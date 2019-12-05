@@ -17,7 +17,6 @@ public enum WaysToKillAPlayer
 [RequireComponent(typeof(PhotonView))]
 public class MessageSender : MonoBehaviourPunCallbacks
 {
-    public GameObject skullPrefab;
     PhotonView photonView;
     Player myPlayer;
 
@@ -157,17 +156,15 @@ public class MessageSender : MonoBehaviourPunCallbacks
     [PunRPC]
     public void KillYourself(byte [] image, string killer, WaysToKillAPlayer way)
     {
+        spawnMobile();
         switch (way)
         {
             case WaysToKillAPlayer.Image:
                 Debug.Log("Matao");
                 if (photonView.IsMine && !myPlayer.isGameMaster)
                 {
-                    PhotonNetwork.Destroy(gameObject);
-                    SpawnSkull();
-					
-                    GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().PlayerKilled(getTextureFromBytes(image), killer);
                     PhotonNetwork.LeaveRoom();
+                    GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().PlayerKilled(getTextureFromBytes(image), killer);
                     //TODO: TRANSFERIR OWNERSHIP
                 }
                 break;
@@ -175,8 +172,6 @@ public class MessageSender : MonoBehaviourPunCallbacks
             case WaysToKillAPlayer.Zone:
                 if (photonView.IsMine)
                 {
-                    PhotonNetwork.Destroy(gameObject);
-                    SpawnSkull();
                     PhotonNetwork.LeaveRoom();
                     SceneManager.LoadScene("DeathByZone");
                     Debug.Log("TE MORISTE POR LA ZONA CRACK");
@@ -186,8 +181,6 @@ public class MessageSender : MonoBehaviourPunCallbacks
             case WaysToKillAPlayer.GMChoice:
                 if (photonView.IsMine)
                 {
-                    PhotonNetwork.Destroy(gameObject);
-                    SpawnSkull();
                     PhotonNetwork.LeaveRoom();
                     SceneManager.LoadScene("DeathByGM");
                     Debug.Log("TE MORISTE POR LA ZONA CRACK");
@@ -196,13 +189,14 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 break;
         }
 
+        PhotonNetwork.Destroy(gameObject);
+
     }
 
-    public void SpawnSkull()
+    public void spawnMobile()
     {
-        GameObject skull = PhotonNetwork.Instantiate(skullPrefab.name, gameObject.transform.position, Quaternion.identity);
-        skull.GetPhotonView().TransferOwnership(PhotonNetwork.MasterClient);
-
+        GameObject mobile = PhotonNetwork.Instantiate(GamemasterManager.Instance.mobilePrefab.name, gameObject.transform.position, Quaternion.identity);
+        mobile.GetPhotonView().TransferOwnership(PhotonNetwork.MasterClient);
     }
 
     public override void OnLeftRoom()
