@@ -48,7 +48,7 @@ public class CountDown : MonoBehaviour,IPunObservable
     {
         secs--;
         secsSend = secs;
-        if (secsSend < 0)
+        if (secsSend < -1)
         {
             CancelInvoke("Countdown");
             onCountDownFinished();

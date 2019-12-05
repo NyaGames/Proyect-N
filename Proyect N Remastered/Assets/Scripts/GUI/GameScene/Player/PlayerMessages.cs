@@ -14,10 +14,17 @@ public class PlayerMessages : MonoBehaviour
 
     private void Update()
     {
-        if (messages.Count <= 0)
+        if (GameManager.Instance.gameStarted)
         {
-            gameObject.SetActive(false);
-        }        
+            if (messages.Count <= 0)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+        else{
+            messageText.text = "Game hasn't started";
+        }
+            
     }
 
     public void AddMessage(PlayerMessage newMessage)

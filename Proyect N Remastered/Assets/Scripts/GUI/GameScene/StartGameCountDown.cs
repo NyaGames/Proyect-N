@@ -49,7 +49,7 @@ public class StartGameCountDown : MonoBehaviour, IPunObservable
     {
         secs--;
         secsSend = secs;
-        if (secsSend < 0)
+        if (secsSend < -1)
         {
             GameManager.Instance.StartGame();
             CancelInvoke("Countdown");
