@@ -62,24 +62,7 @@ public class Drop : MonoBehaviour
 		if (!pickable)
 		{
 			//GM
-			if (!dropAnimation.activated)
-			{
-
-				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
-				{
-					
-					GameObject player = GamemasterManager.Instance.playersViewsList[i];
-
-					if (!player.GetPhotonView().Owner.IsMasterClient)
-					{
-						if (Vector3.Distance(player.transform.position, transform.position) <= pickUpRange) //Si hay algun jugador en el rango, activa la animacion para todo el mundo
-						{
-                            //photonView.RPC("ActivateToEveryone", RpcTarget.All);
-                        }
-					}
-				}
-			}
-			else
+			if (dropAnimation.activated)
 			{
 				bool someoneInRange = false;
 				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
@@ -105,13 +88,6 @@ public class Drop : MonoBehaviour
 				if (Vector3.Distance(transform.position, player.transform.position) <= pickUpRange)
 				{
                     photonView.RPC("ActivateToEveryone", RpcTarget.All);
-                }
-			}
-			else
-			{
-				if (Vector3.Distance(transform.position, player.transform.position) > pickUpRange && !playerInside) //TODO: QUE SE DESACTIVE CUANDO NO HAYA NADIE  EN EL RANGO
-				{
-                   
                 }
 			}
 		}
