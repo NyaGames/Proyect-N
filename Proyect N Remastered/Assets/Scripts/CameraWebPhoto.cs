@@ -16,6 +16,7 @@ public class CameraWebPhoto : MonoBehaviour
    
     public RawImage background;
     public RawImage snapTakenImage;
+    public RawImage scope;
 
     public int tamaño = 512;
 
@@ -88,14 +89,6 @@ public class CameraWebPhoto : MonoBehaviour
 
         int orient = -finalCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-       
-    }
-
-    public void takePhotoGuarra()
-    {
-        Texture2D tex = new Texture2D(finalCam.width, finalCam.height, TextureFormat.RGBA32, false);
-        tex.SetPixels32(finalCam.GetPixels32());
-        tex.Apply();
         if (tamaño > finalCam.width || tamaño > finalCam.height)
         {
             Debug.LogError("Tamaño mayor que imagen");
@@ -104,7 +97,18 @@ public class CameraWebPhoto : MonoBehaviour
             {
                 tamaño = tamaño / 2;
             }
+            //background.rectTransform.sizeDelta
+            //scope.rectTransform.sizeDelta = new Vector2(tamaño, tamaño);
         }
+
+    }
+
+    public void takePhotoGuarra()
+    {
+        Texture2D tex = new Texture2D(finalCam.width, finalCam.height, TextureFormat.RGBA32, false);
+        tex.SetPixels32(finalCam.GetPixels32());
+        tex.Apply();
+        
         Debug.Log("Height: " + tex.height + "  Width: " + tex.width);
         Texture2D photoTakenTex = ResampleAndCrop(tex, tamaño, tamaño);
         int orient = -finalCam.videoRotationAngle;
