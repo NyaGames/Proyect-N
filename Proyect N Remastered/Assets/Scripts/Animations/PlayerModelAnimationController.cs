@@ -12,6 +12,8 @@ public class PlayerModelAnimationController : MonoBehaviour
 
 	Vector3 prevPos;
 
+	float threshold = 2f;
+
 	private void Awake()
 	{
 		anim = GetComponent<Animator>();
@@ -21,18 +23,17 @@ public class PlayerModelAnimationController : MonoBehaviour
 
 	void CheckMovement()
 	{
-		Vector3 pos = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
 
 		if (prevPos == null)
 		{
-			prevPos = pos;
+			prevPos = transform.position;
 		}
 		else
 		{		
 
 			if (isWalking)
 			{
-				if(pos == prevPos)
+				if((prevPos - transform.position).magnitude < threshold)
 				{
 					isWalking = false;
 					anim.SetBool("IsWalking", isWalking);
@@ -40,14 +41,14 @@ public class PlayerModelAnimationController : MonoBehaviour
 			}
 			else
 			{
-				if (pos != prevPos)
+				if ((prevPos - transform.position).magnitude >= threshold)
 				{
 					isWalking = true;
 					anim.SetBool("IsWalking", isWalking);
 				}
 			}
 
-			prevPos = pos;
+			prevPos = transform.position;
 		}
 	}
 }
