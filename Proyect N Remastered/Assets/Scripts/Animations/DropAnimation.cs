@@ -11,11 +11,13 @@ public class DropAnimation : MonoBehaviour
 	public bool activated = false;
 
 	public Transform model;
-
+    PhotonView photonView;
 
     // Start is called before the first frame update
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
+        
 		model = transform.GetChild(0).GetChild(0);		
 	}   
   
@@ -58,8 +60,10 @@ public class DropAnimation : MonoBehaviour
 		model.GetComponent<FloatingRotator>().AccelerateRotation(50);
 		seq.Append(model.DOScale(new Vector3(5, 5, 5), 0.1f));
 		seq.Append(model.DOScale(new Vector3(0, 0, 0), 1f));
-        seq.AppendCallback(() => PhotonNetwork.Destroy(this.gameObject));
-        //seq.AppendCallback(() => gameObject.Destroy());
+        if (photonView.IsMine)
+        {
+            seq.AppendCallback(() => PhotonNetwork.Destroy(gameObject));
+        }
 
     }
 }

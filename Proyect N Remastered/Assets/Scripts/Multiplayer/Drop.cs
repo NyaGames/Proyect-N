@@ -24,11 +24,11 @@ public class Drop : MonoBehaviour
         dropAmmo = Random.Range(3,6);
         dropAnimation = GetComponent<DropAnimation>();
 
-		if (!GameManager.Instance.myPlayer.GetComponent<Player>().isGameMaster)
-		{
+		//if (!GameManager.Instance.myPlayer.GetComponent<Player>().isGameMaster)
+		//{
 			pickable = true;
 			player = GameManager.Instance.myPlayer.transform;
-		}
+		//}
 	}
 
 	private void OnValidate()
@@ -124,7 +124,7 @@ public class Drop : MonoBehaviour
                 Debug.Log("Something Hit");
                 if (raycastHit.collider.gameObject == dropAnimation.model.gameObject)
                 {
-                    if (!GameManager.Instance.myPlayer.GetPhotonView().Owner.IsMasterClient && dropAnimation.activated)
+                    if (/*!GameManager.Instance.myPlayer.GetPhotonView().Owner.IsMasterClient &&*/ dropAnimation.activated)
                     {
                         PickUpDrop();
                     }
@@ -161,6 +161,7 @@ public class Drop : MonoBehaviour
 	{
         //TODO: Darle munición a este jugador y llamar a dropAnimation.TryDestroyAnimation en todos los clientes
         GameManager.Instance.myPlayer.GetComponent<AmmoInfo>().currentAmmo += dropAmmo;
+        photonView.TransferOwnership(PhotonNetwork.LocalPlayer); //Le damos el control del drop al jugador que lo pilla
         photonView.RPC("TryDestroyAnimation",RpcTarget.All);
 
     }	
