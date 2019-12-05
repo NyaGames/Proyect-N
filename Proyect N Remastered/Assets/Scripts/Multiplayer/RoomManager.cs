@@ -10,12 +10,25 @@ using Photon.Realtime;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
-    public RoomSceneGUIController screenSceneGUIController;
+    public RoomSceneGMGUIController roomSceneGMGUIController;
+    public RoomScenePlayerGUIController roomScenePlayerGUIController;
     private List<RoomInfo> roomsAvaiable = new List<RoomInfo>();
 
-    public TextMeshProUGUI feedbackText;
+	private void Awake()
+	{
+		if (PersistentData.isGM)
+		{			
+			roomSceneGMGUIController.gameObject.SetActive(true);
+			roomScenePlayerGUIController.gameObject.SetActive(false);
+		}
+		else
+		{
+			roomScenePlayerGUIController.gameObject.SetActive(true);
+			roomSceneGMGUIController.gameObject.SetActive(false);
+		}
+	}
 
-    public string GenerateUniqueRoomID()
+	public string GenerateUniqueRoomID()
     {
         string s = "";
         string time = System.DateTime.Now.ToString();
@@ -30,28 +43,28 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     public void CreateRoom()
     {
-        feedbackText.text = "Creating room...";
+        roomSceneGMGUIController.feedbackText.text = "Creating room...";
 
         string roomName = "dani";//GenerateUniqueRoomID();
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = (byte)screenSceneGUIController.maxPlayers.GetComponentInChildren<Slider>().value;
+		roomOptions.MaxPlayers = 20;//(byte)roomSceneGMGUIController.maxPlayers.GetComponentInChildren<Slider>().value;
         roomOptions.IsVisible = false; //FALSE = Hace la sala privada
         PhotonNetwork.CreateRoom(roomName, roomOptions, null);
         Debug.Log("Sala creada: " + roomName);
         PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
 
-        PhotonNetwork.NickName = screenSceneGUIController.usernameInput.text;
+		PhotonNetwork.NickName = "GM";//roomSceneGMGUIController.usernameInput.text;
     }
 
     public override void OnCreatedRoom()
     {
-        feedbackText.text = "Room created!";
-        SceneManager.LoadScene("LobbyScene");
+		roomSceneGMGUIController.feedbackText.text = "Room created!";
+        SceneManager.LoadScene("FinalLobbyScene");
     }
 
     public void JoinRoom()
     {
-        feedbackText.text = "Joining room...";
+		roomScenePlayerGUIController.feedbackText.text = "Joining room...";
 
         string roomPassword = "dani";//roompasswordInputText.text;
 
@@ -64,7 +77,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             Debug.Log("Introduce el código de la sala a la que quieres unirte");
         }
 
-        PhotonNetwork.NickName = screenSceneGUIController.usernameInput.text;
+        PhotonNetwork.NickName = roomScenePlayerGUIController.usernameInput.text;
     }
     public override void OnJoinedRoom()
     {
@@ -76,24 +89,24 @@ public class RoomManager : MonoBehaviourPunCallbacks
             if (p.NickName.Equals(PhotonNetwork.LocalPlayer.NickName))
             {
                 PhotonNetwork.LeaveRoom();
-                feedbackText.text = "Username already in use, please use other one";
+				roomScenePlayerGUIController.feedbackText.text = "Username already in use, please use other one";
                 return;
             }
         }
 
-        feedbackText.text = "You have joined Room: " + PhotonNetwork.CurrentRoom.Name;
-        SceneManager.LoadScene("LobbyScene");
+		roomScenePlayerGUIController.feedbackText.text = "You have joined Room: " + PhotonNetwork.CurrentRoom.Name;
+        SceneManager.LoadScene("FinalLobbyScene");
 
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        feedbackText.text = "Room doesnt exists or wrong room code";
+		roomScenePlayerGUIController.feedbackText.text = "Room doesnt exists or wrong room code";
         Debug.Log("La sala no existe o la contraseña es incorrecta");
     }
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenuScreen");
+        SceneManager.LoadScene("FinalMainMenu");
     }
 }

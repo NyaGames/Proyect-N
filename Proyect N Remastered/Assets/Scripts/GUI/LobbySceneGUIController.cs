@@ -3,16 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LobbySceneGUIController : MonoBehaviour
 {
-    public Text roomName;
-    public Text playerCount;
+    public TextMeshProUGUI roomName;
+    public TextMeshProUGUI playerCount;
     public Button startGameButton;
 
     public void Start()
     {
-        roomName.text = "Room: " + PhotonNetwork.CurrentRoom.Name;
+        roomName.text = PhotonNetwork.CurrentRoom.Name;
         if (!PersistentData.isGM)
         {
             startGameButton.interactable = false;
@@ -23,7 +24,7 @@ public class LobbySceneGUIController : MonoBehaviour
     {
         if (PhotonNetwork.CurrentRoom != null) 
         {
-            playerCount.text = "Players connected: " + PhotonNetwork.CurrentRoom.PlayerCount;
+            playerCount.text = PhotonNetwork.CurrentRoom.PlayerCount.ToString();
         }
     }
 

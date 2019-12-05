@@ -6,8 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+	[SerializeField] private LobbySceneGUIController playerLobby;
+	[SerializeField] private LobbySceneGUIController gmLobby;
+
+	private void Awake()
+	{
+		if (PersistentData.isGM)
+		{
+			playerLobby.gameObject.SetActive(false);
+			gmLobby.gameObject.SetActive(true);
+		}
+		else
+		{
+			playerLobby.gameObject.SetActive(true);
+			gmLobby.gameObject.SetActive(false);
+		}
+	}
+	// Start is called before the first frame update
+	void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
     }

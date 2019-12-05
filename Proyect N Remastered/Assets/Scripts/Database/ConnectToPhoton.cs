@@ -43,7 +43,7 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
         }
         else //Si ya estás conectado a Photon
         {
-            SceneManager.LoadScene("RoomScreen");
+            SceneManager.LoadScene("FinalRoomScene");
         }
     }
 
@@ -52,6 +52,6 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
     {
         feedbackText.text = "You have been connected";
         PhotonNetwork.JoinLobby(null);
-        SceneManager.LoadScene("RoomScreen");
+        SceneManager.LoadScene("FinalRoomScene");
     }
 }
