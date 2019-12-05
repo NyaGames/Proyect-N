@@ -15454,6 +15454,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OutOfZonePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 2439878430648178546, guid: 54ad7684ee3234448bea783771548a47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2439878430648178547, guid: 54ad7684ee3234448bea783771548a47,
         type: 3}
       propertyPath: m_LocalPosition.x

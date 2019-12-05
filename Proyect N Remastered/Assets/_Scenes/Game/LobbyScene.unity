@@ -272,7 +272,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 24
+  m_fontSize: 72
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -427,7 +427,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 29.95
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -616,8 +616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39712fe54adec142a6b2e8728d9f4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomName: {fileID: 688866448}
-  playerCount: {fileID: 215893657}
+  roomName: {fileID: 0}
+  playerCount: {fileID: 0}
   startGameButton: {fileID: 1708842082}
 --- !u!1 &688866446
 GameObject:
@@ -868,6 +868,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782eebfdd31dd44478277a5e8fd6a53a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerLobby: {fileID: 0}
+  gmLobby: {fileID: 0}
 --- !u!4 &1034928556
 Transform:
   m_ObjectHideFlags: 0
@@ -1243,7 +1245,7 @@ GameObject:
   - component: {fileID: 1783249482}
   - component: {fileID: 1783249481}
   m_Layer: 5
-  m_Name: Button
+  m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
