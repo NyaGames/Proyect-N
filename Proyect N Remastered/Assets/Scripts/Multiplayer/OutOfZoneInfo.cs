@@ -44,14 +44,12 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
                 {
                     GameManager.Instance.outOfZoneText.SetActive(true);
                     StartCoundDown();
-                    //this.GetComponent<Renderer>().material.color = new Color(255f, 0f, 0f);
                 }
                 else
                 {
                     GameManager.Instance.outOfZoneText.SetActive(false);
                     CancelInvoke("Countdown");
                     outOfZoneActive = false;
-                    //this.GetComponent<Renderer>().material.color = new Color(0f, 255f, 0f);
                 }
 
             }
