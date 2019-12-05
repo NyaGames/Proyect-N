@@ -17,7 +17,16 @@ public class AmmoPanelController : MonoBehaviour
 
    
     void Update()
-    {   
-       ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString();	
-    }
+    {
+        if(myPlayerAmmoinfo.currentAmmo <= 0)
+        {
+			photoButton.interactable = false;           
+        }
+        else
+        {
+			photoButton.interactable = true;
+        }
+
+		ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString();
+	}
 }
