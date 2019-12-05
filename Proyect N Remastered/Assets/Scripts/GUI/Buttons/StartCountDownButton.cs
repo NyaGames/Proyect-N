@@ -8,13 +8,13 @@ using TMPro;
 [RequireComponent(typeof(Button))]
 public class StartCountDownButton : MonoBehaviour
 {
-	[SerializeField] private TMP_InputField minsText;
-	[SerializeField] private TMP_InputField secsText;
+    [SerializeField] private TextMeshProUGUI totalSecsToStartGame;
+    [SerializeField] private Button incrementSecsToStartGame;
+    [SerializeField] private TextMeshProUGUI timeWarning;
+    [SerializeField] private TextMeshProUGUI zoneWarning;
 
-	[SerializeField] private TextMeshProUGUI timeWarning;
-	[SerializeField] private TextMeshProUGUI zoneWarning;
-
-	private Button button;
+    public int incrementToStartGame;
+    private Button button;
 
 	int secs, mins;
 
@@ -28,16 +28,15 @@ public class StartCountDownButton : MonoBehaviour
 	private void Update()
 	{
 	
-		int.TryParse(secsText.text, out secs);
-		int.TryParse(minsText.text, out mins);
+		int.TryParse(totalSecsToStartGame.text, out secs);
 
-        /*if((GamemasterManager.Instance.provZone == null || !GamemasterManager.Instance.provZone.activeSelf) || (secs > 60 || mins > 60) ||( mins == 0 && secs == 0)){
+        if((GamemasterManager.Instance.provZone == null || !GamemasterManager.Instance.provZone.activeSelf) || (secs > 60 || mins > 60) ||( mins == 0 && secs == 0)){
             button.interactable = false;
         }
         else
         {
             button.interactable = true;
-        }*/
+        }
 
 		if(GamemasterManager.Instance.provZone == null || !GamemasterManager.Instance.provZone.activeSelf)
 		{
@@ -65,6 +64,16 @@ public class StartCountDownButton : MonoBehaviour
         GameObject countDown = PhotonNetwork.Instantiate(startGameCountDownPrefab.name, Vector3.zero, Quaternion.identity);
         countDown.GetComponent<StartGameCountDown>().Create(mins * 60 + secs, "Game starts in ", GameManager.Instance.StartGame);
         countDown.GetComponent<StartGameCountDown>().StartCoundDown();
+
+        totalSecsToStartGame.text = "0";
+    }
+
+    public void increaseTotalSecsToStartGame()
+    {
+        int actualSeconds;
+        int.TryParse(totalSecsToStartGame.text, out actualSeconds);
+
+        totalSecsToStartGame.text = (actualSeconds + incrementToStartGame).ToString();
     }
 
 }
