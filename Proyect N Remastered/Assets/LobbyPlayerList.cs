@@ -55,7 +55,7 @@ public class LobbyPlayerList : MonoBehaviour
 		newPlayer.GetComponentInChildren<TextMeshProUGUI>().text = username;
 		currentPlayers.Add(newPlayer);
 
-		float height = playerPrefab.GetComponent<RectTransform>().rect.width / playerPrefab.GetComponent<AspectRatioFitter>().aspectRatio;
+		float height = playersRect.rect.width / playerPrefab.GetComponent<AspectRatioFitter>().aspectRatio;
 		playersRect.sizeDelta = new Vector2(playersRect.sizeDelta.x, playersRect.sizeDelta.y + height + separation);
 	}
 }
