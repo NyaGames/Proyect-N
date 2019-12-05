@@ -15,8 +15,8 @@ public class PlayerCounter : MonoBehaviour
 
     }
 
-    private void UpdateText()
-    {
-        counter.text = (GamemasterManager.Instance.playersViewsList.Length - 1).ToString();
-    }
+	private void UpdateText()
+	{
+		counter.text = (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount - 1).ToString();
+	}
 }

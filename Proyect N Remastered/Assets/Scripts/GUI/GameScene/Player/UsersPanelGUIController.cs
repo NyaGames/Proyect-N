@@ -33,12 +33,14 @@ public class UsersPanelGUIController : MonoBehaviour
 			RemoveExistingButtons();
 		}
 
-		ShowUsers();
+		InvokeRepeating("ShowUsers", 0f, 1f);
 	}
 
 	public void ShowUsers()
 	{
 		Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
+
+		RemoveExistingButtons();
         
         for (int i = 0; i < players.Length; i++)
 		{
