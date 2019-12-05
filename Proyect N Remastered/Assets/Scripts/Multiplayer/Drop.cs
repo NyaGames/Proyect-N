@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 [RequireComponent(typeof(DropAnimation))]
 public class Drop : MonoBehaviour
@@ -45,6 +46,7 @@ public class Drop : MonoBehaviour
 
 	private void Update()
     {
+
         if (!movingObject ) //Si no se mueve y no se esta creando, lo detectamos
         {
             detectObjectTapped();
@@ -100,15 +102,15 @@ public class Drop : MonoBehaviour
 			{
 				if (Vector3.Distance(transform.position, player.transform.position) <= pickUpRange)
 				{
-					dropAnimation.ActivateDrop();
-				}
+                    photonView.RPC("ActivateToEveryone", RpcTarget.All);
+                }
 			}
 			else
 			{
 				if (Vector3.Distance(transform.position, player.transform.position) > pickUpRange)
 				{
-					dropAnimation.DeactivateDrop();					
-				}
+                    photonView.RPC("DeActivateToEveryone", RpcTarget.All);
+                }
 			}
 		}
     }
@@ -159,9 +161,9 @@ public class Drop : MonoBehaviour
 	//Se está cerca de un drop y se ha pulsado, 
 	public void PickUpDrop()
 	{
-        //TODO: Darle munición a este jugador y llamar a dropAnimation.TryDestroyAnimation en todos los clientes
         GameManager.Instance.myPlayer.GetComponent<AmmoInfo>().currentAmmo += dropAmmo;
-        photonView.RPC("TryDestroyAnimation", RpcTarget.All);
+        photonView.TransferOwnership(PhotonNetwork.LocalPlayer); //Le damos el control del drop al jugador que lo pilla
+        photonView.RPC("TryDestroyAnimation",RpcTarget.All);
 
     }	
 

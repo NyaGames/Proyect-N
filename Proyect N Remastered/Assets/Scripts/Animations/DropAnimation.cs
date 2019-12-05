@@ -5,17 +5,20 @@ using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine.Events;
 using Photon.Pun;
+using TMPro;
 
 public class DropAnimation : MonoBehaviour
 {
 	public bool activated = false;
 
 	public Transform model;
-
+    PhotonView photonView;
 
     // Start is called before the first frame update
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
+        
 		model = transform.GetChild(0).GetChild(0);		
 	}   
   
@@ -25,7 +28,7 @@ public class DropAnimation : MonoBehaviour
 	{
 		if (activated) return;
 
-		activated = true;
+        activated = true;
 		Sequence seq = DOTween.Sequence();
 		seq.Append(model.DOLocalRotate(new Vector3(45f, 45f, 45f), 1f));
 		seq.Join(model.DOLocalMoveY(5f, 1f));
@@ -37,7 +40,7 @@ public class DropAnimation : MonoBehaviour
 	{
 		if (!activated) return;
 
-		activated = false;
+        activated = false;
 
 		Sequence seq = DOTween.Sequence();
 		seq.AppendCallback(() => model.gameObject.GetComponent<FloatingRotator>().enabled = false);
@@ -52,14 +55,35 @@ public class DropAnimation : MonoBehaviour
 	{
 		if (!activated) return;
 
-		activated = false;
+        activated = false;
 
 		Sequence seq = DOTween.Sequence();
 		model.GetComponent<FloatingRotator>().AccelerateRotation(50);
 		seq.Append(model.DOScale(new Vector3(5, 5, 5), 0.1f));
 		seq.Append(model.DOScale(new Vector3(0, 0, 0), 1f));
-        seq.AppendCallback(() => PhotonNetwork.Destroy(gameObject));
-        //seq.AppendCallback(() => gameObject.Destroy());
+        if (photonView.IsMine)
+        {
+            seq.AppendCallback(() => PhotonNetwork.Destroy(gameObject));
+        }
+
+    }
+
+    [PunRPC]
+    public void ActivateToEveryone()
+    {
+        if (!activated)
+        {
+            ActivateDrop();
+        }
+
+    }
+    [PunRPC]
+    public void DeActivateToEveryone()
+    {
+        if (activated)
+        {
+            DeactivateDrop();
+        }
 
     }
 }

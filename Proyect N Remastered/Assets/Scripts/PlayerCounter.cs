@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
 public class PlayerCounter : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class PlayerCounter : MonoBehaviour
 
     }
 
-	private void UpdateText()
-	{
-		counter.text = (Photon.Pun.PhotonNetwork.CurrentRoom.PlayerCount - 1).ToString();
-	}
+    private void UpdateText()
+    {
+        counter.text = (PhotonNetwork.CurrentRoom.PlayerCount - 1).ToString();
+    }
 }
