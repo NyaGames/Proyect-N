@@ -12,7 +12,8 @@ public class RandomUsername : MonoBehaviour
 												   "K-9","Keystone","Kickstart","Kill Switch","Kingfisher","Kitchen","Knuckles", "Lady Killer","Liquid Science","Little Cobra",
 												   "Little General","Lord Nikon","Lord Pistachio","Mad Irishman","Snow Hound","Sofa King","Speedwell", "Spider Fuji","Springheel Jack","Squatch",
 												   "Stacker of Wheat","Sugar Man","Suicide Jockey","Swampmasher","Swerve","Tacklebox","The China Wall", "Toolmaker","Troubadour","Vagabond Warrior",
-												   "Washer","Twitch","Glyph","Guillotine","Gunhawk","Highlander Monk","High Kingdom Warrior", "Esquire","Flakes","Flint" };
+												   "Washer","Twitch","Glyph","Guillotine","Gunhawk","Highlander Monk","High Kingdom Warrior", "Esquire","Flakes","Flint", "Giorno Giovanna", "zorroxanon", "chetok",
+												   "Kace", "JekLag", "jusimito", "Speedwagon", "Joseph Joestar", "Kujo Jotaro"};
 
 	public void GetRandomUsername()
 	{
