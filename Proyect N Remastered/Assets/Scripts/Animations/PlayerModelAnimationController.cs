@@ -6,7 +6,7 @@ using Mapbox.Unity.Location;
 [RequireComponent(typeof(Animator))]
 public class PlayerModelAnimationController : MonoBehaviour
 {
-	private bool isWalking;
+	private bool isWalking = false;
 
 	Animator anim;
 
