@@ -5,6 +5,7 @@ using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine.Events;
 using Photon.Pun;
+using TMPro;
 
 public class DropAnimation : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class DropAnimation : MonoBehaviour
 	{
 		if (activated) return;
 
-		activated = true;
+        activated = true;
 		Sequence seq = DOTween.Sequence();
 		seq.Append(model.DOLocalRotate(new Vector3(45f, 45f, 45f), 1f));
 		seq.Join(model.DOLocalMoveY(5f, 1f));
@@ -39,7 +40,7 @@ public class DropAnimation : MonoBehaviour
 	{
 		if (!activated) return;
 
-		activated = false;
+        activated = false;
 
 		Sequence seq = DOTween.Sequence();
 		seq.AppendCallback(() => model.gameObject.GetComponent<FloatingRotator>().enabled = false);
@@ -54,7 +55,7 @@ public class DropAnimation : MonoBehaviour
 	{
 		if (!activated) return;
 
-		activated = false;
+        activated = false;
 
 		Sequence seq = DOTween.Sequence();
 		model.GetComponent<FloatingRotator>().AccelerateRotation(50);
@@ -63,6 +64,25 @@ public class DropAnimation : MonoBehaviour
         if (photonView.IsMine)
         {
             seq.AppendCallback(() => PhotonNetwork.Destroy(gameObject));
+        }
+
+    }
+
+    [PunRPC]
+    public void ActivateToEveryone()
+    {
+        if (!activated)
+        {
+            ActivateDrop();
+        }
+
+    }
+    [PunRPC]
+    public void DeActivateToEveryone()
+    {
+        if (activated)
+        {
+            DeactivateDrop();
         }
 
     }
