@@ -408,7 +408,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
 
 		if (PersistentData.isGM)
 		{
-
+			PhotosNotificationsManager.Instance.PlayerDeathReceived(otherPlayer);
 		}
 
     }
