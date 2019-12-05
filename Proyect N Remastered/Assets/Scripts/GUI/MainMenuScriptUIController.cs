@@ -8,6 +8,8 @@ using TMPro;
 public class MainMenuScriptUIController : MonoBehaviour
 {
     [SerializeField] private Button gmButton;
+    [SerializeField] private GameObject playerPanel;
+    [SerializeField] private GameObject gmPanel;
 
     private void Awake()
     {
@@ -15,6 +17,7 @@ public class MainMenuScriptUIController : MonoBehaviour
         {
             gmButton.interactable = false;
         }
+
         ChangeGMText();
     }
 
@@ -28,12 +31,14 @@ public class MainMenuScriptUIController : MonoBehaviour
     {
         if (PersistentData.isGM)
         {
-            gmButton.GetComponentInChildren<TextMeshProUGUI>().text = "Deactivate \n GM";
-        }
+			playerPanel.SetActive(false);
+			gmPanel.SetActive(true);
+		}
         else
         {
-            gmButton.GetComponentInChildren<TextMeshProUGUI>().text = "Activate GM";
-        }
+			playerPanel.SetActive(true);
+			gmPanel.SetActive(false);
+		}
     }
 
     public void ChangeGMStatus()

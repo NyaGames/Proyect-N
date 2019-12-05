@@ -165,7 +165,8 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 {
                     PhotonNetwork.Destroy(gameObject);
                     SpawnSkull();
-                    GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().PlayerKilled(getUncompressedTextureFromBytes(image), killer);
+					
+                    GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().PlayerKilled(getTextureFromBytes(image), killer);
                     PhotonNetwork.LeaveRoom();
                     //TODO: TRANSFERIR OWNERSHIP
                 }
@@ -232,5 +233,15 @@ public class MessageSender : MonoBehaviourPunCallbacks
         tex.Apply();
 
         return tex;
-    }   
+    }
+
+	private Texture2D getTextureFromBytes(byte[] byteArray)
+	{		
+		int rowSize = (int) Mathf.Sqrt(byteArray.Length) / 2;
+		Texture2D tex = new Texture2D(rowSize, rowSize, TextureFormat.RGBA32, false);
+		tex.LoadRawTextureData(byteArray);
+		tex.Apply();
+
+		return tex;
+	}
 }
