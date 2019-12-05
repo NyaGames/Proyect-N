@@ -82,14 +82,16 @@ public class CameraWebPhoto : MonoBehaviour
         camAvailable = true;
 
 
-        if (Application.isMobilePlatform)
-        { 
-            if(Application.platform != RuntimePlatform.WebGLPlayer)
-            {
-                changeCameraButton.gameObject.SetActive(true);
-            }
-            
+       if(Application.platform == RuntimePlatform.Android)
+       {
+            changeCameraButton.gameObject.SetActive(true);
         }
+        else
+        {
+            changeCameraButton.gameObject.SetActive(false);
+        }
+            
+        
        
     }
     private void Update()
