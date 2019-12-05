@@ -6,7 +6,7 @@ using Mapbox.Unity.Location;
 [RequireComponent(typeof(Animator))]
 public class PlayerModelAnimationController : MonoBehaviour
 {
-	private bool isWalking;
+	private bool isWalking = false;
 
 	Animator anim;
 
@@ -33,7 +33,7 @@ public class PlayerModelAnimationController : MonoBehaviour
 
 			if (isWalking)
 			{
-				if((prevPos - transform.position).magnitude < threshold)
+				if(prevPos == transform.position)
 				{
 					isWalking = false;
 					anim.SetBool("IsWalking", isWalking);
@@ -41,7 +41,7 @@ public class PlayerModelAnimationController : MonoBehaviour
 			}
 			else
 			{
-				if ((prevPos - transform.position).magnitude >= threshold)
+				if (prevPos != transform.position)
 				{
 					isWalking = true;
 					anim.SetBool("IsWalking", isWalking);
