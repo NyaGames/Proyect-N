@@ -19,6 +19,8 @@ public class Drop : MonoBehaviour
 	DropAnimation dropAnimation;
 	bool pickable = false;
 
+    [HideInInspector] public bool playerInside = false;
+
 	private void Awake()
 	{
         photonView = GetComponent<PhotonView>();
@@ -60,24 +62,7 @@ public class Drop : MonoBehaviour
 		if (!pickable)
 		{
 			//GM
-			if (!dropAnimation.activated)
-			{
-
-				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
-				{
-					
-					GameObject player = GamemasterManager.Instance.playersViewsList[i];
-
-					if (!player.GetPhotonView().Owner.IsMasterClient)
-					{
-						if (Vector3.Distance(player.transform.position, transform.position) <= pickUpRange)
-						{
-							dropAnimation.ActivateDrop();
-						}
-					}
-				}
-			}
-			else
+			if (dropAnimation.activated)
 			{
 				bool someoneInRange = false;
 				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
@@ -91,8 +76,8 @@ public class Drop : MonoBehaviour
 
 				if (!someoneInRange)
 				{
-					dropAnimation.DeactivateDrop();
-				}
+                    photonView.RPC("DeActivateToEveryone", RpcTarget.All);
+                }
 			}
 		}
 		else
@@ -103,13 +88,6 @@ public class Drop : MonoBehaviour
 				if (Vector3.Distance(transform.position, player.transform.position) <= pickUpRange)
 				{
                     photonView.RPC("ActivateToEveryone", RpcTarget.All);
-                }
-			}
-			else
-			{
-				if (Vector3.Distance(transform.position, player.transform.position) > pickUpRange)
-				{
-                    photonView.RPC("DeActivateToEveryone", RpcTarget.All);
                 }
 			}
 		}
@@ -172,4 +150,5 @@ public class Drop : MonoBehaviour
     {
         GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("New Drops!", 3, 5f));
     }
+
 }

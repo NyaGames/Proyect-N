@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class UsersPanelGUIController : MonoBehaviour
 {
@@ -46,11 +47,15 @@ public class UsersPanelGUIController : MonoBehaviour
 		{
 			if (!players[i].IsMasterClient && players[i] != PhotonNetwork.LocalPlayer)
 			{
-                buttonsRect.sizeDelta = new Vector2(buttonsRect.sizeDelta.x, buttonsRect.sizeDelta.y + userButtonPrefab.GetComponent<RectTransform>().rect.height + separation);
+               
 				GameObject newButton = Instantiate(userButtonPrefab);
 				newButton.transform.SetParent(buttonsRect.transform, false);        
                 newButton.GetComponentInChildren<TextMeshProUGUI>().text = players[i].NickName;
                 users.Add(newButton);
+
+				float height = buttonsRect.rect.width / newButton.GetComponent<AspectRatioFitter>().aspectRatio;
+				buttonsRect.sizeDelta = new Vector2(buttonsRect.sizeDelta.x, buttonsRect.sizeDelta.y + height + separation);
+
 			}
 		}
 	}

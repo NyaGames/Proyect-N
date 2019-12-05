@@ -24,7 +24,7 @@ public class SetPhotoReceivedInImage : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenuScreen");
+        SceneManager.LoadScene("FinalMainMenu");
     }
 
 }

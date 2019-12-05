@@ -14,9 +14,12 @@ public class DropAnimation : MonoBehaviour
 	public Transform model;
     PhotonView photonView;
 
+    Drop drop;
     // Start is called before the first frame update
     void Start()
     {
+
+        drop = GetComponent<Drop>();
         photonView = GetComponent<PhotonView>();
         
 		model = transform.GetChild(0).GetChild(0);		
@@ -71,6 +74,7 @@ public class DropAnimation : MonoBehaviour
     [PunRPC]
     public void ActivateToEveryone()
     {
+        drop.playerInside = true;
         if (!activated)
         {
             ActivateDrop();
@@ -80,6 +84,7 @@ public class DropAnimation : MonoBehaviour
     [PunRPC]
     public void DeActivateToEveryone()
     {
+        drop.playerInside = false;
         if (activated)
         {
             DeactivateDrop();

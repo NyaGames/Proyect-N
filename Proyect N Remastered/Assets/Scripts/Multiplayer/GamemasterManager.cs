@@ -406,6 +406,11 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
             g.GetComponent<PhotonView>().RPC("OnKillReceived", RpcTarget.Others, otherPlayer.NickName);
         }
 
+		if (PersistentData.isGM)
+		{
+			PhotosNotificationsManager.Instance.PlayerDeathReceived(otherPlayer);
+		}
+
     }
 
 }

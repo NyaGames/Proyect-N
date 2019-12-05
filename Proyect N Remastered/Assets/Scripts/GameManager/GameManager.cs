@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
     {
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.NickName = "";
-        SceneManager.LoadScene("MainMenuScreen");
+        SceneManager.LoadScene("FinalMainMenu");
         Debug.Log("Dejaste la partida");
     }
 }
