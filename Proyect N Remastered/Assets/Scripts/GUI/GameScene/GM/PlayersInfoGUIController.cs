@@ -46,9 +46,10 @@ public class PlayersInfoGUIController : MonoBehaviour
 		for (int i = 0; i < players.Length; i++)
 		{
 			if (!players[i].IsMasterClient && players[i] != PhotonNetwork.LocalPlayer)
-			{
-				usersRect.sizeDelta = new Vector2(usersRect.sizeDelta.x, usersRect.sizeDelta.y + userInfoPrefab.GetComponent<RectTransform>().rect.height + separation);
+			{				
 				GameObject newButton = Instantiate(userInfoPrefab);
+				float height = usersRect.rect.width / newButton.GetComponent<AspectRatioFitter>().aspectRatio;
+				usersRect.sizeDelta = new Vector2(usersRect.sizeDelta.x, usersRect.sizeDelta.y + height + separation);
 				newButton.transform.SetParent(usersRect.transform, false);
 				newButton.GetComponentInChildren<TextMeshProUGUI>().text = players[i].NickName;
 				newButton.GetComponent<UserInfoButton>().actorNumber = players[i].ActorNumber;

@@ -8,7 +8,7 @@ public class PhotosNotificationsManager : MonoBehaviour
 {
     public static PhotosNotificationsManager Instance { get; private set; }	
 
-	public List<Texture2D> imagesReceived { get; private set; }
+	public List<Notification> notifications { get; private set; }
 
 	[SerializeField] private GameObject photoReceivedPanel;
  	[SerializeField] private GameObject notificationPrefab;
@@ -30,7 +30,7 @@ public class PhotosNotificationsManager : MonoBehaviour
 			Destroy(this);
 		}
 
-		imagesReceived = new List<Texture2D>();
+		notifications = new List<Notification>();
 	}
 
 	private void Start()
@@ -43,7 +43,7 @@ public class PhotosNotificationsManager : MonoBehaviour
 		//notificationsRect.height += notificationPrefab.GetComponent<RectTransform>().rect.height + 10;
 		rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, rectTransform.sizeDelta.y + rectTransform.rect.width + 10);
 
-		imagesReceived.Add(newImage);
+		
 
 		GameObject notification = Instantiate(notificationPrefab);
 		notification.transform.SetParent(transform, false);
@@ -51,26 +51,29 @@ public class PhotosNotificationsManager : MonoBehaviour
 		/*senderText.text = "Sent by: \n" + sender;
 		playerToKillText.text = "Kill \n " + playerToKill + "?";*/
 
-
+		Notification notif = notification.GetComponent<Notification>();
 		//notification.GetComponent<Notification>().image.texture = newImage;
-		notification.GetComponent<Notification>().textureReceived = newImage;
-		notification.GetComponent<Notification>().snapped = playerToKill;
-		notification.GetComponent<Notification>().snapper = sender;        
-    }
+		notif.textureReceived = newImage;
+		notif.snapped = playerToKill;
+		notif.snapper = sender;
+		notifications.Add(notif);
+	}
 
 
 	public void OpenNotification(GameObject notification)
 	{
 		Notification notif = notification.GetComponent<Notification>();
-
-		rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, rectTransform.sizeDelta.y - rectTransform.rect.width + 10);
-		
 		photoReceivedPanel.SetActive(true);
 
 		GameSceneGUIController.Instance.photoReceivedPanel.SetInfo(notif.textureReceived, notif.snapped, notif.snapper);
+		RemoveNotification(notif);
+	}
 
-		imagesReceived.Remove(notif.textureReceived);
-		Destroy(notification);
+	private void RemoveNotification(Notification notification)
+	{
+		rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, rectTransform.sizeDelta.y - (rectTransform.rect.width + 10));
+		notifications.Remove(notification);
+		Destroy(notification.gameObject);
 	}
 
 	public void ConfirmDeath(string Sender, string PlayerToKill, byte[] killImage)
@@ -85,5 +88,17 @@ public class PhotosNotificationsManager : MonoBehaviour
 	{
 		photoReceivedPanel.SetActive(false);
 		Debug.Log("Player not killed!");
+	}
+
+	public void PlayerDeathReceived(Photon.Realtime.Player otherPlayer)
+	{
+		for (int i = 0; i < notifications.Count; i++)
+		{
+			if(notifications[i].snapper == otherPlayer.NickName || notifications[i].snapped == otherPlayer.NickName)
+			{
+				RemoveNotification(notifications[i]);
+				i--;
+			}
+		}
 	}
 }
