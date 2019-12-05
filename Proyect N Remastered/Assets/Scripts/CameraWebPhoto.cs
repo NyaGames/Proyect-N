@@ -18,7 +18,11 @@ public class CameraWebPhoto : MonoBehaviour
     public RawImage snapTakenImage;
     public RawImage scope;
 
+    public Button changeCameraButton;
+
     public int tamaño = 512;
+
+    private Boolean frontCamera = false;
 
 
     void Start()
@@ -59,23 +63,36 @@ public class CameraWebPhoto : MonoBehaviour
         finalCam.Play();
         background.texture = finalCam;
 
-
+        float w = 1080;
+        float h = 1920;
+        foreach (var canvas in FindObjectsOfType<Canvas>())
+        {
+            if(canvas.name == "GUI")
+            {
+                h = canvas.GetComponent<RectTransform>().rect.height;
+                w = canvas.GetComponent<RectTransform>().rect.width;
+            }
+        }
+        int scopeSize = 1024;
+        while (scopeSize > h || scopeSize > w)
+        {
+            scopeSize = scopeSize / 2;
+        }
+        scope.rectTransform.sizeDelta = new Vector2(scopeSize, scopeSize);
         camAvailable = true;
 
-        /*webCamTexture = new WebCamTexture();
 
-        if(devices.Length > 1)
-        {
-            webCamTexture.deviceName = devices[1].name;
-            webCamTexture.Play();
+       if(Application.platform == RuntimePlatform.Android)
+       {
+            changeCameraButton.gameObject.SetActive(true);
         }
         else
         {
-            webCamTexture.deviceName = devices[0].name;
-            webCamTexture.Play();
+            changeCameraButton.gameObject.SetActive(false);
         }
-        GetComponent<Renderer>().material.mainTexture = webCamTexture; //Add Mesh Renderer to the GameObject to which this script is attached to
-        //webCamTexture.Play();*/
+            
+        
+       
     }
     private void Update()
     {
@@ -89,17 +106,8 @@ public class CameraWebPhoto : MonoBehaviour
 
         int orient = -finalCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
-        if (tamaño > finalCam.width || tamaño > finalCam.height)
-        {
-            Debug.LogError("Tamaño mayor que imagen");
-            Debug.Log("Tamaño mayor que imagen");
-            while (tamaño > finalCam.width || tamaño > finalCam.height)
-            {
-                tamaño = tamaño / 2;
-            }
-            //background.rectTransform.sizeDelta
-            //scope.rectTransform.sizeDelta = new Vector2(tamaño, tamaño);
-        }
+        background.texture = finalCam;
+
 
     }
 
@@ -108,12 +116,24 @@ public class CameraWebPhoto : MonoBehaviour
         Texture2D tex = new Texture2D(finalCam.width, finalCam.height, TextureFormat.RGBA32, false);
         tex.SetPixels32(finalCam.GetPixels32());
         tex.Apply();
-        
+        if (tamaño > finalCam.width || tamaño > finalCam.height)
+        {
+            Debug.LogError("Tamaño mayor que imagen");
+            Debug.Log("Tamaño mayor que imagen");
+            while (tamaño > finalCam.width || tamaño > finalCam.height)
+            {
+                tamaño = tamaño / 2;
+            }
+            
+        }
         Debug.Log("Height: " + tex.height + "  Width: " + tex.width);
         Texture2D photoTakenTex = ResampleAndCrop(tex, tamaño, tamaño);
         int orient = -finalCam.videoRotationAngle;
         if (orient != 0)
             photoTakenTex = rotate(photoTakenTex);
+
+        if (frontCamera)
+            photoTakenTex = rotate(rotate(photoTakenTex));
         Debug.Log("Height: "+ photoTakenTex.height + "  Width: "+ photoTakenTex.width);
         snapTakenImage.texture = photoTakenTex;
     }
@@ -155,6 +175,24 @@ public class CameraWebPhoto : MonoBehaviour
             }
             newTexture.Apply();
             return newTexture;   
+    }
+    public void changeCamera()
+    {
+            if (!frontCamera)
+            {
+                finalCam.Stop();
+                finalCam = frontCam;
+                finalCam.Play();
+                frontCamera = true;
+            }
+            else
+            {
+                finalCam.Stop();
+                finalCam = webCamTexture;
+                finalCam.Play();
+                frontCamera = false;
+            }
+       
     }
    
 }

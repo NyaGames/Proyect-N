@@ -13,6 +13,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
 	public GameObject zonePrefab;
     public GameObject zoneCantGetOutPrefab;
 	public GameObject dropPrefab;
+    public GameObject mobilePrefab;
 
 	public bool creatingDrop = false;
 
@@ -401,15 +402,20 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
-        foreach (GameObject g in playersViewsList)
+        if (PhotonNetwork.IsMasterClient)
         {
-            g.GetComponent<PhotonView>().RPC("OnKillReceived", RpcTarget.Others, otherPlayer.NickName);
-        }
+           
 
-		if (PersistentData.isGM)
-		{
-			PhotosNotificationsManager.Instance.PlayerDeathReceived(otherPlayer);
-		}
+            foreach (GameObject g in playersViewsList)
+            {
+                g.GetComponent<PhotonView>().RPC("OnKillReceived", RpcTarget.All, otherPlayer.NickName);
+            }
+
+            if (PersistentData.isGM)
+            {
+                PhotosNotificationsManager.Instance.PlayerDeathReceived(otherPlayer);
+            }
+        }
 
     }
 
