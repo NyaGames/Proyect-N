@@ -330,6 +330,7 @@ MonoBehaviour:
   rangeScaler: {fileID: 7864363253354405370}
   player: {fileID: 0}
   dropAmmo: 0
+  playerInside: 0
 --- !u!114 &4323739013939648350
 MonoBehaviour:
   m_ObjectHideFlags: 0
