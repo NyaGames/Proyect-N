@@ -522,7 +522,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_room_code
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &64508768
@@ -609,7 +608,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 67.4
+  m_fontSize: 19.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -695,7 +694,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_create
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &112329479
@@ -1547,7 +1545,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_player_count
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &583985196
@@ -1634,7 +1631,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 66.95
+  m_fontSize: 19.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1720,7 +1717,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_join
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &593682476
@@ -2506,11 +2502,11 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 57.3
+  m_fontSize: 5.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 13.85
+  m_fontSizeMin: 5.7
   m_fontSizeMax: 72
   m_fontStyle: 17
   m_textAlignment: 514
@@ -2523,7 +2519,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 5
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -2592,7 +2588,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_join
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &878246337
@@ -2903,7 +2898,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_username
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &929001432
@@ -3076,7 +3070,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: 
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &950275840
@@ -8053,7 +8046,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_random_username
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1034928554
@@ -8465,11 +8457,11 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 46.2
+  m_fontSize: 9.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 5.9
   m_fontSizeMax: 72
   m_fontStyle: 17
   m_textAlignment: 514
@@ -8551,7 +8543,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_create
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1142069803
@@ -8793,7 +8784,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_room_code
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1001 &1220007516
@@ -11078,7 +11068,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_create
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1568699889
@@ -16872,7 +16861,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_room_name
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1807597617
@@ -17045,7 +17033,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_join
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1809138411
@@ -17461,7 +17448,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_room_name
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1980666421
@@ -17634,7 +17620,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_username
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1995996279
