@@ -60,7 +60,7 @@ public class PhotosPanelGUIController : MonoBehaviour
         PersistentData.killcam = killCam;
         PersistentData.killer = killer;
         PhotonNetwork.LeaveRoom();
-        SceneManager.LoadScene("DeathScene");
+        SceneManager.LoadScene("FinalDeathScene");
     }
 
     public void KillConfirmed(string playerKilled)
@@ -69,5 +69,10 @@ public class PhotosPanelGUIController : MonoBehaviour
         GameManager.Instance.myPlayer.GetComponent<KillsInfo>().currentKills += 1;
         killConfirmedPanel.GetComponent<KillConfirmation>().SetPlayerKilled(playerKilled, GameManager.Instance.myPlayer.GetComponent<KillsInfo>().currentKills);
         
+    }
+    public void KillDenied(string playerKilled)
+    {
+        killConfirmedPanel.SetActive(true);
+        killConfirmedPanel.GetComponent<KillConfirmation>().SetPlayerNotKilled(playerKilled, GameManager.Instance.myPlayer.GetComponent<KillsInfo>().currentKills);
     }
 }

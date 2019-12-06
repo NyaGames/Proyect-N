@@ -84,10 +84,11 @@ public class PhotosNotificationsManager : MonoBehaviour
 		Debug.Log("Player Killed!");
 	}
 
-	public void CancelDeath()
-	{
+	public void CancelDeath(string Sender, string PlayerToKill, byte[] killImage)
+    {
 		photoReceivedPanel.SetActive(false);
-		Debug.Log("Player not killed!");
+        GameManager.Instance.myPlayer.GetComponent<MessageSender>().CancelKill(Sender, PlayerToKill);
+        Debug.Log("Player not killed!");
 	}
 
 	public void PlayerDeathReceived(Photon.Realtime.Player otherPlayer)

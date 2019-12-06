@@ -113,7 +113,16 @@ public class MessageSender : MonoBehaviourPunCallbacks
         {
             Debug.Log("NO ERES MASTER CLIENT");
         }
-
+    }
+    public void CancelKill(string sender,string playerToKill)
+    {
+        for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
+        {
+            if (GamemasterManager.Instance.playersViewsList[i].GetPhotonView().Owner.NickName == sender)
+            {
+                GamemasterManager.Instance.playersViewsList[i].GetPhotonView().RPC("KillDenied", RpcTarget.All, playerToKill);
+            }
+        }
     }
     [PunRPC]
     public void ActivateCountdownText()
@@ -189,7 +198,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 if (photonView.IsMine)
                 {
                     PhotonNetwork.LeaveRoom();
-                    SceneManager.LoadScene("DeathByZone");
+                    SceneManager.LoadScene("FinalDeathByZone");
                     Debug.Log("TE MORISTE POR LA ZONA CRACK");
                 }
                 break;
@@ -198,7 +207,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 if (photonView.IsMine)
                 {
                     PhotonNetwork.LeaveRoom();
-                    SceneManager.LoadScene("DeathByGM");
+                    SceneManager.LoadScene("FinalDeathByGM");
                     Debug.Log("TE MORISTE POR LA ZONA CRACK");
                 }
                 Debug.Log("TE MATO EL GM CRACK");
@@ -226,7 +235,15 @@ public class MessageSender : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsMasterClient)
             GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().KillConfirmed(playerToKill);
         //PhotosPanelGUIController.Instance.KillConfirmed(playerToKill);
-    }		
+    }
+
+    [PunRPC]
+    public void KillDenied(string playerToKill)
+    {
+        if (!PhotonNetwork.IsMasterClient)
+            GameSceneGUIController.Instance.photosPanel.GetComponent<PhotosPanelGUIController>().KillDenied(playerToKill);
+        //PhotosPanelGUIController.Instance.KillConfirmed(playerToKill);
+    }
 
     private Texture2D getUncompressedTextureFromBytes(byte[] byteArray)
     {
