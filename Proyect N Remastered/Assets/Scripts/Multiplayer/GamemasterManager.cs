@@ -215,7 +215,9 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
 
         foreach (GameObject g in playersViewsList)
         {
-            g.GetComponent<PhotonView>().RPC("ActivateCountdownText", RpcTarget.All);
+            PhotonView p = g.GetComponent<PhotonView>();
+            p.RPC("ActivateCountdownText", RpcTarget.All);
+            p.RPC("ResetCurrentSecsOutOfZone", RpcTarget.All);
         }
 
     }

@@ -90,4 +90,10 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
         }
     }
 
+    [PunRPC]
+    public void ResetCurrentSecsOutOfZone()
+    {
+        currentSecsOutOfZone = maxSecsOutOfZone;
+    }
+
 }
