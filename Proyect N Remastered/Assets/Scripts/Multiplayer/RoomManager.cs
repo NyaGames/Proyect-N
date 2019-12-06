@@ -149,12 +149,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
 		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
 		{
 			roomScenePlayerGUIController.feedbackText.text = "Room doesnt exists or wrong room code";
+		}
 		else
 		{
 			roomScenePlayerGUIController.feedbackText.text = "La sala no existe o la contraseña es incorrecta";
 		}
-			Debug.Log("La sala no existe o la contraseña es incorrecta");
-		}
+
+		Debug.Log("La sala no existe o la contraseña es incorrecta");
+		
 	}
 
 	public void ReturnToMainMenu()
