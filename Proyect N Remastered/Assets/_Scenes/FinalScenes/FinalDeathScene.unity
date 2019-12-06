@@ -195,7 +195,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 28.9
+  m_fontSize: 25.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 504336895}
   - component: {fileID: 504336894}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: killer name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 15.15
+  m_fontSize: 13.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1141,7 +1141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageToBeShown: {fileID: 1706805771}
-  killerName: {fileID: 0}
+  killerName: {fileID: 504336894}
 --- !u!1 &2082699274
 GameObject:
   m_ObjectHideFlags: 0
