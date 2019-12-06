@@ -63,11 +63,11 @@ public class StartCountDownButton : MonoBehaviour
 		{
 			if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
 			{
-				zoneWarning.text = "Time not valid!";
+				timeWarning.text = "Time not valid!";
 			}
 			else
 			{
-				zoneWarning.text = "¡El tiempo no puede ser 0!";
+				timeWarning.text = "¡El tiempo no puede ser 0!";
 			}
 		}
 	}

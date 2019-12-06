@@ -185,7 +185,7 @@ MonoBehaviour:
       name: Room Scene
   - indexLanguage: 0
     nameID: ls_start
-    translation: Translation here
+    translation: Start
     idUniqueElements: 13
     categories:
       index: 2
@@ -199,7 +199,7 @@ MonoBehaviour:
       name: LobbyScene
   - indexLanguage: 0
     nameID: ls_player_list
-    translation: Translation here
+    translation: Player List
     idUniqueElements: 14
     categories:
       index: 2
@@ -213,7 +213,7 @@ MonoBehaviour:
       name: LobbyScene
   - indexLanguage: 0
     nameID: ls_room_name
-    translation: Translation here
+    translation: Room Name
     idUniqueElements: 15
     categories:
       index: 2
@@ -234,21 +234,21 @@ MonoBehaviour:
       name: Game Scene
   - indexLanguage: 1
     nameID: gs_zone
-    translation: Zona
+    translation: 'Z\no\nn\na  '
     idUniqueElements: 16
     categories:
       index: 3
       name: Game Scene
   - indexLanguage: 0
     nameID: gs_drops
-    translation: Drops
+    translation: D\nr\no\np\ns
     idUniqueElements: 17
     categories:
       index: 3
       name: Game Scene
   - indexLanguage: 1
     nameID: gs_drops
-    translation: Drops
+    translation: D\nr\no\np\ns
     idUniqueElements: 17
     categories:
       index: 3
@@ -332,14 +332,14 @@ MonoBehaviour:
       name: Game Manager Scene
   - indexLanguage: 1
     nameID: gs_time_until_start_closing
-    translation: Tiempo hasta que empiece ha cerrarse
+    translation: Tiempo hasta cerrarse
     idUniqueElements: 23
     categories:
       index: 3
       name: Game Manager Scene
   - indexLanguage: 0
     nameID: gs_time_closing
-    translation: Time Closing
+    translation: Closing Time
     idUniqueElements: 24
     categories:
       index: 3
@@ -561,6 +561,20 @@ MonoBehaviour:
     categories:
       index: 3
       name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: mm_offline
+    translation: Not connected
+    idUniqueElements: 40
+    categories:
+      index: 0
+      name: Main Menu
+  - indexLanguage: 1
+    nameID: mm_offline
+    translation: No Conectado
+    idUniqueElements: 40
+    categories:
+      index: 0
+      name: Main Menu
   languages:
   - English
   - "Espa\xF1ol"
@@ -650,3 +664,5 @@ MonoBehaviour:
     id: 38
   - inUse: 1
     id: 39
+  - inUse: 1
+    id: 40

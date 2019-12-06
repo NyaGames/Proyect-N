@@ -45,7 +45,7 @@ public class ChangeButtonText : MonoBehaviour
 		}
 		else
 		{
-			index = (index + 1) % spanishTexts.Length;			
+			text.text = spanishTexts[index];
 		}
 	}
 }

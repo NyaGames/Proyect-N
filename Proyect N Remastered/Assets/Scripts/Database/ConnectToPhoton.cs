@@ -29,7 +29,15 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
 
     public void Connect()
     {
-        feedbackText.text = "Trying to connect...";
+		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+		{
+			feedbackText.text = "Trying to connect...";
+		}
+		else
+		{
+			feedbackText.text = "Intenando conectarse...";
+		}
+		
         if (!PhotonNetwork.IsConnected)
         {
             if (PhotonNetwork.ConnectUsingSettings())
@@ -38,7 +46,15 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
             }
             else
             {
-                feedbackText.text = "Connection to server failed, try again";
+				if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+				{
+					feedbackText.text = "Connection to server failed, try again";
+				}
+				else
+				{
+					feedbackText.text = "Ha fallado la conexión, inténtalo otra vez";
+				}
+				
             }
         }
         else //Si ya estás conectado a Photon
