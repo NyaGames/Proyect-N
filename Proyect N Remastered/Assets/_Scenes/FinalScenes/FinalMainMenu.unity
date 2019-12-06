@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gmFeedbackText: {fileID: 2044123778}
-  playerFeedbackText: {fileID: 0}
+  playerFeedbackText: {fileID: 645819651}
 --- !u!1 &160090035
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,7 +922,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 68.7
+  m_fontSize: 11.95
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2182,7 +2182,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 71.9
+  m_fontSize: 11.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3040,7 +3040,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 48.25
+  m_fontSize: 7.05
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4040,7 +4040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1046925532
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4460,7 +4460,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 46.85
+  m_fontSize: 9.1
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7829,7 +7829,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1779842491
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9946,7 +9946,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 72
+  m_fontSize: 20.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10032,5 +10032,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_offline
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
