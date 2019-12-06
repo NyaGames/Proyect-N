@@ -984,6 +984,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 97128384}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &97128386 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2439878430648178546, guid: 54ad7684ee3234448bea783771548a47,
+    type: 3}
+  m_PrefabInstance: {fileID: 97128384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &102168203
 GameObject:
   m_ObjectHideFlags: 0
@@ -5830,7 +5836,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 58.45
+  m_fontSize: 39.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6151,7 +6157,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '99 : 99'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6334,7 +6340,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 65.05
+  m_fontSize: 36.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7330,7 +7336,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 34.65
+  m_fontSize: 19.5
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -12517,7 +12523,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c412f39696b4cf64bb7f8f0966cd2fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  labelText: {fileID: 0}
   usernameKilled: {fileID: 397038280}
+  killConfirmedColor: {r: 0, g: 0, b: 0, a: 0}
+  killDeniedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1202211990
 GameObject:
   m_ObjectHideFlags: 0
@@ -13423,10 +13432,10 @@ MonoBehaviour:
   gmCountDownText: {fileID: 1517487559}
   playerCountDownText: {fileID: 1804050355}
   playerPhotoButton: {fileID: 875973675}
-  outOfZonePanel: {fileID: 0}
+  outOfZonePanel: {fileID: 97128386}
   winningPanel: {fileID: 1715614903}
-  playerCountDown: {fileID: 0}
-  gmCountdown: {fileID: 0}
+  playerCountDown: {fileID: 1815936448}
+  gmCountdown: {fileID: 876954914}
   playerCountAtStart: 0
 --- !u!4 &1250016668
 Transform:
@@ -13460,7 +13469,8 @@ MonoBehaviour:
     type: 3}
   dropPrefab: {fileID: 7291670006575766536, guid: 131d60eb84b431440ac933a227a29ca5,
     type: 3}
-  mobilePrefab: {fileID: 0}
+  mobilePrefab: {fileID: 714640910401667126, guid: c44a101c83a12524b827860869c7fe67,
+    type: 3}
   creatingDrop: 0
   staticZone: {fileID: 0}
   newZonePosition: {fileID: 0}
@@ -15768,7 +15778,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 41.7
+  m_fontSize: 36.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15814,7 +15824,7 @@ MonoBehaviour:
     spaceCount: 3
     wordCount: 5
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -16743,7 +16753,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 59.6
+  m_fontSize: 33.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
