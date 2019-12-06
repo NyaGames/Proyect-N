@@ -135,7 +135,15 @@ public class Player : MonoBehaviour
     [PunRPC]
     public void OnKillReceived(string playerName)
     {
-        GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage(playerName + " has died!", 3, 5f));
+		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+		{
+			GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage(playerName + " has been eliminated!", 3, 5f));
+		}
+		else
+		{
+			GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage(playerName + " ha sido eliminado!", 3, 5f));
+		}
+		
     }
 
 }

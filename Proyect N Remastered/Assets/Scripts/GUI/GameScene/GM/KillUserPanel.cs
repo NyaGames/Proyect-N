@@ -11,10 +11,10 @@ public class KillUserPanel : MonoBehaviour
 
 	private GameObject playerPrefab;
 
-	public void AskForConfirmation(GameObject user)
+	public void AskForConfirmation(GameObject user, string usernameString)
 	{
 		gameObject.SetActive(true);
-		username.text = user.GetComponent<Player>().nickName;
+		username.text = usernameString;
         playerPrefab = user;
 	}
 
