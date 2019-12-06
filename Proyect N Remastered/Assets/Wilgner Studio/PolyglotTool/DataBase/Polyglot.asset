@@ -178,7 +178,7 @@ MonoBehaviour:
       name: Room Scene
   - indexLanguage: 1
     nameID: rs_random_username
-    translation: Translation here
+    translation: Nombre aleatorio
     idUniqueElements: 12
     categories:
       index: 1
