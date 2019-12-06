@@ -1008,7 +1008,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_profile
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &261036823
@@ -2133,7 +2132,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_start
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!114 &541958231
@@ -2357,6 +2355,7 @@ GameObject:
   - component: {fileID: 645819650}
   - component: {fileID: 645819652}
   - component: {fileID: 645819651}
+  - component: {fileID: 645819653}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2501,6 +2500,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645819649}
   m_CullTransparentMesh: 0
+--- !u!114 &645819653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645819649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f16b0ef7e682fb4a83f8f9e41fbe01b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameId: 
+  text: {fileID: 0}
+  polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
+  searchTranslations: []
 --- !u!1 &652258545
 GameObject:
   m_ObjectHideFlags: 0
@@ -3126,7 +3141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_credits
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &719590170
@@ -4546,7 +4560,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_player
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1173670591
@@ -4964,7 +4977,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_credits
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1322429977
@@ -5257,7 +5269,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14.8
+  m_fontSize: 16.6
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5343,7 +5355,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_profile
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1414447772
@@ -5516,7 +5527,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_gm
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1420734003
@@ -7028,7 +7038,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_start
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1683637813
@@ -10032,6 +10041,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_offline
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
