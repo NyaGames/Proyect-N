@@ -3,22 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(LanguageControl))]
 public class UpdateTextsOnSceneLoaded : MonoBehaviour
 {
-	void OnEnable()
-	{		
-		SceneManager.sceneLoaded += OnSceneLoaded;
-	}
 
-	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+	private void Start()
 	{
-		GetComponent<LanguageControl>().UpdateTextTranslation();
+		GameObject.FindGameObjectWithTag("LanguageControl").GetComponent<LanguageControl>().UpdateTextTranslation();
 	}
-
-	void OnDisable()
-	{		
-		SceneManager.sceneLoaded -= OnSceneLoaded;
-	}
-
 }

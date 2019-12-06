@@ -44,7 +44,13 @@ public class FindTranslation : MonoBehaviour {
 
     public void SetText()
     {
-        Translation t = polyglot.GetTranslationByName(nameId, lc.GetSelectedLanguage());
+		this.lc = GameObject.FindObjectOfType<LanguageControl>();
+		this.text = this.GetComponent<Text>();
+
+#if TMP
+		this.textP = this.GetComponent<TMP_Text>();
+#endif
+		Translation t = polyglot.GetTranslationByName(nameId, lc.GetSelectedLanguage());
         if (t != null)
         {
 #if TMP
