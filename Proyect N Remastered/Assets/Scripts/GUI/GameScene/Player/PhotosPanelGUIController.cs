@@ -60,7 +60,7 @@ public class PhotosPanelGUIController : MonoBehaviour
         PersistentData.killcam = killCam;
         PersistentData.killer = killer;
         PhotonNetwork.LeaveRoom();
-        SceneManager.LoadScene("DeathScene");
+        SceneManager.LoadScene("FinalDeathScene");
     }
 
     public void KillConfirmed(string playerKilled)

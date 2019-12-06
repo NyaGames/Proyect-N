@@ -14,6 +14,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/FinalScenes/FinalLobbyScene.unity
     guid: 05ae4cd9cc16d06409792eacc1d0bc55
+  - enabled: 1
+    path: Assets/_Scenes/FinalScenes/FinalGameScene.unity
+    guid: 9bc8ec44705c3e840b60ea01c81b4f31
+  - enabled: 1
+    path: Assets/_Scenes/FinalScenes/FinalDeathScene.unity
+    guid: ff523336a4b47a240814fac0aa1776c2
+  - enabled: 1
+    path: Assets/_Scenes/FinalScenes/FinalDeathByZone.unity
+    guid: ae273c673b9806c44848b8561ce5bdd0
+  - enabled: 1
+    path: Assets/_Scenes/FinalScenes/FinalDeathByGM.unity
+    guid: 6dc68558098f1d143910ad8f15de94ad
   - enabled: 0
     path: Assets/_Scenes/Game/MainMenuScreen.unity
     guid: bff7164a24821c649b724031a8e3c9b3
@@ -23,16 +35,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Scenes/Game/LobbyScene.unity
     guid: 3cadbb39ac2dc1745a3cdf275a0c71c4
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Game/GameScene.unity
     guid: 4f8d3db9a20eb1c46bdcb10631deb1aa
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Game/DeathScene.unity
     guid: f6fdfdfbc8322a1429b6b4bfadf0c14f
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Game/DeathByZone.unity
     guid: f1bbca83fc096f54d9c2f303be418986
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Game/DeathByGM.unity
     guid: c8e0e8d5a39b21b4e90a52ad9af9125f
   m_configObjects: {}

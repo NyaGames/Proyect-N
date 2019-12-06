@@ -198,7 +198,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 if (photonView.IsMine)
                 {
                     PhotonNetwork.LeaveRoom();
-                    SceneManager.LoadScene("DeathByZone");
+                    SceneManager.LoadScene("FinalDeathByZone");
                     Debug.Log("TE MORISTE POR LA ZONA CRACK");
                 }
                 break;
@@ -207,7 +207,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
                 if (photonView.IsMine)
                 {
                     PhotonNetwork.LeaveRoom();
-                    SceneManager.LoadScene("DeathByGM");
+                    SceneManager.LoadScene("FinalDeathByGM");
                     Debug.Log("TE MORISTE POR LA ZONA CRACK");
                 }
                 Debug.Log("TE MATO EL GM CRACK");
