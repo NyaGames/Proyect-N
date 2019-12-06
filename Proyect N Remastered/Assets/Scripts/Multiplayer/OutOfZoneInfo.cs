@@ -42,12 +42,12 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
             {
                 if (!insideZone)
                 {
-                    GameManager.Instance.outOfZoneText.SetActive(true);
+                    GameManager.Instance.outOfZonePanel.SetActive(true);
                     StartCoundDown();
                 }
                 else
                 {
-                    GameManager.Instance.outOfZoneText.SetActive(false);
+                    GameManager.Instance.outOfZonePanel.SetActive(false);
                     CancelInvoke("Countdown");
                     outOfZoneActive = false;
                 }

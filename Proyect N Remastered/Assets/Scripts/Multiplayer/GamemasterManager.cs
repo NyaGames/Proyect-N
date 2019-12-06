@@ -2,6 +2,7 @@
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -415,6 +416,15 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
             {
                 PhotosNotificationsManager.Instance.PlayerDeathReceived(otherPlayer);
             }
+        }
+
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount <= 2 && !PhotonNetwork.LocalPlayer.IsMasterClient && !GameManager.Instance.winningPanel.activeSelf) //Si solo quedais tu y el gm, has ganado
+        {
+            GameManager.Instance.winningPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "You have killed " + GameManager.Instance.myPlayer.GetComponent<KillsInfo>().currentKills;
+            GameManager.Instance.winningPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = PhotonNetwork.CurrentRoom.PlayerCount - 1  + "/" + GameManager.Instance.playerCountAtStart;
+            GameManager.Instance.winningPanel.SetActive(true);
+           
         }
 
     }

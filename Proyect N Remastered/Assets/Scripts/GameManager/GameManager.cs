@@ -26,10 +26,10 @@ public class GameManager : MonoBehaviour
 
     UnityAction onCountDownFinished;
 
-    public GameObject outOfZoneText;
+    public GameObject outOfZonePanel;
 
     public GameObject winningPanel;
-    private int playerCountAtStart;
+    [HideInInspector] public int playerCountAtStart;
 
 	private void Awake()
 	{
@@ -48,18 +48,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-	/*public void SetCountDown(int secs, string countDownText, UnityAction onCountDownFinished)
-	{
-        if (!countdownActive)
-        {
-            this.onCountDownFinished += onCountDownFinished;
-            secsToGameStart = secs;
-            this.countDownText = countDownText;
-            countdownActive = true;
-            InvokeRepeating("Countdown", 1f, 1f);
-        }
-    
-	}*/
 
 	public void StartGame()
 	{
@@ -108,17 +96,11 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-        if (outOfZoneText.activeSelf && myPlayer != null && !PhotonNetwork.LocalPlayer.IsMasterClient) {
-            outOfZoneText.GetComponent<TMPro.TextMeshProUGUI>().text = "You have " + myPlayer.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone + " seconds to return to game area! Run now!";
+        if (outOfZonePanel.activeSelf && myPlayer != null && !PhotonNetwork.LocalPlayer.IsMasterClient) {
+            outOfZonePanel.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "You have " + myPlayer.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone + " seconds to return to game area! Run now!";
         }
 
-        /*if (PhotonNetwork.CurrentRoom.PlayerCount <= 2 && !PhotonNetwork.LocalPlayer.IsMasterClient && !winningPanel.activeSelf) //Si solo quedais tu y el gm, has ganado
-        {
-            winningPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "You have killed " + myPlayer.GetComponent<KillsInfo>().currentKills;
-            winningPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = PhotonNetwork.CurrentRoom.PlayerCount - 1  + "/" + playerCountAtStart;
-            winningPanel.SetActive(true);
-           
-        }*/
+
 
 	}
 
