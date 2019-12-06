@@ -7,6 +7,9 @@ TagManager:
   - TargetImage
   - LanguageControl
   - Music
+  - Drop
+  - CountDownText
+  - MenusBackground
   layers:
   - Default
   - TransparentFX
