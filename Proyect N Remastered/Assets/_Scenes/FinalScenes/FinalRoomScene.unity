@@ -1982,6 +1982,7 @@ GameObject:
   - component: {fileID: 694437472}
   - component: {fileID: 694437474}
   - component: {fileID: 694437473}
+  - component: {fileID: 694437475}
   m_Layer: 5
   m_Name: JoinRoomImage
   m_TagString: Untagged
@@ -2043,6 +2044,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694437471}
   m_CullTransparentMesh: 0
+--- !u!95 &694437475
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694437471}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4900dcffda6118143ac19077b8c46bb2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &727826555
 GameObject:
   m_ObjectHideFlags: 0
@@ -7908,6 +7928,7 @@ GameObject:
   - component: {fileID: 1050575750}
   - component: {fileID: 1050575752}
   - component: {fileID: 1050575751}
+  - component: {fileID: 1050575753}
   m_Layer: 5
   m_Name: JoinRoomButton
   m_TagString: Untagged
@@ -7995,6 +8016,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050575749}
   m_CullTransparentMesh: 0
+--- !u!114 &1050575753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050575749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217c4fff7ec34ef49b7b61ff8a047b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boton: {fileID: 1050575749}
+  animator: {fileID: 1561820399}
 --- !u!1 &1059494758
 GameObject:
   m_ObjectHideFlags: 0
@@ -10258,6 +10293,7 @@ GameObject:
   - component: {fileID: 1561820400}
   - component: {fileID: 1561820402}
   - component: {fileID: 1561820401}
+  - component: {fileID: 1561820403}
   m_Layer: 5
   m_Name: JoinRoomImage
   m_TagString: Untagged
@@ -10319,6 +10355,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1561820399}
   m_CullTransparentMesh: 0
+--- !u!95 &1561820403
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561820399}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ba120311fa84bcd48b200e369c8f4c22, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1565555374
 PrefabInstance:
   m_ObjectHideFlags: 0
