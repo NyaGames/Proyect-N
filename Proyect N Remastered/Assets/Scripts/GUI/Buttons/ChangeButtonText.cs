@@ -6,7 +6,9 @@ using TMPro;
 public class ChangeButtonText : MonoBehaviour
 {
 	[TextArea(2, 10)]
-	public string[] texts;
+	public string[] englishTexts;
+	[TextArea(2, 10)]
+	public string[] spanishTexts;
 
 	private int index = 0;
 
@@ -15,11 +17,35 @@ public class ChangeButtonText : MonoBehaviour
 	private void Awake()
 	{
 		text = GetComponentInChildren<TextMeshProUGUI>();
+		FindObjectOfType<LanguageControl>().LanguageChanged.AddListener(LanguageChange);
+
+		LanguageChange();
 	}
 
 	public void ChangeText()
 	{
-		index = (index + 1) % texts.Length;
-		text.text = texts[index];
+		if(FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+		{
+			index = (index + 1) % englishTexts.Length;
+			text.text = englishTexts[index];
+		}
+		else
+		{
+			index = (index + 1) % spanishTexts.Length;
+			text.text = spanishTexts[index];
+		}
+		
+	}
+
+	private void LanguageChange()
+	{
+		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+		{		
+			text.text = englishTexts[index];
+		}
+		else
+		{
+			text.text = spanishTexts[index];
+		}
 	}
 }

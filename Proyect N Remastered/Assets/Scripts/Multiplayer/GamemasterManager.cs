@@ -22,7 +22,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
     [HideInInspector]public GameObject newZonePosition;
     [HideInInspector]public GameObject provZone;
 
-	private List<GameObject> provDropList = new List<GameObject>();
+	public List<GameObject> provDropList = new List<GameObject>();
 	private List<GameObject> dropList = new List<GameObject>();
 
 	Vector3 lasPositionTapped = new Vector3(0, 0, 0);
@@ -130,7 +130,15 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
                         provZone.transform.position = touchInWorldCoord;
                     }
 
-					GameSceneGUIController.Instance.gmHelp.SetMessage("Move to scale the zone");
+					if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+					{
+						GameSceneGUIController.Instance.gmHelp.SetMessage("Move to scale the zone");
+					}
+					else
+					{
+						GameSceneGUIController.Instance.gmHelp.SetMessage("Mueve para escalar la zona");
+					}
+					
 				}
                 break;
 
@@ -151,7 +159,15 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
                     provZone.GetComponent<Zone>().creatingObject = false;
                 }
 
-				GameSceneGUIController.Instance.gmHelp.SetMessage("Try moving and scaling!");
+
+				if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+				{
+					GameSceneGUIController.Instance.gmHelp.SetMessage("Try moving and scaling!");
+				}
+				else
+				{
+					GameSceneGUIController.Instance.gmHelp.SetMessage("¡Intenta moverla y escalarla!");
+				}				
 
 				provZoneCreated = true;
                 break;
@@ -336,7 +352,14 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
                     break;
             }
 
-			GameSceneGUIController.Instance.gmHelp.SetMessage("To erase drops, exit edition mode");
+			if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+			{
+				GameSceneGUIController.Instance.gmHelp.SetMessage("To erase drops, exit edition mode");
+			}
+			else
+			{
+				GameSceneGUIController.Instance.gmHelp.SetMessage("Para borrar drops, sal del modo edición");
+			}			
         }
         else
         {

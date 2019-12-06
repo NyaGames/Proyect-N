@@ -183,12 +183,406 @@ MonoBehaviour:
     categories:
       index: 1
       name: Room Scene
+  - indexLanguage: 0
+    nameID: ls_start
+    translation: Start
+    idUniqueElements: 13
+    categories:
+      index: 2
+      name: LobbyScene
+  - indexLanguage: 1
+    nameID: ls_start
+    translation: Jugar
+    idUniqueElements: 13
+    categories:
+      index: 2
+      name: LobbyScene
+  - indexLanguage: 0
+    nameID: ls_player_list
+    translation: Player List
+    idUniqueElements: 14
+    categories:
+      index: 2
+      name: LobbyScene
+  - indexLanguage: 1
+    nameID: ls_player_list
+    translation: Lista de Jugadores
+    idUniqueElements: 14
+    categories:
+      index: 2
+      name: LobbyScene
+  - indexLanguage: 0
+    nameID: ls_room_name
+    translation: Room Name
+    idUniqueElements: 15
+    categories:
+      index: 2
+      name: LobbyScene
+  - indexLanguage: 1
+    nameID: ls_room_name
+    translation: Nombre de la sala
+    idUniqueElements: 15
+    categories:
+      index: 2
+      name: LobbyScene
+  - indexLanguage: 0
+    nameID: gs_zone
+    translation: Zone
+    idUniqueElements: 16
+    categories:
+      index: 3
+      name: Game Scene
+  - indexLanguage: 1
+    nameID: gs_zone
+    translation: 'Z\no\nn\na  '
+    idUniqueElements: 16
+    categories:
+      index: 3
+      name: Game Scene
+  - indexLanguage: 0
+    nameID: gs_drops
+    translation: D\nr\no\np\ns
+    idUniqueElements: 17
+    categories:
+      index: 3
+      name: Game Scene
+  - indexLanguage: 1
+    nameID: gs_drops
+    translation: D\nr\no\np\ns
+    idUniqueElements: 17
+    categories:
+      index: 3
+      name: Game Scene
+  - indexLanguage: 0
+    nameID: gs_players
+    translation: Players
+    idUniqueElements: 18
+    categories:
+      index: 3
+      name: Game Scene
+  - indexLanguage: 1
+    nameID: gs_players
+    translation: Jugadores
+    idUniqueElements: 18
+    categories:
+      index: 3
+      name: Game Scene
+  - indexLanguage: 0
+    nameID: gs_edition
+    translation: Edition
+    idUniqueElements: 19
+    categories:
+      index: 3
+      name: Game Scene
+  - indexLanguage: 1
+    nameID: gs_edition
+    translation: "Edici\xF3n"
+    idUniqueElements: 19
+    categories:
+      index: 3
+      name: Game Scene
+  - indexLanguage: 0
+    nameID: gs_center_camera
+    translation: Center Camera
+    idUniqueElements: 20
+    categories:
+      index: 3
+      name: Game Scene
+  - indexLanguage: 1
+    nameID: gs_center_camera
+    translation: "Centrar C\xE1mara"
+    idUniqueElements: 20
+    categories:
+      index: 3
+      name: Game Scene
+  - indexLanguage: 0
+    nameID: gs_zone_edition
+    translation: Zone Edition
+    idUniqueElements: 21
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_zone_edition
+    translation: "Edici\xF3n de Zonas"
+    idUniqueElements: 21
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_create_zone
+    translation: Create Zone
+    idUniqueElements: 22
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_create_zone
+    translation: Crear Zona
+    idUniqueElements: 22
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_time_until_start_closing
+    translation: Time Until Closing
+    idUniqueElements: 23
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_time_until_start_closing
+    translation: Tiempo hasta cerrarse
+    idUniqueElements: 23
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_time_closing
+    translation: Closing Time
+    idUniqueElements: 24
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_time_closing
+    translation: "Tiempo cerr\xE1ndose"
+    idUniqueElements: 24
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_start_countdown
+    translation: Start Countdown
+    idUniqueElements: 25
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_start_countdown
+    translation: "Empezar cuenta atr\xE1s"
+    idUniqueElements: 25
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_send_drops
+    translation: Send Drops
+    idUniqueElements: 27
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_send_drops
+    translation: Enviar drops
+    idUniqueElements: 27
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_drops_edition
+    translation: Drops Edition
+    idUniqueElements: 26
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_drops_edition
+    translation: "Edici\xF3n de Drops"
+    idUniqueElements: 26
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_players
+    translation: Players
+    idUniqueElements: 28
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_players
+    translation: Jugadores
+    idUniqueElements: 28
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_players_killed
+    translation: Players Snapped
+    idUniqueElements: 29
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_players_killed
+    translation: Jugadores snappeados
+    idUniqueElements: 29
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_ammo
+    translation: Reels
+    idUniqueElements: 30
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_ammo
+    translation: Carretes
+    idUniqueElements: 30
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_out_of_zone_time
+    translation: Out of Zone Time Remaining
+    idUniqueElements: 31
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_out_of_zone_time
+    translation: Tiempo fuera de la zona restante
+    idUniqueElements: 31
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_kill_player
+    translation: Remove Player
+    idUniqueElements: 32
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_kill_player
+    translation: Eliminar jugador
+    idUniqueElements: 32
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_back
+    translation: Back
+    idUniqueElements: 33
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_back
+    translation: "Atr\xE1s"
+    idUniqueElements: 33
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_settings
+    translation: Settings
+    idUniqueElements: 34
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_settings
+    translation: Opciones
+    idUniqueElements: 34
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_game_start
+    translation: Game Start Edition
+    idUniqueElements: 35
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_game_start
+    translation: Inicio de Partida
+    idUniqueElements: 35
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_countdown
+    translation: Countdown
+    idUniqueElements: 36
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_countdown
+    translation: "Cuenta Atr\xE1s"
+    idUniqueElements: 36
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_snap
+    translation: Snap!
+    idUniqueElements: 37
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_snap
+    translation: Snappear!
+    idUniqueElements: 37
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_deny
+    translation: Deny
+    idUniqueElements: 38
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_deny
+    translation: Denegar
+    idUniqueElements: 38
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_game_not_started
+    translation: Game hasn't started yet
+    idUniqueElements: 39
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_game_not_started
+    translation: "La partida a\xFAn no ha empezado"
+    idUniqueElements: 39
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: mm_offline
+    translation: Not connected
+    idUniqueElements: 40
+    categories:
+      index: 0
+      name: Main Menu
+  - indexLanguage: 1
+    nameID: mm_offline
+    translation: No Conectado
+    idUniqueElements: 40
+    categories:
+      index: 0
+      name: Main Menu
   languages:
   - English
   - "Espa\xF1ol"
   languagesCategories:
   - Main Menu
   - Room Scene
+  - LobbyScene
+  - Game Manager Scene
   idElements:
   - inUse: 1
     id: 0
@@ -216,3 +610,59 @@ MonoBehaviour:
     id: 11
   - inUse: 1
     id: 12
+  - inUse: 1
+    id: 13
+  - inUse: 1
+    id: 14
+  - inUse: 1
+    id: 15
+  - inUse: 1
+    id: 16
+  - inUse: 1
+    id: 17
+  - inUse: 1
+    id: 18
+  - inUse: 1
+    id: 19
+  - inUse: 1
+    id: 20
+  - inUse: 1
+    id: 21
+  - inUse: 1
+    id: 22
+  - inUse: 1
+    id: 23
+  - inUse: 1
+    id: 24
+  - inUse: 1
+    id: 25
+  - inUse: 1
+    id: 26
+  - inUse: 1
+    id: 27
+  - inUse: 1
+    id: 28
+  - inUse: 1
+    id: 29
+  - inUse: 1
+    id: 30
+  - inUse: 1
+    id: 31
+  - inUse: 1
+    id: 32
+  - inUse: 1
+    id: 33
+  - inUse: 1
+    id: 34
+  - inUse: 1
+    id: 35
+  - inUse: 1
+    id: 36
+  - inUse: 1
+    id: 37
+  - inUse: 1
+    id: 38
+  - inUse: 1
+    id: 39
+  - inUse: 1
+    id: 40

@@ -30,7 +30,8 @@ public class StartCountDownButton : MonoBehaviour
 	
 		int.TryParse(totalSecsToStartGame.text, out secs);
 
-        if((GamemasterManager.Instance.provZone == null || !GamemasterManager.Instance.provZone.activeSelf) || (secs > 60 || mins > 60) ||( mins == 0 && secs == 0)){
+        if((GamemasterManager.Instance.provZone == null || !GamemasterManager.Instance.provZone.activeSelf) || (secs > 60 || mins > 60) ||( mins == 0 && secs == 0))
+		{
             button.interactable = false;
         }
         else
@@ -40,7 +41,14 @@ public class StartCountDownButton : MonoBehaviour
 
 		if(GamemasterManager.Instance.provZone == null || !GamemasterManager.Instance.provZone.activeSelf)
 		{
-			zoneWarning.text = "Zone not confirmed";
+			if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+			{
+				zoneWarning.text = "There's no zone!";
+			}
+			else
+			{
+				zoneWarning.text = "¡No has puesto ninguna zona!";
+			}
 		}
 		else
 		{
@@ -52,8 +60,15 @@ public class StartCountDownButton : MonoBehaviour
 			timeWarning.text = "";
 		}
 		else
-		{			
-			timeWarning.text = "Time not Valid";
+		{
+			if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+			{
+				timeWarning.text = "Time not valid!";
+			}
+			else
+			{
+				timeWarning.text = "¡El tiempo no puede ser 0!";
+			}
 		}
 	}
 
@@ -62,7 +77,16 @@ public class StartCountDownButton : MonoBehaviour
         GamemasterManager.Instance.SendZoneToOtherPlayers();
 
         GameObject countDown = PhotonNetwork.Instantiate(startGameCountDownPrefab.name, Vector3.zero, Quaternion.identity);
-        countDown.GetComponent<StartGameCountDown>().Create(mins * 60 + secs, "Game starts in ", GameManager.Instance.StartGame);
+
+		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+		{
+			countDown.GetComponent<StartGameCountDown>().Create(mins * 60 + secs, "Game starts in ", GameManager.Instance.StartGame);
+		}
+		else
+		{
+			countDown.GetComponent<StartGameCountDown>().Create(mins * 60 + secs, "El juego empieza en ", GameManager.Instance.StartGame);
+		}
+		
         countDown.GetComponent<StartGameCountDown>().StartCoundDown();
 
         totalSecsToStartGame.text = "0";

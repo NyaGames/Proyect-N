@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TargetImage
   - LanguageControl
+  - Music
   layers:
   - Default
   - TransparentFX
