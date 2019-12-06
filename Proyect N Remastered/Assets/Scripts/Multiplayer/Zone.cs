@@ -121,7 +121,15 @@ public class Zone : MonoBehaviour
 	[PunRPC]
 	public void NewZoneReceived()
 	{
-		GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("A new zone was created!", 2, 5f));
+		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+		{
+			GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("A new zone was created!", 2, 5f));
+		}
+		else
+		{
+			GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("¡Se ha creado una nueva zona!", 2, 5f));
+		}
+		
 	}
 
    

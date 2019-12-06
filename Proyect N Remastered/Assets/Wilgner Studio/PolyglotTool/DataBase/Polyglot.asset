@@ -617,6 +617,132 @@ MonoBehaviour:
     categories:
       index: 3
       name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: player_lock_camera
+    translation: Change Camera
+    idUniqueElements: 44
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 1
+    nameID: player_lock_camera
+    translation: "Cambiar c\xE1mara"
+    idUniqueElements: 44
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 0
+    nameID: player_game_hasn't_started
+    translation: Game hasn't started yet
+    idUniqueElements: 45
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 1
+    nameID: player_game_hasn't_started
+    translation: "La partida no ha empezado todav\xEDa"
+    idUniqueElements: 45
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 0
+    nameID: player_back
+    translation: Back
+    idUniqueElements: 46
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 1
+    nameID: player_back
+    translation: "Atr\xE1s"
+    idUniqueElements: 46
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 0
+    nameID: player_change_camera
+    translation: Change Camera
+    idUniqueElements: 47
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 1
+    nameID: player_change_camera
+    translation: "Cambiar c\xE1mara"
+    idUniqueElements: 47
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 0
+    nameID: player_you_killed
+    translation: 'You snapped:'
+    idUniqueElements: 48
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 1
+    nameID: player_you_killed
+    translation: 'Has snappeado a:'
+    idUniqueElements: 48
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 0
+    nameID: player_do_you_want_to_send_snap
+    translation: Do you want to send this Snap?
+    idUniqueElements: 49
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 1
+    nameID: player_do_you_want_to_send_snap
+    translation: "\xBFQuieres enviar este snap?"
+    idUniqueElements: 49
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 0
+    nameID: player_return_to_main_menu
+    translation: Return to Main Menu
+    idUniqueElements: 50
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 1
+    nameID: player_return_to_main_menu
+    translation: "Volver al men\xFA principal"
+    idUniqueElements: 50
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 0
+    nameID: player_won
+    translation: You Won!!
+    idUniqueElements: 51
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 1
+    nameID: player_won
+    translation: "\xA1Has ganado!"
+    idUniqueElements: 51
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 0
+    nameID: player_who_is_in_this_photo
+    translation: Who is in this snap?
+    idUniqueElements: 52
+    categories:
+      index: 4
+      name: Player Game Scene
+  - indexLanguage: 1
+    nameID: player_who_is_in_this_photo
+    translation: "\xBFQuien aparece en este Snap?"
+    idUniqueElements: 52
+    categories:
+      index: 4
+      name: Player Game Scene
   languages:
   - English
   - "Espa\xF1ol"
@@ -625,6 +751,7 @@ MonoBehaviour:
   - Room Scene
   - LobbyScene
   - Game Manager Scene
+  - Player Game Scene
   idElements:
   - inUse: 1
     id: 0
@@ -714,3 +841,21 @@ MonoBehaviour:
     id: 42
   - inUse: 1
     id: 43
+  - inUse: 1
+    id: 44
+  - inUse: 1
+    id: 45
+  - inUse: 1
+    id: 46
+  - inUse: 1
+    id: 47
+  - inUse: 1
+    id: 48
+  - inUse: 1
+    id: 49
+  - inUse: 1
+    id: 50
+  - inUse: 1
+    id: 51
+  - inUse: 1
+    id: 52

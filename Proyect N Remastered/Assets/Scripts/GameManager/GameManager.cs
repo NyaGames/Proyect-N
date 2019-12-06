@@ -98,8 +98,17 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-        if (outOfZonePanel.activeSelf && myPlayer != null && !PhotonNetwork.LocalPlayer.IsMasterClient) {
-            outOfZonePanel.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "You have " + myPlayer.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone + " seconds to return to game area! Run now!";
+        if (outOfZonePanel.activeSelf && myPlayer != null && !PhotonNetwork.LocalPlayer.IsMasterClient)
+		{
+			if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+			{
+				outOfZonePanel.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "You have " + myPlayer.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone + " seconds to return to game area!";
+			}
+			else
+			{
+				outOfZonePanel.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "¡Tienes " + myPlayer.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone + " segundos para volver a la zona!";
+			}
+			
         }
 
 

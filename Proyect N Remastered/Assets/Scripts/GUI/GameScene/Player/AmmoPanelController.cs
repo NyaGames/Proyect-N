@@ -27,6 +27,14 @@ public class AmmoPanelController : MonoBehaviour
 			photoButton.interactable = true;
         }
 
-		ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString() + "\n snaps";
+		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+		{
+			ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString() + "reels";
+		}
+		else
+		{
+			ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString() + "carretes";
+		}
+		
 	}
 }

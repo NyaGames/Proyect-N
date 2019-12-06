@@ -22,14 +22,35 @@ public class KillConfirmation : MonoBehaviour
     public void SetPlayerKilled(string playerKilled,int numKills)
     {
         background.color = killConfirmedColor;
-        labelText.text = "You killed: ";
+
+		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+		{
+			labelText.text = "You Snapped: ";
+		}
+		else
+		{
+			labelText.text = "Has snapedo a: ";
+		}
+
+		
 		usernameKilled.text = playerKilled;//+ ". You have killed " + numKills + " people!";
     }
 
     public void SetPlayerNotKilled(string playerKilled, int numKills)
     {
         background.color = killDeniedColor;
-        labelText.text = "You haven't killed: ";
+
+
+		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+		{
+			labelText.text = "Snap denied: ";
+		}
+		else
+		{
+			labelText.text = "Snap denegado: ";
+		}
+
+		
         usernameKilled.text = playerKilled;
     }
 }

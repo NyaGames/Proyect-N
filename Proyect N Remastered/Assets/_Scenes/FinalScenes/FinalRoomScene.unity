@@ -9906,7 +9906,7 @@ MonoBehaviour:
   createRoomButton: {fileID: 1284026703}
   maxPlayers: {fileID: 35908259}
   usernameInput: {fileID: 0}
-  feedbackText: {fileID: 0}
+  feedbackText: {fileID: 750013773}
 --- !u!114 &1437401833
 MonoBehaviour:
   m_ObjectHideFlags: 0

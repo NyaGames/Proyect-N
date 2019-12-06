@@ -253,7 +253,14 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
     public void StartClosingZone()
     {   
         StartCoroutine(CloseActualZone());
-		GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("Zone is closing!", 1, 5f));
+		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+		{
+			GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("Zone is closing!", 1, 5f));
+		}
+		else
+		{
+			GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("¡La zona se está cerrando!", 2, 5f));
+		}		
 	}
 
     public IEnumerator CloseActualZone()
@@ -450,7 +457,15 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.CurrentRoom.PlayerCount <= 2 && !PhotonNetwork.LocalPlayer.IsMasterClient && !GameManager.Instance.winningPanel.activeSelf) //Si solo quedais tu y el gm, has ganado
         {
-            GameManager.Instance.winningPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "You have killed " + GameManager.Instance.myPlayer.GetComponent<KillsInfo>().currentKills;
+			if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+			{
+				GameManager.Instance.winningPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "You snapped " + GameManager.Instance.myPlayer.GetComponent<KillsInfo>().currentKills;
+			}
+			else
+			{
+				GameManager.Instance.winningPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Has snappeado a " + GameManager.Instance.myPlayer.GetComponent<KillsInfo>().currentKills;
+			}
+			
             GameManager.Instance.winningPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = PhotonNetwork.CurrentRoom.PlayerCount - 1  + "/" + GameManager.Instance.playerCountAtStart;
             GameManager.Instance.winningPanel.SetActive(true);
            

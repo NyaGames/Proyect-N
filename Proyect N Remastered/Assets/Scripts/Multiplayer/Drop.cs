@@ -148,7 +148,15 @@ public class Drop : MonoBehaviour
     [PunRPC]
     public void ReceiveDropNotification()
     {
-        GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("New Drops!", 3, 5f));
+		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+		{
+			GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("New Drops!", 3, 5f));
+		}
+		else
+		{
+			GameSceneGUIController.Instance.playerMessages.AddMessage(new PlayerMessage("¡Nuevos Drops!", 3, 5f));
+		}
+		
     }
 
 }
