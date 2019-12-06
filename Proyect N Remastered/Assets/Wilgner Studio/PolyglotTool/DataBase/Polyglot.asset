@@ -71,11 +71,124 @@ MonoBehaviour:
     categories:
       index: 0
       name: Main Menu
+  - indexLanguage: 0
+    nameID: mm_player
+    translation: Player
+    idUniqueElements: 5
+    categories:
+      index: 0
+      name: Main Menu
+  - indexLanguage: 1
+    nameID: mm_player
+    translation: Jugador
+    idUniqueElements: 5
+    categories:
+      index: 0
+      name: Main Menu
+  - indexLanguage: 0
+    nameID: rs_join
+    translation: Join Room
+    idUniqueElements: 6
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 1
+    nameID: rs_join
+    translation: Unirse a sala
+    idUniqueElements: 6
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 0
+    nameID: rs_create
+    translation: Create Room
+    idUniqueElements: 7
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 1
+    nameID: rs_create
+    translation: Crear una sala
+    idUniqueElements: 7
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 0
+    nameID: rs_room_name
+    translation: Room Name
+    idUniqueElements: 8
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 1
+    nameID: rs_room_name
+    translation: Nombre de la sala
+    idUniqueElements: 8
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 0
+    nameID: rs_player_count
+    translation: 'Player Count: 20'
+    idUniqueElements: 9
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 1
+    nameID: rs_player_count
+    translation: "N\xBA de jugadores: 20"
+    idUniqueElements: 9
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 0
+    nameID: rs_username
+    translation: Username
+    idUniqueElements: 10
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 1
+    nameID: rs_username
+    translation: Nombre de usuario
+    idUniqueElements: 10
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 0
+    nameID: rs_room_code
+    translation: Room Code
+    idUniqueElements: 11
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 1
+    nameID: rs_room_code
+    translation: "C\xF3digo de la sala"
+    idUniqueElements: 11
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 0
+    nameID: rs_random_username
+    translation: Random Username
+    idUniqueElements: 12
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 1
+    nameID: rs_random_username
+    translation: Translation here
+    idUniqueElements: 12
+    categories:
+      index: 1
+      name: Room Scene
   languages:
   - English
   - "Espa\xF1ol"
   languagesCategories:
   - Main Menu
+  - Room Scene
   idElements:
   - inUse: 1
     id: 0
@@ -87,3 +200,19 @@ MonoBehaviour:
     id: 3
   - inUse: 1
     id: 4
+  - inUse: 1
+    id: 5
+  - inUse: 1
+    id: 6
+  - inUse: 1
+    id: 7
+  - inUse: 1
+    id: 8
+  - inUse: 1
+    id: 9
+  - inUse: 1
+    id: 10
+  - inUse: 1
+    id: 11
+  - inUse: 1
+    id: 12
