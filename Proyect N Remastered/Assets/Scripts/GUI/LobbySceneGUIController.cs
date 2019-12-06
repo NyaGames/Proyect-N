@@ -30,7 +30,7 @@ public class LobbySceneGUIController : MonoBehaviour
 
     public void StartNewGame()
     {
-        PhotonNetwork.LoadLevel("GameScene");
+        PhotonNetwork.LoadLevel("FinalGameScene");
     }
 
 }
