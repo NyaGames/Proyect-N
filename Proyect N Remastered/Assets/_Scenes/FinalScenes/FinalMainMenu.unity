@@ -996,7 +996,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 45
+  m_fontSize: 19.55
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1082,7 +1082,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_credits
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1001 &239015030
@@ -2186,7 +2185,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_start
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!114 &541958231
@@ -2235,7 +2233,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40.45
+  m_fontSize: 20.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2463,7 +2461,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 72
+  m_fontSize: 15.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2985,7 +2983,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 26.8
+  m_fontSize: 12.95
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3071,7 +3069,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_credits
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &719590170
@@ -4392,7 +4389,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 32
+  m_fontSize: 10.1
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4478,7 +4475,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_player
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1173670591
@@ -4810,7 +4806,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 46.05
+  m_fontSize: 9.15
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4896,7 +4892,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_credits
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1322429977
@@ -5092,7 +5087,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 51.25
+  m_fontSize: 8.4
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5178,7 +5173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_profile
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1414447772
@@ -5265,7 +5259,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 115.35
+  m_fontSize: 21.25
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5351,7 +5345,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_gm
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1420734003
@@ -6561,7 +6554,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 72
+  m_fontSize: 37.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6647,7 +6640,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_start
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1683637813
@@ -9196,7 +9188,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 71.75
+  m_fontSize: 21.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
