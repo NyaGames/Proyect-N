@@ -118,8 +118,16 @@ public class MessageSender : MonoBehaviourPunCallbacks
     [PunRPC]
     public void ActivateCountdownText()
     {
-        GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
-        g.gameObject.SetActive(true);
+        if (!PersistentData.isGM)
+        {
+            GameObject g = GameManager.Instance.playerCountDown;
+            g.gameObject.SetActive(true);
+        }
+        else{
+            GameObject g = GameManager.Instance.gmCountdown;
+            g.gameObject.SetActive(true);
+        }
+      
 
     }
     [PunRPC]
@@ -147,8 +155,16 @@ public class MessageSender : MonoBehaviourPunCallbacks
     [PunRPC]
     public void DeactivateCountdownText()
     {
-        GameObject g = GameObject.FindGameObjectWithTag("CountDownText");
-        g.GetComponentInChildren<TextMeshProUGUI>().text = "";
+        if (!PersistentData.isGM)
+        {
+            GameObject g = GameManager.Instance.playerCountDown;
+            g.gameObject.SetActive(false);
+        }
+        else
+        {
+            GameObject g = GameManager.Instance.gmCountdown;
+            g.gameObject.SetActive(false);
+        }
     }
     #endregion
 

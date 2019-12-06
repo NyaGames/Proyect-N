@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     public GameObject outOfZonePanel;
 
     public GameObject winningPanel;
+
+    public GameObject playerCountDown;
+    public GameObject gmCountdown;
     [HideInInspector] public int playerCountAtStart;
 
 	private void Awake()
@@ -58,7 +61,6 @@ public class GameManager : MonoBehaviour
         if (!PersistentData.isGM)
         {
             playerPhotoButton.interactable = true;
-            playerCountDownText.text = "";
         }
         else
         {

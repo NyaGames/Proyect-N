@@ -76,7 +76,7 @@ public class StartGameCountDown : MonoBehaviour, IPunObservable
 
         if(secs < 0)
         {
-            countDownText.text = "Game started!";
+            GameManager.Instance.playerCountDown.SetActive(false);
         }
         else
         {

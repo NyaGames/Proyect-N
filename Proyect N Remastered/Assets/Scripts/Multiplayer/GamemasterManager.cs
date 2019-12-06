@@ -213,6 +213,11 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
 			}      
         }
 
+        foreach (GameObject g in playersViewsList)
+        {
+            g.GetComponent<PhotonView>().RPC("ActivateCountdownText", RpcTarget.All);
+        }
+
     }
 
     public void CreateNewPosZone()
