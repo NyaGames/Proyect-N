@@ -31,7 +31,16 @@ public class CloseZoneButton : MonoBehaviour
         {
             GamemasterManager.Instance.SendZoneToOtherPlayers();
             GameObject countDown = PhotonNetwork.Instantiate(countDownPrefab.name,Vector3.zero,Quaternion.identity);
-            countDown.GetComponent<CountDown>().Create(secsToStartClosing, "NEW ZONE! Closes in ", GameManager.Instance.CloseZone);
+
+			if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+			{
+				countDown.GetComponent<CountDown>().Create(secsToStartClosing, "NEW ZONE! Closes in ", GameManager.Instance.CloseZone);
+			}
+			else
+			{
+				countDown.GetComponent<CountDown>().Create(secsToStartClosing, "NUEVA ZONA! Cierra en ", GameManager.Instance.CloseZone);
+			}
+			
             countDown.GetComponent<CountDown>().StartCoundDown();
 
             totalSecsToStartClosing.text = "0";

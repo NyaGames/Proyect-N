@@ -36,7 +36,17 @@ public class ZoneManager : MonoBehaviour
 		{
 			isEditingZone = true;
 			zoneMod.SetActive(true);
-			GameSceneGUIController.Instance.gmHelp.SetMessage("Tap to create a zone");
+
+			if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+			{
+				GameSceneGUIController.Instance.gmHelp.SetMessage("Tap to create a zone");
+			}
+			else
+			{
+				GameSceneGUIController.Instance.gmHelp.SetMessage("Pulsa para crear una zona");
+			}
+
+			
 		}		
 	}
 
@@ -52,8 +62,16 @@ public class ZoneManager : MonoBehaviour
 		else
 		{
 			isEditingDrops = true;
-			zoneMod.SetActive(true);			
-			GameSceneGUIController.Instance.gmHelp.SetMessage("Tap to create a drop");
+			zoneMod.SetActive(true);
+
+			if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+			{
+				GameSceneGUIController.Instance.gmHelp.SetMessage("Tap to create a drop");
+			}
+			else
+			{
+				GameSceneGUIController.Instance.gmHelp.SetMessage("Pulsa para crear un drop");
+			}			
 		}
 	}
 }
