@@ -984,6 +984,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 97128384}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &97128386 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2439878430648178546, guid: 54ad7684ee3234448bea783771548a47,
+    type: 3}
+  m_PrefabInstance: {fileID: 97128384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &102168203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2524,7 +2530,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 15.65
+  m_fontSize: 18.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2570,7 +2576,7 @@ MonoBehaviour:
     spaceCount: 1
     wordCount: 2
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -3722,7 +3728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &373642726
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4178,7 +4184,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 11.65
+  m_fontSize: 13.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4224,7 +4230,7 @@ MonoBehaviour:
     spaceCount: 2
     wordCount: 2
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -5830,7 +5836,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 58.45
+  m_fontSize: 11.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6179,7 +6185,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 26.4
+  m_fontSize: 19.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6334,7 +6340,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 65.05
+  m_fontSize: 10.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6636,7 +6642,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 7.25
+  m_fontSize: 5.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7175,7 +7181,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 64.85
+  m_fontSize: 20.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7221,7 +7227,7 @@ MonoBehaviour:
     spaceCount: 3
     wordCount: 3
     linkCount: 0
-    lineCount: 2
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -7330,7 +7336,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 34.65
+  m_fontSize: 5.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7642,7 +7648,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 72
+  m_fontSize: 18.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7688,7 +7694,7 @@ MonoBehaviour:
     spaceCount: 2
     wordCount: 2
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -9060,7 +9066,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 16.25
+  m_fontSize: 19.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9106,7 +9112,7 @@ MonoBehaviour:
     spaceCount: 1
     wordCount: 2
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -9578,7 +9584,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 21.6
+  m_fontSize: 16.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10811,7 +10817,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 19.45
+  m_fontSize: 14.5
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -12009,10 +12015,10 @@ RectTransform:
   m_Father: {fileID: 1554217825}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 91.66666, y: -34.92926}
+  m_SizeDelta: {x: 34.266663, y: 69.85852}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1140597084
 MonoBehaviour:
@@ -12517,7 +12523,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c412f39696b4cf64bb7f8f0966cd2fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  labelText: {fileID: 1381953385}
   usernameKilled: {fileID: 397038280}
+  killConfirmedColor: {r: 0.2884653, g: 0.754717, b: 0.16731933, a: 1}
+  killDeniedColor: {r: 0.77254903, g: 0.2, b: 0.2, a: 1}
 --- !u!1 &1202211990
 GameObject:
   m_ObjectHideFlags: 0
@@ -12824,7 +12833,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 6.45
+  m_fontSize: 8.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13189,7 +13198,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 46.4
+  m_fontSize: 34.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13423,10 +13432,10 @@ MonoBehaviour:
   gmCountDownText: {fileID: 1517487559}
   playerCountDownText: {fileID: 1804050355}
   playerPhotoButton: {fileID: 875973675}
-  outOfZonePanel: {fileID: 0}
+  outOfZonePanel: {fileID: 97128386}
   winningPanel: {fileID: 1715614903}
-  playerCountDown: {fileID: 0}
-  gmCountdown: {fileID: 0}
+  playerCountDown: {fileID: 1815936448}
+  gmCountdown: {fileID: 876954914}
   playerCountAtStart: 0
 --- !u!4 &1250016668
 Transform:
@@ -13460,7 +13469,8 @@ MonoBehaviour:
     type: 3}
   dropPrefab: {fileID: 7291670006575766536, guid: 131d60eb84b431440ac933a227a29ca5,
     type: 3}
-  mobilePrefab: {fileID: 0}
+  mobilePrefab: {fileID: 714640910401667126, guid: c44a101c83a12524b827860869c7fe67,
+    type: 3}
   creatingDrop: 0
   staticZone: {fileID: 0}
   newZonePosition: {fileID: 0}
@@ -14697,7 +14707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1413504831
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15768,7 +15778,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 41.7
+  m_fontSize: 10.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15814,7 +15824,7 @@ MonoBehaviour:
     spaceCount: 3
     wordCount: 5
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -16338,7 +16348,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 16.45
+  m_fontSize: 12.4
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -16743,7 +16753,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 59.6
+  m_fontSize: 9.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -16968,7 +16978,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 35.65
+  m_fontSize: 26.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17280,7 +17290,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 72
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17326,7 +17336,7 @@ MonoBehaviour:
     spaceCount: 0
     wordCount: 1
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -17894,8 +17904,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1643417481}
-        m_MethodName: CancelDeath
+      - m_Target: {fileID: 1857199403}
+        m_MethodName: DontKillPlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17975,10 +17985,10 @@ RectTransform:
   m_Father: {fileID: 1554217825}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 17.133331, y: -34.92926}
+  m_SizeDelta: {x: 34.266663, y: 69.85852}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1715509320
 MonoBehaviour:
@@ -19637,7 +19647,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 35.25
+  m_fontSize: 24.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -20577,7 +20587,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 72
+  m_fontSize: 20
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -20684,10 +20694,10 @@ RectTransform:
   m_Father: {fileID: 1554217825}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 54.399994, y: -34.92926}
+  m_SizeDelta: {x: 34.266663, y: 69.85852}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1908333460
 MonoBehaviour:
@@ -20913,7 +20923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1938969188
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21840,7 +21850,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 8.15
+  m_fontSize: 6.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

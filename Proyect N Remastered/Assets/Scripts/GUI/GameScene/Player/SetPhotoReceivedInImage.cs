@@ -18,7 +18,7 @@ public class SetPhotoReceivedInImage : MonoBehaviour
 
     public void SetImage()
     {
-        killerName.text = "You have been killed by " + PersistentData.killer;
+        killerName.text += " " + PersistentData.killer;
         imageToBeShown.texture = PersistentData.killcam;
     }
 
