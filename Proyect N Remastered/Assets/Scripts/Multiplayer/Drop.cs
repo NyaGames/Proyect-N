@@ -68,7 +68,7 @@ public class Drop : MonoBehaviour
 				for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
 				{
 					GameObject player = GamemasterManager.Instance.playersViewsList[i];
-					if (Vector3.Distance(player.transform.position, transform.position) <= pickUpRange)
+					if (Vector3.Distance(player.transform.position, transform.position) <= pickUpRange && !player.GetPhotonView().Owner.IsMasterClient)
 					{
 						someoneInRange = true;
 					}
@@ -99,16 +99,16 @@ public class Drop : MonoBehaviour
         {
             Ray raycast = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
             RaycastHit raycastHit;
-            if (Physics.Raycast(raycast, out raycastHit))
-            {
-                Debug.Log("Something Hit");
+            if (Physics.Raycast(raycast, out raycastHit, Mathf.Infinity, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+            { 
+               
                 if (raycastHit.collider.gameObject == dropAnimation.model.gameObject)
                 {
                     if (!GameManager.Instance.myPlayer.GetPhotonView().Owner.IsMasterClient && dropAnimation.activated)
                     {
                         PickUpDrop();
                     }
-                    movingObject = true;
+                   // movingObject = true;
                     Debug.Log("Drop tapped");
                 }
 
