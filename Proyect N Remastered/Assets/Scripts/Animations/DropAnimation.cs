@@ -11,7 +11,8 @@ public class DropAnimation : MonoBehaviour
 {
 	public bool activated = false;
 
-	public Transform model;
+    public Transform pivot;
+    public Transform model;
     PhotonView photonView;
 
     Drop drop;
@@ -21,8 +22,8 @@ public class DropAnimation : MonoBehaviour
 
         drop = GetComponent<Drop>();
         photonView = GetComponent<PhotonView>();
-        
-		model = transform.GetChild(0).GetChild(0);		
+        pivot = transform.GetChild(0);
+        model = transform.GetChild(0).GetChild(0);		
 	}   
   
 	
@@ -35,8 +36,9 @@ public class DropAnimation : MonoBehaviour
 		Sequence seq = DOTween.Sequence();
 		seq.Append(model.DOLocalRotate(new Vector3(45f, 45f, 45f), 1f));
 		seq.Join(model.DOLocalMoveY(5f, 1f));
-		seq.AppendCallback(() => model.gameObject.GetComponent<FloatingRotator>().enabled = true);
-	}
+        //seq.AppendCallback(() => model.gameObject.GetComponent<FloatingRotator>().enabled = true);
+        seq.AppendCallback(() => pivot.gameObject.GetComponent<FloatingRotator>().enabled = true);
+    }
 
 	[Button]
 	public void DeactivateDrop()

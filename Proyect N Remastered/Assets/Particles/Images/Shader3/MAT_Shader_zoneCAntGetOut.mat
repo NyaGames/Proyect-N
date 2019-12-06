@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_Shader_zone
+  m_Name: MAT_Shader_zoneCAntGetOut
   m_Shader: {fileID: 4800000, guid: 4fcde08e96d162b478bc07ad2c760831, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 4
@@ -100,4 +100,4 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 0, g: 1, b: 0.034409046, a: 0}
+    - _TintColor: {r: 1, g: 0.07510985, b: 0, a: 0}

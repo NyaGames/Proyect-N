@@ -124,6 +124,7 @@ public class MessageSender : MonoBehaviourPunCallbacks
             }
         }
     }
+
     [PunRPC]
     public void ActivateCountdownText()
     {

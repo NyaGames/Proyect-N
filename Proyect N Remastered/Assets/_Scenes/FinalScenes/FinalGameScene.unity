@@ -13896,9 +13896,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52d901a4a84b7544b1106809b78efc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zonePrefab: {fileID: 4882047626752070807, guid: b882004d80974e34ab64c4cd801dfa08,
+  zonePrefab: {fileID: 5601681845449439339, guid: 9ff488d62bac9b34d9a15c69c2a5e6f1,
     type: 3}
-  zoneCantGetOutPrefab: {fileID: 2674037639062472761, guid: fd52cf957d6da7f448892de4ef21ea4d,
+  zoneCantGetOutPrefab: {fileID: 6265948169910221702, guid: 41624b09eace2d54ca73e6583a650133,
     type: 3}
   dropPrefab: {fileID: 7291670006575766536, guid: 131d60eb84b431440ac933a227a29ca5,
     type: 3}

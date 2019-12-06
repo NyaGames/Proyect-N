@@ -111,8 +111,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
     private void CreateProvZone(Touch touch)
     {
         float cameraDistanceToGround = getDistanceFromCameraToGround();
-        Vector3 touchInWorldCoord = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround));
-
+        Vector3 touchInWorldCoord = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraDistanceToGround - 0.5f));
 
         switch (touch.phase)
         {
