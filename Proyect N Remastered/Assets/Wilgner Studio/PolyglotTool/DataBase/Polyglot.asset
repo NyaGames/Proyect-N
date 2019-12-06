@@ -743,6 +743,49 @@ MonoBehaviour:
     categories:
       index: 4
       name: Player Game Scene
+  - indexLanguage: 0
+    nameID: death_you've_been_snapped_by
+    translation: 'you''ve been snapped by:'
+    idUniqueElements: 53
+    categories:
+      index: 5
+      name: Death Scenes
+  - indexLanguage: 1
+    nameID: death_you've_been_snapped_by
+    translation: 'Has sido Snapeado por:'
+    idUniqueElements: 53
+    categories:
+      index: 5
+      name: Death Scenes
+  - indexLanguage: 0
+    nameID: death_by_zone
+    translation: you've been out of the zone for too long!\nyou've been eliminated
+    idUniqueElements: 54
+    categories:
+      index: 5
+      name: Death Scenes
+  - indexLanguage: 1
+    nameID: death_by_zone
+    translation: "\xA1Has estado fuera de la zona demasiado tiempo!\\n\xA1Has sido
+      eliminado!"
+    idUniqueElements: 54
+    categories:
+      index: 5
+      name: Death Scenes
+  - indexLanguage: 0
+    nameID: death_by_gm
+    translation: you have been eliminated by gm
+    idUniqueElements: 55
+    categories:
+      index: 5
+      name: Death Scenes
+  - indexLanguage: 1
+    nameID: death_by_gm
+    translation: Has sido elminado por el GM
+    idUniqueElements: 55
+    categories:
+      index: 5
+      name: Death Scenes
   languages:
   - English
   - "Espa\xF1ol"
@@ -752,6 +795,7 @@ MonoBehaviour:
   - LobbyScene
   - Game Manager Scene
   - Player Game Scene
+  - Death Scenes
   idElements:
   - inUse: 1
     id: 0
@@ -859,3 +903,9 @@ MonoBehaviour:
     id: 51
   - inUse: 1
     id: 52
+  - inUse: 1
+    id: 53
+  - inUse: 1
+    id: 54
+  - inUse: 1
+    id: 55
