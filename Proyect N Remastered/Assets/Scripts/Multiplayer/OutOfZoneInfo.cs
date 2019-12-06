@@ -38,7 +38,7 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
                 currentSecsOutOfZone = receivedcurrentSecsOutOfZone;
             }
 
-           /* if (GameManager.Instance.gameStarted) //Si la partida ha empezado, miro si estoy dentro de la zona
+            if (GameManager.Instance.gameStarted) //Si la partida ha empezado, miro si estoy dentro de la zona
             {
                 if (!insideZone)
                 {
@@ -52,7 +52,7 @@ public class OutOfZoneInfo : MonoBehaviour,IPunObservable
                     outOfZoneActive = false;
                 }
 
-            }*/
+            }
         }
     }
 

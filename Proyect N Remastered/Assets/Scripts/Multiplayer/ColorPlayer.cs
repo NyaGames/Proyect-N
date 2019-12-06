@@ -9,12 +9,18 @@ public class ColorPlayer : MonoBehaviour
     public Color playerSurfaceColor;
     public Color playerJointsColor;
 
+    private Player playerInfo;
+    public void Awake()
+    {
+        playerInfo = GetComponentInParent<Player>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         SkinnedMeshRenderer[] skins = GetComponentsInChildren<SkinnedMeshRenderer>();
         
-        if (PersistentData.isGM)
+        if (playerInfo.isGameMaster)
         {
             skins[0].material.color = gmJointsColor;
             skins[1].material.color = gmSurfaceColor;
