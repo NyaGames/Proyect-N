@@ -68,18 +68,16 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
 	public override void OnCreatedRoom()
 	{
-		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
-		{
-			roomSceneGMGUIController.feedbackText.text = "Room created!";
-		}
-		else
-		{
-			roomSceneGMGUIController.feedbackText.text = "¡Sala creada!";
-		}
+        if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+        {
+            roomSceneGMGUIController.feedbackText.text = "Room created!";
+        }
+        else
+        {
+            roomSceneGMGUIController.feedbackText.text = "¡Sala creada!";
+        }
 
-
-
-		SceneManager.LoadScene("FinalLobbyScene");
+        SceneManager.LoadScene("FinalLobbyScene");
 	}
 
 	public void JoinRoom()
@@ -130,17 +128,34 @@ public class RoomManager : MonoBehaviourPunCallbacks
 				return;
 			}
 		}
+        //Tambien comrobamos que la partida no esté empezada
+        ExitGames.Client.Photon.Hashtable table = PhotonNetwork.CurrentRoom.CustomProperties;
+        if (!table.ContainsKey("GameStarted"))
+        {
+            if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+            {
+                roomScenePlayerGUIController.feedbackText.text = "You have joined Room: " + PhotonNetwork.CurrentRoom.Name;
+            }
+            else
+            {
+                roomScenePlayerGUIController.feedbackText.text = "Te has unido a la sala: " + PhotonNetwork.CurrentRoom.Name;
+            }
 
-		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
-		{
-			roomScenePlayerGUIController.feedbackText.text = "You have joined Room: " + PhotonNetwork.CurrentRoom.Name;
-		}
-		else
-		{
-			roomScenePlayerGUIController.feedbackText.text = "Te has unido a la sala: " + PhotonNetwork.CurrentRoom.Name;
-		}
-
-		SceneManager.LoadScene("FinalLobbyScene");
+            SceneManager.LoadScene("FinalLobbyScene");
+        }
+        else
+        {
+            if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
+            {
+                roomScenePlayerGUIController.feedbackText.text = "The game has already started, you cant join now";
+            }
+            else
+            {
+                roomScenePlayerGUIController.feedbackText.text = "La partida ya ha empezado, no puedes unirte";
+            }
+            PhotonNetwork.LeaveRoom();
+            return;
+        }
 
 	}
 

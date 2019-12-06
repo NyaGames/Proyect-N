@@ -30,6 +30,10 @@ public class LobbySceneGUIController : MonoBehaviour
 
     public void StartNewGame()
     {
+        ExitGames.Client.Photon.Hashtable table = new ExitGames.Client.Photon.Hashtable();
+        table.Add("GameStarted",true);
+        PhotonNetwork.CurrentRoom.SetCustomProperties(table);
+
         PhotonNetwork.LoadLevel("FinalGameScene");
     }
 
