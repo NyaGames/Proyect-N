@@ -76,7 +76,15 @@ public class StartGameCountDown : MonoBehaviour, IPunObservable
 
         if(secs < 0)
         {
-            GameManager.Instance.playerCountDown.SetActive(false);
+            //GameManager.Instance.playerCountDown.SetActive(false);
+            if (PersistentData.isGM)
+            {
+                GameManager.Instance.gmCountdown.SetActive(false);
+            }
+            else
+            {
+                GameManager.Instance.playerCountDown.SetActive(false);
+            }
         }
         else
         {
