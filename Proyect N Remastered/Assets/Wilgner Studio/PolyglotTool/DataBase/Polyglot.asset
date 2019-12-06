@@ -183,12 +183,55 @@ MonoBehaviour:
     categories:
       index: 1
       name: Room Scene
+  - indexLanguage: 0
+    nameID: ls_start
+    translation: Translation here
+    idUniqueElements: 13
+    categories:
+      index: 2
+      name: LobbyScene
+  - indexLanguage: 1
+    nameID: ls_start
+    translation: Jugar
+    idUniqueElements: 13
+    categories:
+      index: 2
+      name: LobbyScene
+  - indexLanguage: 0
+    nameID: ls_player_list
+    translation: Translation here
+    idUniqueElements: 14
+    categories:
+      index: 2
+      name: LobbyScene
+  - indexLanguage: 1
+    nameID: ls_player_list
+    translation: Lista de Jugadores
+    idUniqueElements: 14
+    categories:
+      index: 2
+      name: LobbyScene
+  - indexLanguage: 0
+    nameID: ls_room_name
+    translation: Translation here
+    idUniqueElements: 15
+    categories:
+      index: 2
+      name: LobbyScene
+  - indexLanguage: 1
+    nameID: ls_room_name
+    translation: Nombre de la sala
+    idUniqueElements: 15
+    categories:
+      index: 2
+      name: LobbyScene
   languages:
   - English
   - "Espa\xF1ol"
   languagesCategories:
   - Main Menu
   - Room Scene
+  - LobbyScene
   idElements:
   - inUse: 1
     id: 0
@@ -216,3 +259,9 @@ MonoBehaviour:
     id: 11
   - inUse: 1
     id: 12
+  - inUse: 1
+    id: 13
+  - inUse: 1
+    id: 14
+  - inUse: 1
+    id: 15
