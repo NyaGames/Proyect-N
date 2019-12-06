@@ -84,12 +84,12 @@ public class CameraWebPhoto : MonoBehaviour
 
        if(Application.platform == RuntimePlatform.Android)
        {
-            changeCameraButton.gameObject.SetActive(true);
+            changeCameraButton.interactable = true;
         }
         else
         {
-            changeCameraButton.gameObject.SetActive(false);
-        }
+			changeCameraButton.interactable = false;
+		}
             
         
        

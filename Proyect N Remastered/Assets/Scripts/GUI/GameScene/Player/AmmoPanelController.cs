@@ -27,6 +27,6 @@ public class AmmoPanelController : MonoBehaviour
 			photoButton.interactable = true;
         }
 
-		ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString();
+		ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString() + "\n snaps";
 	}
 }
