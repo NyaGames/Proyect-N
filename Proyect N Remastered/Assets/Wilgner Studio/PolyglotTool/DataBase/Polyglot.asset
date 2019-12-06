@@ -451,7 +451,7 @@ MonoBehaviour:
       name: Game Manager Scene
   - indexLanguage: 0
     nameID: gs_kill_player
-    translation: Remove Player
+    translation: Eliminate Player
     idUniqueElements: 32
     categories:
       index: 3
@@ -575,6 +575,48 @@ MonoBehaviour:
     categories:
       index: 0
       name: Main Menu
+  - indexLanguage: 0
+    nameID: gs_kill_label
+    translation: 'You are going to eliminate:'
+    idUniqueElements: 41
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_kill_label
+    translation: 'Vas a elminar a:'
+    idUniqueElements: 41
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_yes
+    translation: Yes
+    idUniqueElements: 42
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_yes
+    translation: Si
+    idUniqueElements: 42
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 0
+    nameID: gs_are_you_sure
+    translation: Are you sure?
+    idUniqueElements: 43
+    categories:
+      index: 3
+      name: Game Manager Scene
+  - indexLanguage: 1
+    nameID: gs_are_you_sure
+    translation: "\xBFEst\xE1s seguro?"
+    idUniqueElements: 43
+    categories:
+      index: 3
+      name: Game Manager Scene
   languages:
   - English
   - "Espa\xF1ol"
@@ -666,3 +708,9 @@ MonoBehaviour:
     id: 39
   - inUse: 1
     id: 40
+  - inUse: 1
+    id: 41
+  - inUse: 1
+    id: 42
+  - inUse: 1
+    id: 43

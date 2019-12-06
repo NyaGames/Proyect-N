@@ -11,7 +11,8 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
 {
     public static ConnectToPhoton Instance { get; private set; }
 
-    public TextMeshProUGUI feedbackText;
+    public TextMeshProUGUI gmFeedbackText;
+    public TextMeshProUGUI playerFeedbackText;
 
     private void Awake()
     {
@@ -31,11 +32,13 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
     {
 		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
 		{
-			feedbackText.text = "Trying to connect...";
+			gmFeedbackText.text = "Trying to connect...";
+			playerFeedbackText.text = "Trying to connect...";
 		}
 		else
 		{
-			feedbackText.text = "Intenando conectarse...";
+			gmFeedbackText.text = "Intenando conectarse...";
+			playerFeedbackText.text = "Intenando conectarse...";
 		}
 		
         if (!PhotonNetwork.IsConnected)
@@ -48,11 +51,11 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
             {
 				if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
 				{
-					feedbackText.text = "Connection to server failed, try again";
+					gmFeedbackText.text = "Connection to server failed, try again";
 				}
 				else
 				{
-					feedbackText.text = "Ha fallado la conexión, inténtalo otra vez";
+					gmFeedbackText.text = "Ha fallado la conexión, inténtalo otra vez";
 				}
 				
             }
@@ -66,7 +69,7 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        feedbackText.text = "You have been connected";
+        gmFeedbackText.text = "You have been connected";
         PhotonNetwork.JoinLobby(null);
         SceneManager.LoadScene("FinalRoomScene");
     }
