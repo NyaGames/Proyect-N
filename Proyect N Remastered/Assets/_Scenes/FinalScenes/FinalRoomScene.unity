@@ -522,6 +522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_room_code
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &64508768
@@ -694,6 +695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_create
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &112329479
@@ -960,6 +962,7 @@ GameObject:
   - component: {fileID: 339707683}
   - component: {fileID: 339707685}
   - component: {fileID: 339707684}
+  - component: {fileID: 339707686}
   m_Layer: 5
   m_Name: CreateRoomPanel
   m_TagString: Untagged
@@ -1028,6 +1031,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339707682}
   m_CullTransparentMesh: 0
+--- !u!114 &339707686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339707682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ae2c9bfb043fc42a0f883d119bc5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &405843961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,6 +1560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_player_count
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &583985196
@@ -1717,6 +1733,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_join
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &593682476
@@ -1732,6 +1749,7 @@ GameObject:
   - component: {fileID: 593682478}
   - component: {fileID: 593682477}
   - component: {fileID: 593682481}
+  - component: {fileID: 593682482}
   m_Layer: 5
   m_Name: PlayerPanel
   m_TagString: Untagged
@@ -1836,6 +1854,18 @@ MonoBehaviour:
   loginRoomButton: {fileID: 1050575751}
   usernameInput: {fileID: 1425973352}
   feedbackText: {fileID: 543578808}
+--- !u!114 &593682482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593682476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ae2c9bfb043fc42a0f883d119bc5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &615151446
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,7 +2075,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &659698708
 MonoBehaviour:
@@ -2502,7 +2532,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 5.7
+  m_fontSize: 57.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2519,7 +2549,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 5
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -2588,6 +2618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_join
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &878246337
@@ -2898,6 +2929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_username
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &929001432
@@ -3070,6 +3102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: 
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &950275840
@@ -8046,53 +8079,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_random_username
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
---- !u!1 &1034928554
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1034928556}
-  - component: {fileID: 1034928555}
-  m_Layer: 0
-  m_Name: LobbyManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1034928555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034928554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 782eebfdd31dd44478277a5e8fd6a53a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerLobby: {fileID: 0}
-  gmLobby: {fileID: 0}
---- !u!4 &1034928556
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034928554}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 90}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1050575749
 GameObject:
   m_ObjectHideFlags: 0
@@ -8457,7 +8446,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 9.55
+  m_fontSize: 46.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8543,6 +8532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_create
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1142069803
@@ -8784,6 +8774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_room_code
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1001 &1220007516
@@ -9819,6 +9810,7 @@ GameObject:
   - component: {fileID: 1437401834}
   - component: {fileID: 1437401833}
   - component: {fileID: 1437401832}
+  - component: {fileID: 1437401837}
   m_Layer: 5
   m_Name: GMPanel
   m_TagString: Untagged
@@ -9924,6 +9916,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1437401837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437401831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ae2c9bfb043fc42a0f883d119bc5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1443648352
 GameObject:
   m_ObjectHideFlags: 0
@@ -10074,6 +10078,7 @@ GameObject:
   - component: {fileID: 1471184180}
   - component: {fileID: 1471184182}
   - component: {fileID: 1471184181}
+  - component: {fileID: 1471184183}
   m_Layer: 5
   m_Name: JoinPanel
   m_TagString: Untagged
@@ -10143,6 +10148,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471184179}
   m_CullTransparentMesh: 0
+--- !u!114 &1471184183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471184179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ae2c9bfb043fc42a0f883d119bc5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1486803065
 GameObject:
   m_ObjectHideFlags: 0
@@ -11068,6 +11085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_create
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1568699889
@@ -16467,6 +16485,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: UpdateTextTranslation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!222 &1708087813
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16850,6 +16879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_room_name
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1807597617
@@ -17020,8 +17050,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f16b0ef7e682fb4a83f8f9e41fbe01b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameId: 
+  nameId: rs_join
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1809138411
@@ -17437,6 +17468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_room_name
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1980666421
@@ -17607,8 +17639,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f16b0ef7e682fb4a83f8f9e41fbe01b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameId: 
+  nameId: rs_username
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1995996279
