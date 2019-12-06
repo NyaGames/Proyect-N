@@ -3900,6 +3900,7 @@ GameObject:
   - component: {fileID: 373642726}
   - component: {fileID: 373642728}
   - component: {fileID: 373642727}
+  - component: {fileID: 373642729}
   m_Layer: 5
   m_Name: PlayerPanel
   m_TagString: Untagged
@@ -3950,6 +3951,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 373642725}
   m_CullTransparentMesh: 0
+--- !u!114 &373642729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373642725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ae2c9bfb043fc42a0f883d119bc5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &381784281
 GameObject:
   m_ObjectHideFlags: 0
@@ -11375,7 +11388,7 @@ RectTransform:
   m_Children:
   - {fileID: 1035295879}
   m_Father: {fileID: 1196780682}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39346406, y: 0.93683827}
   m_AnchorMax: {x: 0.60980403, y: 1}
@@ -12363,6 +12376,7 @@ GameObject:
   - component: {fileID: 1109179210}
   - component: {fileID: 1109179212}
   - component: {fileID: 1109179211}
+  - component: {fileID: 1109179213}
   m_Layer: 5
   m_Name: Photo Confirmation Panel
   m_TagString: Untagged
@@ -12386,7 +12400,7 @@ RectTransform:
   - {fileID: 872371524}
   - {fileID: 1767946672}
   m_Father: {fileID: 1196780682}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.164}
   m_AnchorMax: {x: 1, y: 0.90200007}
@@ -12428,6 +12442,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109179209}
   m_CullTransparentMesh: 0
+--- !u!114 &1109179213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109179209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ae2c9bfb043fc42a0f883d119bc5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1126965349
 GameObject:
   m_ObjectHideFlags: 0
@@ -12823,6 +12849,7 @@ GameObject:
   - component: {fileID: 1196780684}
   - component: {fileID: 1196780685}
   - component: {fileID: 1196780686}
+  - component: {fileID: 1196780683}
   m_Layer: 5
   m_Name: PhotoPanel
   m_TagString: Untagged
@@ -12847,9 +12874,9 @@ RectTransform:
   - {fileID: 440209948}
   - {fileID: 1403174252}
   - {fileID: 1940471034}
+  - {fileID: 1001832384}
   - {fileID: 1109179210}
   - {fileID: 1944420772}
-  - {fileID: 1001832384}
   m_Father: {fileID: 373642726}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12858,6 +12885,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1196780683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196780681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ae2c9bfb043fc42a0f883d119bc5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &1196780684
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12985,6 +13024,7 @@ GameObject:
   - component: {fileID: 1201720977}
   - component: {fileID: 1201720976}
   - component: {fileID: 1201720978}
+  - component: {fileID: 1201720979}
   m_Layer: 5
   m_Name: Kill Confirmation Panel
   m_TagString: Untagged
@@ -13065,6 +13105,18 @@ MonoBehaviour:
   usernameKilled: {fileID: 397038280}
   killConfirmedColor: {r: 0.2884653, g: 0.754717, b: 0.16731933, a: 1}
   killDeniedColor: {r: 0.77254903, g: 0.2, b: 0.2, a: 1}
+--- !u!114 &1201720979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201720974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ae2c9bfb043fc42a0f883d119bc5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1202211990
 GameObject:
   m_ObjectHideFlags: 0
@@ -18663,6 +18715,7 @@ GameObject:
   - component: {fileID: 1715614904}
   - component: {fileID: 1715614906}
   - component: {fileID: 1715614905}
+  - component: {fileID: 1715614907}
   m_Layer: 5
   m_Name: Wining Panel
   m_TagString: Untagged
@@ -18728,6 +18781,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715614903}
   m_CullTransparentMesh: 0
+--- !u!114 &1715614907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715614903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ae2c9bfb043fc42a0f883d119bc5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1723391621
 GameObject:
   m_ObjectHideFlags: 0
@@ -21906,6 +21971,7 @@ GameObject:
   - component: {fileID: 1944420774}
   - component: {fileID: 1944420773}
   - component: {fileID: 1944420775}
+  - component: {fileID: 1944420776}
   m_Layer: 5
   m_Name: Users Panel
   m_TagString: Untagged
@@ -21929,7 +21995,7 @@ RectTransform:
   - {fileID: 807986629}
   - {fileID: 174945805}
   m_Father: {fileID: 1196780682}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.708}
@@ -21987,6 +22053,18 @@ MonoBehaviour:
   userButtonPrefab: {fileID: 915229798158182973, guid: 4bc175ce11cfa5c499458fcc35e71ecd,
     type: 3}
   buttonsRect: {fileID: 1207583120}
+--- !u!114 &1944420776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944420771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ae2c9bfb043fc42a0f883d119bc5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1946017429
 GameObject:
   m_ObjectHideFlags: 0
