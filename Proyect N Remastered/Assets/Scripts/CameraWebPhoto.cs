@@ -78,7 +78,7 @@ public class CameraWebPhoto : MonoBehaviour
         {
             scopeSize = scopeSize / 2;
         }
-        scope.rectTransform.sizeDelta = new Vector2(scopeSize, scopeSize);
+        //scope.rectTransform.sizeDelta = new Vector2(scopeSize, scopeSize);
         camAvailable = true;
 
 
