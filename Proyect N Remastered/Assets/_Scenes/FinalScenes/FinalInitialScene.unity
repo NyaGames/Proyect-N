@@ -650,8 +650,23 @@ PrefabInstance:
       propertyPath: _options.tileMaterial
       value: 
       objectReference: {fileID: 331800210}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3433358730333391309, guid: 385309557752f094aa5d5c057d691a87, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 385309557752f094aa5d5c057d691a87, type: 3}
+--- !u!1 &1226202675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3433358730333391310, guid: 385309557752f094aa5d5c057d691a87,
+    type: 3}
+  m_PrefabInstance: {fileID: 1226202674}
+  m_PrefabAsset: {fileID: 0}
+--- !u!81 &1226202676
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226202675}
+  m_Enabled: 1
 --- !u!1 &1280897110
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,6 +980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_start
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1733310483
