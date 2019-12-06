@@ -16,6 +16,7 @@ public class ShowPlayerInfo : MonoBehaviour
 
     //Photon.Realtime.Player player;
     GameObject playerGO;
+	string usernameString;
 
 	public void ShowUserInfo(int actorNumber)
 	{
@@ -29,8 +30,10 @@ public class ShowPlayerInfo : MonoBehaviour
 			{
 				playerGO = GamemasterManager.Instance.playersViewsList[i];
 				username.text = playerGO.GetPhotonView().Owner.NickName;
+				usernameString = username.text;
 
-                ammo.text = playerGO.GetComponent<AmmoInfo>().currentAmmo.ToString();
+
+				ammo.text = playerGO.GetComponent<AmmoInfo>().currentAmmo.ToString();
                 ozt.text = playerGO.GetComponent<OutOfZoneInfo>().currentSecsOutOfZone.ToString();
                 playersKilled.text = playerGO.GetComponent<KillsInfo>().currentKills.ToString();
 
@@ -44,7 +47,7 @@ public class ShowPlayerInfo : MonoBehaviour
 
 	public void AskForKillConfirmation()
 	{
-		killConfirmationPanel.AskForConfirmation(playerGO);
+		killConfirmationPanel.AskForConfirmation(playerGO, usernameString);
 	}
 
 	private void OnDisable()
