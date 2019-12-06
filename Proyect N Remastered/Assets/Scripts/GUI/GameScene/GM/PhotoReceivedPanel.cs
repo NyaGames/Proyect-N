@@ -28,5 +28,12 @@ public class PhotoReceivedPanel : MonoBehaviour
 		byte[] bytes = tex.GetRawTextureData();
 		PhotosNotificationsManager.Instance.ConfirmDeath(snapper, snapped, bytes);
 	}
+
+    public void DontKillPlayer()
+    {
+        Texture2D tex = snap.texture as Texture2D;
+        byte[] bytes = tex.GetRawTextureData();
+        PhotosNotificationsManager.Instance.CancelDeath(snapper, snapped, bytes);
+    }
 	
 }
