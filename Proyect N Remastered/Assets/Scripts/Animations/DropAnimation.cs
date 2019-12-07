@@ -10,8 +10,7 @@ using TMPro;
 public class DropAnimation : MonoBehaviour
 {
 	public bool activated = false;
-
-    public Transform pivot;
+    
     public Transform model;
     PhotonView photonView;
 
@@ -22,8 +21,7 @@ public class DropAnimation : MonoBehaviour
 
         drop = GetComponent<Drop>();
         photonView = GetComponent<PhotonView>();
-        pivot = transform.GetChild(0);
-        model = transform.GetChild(0).GetChild(0);		
+        model = transform.GetChild(0);		
 	}   
   
 	
@@ -37,7 +35,7 @@ public class DropAnimation : MonoBehaviour
 		seq.Append(model.DOLocalRotate(new Vector3(45f, 45f, 45f), 1f));
 		seq.Join(model.DOLocalMoveY(5f, 1f));
         //seq.AppendCallback(() => model.gameObject.GetComponent<FloatingRotator>().enabled = true);
-        seq.AppendCallback(() => pivot.gameObject.GetComponentInChildren<FloatingRotator>().enabled = true);
+        seq.AppendCallback(() => gameObject.GetComponentInChildren<FloatingRotator>().enabled = true);
     }
 
 	[Button]
@@ -48,7 +46,7 @@ public class DropAnimation : MonoBehaviour
         activated = false;
 
 		Sequence seq = DOTween.Sequence();
-		seq.AppendCallback(() => model.gameObject.GetComponentInChildren<FloatingRotator>().enabled = false);
+		seq.AppendCallback(() => gameObject.GetComponentInChildren<FloatingRotator>().enabled = false);
 		seq.Append(model.DOLocalRotate(new Vector3(0, 0, 0), 1f));
 		seq.Join(model.DOLocalMoveY(0f, 1f));
 
