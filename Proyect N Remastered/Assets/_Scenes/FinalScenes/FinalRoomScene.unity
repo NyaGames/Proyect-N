@@ -3327,6 +3327,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomSceneGMGUIController: {fileID: 1437401832}
   roomScenePlayerGUIController: {fileID: 593682481}
+  gmRoomCode: {fileID: 33312025}
+  playerRoomCode: {fileID: 1059494760}
+  playerJoinButton: {fileID: 1050575751}
+  gmCreateButton: {fileID: 112329481}
 --- !u!4 &659698707
 Transform:
   m_ObjectHideFlags: 0
