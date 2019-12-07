@@ -68,7 +68,15 @@ public class LockedCameraMovement : CameraMovement
 		{
 			if (Mathf.Abs(touchDeltaPosition.x) > Mathf.Abs(touchDeltaPosition.y))
 			{
-				delta = touchDeltaPosition.x * rotationSpeed;
+                if(Application.platform == RuntimePlatform.WebGLPlayer)
+                {
+                    delta = touchDeltaPosition.x * -rotationSpeed;
+                }
+                else
+                {
+                    delta = touchDeltaPosition.x * rotationSpeed;
+                }
+			
 
 				if (touch.position.y / Screen.height > 0.5f)
 				{
@@ -82,9 +90,17 @@ public class LockedCameraMovement : CameraMovement
 			}
 			else
 			{
-				delta = touchDeltaPosition.y * rotationSpeed;
 
-				if (touch.position.x / Screen.width > 0.5f)
+                if (Application.platform == RuntimePlatform.WebGLPlayer)
+                {
+                    delta = touchDeltaPosition.y * -rotationSpeed;
+                }
+                else
+                {
+                    delta = touchDeltaPosition.y * rotationSpeed;
+                }
+
+                if (touch.position.x / Screen.width > 0.5f)
 				{
 					transform.Rotate(Vector3.up, delta);
 				}
@@ -108,7 +124,17 @@ public class LockedCameraMovement : CameraMovement
 		float prevMagnitude = (firstTouchPrevPos - secondTouchPrevPos).magnitude;
 		float currentMagnitude = (firstTouch.position - secondTouch.position).magnitude;
 
-		float delta = -(currentMagnitude - prevMagnitude) * zoomSpeed;
+        float delta = 0; 
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+           delta = (currentMagnitude - prevMagnitude) * zoomSpeed;
+        }
+        else
+        {
+            delta = -(currentMagnitude - prevMagnitude) * zoomSpeed;
+        }
+
+           
 
 		zoom = Mathf.Clamp01(zoom + delta);
 

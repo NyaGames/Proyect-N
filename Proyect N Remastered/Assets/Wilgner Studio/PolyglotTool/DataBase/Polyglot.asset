@@ -759,15 +759,14 @@ MonoBehaviour:
       name: Death Scenes
   - indexLanguage: 0
     nameID: death_by_zone
-    translation: you've been out of the zone for too long!\nyou've been eliminated
+    translation: you've been out of the zone for too long! you've been eliminated
     idUniqueElements: 54
     categories:
       index: 5
       name: Death Scenes
   - indexLanguage: 1
     nameID: death_by_zone
-    translation: "\xA1Has estado fuera de la zona demasiado tiempo!\\n\xA1Has sido
-      eliminado!"
+    translation: "\xA1Has estado fuera de la zona demasiado tiempo!\xA1 Has sido eliminado!"
     idUniqueElements: 54
     categories:
       index: 5
