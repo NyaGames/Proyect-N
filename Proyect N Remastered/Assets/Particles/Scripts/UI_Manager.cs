@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Photon.Pun;
 
 [RequireComponent(typeof(Button))]
 public class UI_Manager : MonoBehaviour
@@ -54,7 +55,11 @@ public class UI_Manager : MonoBehaviour
     }
 
     public void StartGame()
-    {   
+    {
+        ExitGames.Client.Photon.Hashtable table = new ExitGames.Client.Photon.Hashtable();
+        table.Add("GameStarted", true);
+        PhotonNetwork.CurrentRoom.SetCustomProperties(table);
+
         anim = gameObject.GetComponent<Animator>();
         Halo.Destroy();
         Points.Destroy();
