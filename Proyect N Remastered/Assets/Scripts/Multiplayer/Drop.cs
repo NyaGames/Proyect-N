@@ -65,17 +65,11 @@ public class Drop : MonoBehaviour
 			if (dropAnimation.activated)
 			{
 				bool someoneInRange = false;
-                GameObject[] list = GameObject.FindGameObjectsWithTag("Player"); 
-                for (int i = 0; i < list.Length; i++)
+              
+                for (int i = 0; i < GamemasterManager.Instance.playersViewsList.Length; i++)
 				{
-                    GameObject player = list[i];
+                    GameObject player = GamemasterManager.Instance.playersViewsList[i];
 
-                    if (!player.GetPhotonView().Owner.IsMasterClient)
-                    {
-                        GameManager.Instance.gmCountdown.SetActive(true);
-                        GameManager.Instance.gmCountdown.GetComponentInChildren<TextMeshProUGUI>().text = "Drop: " + transform.position + " / Player LP: " + player.transform.localPosition + " y Player WP: " + player.transform.position;
-
-                    }
                     if (Vector3.Distance(player.transform.position, transform.position) <= pickUpRange && !player.GetPhotonView().Owner.IsMasterClient)
 					{
 						someoneInRange = true;
@@ -90,9 +84,6 @@ public class Drop : MonoBehaviour
 		}
 		else
 		{
-            GameManager.Instance.playerCountDown.SetActive(true);
-            GameManager.Instance.playerCountDown.GetComponentInChildren<TextMeshProUGUI>().text = "Activado: "+ dropAnimation.activated + "Distance to drop: " + Vector3.Distance(transform.position, player.transform.position);
-
             //Player
             if (!dropAnimation.activated)
 			{
