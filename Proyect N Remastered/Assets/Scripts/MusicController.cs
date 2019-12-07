@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class MusicController : MonoBehaviour
 {
-    public AudioSource musicBackground;
+    private AudioSource musicBackground;
+    private AudioSource mainMenuTheme;
     public AudioSource lobbyTheme;
+    public AudioSource gameTheme;
+    public AudioSource victoryTheme;
+    public AudioSource defeatTheme;
+
     private void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
@@ -27,6 +32,44 @@ public class MusicController : MonoBehaviour
         if (musicBackground.isPlaying) {
             musicBackground.Stop();
             musicBackground = lobbyTheme;
+            musicBackground.Play();
+        }
+    }
+
+    public void GameStart() {
+        if (musicBackground.isPlaying)
+        {
+            musicBackground.Stop();
+            musicBackground = gameTheme;
+            musicBackground.Play();
+        }
+    }
+
+    public void Victory() {
+        if (musicBackground.isPlaying)
+        {
+            musicBackground.Stop();
+            musicBackground = victoryTheme;
+            musicBackground.Play();
+        }
+    }
+
+    public void Defeat()
+    {
+        if (musicBackground.isPlaying)
+        {
+            musicBackground.Stop();
+            musicBackground = defeatTheme;
+            musicBackground.Play();
+        }
+    }
+
+    public void returnToMainMenu()
+    {
+        if (musicBackground.isPlaying)
+        {
+            musicBackground.Stop();
+            musicBackground = mainMenuTheme;
             musicBackground.Play();
         }
     }

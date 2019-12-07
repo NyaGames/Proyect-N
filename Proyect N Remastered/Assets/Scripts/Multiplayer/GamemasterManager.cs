@@ -468,7 +468,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
 			
             GameManager.Instance.winningPanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = PhotonNetwork.CurrentRoom.PlayerCount - 1  + "/" + GameManager.Instance.playerCountAtStart;
             GameManager.Instance.winningPanel.SetActive(true);
-           
+            GameManager.Instance.musicController.Victory();            
         }
 
     }
