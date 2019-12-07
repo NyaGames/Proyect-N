@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -579,6 +579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_time_closing
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &78902998
@@ -1417,6 +1418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_back
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &112433624
@@ -1735,6 +1737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_who_is_in_this_photo
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &178559401
@@ -2688,7 +2691,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 27.6
+  m_fontSize: 70.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3107,6 +3110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_start_countdown
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &284047403
@@ -3767,6 +3771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_zone_edition
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &350184561
@@ -3942,7 +3947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &373642726
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4407,7 +4412,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 20.5
+  m_fontSize: 52.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4493,6 +4498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_game_start
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &397038278
@@ -6042,6 +6048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_players_killed
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &490966403
@@ -6216,7 +6223,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14.8
+  m_fontSize: 38.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6302,6 +6309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_edition
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &538494105
@@ -6757,7 +6765,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 15.05
+  m_fontSize: 39.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6843,6 +6851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_players
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &575244622
@@ -7007,6 +7016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_drops_edition
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &575869945
@@ -7093,7 +7103,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 10.55
+  m_fontSize: 27.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7179,6 +7189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_start_countdown
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &580492077
@@ -7824,7 +7835,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 13.5
+  m_fontSize: 34.65
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7910,6 +7921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_center_camera
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &681293980
@@ -8082,6 +8094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_back
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &683882882
@@ -8391,6 +8404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: ls_start
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!114 &700319447
@@ -8439,7 +8453,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 29.7
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8681,6 +8695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_won
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &737717802
@@ -9445,6 +9460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_kill_label
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &807802098
@@ -9818,7 +9834,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 28.6
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10336,7 +10352,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 38
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11204,7 +11220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &902224705
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11217,6 +11233,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1825906567}
+  - {fileID: 1192831444}
   m_Father: {fileID: 546428590}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11560,6 +11577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_yes
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!21 &940834964
@@ -11724,7 +11742,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 22.05
+  m_fontSize: 58.85
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11810,6 +11828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_change_camera
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &986520445
@@ -12405,6 +12424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_time_until_start_closing
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1064447030
@@ -12780,6 +12800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_ammo
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1096488154
@@ -13177,10 +13198,10 @@ RectTransform:
   m_Father: {fileID: 1554217825}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 306.99997, y: -117.86322}
-  m_SizeDelta: {x: 120.39999, y: 235.72644}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1140597084
 MonoBehaviour:
@@ -13450,8 +13471,164 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_kill_player
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
+--- !u!1001 &1192831443
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 902224705}
+    m_Modifications:
+    - target: {fileID: 5662541441945094583, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerSettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -66.298096
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 132.59613
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539770618596381839, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539770618596381839, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539770618596381839, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039203018968880870, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039203018968880870, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710563811114137207, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9531450e24c2f224882d2792b4c2b398, type: 3}
+--- !u!224 &1192831444 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
+    type: 3}
+  m_PrefabInstance: {fileID: 1192831443}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1196780681
 GameObject:
   m_ObjectHideFlags: 0
@@ -13902,6 +14079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_return_to_main_menu
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1207583119
@@ -14056,7 +14234,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 10.1
+  m_fontSize: 26.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -14142,6 +14320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: 
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1228547004
@@ -14437,7 +14616,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 29.05
+  m_fontSize: 71.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15275,6 +15454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_you_killed
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1385287997
@@ -16041,7 +16221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1413504831
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17019,6 +17199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_out_of_zone_time
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1491104305
@@ -17136,7 +17317,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 15.2
+  m_fontSize: 39.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17222,6 +17403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_game_not_started
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1525539820
@@ -17645,7 +17827,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 29
+  m_fontSize: 72
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17975,7 +18157,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 13.5
+  m_fontSize: 35.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -18061,6 +18243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_settings
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1584899978
@@ -18218,7 +18401,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30.65
+  m_fontSize: 78.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -18462,6 +18645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_send_drops
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1605738360
@@ -18634,6 +18818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_snap
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1610928304
@@ -19304,10 +19489,10 @@ RectTransform:
   m_Father: {fileID: 1554217825}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 60.199993, y: -117.86322}
-  m_SizeDelta: {x: 120.39999, y: 235.72644}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1715509320
 MonoBehaviour:
@@ -19738,6 +19923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_yes
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1729872637
@@ -20215,6 +20401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_change_camera
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1755945919
@@ -20565,6 +20752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_do_you_want_to_send_snap
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1774785970
@@ -20967,7 +21155,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 15.85
+  m_fontSize: 54
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21053,6 +21241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_game_hasn't_started
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1808678918
@@ -21453,6 +21642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_drops
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1825906566
@@ -21473,7 +21663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1825906567
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21625,6 +21815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_settings
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1833744769
@@ -22217,6 +22408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_deny
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1908333458
@@ -22254,10 +22446,10 @@ RectTransform:
   m_Father: {fileID: 1554217825}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 183.59998, y: -117.86322}
-  m_SizeDelta: {x: 120.39999, y: 235.72644}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1908333460
 MonoBehaviour:
@@ -22484,7 +22676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1938969188
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22933,6 +23125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_are_you_sure
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1953332528
@@ -23480,7 +23673,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14.4
+  m_fontSize: 36.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -23566,6 +23759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_countdown
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &2055349825
@@ -24050,5 +24244,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_players
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
