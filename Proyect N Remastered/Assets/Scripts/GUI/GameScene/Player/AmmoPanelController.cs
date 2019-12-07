@@ -29,11 +29,11 @@ public class AmmoPanelController : MonoBehaviour
 
 		if (FindObjectOfType<LanguageControl>().GetSelectedLanguage() == 0)
 		{
-			ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString() + "\nReels";
+			ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString() + "\nSnaps";
 		}
 		else
 		{
-			ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString() + "\nCarretes";
+			ammoText.text = myPlayerAmmoinfo.currentAmmo.ToString() + "\nSnaps";
 		}
 		
 	}
