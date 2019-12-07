@@ -13,10 +13,15 @@ public class MainMenuScriptUIController : MonoBehaviour
 
     private void Awake()
     {
-        if (!PersistentData.account.isGameMaster)
+        /*if (!PersistentData.account.isGameMaster)
         {
             gmButton.interactable = false;
-        }
+        }*/
+
+		if(Application.platform == RuntimePlatform.WebGLPlayer)
+		{
+			gmButton.interactable = false;
+		}
 
         ChangeGMText();
     }
