@@ -54,19 +54,19 @@ public class UI_Manager : MonoBehaviour
     }
 
     public void StartGame()
-    {
-     
-     anim = gameObject.GetComponent<Animator>();
+    {   
+        anim = gameObject.GetComponent<Animator>();
         Halo.Destroy();
         Points.Destroy();
         StartCoroutine(LoadScene());
        
     }
+
     IEnumerator LoadScene()
     {
         anim.SetTrigger("StartGame");
         yield return new WaitForSeconds(2.0f);
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("FinalGameScene");
     }
 
 }
