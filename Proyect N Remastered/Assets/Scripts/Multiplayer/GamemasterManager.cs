@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GamemasterManager : MonoBehaviourPunCallbacks
@@ -443,8 +444,6 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
-           
-
             foreach (GameObject g in playersViewsList)
             {
                 g.GetComponent<PhotonView>().RPC("OnKillReceived", RpcTarget.All, otherPlayer.NickName);
@@ -473,6 +472,22 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
             GameManager.Instance.musicController.Victory();            
         }
 
+        //Si solo quedas tu, te vas al menu principal
+        if(PhotonNetwork.CurrentRoom.PlayerCount <= 1)
+        {
+            PhotonNetwork.LeaveRoom();
+            SceneManager.LoadScene("FinalMainMenu");
+        }
+
     }
+
+    //Su el gamemaster se va, todos los jugadores abandoanan la sala
+    public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+    {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("FinalMainMenu"); 
+    }
+
+
 
 }

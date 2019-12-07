@@ -134,8 +134,6 @@ public class LockedCameraMovement : CameraMovement
             delta = -(currentMagnitude - prevMagnitude) * zoomSpeed;
         }
 
-           
-
 		zoom = Mathf.Clamp01(zoom + delta);
 
 		float angle = Mathf.Lerp(swivelZoom.x, swivelZoom.y, zoom);
