@@ -11,9 +11,7 @@ GameObject:
   - component: {fileID: 3433358730333391282}
   - component: {fileID: 3433358730333391311}
   - component: {fileID: 3433358730333391308}
-  - component: {fileID: 4172502372138731702}
   - component: {fileID: 1226202676}
-  - component: {fileID: 1268863421797903293}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -90,20 +88,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
---- !u!114 &4172502372138731702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3433358730333391310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ae42c8f78c60684aab6be6c18bd7a9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 0
-  colorblindShader: {fileID: 4800000, guid: b35b8f7ae8cf168488129d5f5f39ebf4, type: 3}
 --- !u!81 &1226202676
 AudioListener:
   m_ObjectHideFlags: 0
@@ -112,18 +96,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3433358730333391310}
   m_Enabled: 1
---- !u!114 &1268863421797903293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3433358730333391310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 400e77ce4ab74484c8f666abbd35bfe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3433358731271714083
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +138,10 @@ PrefabInstance:
     - target: {fileID: 1290224484336908, guid: 5bb46bae81bf04608ac699be504c5e66, type: 3}
       propertyPath: m_Name
       value: CitySimulatorMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 1290224484336908, guid: 5bb46bae81bf04608ac699be504c5e66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4187505068457818, guid: 5bb46bae81bf04608ac699be504c5e66, type: 3}
       propertyPath: m_LocalPosition.x

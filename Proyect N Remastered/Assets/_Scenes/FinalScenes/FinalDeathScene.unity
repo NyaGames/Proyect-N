@@ -196,7 +196,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 62.1
+  m_fontSize: 58.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -242,7 +242,7 @@ MonoBehaviour:
     spaceCount: 3
     wordCount: 4
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 44.55
+  m_fontSize: 25.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -467,8 +467,6 @@ GameObject:
   - component: {fileID: 706048547}
   - component: {fileID: 706048546}
   - component: {fileID: 706048545}
-  - component: {fileID: 706048549}
-  - component: {fileID: 706048548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -540,32 +538,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &706048548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706048544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 400e77ce4ab74484c8f666abbd35bfe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &706048549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706048544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ae42c8f78c60684aab6be6c18bd7a9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 0
-  colorblindShader: {fileID: 4800000, guid: b35b8f7ae8cf168488129d5f5f39ebf4, type: 3}
 --- !u!1 &719360437
 GameObject:
   m_ObjectHideFlags: 0
