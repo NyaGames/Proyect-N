@@ -35,7 +35,10 @@ public class GameManager : MonoBehaviour
     public GameObject gmCountdown;
     [HideInInspector] public int playerCountAtStart;
 
-	private void Awake()
+    public GameObject synchronizeScenesPrefab;
+
+
+    private void Awake()
 	{
 		if (!Instance)
 		{
@@ -46,17 +49,25 @@ public class GameManager : MonoBehaviour
 			Destroy(this);
 		}
 
-		myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
-		gameStarted = false;
+        myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
+        gameStarted = false;
         playerCountAtStart = PhotonNetwork.CurrentRoom.PlayerCount - 1;
 
         musicController = FindObjectOfType<MusicController>();
         musicController.GameStart();
+
+        /*if (PhotonNetwork.IsMasterClient)
+        {
+            ExitGames.Client.Photon.Hashtable table = new ExitGames.Client.Photon.Hashtable();
+            table.Add("Ready", true);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(table);
+        }*/
+
     }
 
-
-	public void StartGame()
+    public void StartGame()
 	{
+
 		gameStarted = true;
 
 		//GameSceneGUIController.Instance.playerMessages.gameObject.SetActive(false);

@@ -14891,6 +14891,8 @@ MonoBehaviour:
   playerCountDown: {fileID: 1815936448}
   gmCountdown: {fileID: 876954914}
   playerCountAtStart: 0
+  synchronizeScenesPrefab: {fileID: 1800308923211925610, guid: 757f0ce531fb14c4f9320c28bc102bd4,
+    type: 3}
 --- !u!4 &1250016668
 Transform:
   m_ObjectHideFlags: 0
