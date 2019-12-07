@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class soundControl : MonoBehaviour
@@ -7,7 +8,8 @@ public class soundControl : MonoBehaviour
 	private void Awake()
 	{
 		SetVolume(1);
-	}
+
+    }
 
 	public void SetVolume(float volume)
 	{

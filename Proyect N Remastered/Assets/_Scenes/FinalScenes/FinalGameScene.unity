@@ -579,6 +579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_time_closing
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &78902998
@@ -1417,6 +1418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_back
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &112433624
@@ -1735,6 +1737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_who_is_in_this_photo
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &178559401
@@ -3107,6 +3110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_start_countdown
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &284047403
@@ -3767,6 +3771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_zone_edition
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &350184561
@@ -4493,6 +4498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_game_start
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &397038278
@@ -6042,6 +6048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_players_killed
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &490966403
@@ -6302,6 +6309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_edition
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &538494105
@@ -6843,6 +6851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_players
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &575244622
@@ -7007,6 +7016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_drops_edition
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &575869945
@@ -7179,6 +7189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_start_countdown
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &580492077
@@ -7910,6 +7921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_center_camera
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &681293980
@@ -8082,6 +8094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_back
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &683882882
@@ -8391,6 +8404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: ls_start
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!114 &700319447
@@ -8681,6 +8695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_won
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &737717802
@@ -9445,6 +9460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_kill_label
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &807802098
@@ -11560,6 +11576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_yes
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!21 &940834964
@@ -11724,7 +11741,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 22.05
+  m_fontSize: 24.45
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11810,6 +11827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_change_camera
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &986520445
@@ -12405,6 +12423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_time_until_start_closing
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1064447030
@@ -12780,6 +12799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_ammo
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1096488154
@@ -13450,6 +13470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_kill_player
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1196780681
@@ -13902,6 +13923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_return_to_main_menu
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1207583119
@@ -14142,6 +14164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: 
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1228547004
@@ -14437,7 +14460,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 29.05
+  m_fontSize: 31.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -14677,6 +14700,8 @@ MonoBehaviour:
   playerCountDown: {fileID: 1815936448}
   gmCountdown: {fileID: 876954914}
   playerCountAtStart: 0
+  synchronizeScenesPrefab: {fileID: 1800308923211925610, guid: 757f0ce531fb14c4f9320c28bc102bd4,
+    type: 3}
 --- !u!4 &1250016668
 Transform:
   m_ObjectHideFlags: 0
@@ -15275,6 +15300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_you_killed
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1385287997
@@ -17019,6 +17045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_out_of_zone_time
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1491104305
@@ -17222,6 +17249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_game_not_started
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1525539820
@@ -18061,6 +18089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_settings
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1584899978
@@ -18218,7 +18247,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30.65
+  m_fontSize: 33.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -18462,6 +18491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_send_drops
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1605738360
@@ -18634,6 +18664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_snap
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1610928304
@@ -19738,6 +19769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_yes
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1729872637
@@ -20215,6 +20247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_change_camera
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1755945919
@@ -20565,6 +20598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_do_you_want_to_send_snap
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1774785970
@@ -20967,7 +21001,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 15.85
+  m_fontSize: 18.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21053,6 +21087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_game_hasn't_started
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1808678918
@@ -21453,6 +21488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_drops
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1825906566
@@ -21625,6 +21661,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_settings
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1833744769
@@ -22217,6 +22254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_deny
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1908333458
@@ -22933,6 +22971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_are_you_sure
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1953332528
@@ -23566,6 +23605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_countdown
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &2055349825
@@ -24050,5 +24090,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: gs_players
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []

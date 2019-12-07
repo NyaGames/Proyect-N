@@ -27,8 +27,21 @@ public class LobbyManager : MonoBehaviour
 	void Start()
     {
 
-        //PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
+
+    /*private void Update()
+    {
+        if (!PhotonNetwork.IsMasterClient) //Si no soy gm, compruebo si este ha llegado a la sala de juego para cargarla yo
+        {
+            ExitGames.Client.Photon.Hashtable table = PhotonNetwork.MasterClient.CustomProperties;
+            if(table.ContainsKey("Ready"))
+            {
+                SceneManager.LoadScene("FinalGameScene");
+            }
+
+        }
+    }*/
 
     public void ReturnToRoomScene()
     {
