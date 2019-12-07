@@ -4282,7 +4282,7 @@ MonoBehaviour:
   incrementSecsToStartGame: {fileID: 1525539822}
   timeWarning: {fileID: 821373387}
   zoneWarning: {fileID: 241209675}
-  incrementToStartGame: 10
+  incrementToStartGame: 1
   startGameCountDownPrefab: {fileID: 4576937961022355878, guid: 0cca4769251c6b74287a15396f951db8,
     type: 3}
 --- !u!1 &392998255
@@ -5156,7 +5156,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.8113208, g: 0.3329477, b: 0.3329477, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -16049,8 +16049,8 @@ MonoBehaviour:
   totalSecsCloseDuration: {fileID: 184917745}
   incrementSecsToStartClosing: {fileID: 299045564}
   incrementSecsCloseDuration: {fileID: 187159119}
-  incrementToStartClosing: 10
-  incrementCloseDuration: 10
+  incrementToStartClosing: 1
+  incrementCloseDuration: 1
   countDownPrefab: {fileID: 5224934494138470313, guid: 2d529cd8dad5a8f4980976f4002ab3e9,
     type: 3}
 --- !u!1 &1413504830

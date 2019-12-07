@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class soundControl : MonoBehaviour
 {
-   public void SetVolume(float volume)
+	private void Awake()
+	{
+		SetVolume(1);
+	}
+
+	public void SetVolume(float volume)
 	{
 		AudioSource[] sources = FindObjectsOfType<AudioSource>();
 

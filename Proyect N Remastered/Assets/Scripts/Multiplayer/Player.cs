@@ -42,19 +42,7 @@ public class Player : MonoBehaviour
         {
             InitCamera();
         }
-
-        //Visual
-        Color playerColor;
-        if (isGameMaster)
-        {
-            playerColor = new Color(0f, 0f, 255f);
-        }
-        else
-        {
-            playerColor = new Color(0f, 255f, 0f);
-        }
-       
-        //this.GetComponentInChildren<Renderer>().material.color = playerColor;			           
+		           
     }
 
     public Photon.Realtime.Player getPlayerReference(int actorNumber){

@@ -33,7 +33,7 @@ public class LobbyManager : MonoBehaviour
     {
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.NickName = "";
-        SceneManager.LoadScene("RoomScreen");
+        SceneManager.LoadScene("FinalRoomScene");
         Debug.Log("Dejaste la sala");
     }
 }
