@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject outOfZonePanel;
 
+    public MusicController musicController;
     public GameObject winningPanel;
 
     public GameObject playerCountDown;
@@ -49,6 +50,8 @@ public class GameManager : MonoBehaviour
 		gameStarted = false;
         playerCountAtStart = PhotonNetwork.CurrentRoom.PlayerCount - 1;
 
+        musicController = FindObjectOfType<MusicController>();
+        musicController.GameStart();
     }
 
 

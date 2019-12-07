@@ -282,7 +282,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: player_return_to_main_menu
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &504336892
@@ -455,7 +454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: death_you've_been_snapped_by
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &706048544
@@ -719,6 +717,8 @@ GameObject:
   - component: {fileID: 1021812924}
   - component: {fileID: 1021812923}
   - component: {fileID: 1021812927}
+  - component: {fileID: 1021812928}
+  - component: {fileID: 1021812929}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -816,6 +816,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14ae2c9bfb043fc42a0f883d119bc5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1021812928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021812922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2cf7e2aa6826d24ca60f404c203e4f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1021812929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021812922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2cf7e2aa6826d24ca60f404c203e4f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1421177466
@@ -968,6 +992,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2041244425}
         m_MethodName: ReturnToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1021812928}
+        m_MethodName: returnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

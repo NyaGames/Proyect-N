@@ -103,6 +103,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 		}
 
 		PhotonNetwork.NickName = roomScenePlayerGUIController.usernameInput.text;
+        FindObjectOfType<MusicController>().LobbyStart();
 	}
 	public override void OnJoinedRoom()
 	{
