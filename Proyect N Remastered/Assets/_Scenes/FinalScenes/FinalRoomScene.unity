@@ -594,7 +594,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_room_code
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &49845923
@@ -806,7 +805,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14
+  m_fontSize: 17.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -892,7 +891,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_create
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &98745201
@@ -1082,7 +1080,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.7924528, g: 0.13082945, b: 0.13082945, a: 0.8039216}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1094,7 +1092,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 806965522}
   m_OnClick:
     m_PersistentCalls:
@@ -2163,7 +2161,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_try_join_room
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &582665498
@@ -2336,7 +2333,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_player_count
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &583985196
@@ -2423,7 +2419,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14.05
+  m_fontSize: 22.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2509,7 +2505,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_join
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &593682476
@@ -3896,7 +3891,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_try_create_room
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &806965520
@@ -4286,7 +4280,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_join
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &878246337
@@ -4633,7 +4626,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_username
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &929001432
@@ -4806,7 +4798,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: 
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &965654019
@@ -5051,7 +5042,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_random_username
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1046057275
@@ -5243,7 +5233,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.7924528, g: 0.13082945, b: 0.13082945, a: 0.8039216}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -5737,7 +5727,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_create
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1064187405
@@ -6211,7 +6200,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_room_code
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1001 &1220007516
@@ -9342,7 +9330,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_create
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1568699889
@@ -15505,7 +15492,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_room_name
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1807597617
@@ -15678,7 +15664,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_join
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1809138411
@@ -16094,7 +16079,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_room_name
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1965898761
@@ -16547,7 +16531,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: rs_username
   text: {fileID: 0}
-  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1983515998
