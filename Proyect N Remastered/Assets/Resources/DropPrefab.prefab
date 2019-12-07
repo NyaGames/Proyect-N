@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59519f46c45753b47924a6034f4773be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activated: 1
+  activated: 0
   pivot: {fileID: 0}
   model: {fileID: 0}
 --- !u!1 &7864363253354405370
