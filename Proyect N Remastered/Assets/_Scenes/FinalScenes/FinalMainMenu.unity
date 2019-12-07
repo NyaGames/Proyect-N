@@ -957,7 +957,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 19.55
+  m_fontSize: 13.05
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1043,6 +1043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_profile
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &261036823
@@ -2167,6 +2168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_start
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!114 &541958231
@@ -2215,7 +2217,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 20.15
+  m_fontSize: 12.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2463,7 +2465,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 15.6
+  m_fontSize: 28.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2549,6 +2551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_offline
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &652258545
@@ -3090,7 +3093,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 12.95
+  m_fontSize: 7.65
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3176,6 +3179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_credits
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &719590170
@@ -4545,7 +4549,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 10.1
+  m_fontSize: 9.85
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4631,6 +4635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_player
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1173670591
@@ -4962,7 +4967,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 9.15
+  m_fontSize: 14.15
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5048,6 +5053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_credits
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1322429977
@@ -5340,7 +5346,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 8.4
+  m_fontSize: 15.95
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5426,6 +5432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_profile
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1001 &1405852031
@@ -5439,6 +5446,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerSettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662541441945094583, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2763371853606243903, guid: 9531450e24c2f224882d2792b4c2b398,
         type: 3}
@@ -5545,6 +5557,56 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7959683112182040013, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.516
+      objectReference: {fileID: 0}
+    - target: {fileID: 7959683112182040013, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6249138180514748336, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.516
+      objectReference: {fileID: 0}
+    - target: {fileID: 6249138180514748336, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.516
+      objectReference: {fileID: 0}
+    - target: {fileID: 6249138180514748336, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539770618596381839, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539770618596381839, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539770618596381839, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039203018968880870, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039203018968880870, guid: 9531450e24c2f224882d2792b4c2b398,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9531450e24c2f224882d2792b4c2b398, type: 3}
 --- !u!224 &1405852032 stripped
@@ -5643,7 +5705,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 21.25
+  m_fontSize: 36.3
   m_fontSizeBase: 131.9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5729,6 +5791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_gm
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1420734003
@@ -7154,7 +7217,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 37.5
+  m_fontSize: 34.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7240,6 +7303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_start
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
 --- !u!1 &1683637813
@@ -8040,7 +8104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1779842491
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10370,7 +10434,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 21.6
+  m_fontSize: 21.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10456,5 +10520,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameId: mm_offline
   text: {fileID: 0}
+  textP: {fileID: 0}
   polyglot: {fileID: 11400000, guid: 7173caba72f06b040b1e7157d28082a0, type: 2}
   searchTranslations: []
