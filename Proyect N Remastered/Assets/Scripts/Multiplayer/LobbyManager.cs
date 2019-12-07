@@ -26,7 +26,8 @@ public class LobbyManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
+
+        //PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public void ReturnToRoomScene()

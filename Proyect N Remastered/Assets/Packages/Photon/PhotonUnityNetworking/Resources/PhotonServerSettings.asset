@@ -47,5 +47,6 @@ MonoBehaviour:
   - DeActivateToEveryone
   - ResetCurrentSecsOutOfZone
   - KillDenied
+  - StartGame
   DisableAutoOpenWizard: 1
   ShowSettings: 0

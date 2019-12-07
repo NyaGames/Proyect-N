@@ -15,6 +15,7 @@ public class UI_Manager : MonoBehaviour
     public Animator anim;
     public bool GM;
 
+    public GameObject synchronizeScenesPrefab;
 
     public void SpawnParticles()
     {
@@ -69,6 +70,13 @@ public class UI_Manager : MonoBehaviour
 
     IEnumerator LoadScene()
     {
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            GameObject ss = PhotonNetwork.Instantiate(synchronizeScenesPrefab.name, Vector3.zero, Quaternion.identity);
+            ss.GetPhotonView().RPC("StartGame", RpcTarget.OthersBuffered);
+        }
+
         anim.SetTrigger("StartGame");
         yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene("FinalGameScene");
