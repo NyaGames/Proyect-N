@@ -37,12 +37,12 @@ public class MusicController : MonoBehaviour
     }
 
     public void GameStart() {
-        if (musicBackground.isPlaying)
+      /*  if (musicBackground.isPlaying)
         {
             musicBackground.Stop();
             musicBackground = gameTheme;
             musicBackground.Play();
-        }
+        }*/
     }
 
     public void Victory() {
