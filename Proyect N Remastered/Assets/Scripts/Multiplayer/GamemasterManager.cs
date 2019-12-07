@@ -16,6 +16,8 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
 	public GameObject dropPrefab;
     public GameObject mobilePrefab;
 
+    public float zoomSpeed = 5f;
+
 	public bool creatingDrop = false;
 
     [HideInInspector]public GameObject staticZone;
@@ -126,7 +128,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
                     else
                     {
                         provZone.SetActive(true);
-                        provZone.transform.localScale = Vector3.one * 5;
+                        provZone.transform.localScale = Vector3.one;
                         provZone.transform.position = touchInWorldCoord;
                     }
 
@@ -147,7 +149,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
                 if (provZone.activeSelf == true)
                 {
                     float distanceFromCenterToTap = (provZone.transform.position - touchInWorldCoord).magnitude;
-                    provZone.transform.localScale = new Vector3(distanceFromCenterToTap * 2, 5f, distanceFromCenterToTap * 2);
+                    provZone.transform.localScale = new Vector3(distanceFromCenterToTap * 2 * zoomSpeed * Time.deltaTime, 5f, distanceFromCenterToTap * 2 * zoomSpeed * Time.deltaTime);
                 }           
 
                 break;
@@ -199,7 +201,7 @@ public class GamemasterManager : MonoBehaviourPunCallbacks
 
             float scaleDelta = (currentMagnitude - prevMagnitude) * zoomSpeed;
 
-            provZone.transform.localScale = new Vector3(provZone.transform.localScale.x + scaleDelta, provZone.transform.localScale.y, provZone.transform.localScale.z + scaleDelta);
+            provZone.transform.localScale = new Vector3(provZone.transform.localScale.x + scaleDelta * zoomSpeed * Time.deltaTime, provZone.transform.localScale.y, provZone.transform.localScale.z + scaleDelta * zoomSpeed * Time.deltaTime);
 
         }
 
