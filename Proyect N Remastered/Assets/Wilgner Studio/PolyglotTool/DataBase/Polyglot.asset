@@ -842,6 +842,34 @@ MonoBehaviour:
     categories:
       index: 6
       name: Settings
+  - indexLanguage: 0
+    nameID: rs_try_create_room
+    translation: Try creating a room
+    idUniqueElements: 60
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 1
+    nameID: rs_try_create_room
+    translation: Intenta crear una sala
+    idUniqueElements: 60
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 0
+    nameID: rs_try_join_room
+    translation: Translation here
+    idUniqueElements: 61
+    categories:
+      index: 1
+      name: Room Scene
+  - indexLanguage: 1
+    nameID: rs_try_join_room
+    translation: Intenta unirte a una sala
+    idUniqueElements: 61
+    categories:
+      index: 1
+      name: Room Scene
   languages:
   - English
   - "Espa\xF1ol"
@@ -974,3 +1002,7 @@ MonoBehaviour:
     id: 58
   - inUse: 1
     id: 59
+  - inUse: 1
+    id: 60
+  - inUse: 1
+    id: 61
