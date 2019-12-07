@@ -14,6 +14,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
 	public RoomScenePlayerGUIController roomScenePlayerGUIController;
 	private List<RoomInfo> roomsAvaiable = new List<RoomInfo>();
 
+    [SerializeField] private TMP_InputField gmRoomCode;
+    [SerializeField] private TMP_InputField playerRoomCode;
+
+    [SerializeField] private Button playerJoinButton;
+    [SerializeField] private Button gmCreateButton;
+
 	private void Awake()
 	{
 		if (PersistentData.isGM)
@@ -28,7 +34,28 @@ public class RoomManager : MonoBehaviourPunCallbacks
 		}
 	}
 
-	public string GenerateUniqueRoomID()
+    private void Update()
+    {
+        if(gmRoomCode.text == "")
+        {
+            gmCreateButton.interactable = false;
+        }
+        else
+        {
+            gmCreateButton.interactable = true;
+        }
+
+        if(playerRoomCode.text == "")
+        {
+            playerJoinButton.interactable = false;
+        }
+        else
+        {
+            playerJoinButton.interactable = true;
+        }
+    }
+
+    public string GenerateUniqueRoomID()
 	{
 		string s = "";
 		string time = System.DateTime.Now.ToString();
@@ -55,7 +82,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
 
 
-		string roomName = "gl";//GenerateUniqueRoomID();
+		string roomName = gmRoomCode.text;
 		RoomOptions roomOptions = new RoomOptions();
 		roomOptions.MaxPlayers = 20;//(byte)roomSceneGMGUIController.maxPlayers.GetComponentInChildren<Slider>().value;
 		roomOptions.IsVisible = false; //FALSE = Hace la sala privada
@@ -91,7 +118,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 			roomScenePlayerGUIController.feedbackText.text = "Uniéndose a la sala...";
 		}
 
-		string roomPassword = "gl";//roompasswordInputText.text;
+		string roomPassword = playerRoomCode.text;
 
 		if (roomPassword != "")
 		{
