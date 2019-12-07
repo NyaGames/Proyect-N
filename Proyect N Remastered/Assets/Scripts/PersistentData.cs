@@ -8,4 +8,5 @@ public static class PersistentData
     public static bool isGM = false;
     public static Texture2D killcam;
     public static string killer;
+	public static int cameraMode = 0;
 }
