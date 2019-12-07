@@ -786,6 +786,62 @@ MonoBehaviour:
     categories:
       index: 5
       name: Death Scenes
+  - indexLanguage: 0
+    nameID: settings
+    translation: Settings
+    idUniqueElements: 56
+    categories:
+      index: 6
+      name: Settings
+  - indexLanguage: 1
+    nameID: settings
+    translation: Opciones
+    idUniqueElements: 56
+    categories:
+      index: 6
+      name: Settings
+  - indexLanguage: 0
+    nameID: settings_color_mode
+    translation: Color mode
+    idUniqueElements: 57
+    categories:
+      index: 6
+      name: Settings
+  - indexLanguage: 1
+    nameID: settings_color_mode
+    translation: Modo de color
+    idUniqueElements: 57
+    categories:
+      index: 6
+      name: Settings
+  - indexLanguage: 0
+    nameID: settings_language
+    translation: Language
+    idUniqueElements: 58
+    categories:
+      index: 6
+      name: Settings
+  - indexLanguage: 1
+    nameID: settings_language
+    translation: Idioma
+    idUniqueElements: 58
+    categories:
+      index: 6
+      name: Settings
+  - indexLanguage: 0
+    nameID: settings_volume
+    translation: Volume
+    idUniqueElements: 59
+    categories:
+      index: 6
+      name: Settings
+  - indexLanguage: 1
+    nameID: settings_volume
+    translation: Volumen
+    idUniqueElements: 59
+    categories:
+      index: 6
+      name: Settings
   languages:
   - English
   - "Espa\xF1ol"
@@ -796,6 +852,7 @@ MonoBehaviour:
   - Game Manager Scene
   - Player Game Scene
   - Death Scenes
+  - Settings
   idElements:
   - inUse: 1
     id: 0
@@ -909,3 +966,11 @@ MonoBehaviour:
     id: 54
   - inUse: 1
     id: 55
+  - inUse: 1
+    id: 56
+  - inUse: 1
+    id: 57
+  - inUse: 1
+    id: 58
+  - inUse: 1
+    id: 59
