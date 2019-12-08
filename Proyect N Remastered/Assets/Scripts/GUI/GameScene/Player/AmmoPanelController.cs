@@ -18,7 +18,7 @@ public class AmmoPanelController : MonoBehaviour
    
     void Update()
     {
-        if(myPlayerAmmoinfo.currentAmmo <= 0)
+		if (myPlayerAmmoinfo.currentAmmo <= 0 || !GameManager.Instance.gameStarted)
         {
 			photoButton.interactable = false;           
         }
