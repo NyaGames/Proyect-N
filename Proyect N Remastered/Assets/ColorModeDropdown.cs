@@ -8,7 +8,7 @@ using Wilberforce;
 public class ColorModeDropdown : MonoBehaviour
 {	
 	public void ChangeColorMode()
-	{sett
+	{
 		int value = GetComponent<TMP_Dropdown>().value;
 		FindObjectOfType<Colorblind>().Type = value;
 		PersistentData.cameraMode = value;
