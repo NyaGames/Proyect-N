@@ -5,7 +5,7 @@ using UnityEngine;
 public class MusicController : MonoBehaviour
 {
     private AudioSource musicBackground;
-    private AudioSource mainMenuTheme;
+    public AudioSource mainMenuTheme;
     public AudioSource lobbyTheme;
     public AudioSource gameTheme;
     public AudioSource victoryTheme;
@@ -13,6 +13,7 @@ public class MusicController : MonoBehaviour
 
     private void Awake()
     {
+        musicBackground = mainMenuTheme;
         DontDestroyOnLoad(transform.gameObject);
     }
 
@@ -37,12 +38,12 @@ public class MusicController : MonoBehaviour
     }
 
     public void GameStart() {
-      /*  if (musicBackground.isPlaying)
+      if (musicBackground.isPlaying)
         {
             musicBackground.Stop();
             musicBackground = gameTheme;
             musicBackground.Play();
-        }*/
+        }
     }
 
     public void Victory() {
