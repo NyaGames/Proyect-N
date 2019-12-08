@@ -15,5 +15,6 @@ Pagina Web / Portfolio: https://nyagames.000webhostapp.com
 
 GDD: https://drive.google.com/open?id=1g21crxcL8vbhj2NKVPSL6vLsdcEc7MJb
 
+Manual de usuario: https://docs.google.com/document/d/1MX7M71xPtkZxtzVEdw41lgU0Wx70hRbhjXsySsdhaD4/edit?usp=sharing
 
 
