@@ -1,4 +1,4 @@
-# Proyecto-N
+# Snapped
 Juego desarrollado por NyaGames
 
 Itch.io: https://nyagames.itch.io/
@@ -13,7 +13,7 @@ Facebook: https://fb.gg/play/524689128323024
 
 Pagina Web / Portfolio: https://nyagames.000webhostapp.com
 
-GDD: https://drive.google.com/open?id=10gTI-358reEQ_fI1ybn-1QVc5SnAQQRg
+GDD: https://drive.google.com/open?id=1g21crxcL8vbhj2NKVPSL6vLsdcEc7MJb
 
 
 
