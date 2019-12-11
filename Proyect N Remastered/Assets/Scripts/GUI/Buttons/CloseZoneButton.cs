@@ -53,7 +53,7 @@ public class CloseZoneButton : MonoBehaviour
         int.TryParse(totalSecsToStartClosing.text, out secsToStartClosing);
         int.TryParse(totalSecsCloseDuration.text, out secsCloseDuration);
 
-        if ((secsCloseDuration <= 60  && !( secsCloseDuration == 0)) && (secsToStartClosing <= 60  && !( secsToStartClosing == 0)) && GameManager.Instance.gameStarted && (GamemasterManager.Instance.provZone != null && GamemasterManager.Instance.provZone.activeSelf))
+        if ( !( secsCloseDuration == 0) && !( secsToStartClosing ==  0) && GameManager.Instance.gameStarted && (GamemasterManager.Instance.provZone != null && GamemasterManager.Instance.provZone.activeSelf))
         {
             GamemasterManager.Instance.secsClosingZone = secsCloseDuration;
             button.interactable = true;

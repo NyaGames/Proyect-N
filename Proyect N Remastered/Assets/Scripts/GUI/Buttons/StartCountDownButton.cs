@@ -30,7 +30,7 @@ public class StartCountDownButton : MonoBehaviour
 	
 		int.TryParse(totalSecsToStartGame.text, out secs);
 
-        if((GamemasterManager.Instance.provZone == null || !GamemasterManager.Instance.provZone.activeSelf) || (secs > 60 || mins > 60) ||( mins == 0 && secs == 0))
+        if((GamemasterManager.Instance.provZone == null || !GamemasterManager.Instance.provZone.activeSelf) ||( mins == 0 && secs == 0))
 		{
             button.interactable = false;
         }
@@ -55,7 +55,7 @@ public class StartCountDownButton : MonoBehaviour
 			zoneWarning.text = "";
 		}
 
-		if(secs <= 60 && mins <= 60 && !(mins == 0 && secs == 0))
+		if(!(mins == 0 && secs == 0))
 		{
 			timeWarning.text = "";
 		}
